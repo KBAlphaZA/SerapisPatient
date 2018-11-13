@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviour="clr-namespace:SerapisPatient.behavious"
+             x:Class="SerapisPatient.Views.Specilization">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="LabelStyle">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource UbuntuBold}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ListView
+            ItemsSource="{Binding ListSpecilizations}"
+            SeparatorColor="Black"
+            SeparatorVisibility="Default"
+            HasUnevenRows="True"
+            behaviour:ListItemSelected.ItemTappedCommand="{Binding SelectSpecilization}"
+            x:Name="specilalties" 
+            >
+
+            <ListView.Header>
+                <Frame BorderColor="Black" 
+                       BackgroundColor="White"
+                       HeightRequest="20"
+                       WidthRequest="200"
+                       CornerRadius="12"
+                       Margin="15,8"
+                       >
+                    <SearchBar CancelButtonColor="Red"
+                               Placeholder="Find specialist"
+                               PlaceholderColor="Gray"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding SearchProffesion}"
+                               />
+                </Frame>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Image 
+                                    Source="{Binding Icon}" 
+                                    Aspect="AspectFit"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Label 
+                                    Text="{Binding Title}"
+                                    Style="{StaticResource LabelStyle}"
+                                    />
+                            </Grid>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

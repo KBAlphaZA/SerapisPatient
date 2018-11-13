@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SideMenuPages.SettingsSubFolder.DeliverySettings"
+             Title="Delivery settings"
+             >
+
+    <!--The Xamarin Map will do better here-->
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry" x:Key="SettingEntry">
+                <Setter Property="PlaceholderColor" Value="Gray"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="SettingLabel">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.75*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8.95*"/>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="0" 
+                   CornerRadius="12"
+                   BorderColor="Black"
+                   HeightRequest="80"
+                   VerticalOptions="Fill"
+                   >
+
+                    <Frame.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                Android="15,10,15,10"
+                                iOS="18,8,18,8"
+                                />
+                    </Frame.Margin>
+
+                    <SearchBar Placeholder="Add delivery location" 
+                           HorizontalTextAlignment="Start"
+                           CancelButtonColor="Red"
+                           PlaceholderColor="DarkGray"  
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="End"
+                           SearchCommand="{Binding SuggestCommand}"
+                           Text="{Binding Suggestion}"
+                           />
+
+                </Frame>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ListView ItemsSource="{Binding SuggestionLocations}"
+                                  TranslationY="140"
+                                  HasUnevenRows="True"
+                                  SeparatorColor="Black"
+                                  SeparatorVisibility="Default"
+                                  >
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--Title from google maps api-->
+                                            <Label Grid.Row="0" 
+                                                   Text="{Binding AddressLine1}"
+                                                   FontAttributes="Bold"
+                                                   />
+
+                                            <!--Sub title from google maps api-->
+                                            <Label Grid.Row="1"
+                                                   Text="{Binding AddressLine2}"
+                                                   />
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            
+                        </ListView>
+                    </Grid>
+                    
+                </Grid>
+
+                <Grid Grid.Row="2" BackgroundColor="Blue">
+                    <!--Put the map with annotations for locations for delivery-->
+                </Grid>
+
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

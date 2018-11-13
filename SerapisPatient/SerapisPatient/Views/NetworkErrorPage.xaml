@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:animation="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="SerapisPatient.Views.NetworkErrorPage">
+
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="ButtonLabel">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="There seems to be a network error" 
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="End"
+                   HorizontalOptions="FillAndExpand"
+                   Grid.Row="0"    
+                   FontSize="Medium"
+                   TextColor="Black"
+                   />
+
+            <animation:AnimationView 
+                Animation="NetworkError.json"
+                AutoPlay="True"
+                Loop="True"
+                Speed="0.4"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Grid.Row="1"
+                />
+
+            <Grid Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="1" BackgroundColor="#607d8b">
+                        <Grid HorizontalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" HorizontalOptions="End">
+                                <Label Text="Refresh" Style="{StaticResource ButtonLabel}"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1" HorizontalOptions="Start">
+                                <Image Source="RefreshButtonIcon.png" Aspect="AspectFit">
+                                    <Image.HeightRequest>
+                                        <OnIdiom x:TypeArguments="x:Double">
+                                            <OnIdiom.Phone>30</OnIdiom.Phone>
+                                        </OnIdiom>
+                                    </Image.HeightRequest>
+                                    <Image.WidthRequest>
+                                        <OnIdiom x:TypeArguments="x:Double">
+                                            <OnIdiom.Phone>30</OnIdiom.Phone>
+                                        </OnIdiom>
+                                    </Image.WidthRequest>
+                                </Image>
+                            </Grid>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandForRefreash}"/>
+                        </Grid.GestureRecognizers>
+
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

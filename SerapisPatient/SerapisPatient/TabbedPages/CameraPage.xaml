@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="SerapisPatient.TabbedPages.CameraPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <forms:AnimationView
+                    x:Name="BarScanIcon"
+                    Grid.Row="0"
+                    Loop="True"
+                    AutoPlay="True"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Animation="BarCodeScan.json"
+                    Speed="0.8"
+                    />
+
+            <Grid BackgroundColor="#8eacbc">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image 
+                        Source="QrCodeIcon.png" 
+                        HeightRequest="80" 
+                        WidthRequest="80" 
+                        HorizontalOptions="Center"
+                        />
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Label 
+                    Text="Scan" 
+                    HorizontalOptions="Start" 
+                    FontSize="25"
+                    TextColor="White"    
+                    VerticalOptions="Center"
+                    />
+                </Grid>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding IntilizeScanner}"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

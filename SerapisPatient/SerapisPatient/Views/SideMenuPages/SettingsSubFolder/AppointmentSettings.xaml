@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SideMenuPages.SettingsSubFolder.AppointmentSettings"
+             Title="Appointment settings"
+             >
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="7*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" RowSpacing="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" VerticalOptions="Start">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0"
+                           Text="Maximum distance" 
+                           TextColor="Black"
+                           FontSize="20"
+                           Margin="15,0,0,0"
+                           />
+
+                        <Image Grid.Column="1" Grid.Row="0" 
+                               Source="MoreInfo.png" 
+                               VerticalOptions="Center"
+                               Aspect="AspectFit"
+                               >
+                     
+                        </Image>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" VerticalOptions="Start">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" 
+                           Text="{Binding DistanceLabel, StringFormat=' {0} km'}"
+                           FontSize="18"
+                           Margin="15,0"
+                           VerticalOptions="Center"    
+                           />
+
+                        <Slider VerticalOptions="Center" 
+                            Margin="15,0" 
+                            Value="{Binding DistanceLabel}" 
+                            Maximum="20" 
+                            Minimum="0"  
+                            Grid.Row="1"
+                            
+                            />
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1" 
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="Center"
+                      Margin="0,10,0,25"
+                      >
+
+                    <BoxView Color="Black" HeightRequest="1"/>
+
+                </Grid>
+
+                <Grid Grid.Row="2" VerticalOptions="Start">
+                   
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" 
+                               Grid.Row="0"
+                               Text="Uber ride request"
+                               FontSize="20"
+                               Margin="15,0,0,0"
+                               TextColor="Black"
+                               />
+
+
+                        <Image Grid.Column="1" Aspect="AspectFit" Grid.Row="0" Source="MoreInfo.png" VerticalOptions="Center">
+                            
+                        </Image>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" ColumnSpacing="0" Margin="15,0">
+                        <Button BorderRadius="10" 
+                                Text="{Binding ButtonText}" 
+                                FontSize="20" 
+                                TextColor="{Binding TextColour}" 
+                                BackgroundColor="{Binding BackgroundColour}"
+                                BorderColor="#607d8b"
+                                BorderWidth="1"
+                                Command="{Binding ButtonCommand}"
+                                />
+                    </Grid>
+
+                </Grid>
+                
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

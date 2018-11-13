@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.ConfirmSerapisBooking"
+             xmlns:local="clr-namespace:SerapisPatient.CustomRenderer"
+             >
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Image" x:Key="ImageIcons">
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HeightRequest" Value="60"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+           
+            <Grid Grid.Row="0">
+                
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="10,10"/>
+                            <On Platform="iOS" Value="12,12"/>
+                        </OnPlatform>
+                    </Grid.Margin>
+                    
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Image Source="CalendarIcon.png" Style="{StaticResource ImageIcons}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <Label Text="Date: 23 August 2018" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Image Source="OperatingIcon.png" Style="{StaticResource ImageIcons}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Label Text="Time: 09h00m" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="2">
+                        <Image Source="PracticeNameIcon.png" Style="{StaticResource ImageIcons}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Label Text="Practice: Medicross Pinetown" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    
+            </Grid>
+
+            <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+                <local:DynamicEditor HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Medium">
+                </local:DynamicEditor>
+            </Grid>
+
+        </Grid>   
+    </ContentPage.Content>
+</ContentPage>

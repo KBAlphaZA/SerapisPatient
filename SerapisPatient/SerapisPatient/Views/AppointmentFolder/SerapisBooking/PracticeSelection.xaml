@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.PracticeSelection"
+             xmlns:behaviour="clr-namespace:SerapisPatient.behavious"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="InfoLabels">
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+   
+        <ListView 
+            ItemsSource="{Binding PracticeList}" 
+            SeparatorVisibility="Default"
+            RowHeight="500"
+            SeparatorColor="Black"
+            VerticalOptions="Fill"
+            behaviour:ListItemSelected.ItemTappedCommand="{Binding GoToDocList}"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" 
+                                   Aspect="AspectFill"
+                                   Source="{Binding PracticeImage}"
+                                   />
+
+                            <Grid Grid.Row="1" HorizontalOptions="Start">
+                                
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0">
+                                       
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" 
+                                                   Source="PracticeNameIcon.png"
+                                                   HeightRequest="50"
+                                                   WidthRequest="50"
+                                                   />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding PracticeName}"
+                                                Style="{StaticResource InfoLabels}"
+                                                VerticalOptions="Center"
+                                                />
+  
+                                    </Grid>
+
+                                    <Grid Grid.Row="1">
+                                       
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" 
+                                                   Source="QueIcon.png"
+                                                   HeightRequest="50"
+                                                   WidthRequest="50"
+                                                   />
+
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding NumOfPatientsInPractice}"
+                                                   Style="{StaticResource InfoLabels}"
+                                                   VerticalOptions="Center"
+                                                   />
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="2">
+                                    
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image 
+                                                Source="OperatingIcon.png" 
+                                                Grid.Column="0"
+                                                VerticalOptions="Center"
+                                                HeightRequest="50"
+                                                WidthRequest="50"
+                                                />
+
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding OperatingTime}"
+                                                   Style="{StaticResource InfoLabels}"
+                                                   VerticalOptions="Center" 
+                                                   />
+
+                                        
+                                    </Grid>
+
+                                    <Grid Grid.Row="3">
+                                       
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0"
+                                                   Source="DistanceIcon.png"
+                                                   Aspect="AspectFit"
+                                                   HeightRequest="50"
+                                                   WidthRequest="50"
+                                                   />
+
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Location.Distance}"
+                                                   Style="{StaticResource InfoLabels}"
+                                                   VerticalOptions="Center"
+                                                   />
+
+                                    </Grid>
+
+                            </Grid>
+                            
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>  
+   
+</ContentPage>

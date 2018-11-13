@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.AppointmentFolder.Booking.ConfirmBooking"
+            >
+    
+    <ScrollView>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+            <Image Source="GreysHospital.jpg"
+                   Grid.Row="0"
+                   Aspect="AspectFit" HorizontalOptions="FillAndExpand"
+                   VerticalOptions="StartAndExpand"></Image>
+
+            <Frame CornerRadius="10" BackgroundColor="White" OutlineColor="Gray" Grid.RowSpan="2" Margin="20,150,20,20">
+                <Grid RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Confirm Booking" FontSize="Large" FontAttributes="Bold" Grid.Row="0"/>
+                    <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
+
+                    <Label Text="Doctor:" FontSize="Large" FontAttributes="Bold" Grid.Row="2"/>
+                    <Label Text="Dr Duma" FontSize="Medium" 
+                           Grid.Row="3"/>
+                    <BoxView Grid.Row="4" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
+
+                    <Label Text="Venue:" FontSize="Large" FontAttributes="Bold" Grid.Row="5"/>
+                    <Label Text="Greys' Hospital, Pietermartizburg" FontSize="Medium" Grid.Row="6"/>
+                    <BoxView Grid.Row="7" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
+
+                    <Label Text="Date And Time" FontSize="Large" FontAttributes="Bold" Grid.Row="8"/>
+                    <Label Text="23 September 2018 at 13:00am" FontSize="Medium" Grid.Row="9"/>
+                    <BoxView Grid.Row="10" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
+
+                    <Grid Grid.Row="11">
+                        <Button Grid.Row="1" Command="{Binding NavigateToHomePageCommand}" Text="Place Booking" BackgroundColor="Gray" BorderRadius="7" TextColor="White"/>
+                    </Grid>
+
+                </Grid>
+
+            </Frame>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

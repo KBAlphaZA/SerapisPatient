@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.TabbedPages.DeliveryPage">
+
+    <ContentPage.Resources>
+        
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            
+ 
+            <!-- The Prescription List-->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+        
+                <Label 
+                        Text="Doctor prescription" 
+                        HorizontalOptions="Center"
+                        TextColor="Black"
+                        FontSize="Large"
+                        Grid.Row="0"    
+                    >
+
+
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android,WinPhone" Value="5,10,5,2"/>
+                            <On Platform="iOS" Value="8,13,8,5"/>
+                        </OnPlatform>
+                    </Label.Margin>
+
+                </Label>
+
+                <Image 
+                    Grid.Row="1"
+                    Source="DoctorPrescriptionIcon.png"
+                    Aspect="AspectFit"
+                    >
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DoctorPrescription}"/>
+                    </Image.GestureRecognizers>
+                    
+                </Image>
+
+                <Label 
+                    Grid.Row="2"
+                    Text="Show prescription"
+                    HorizontalOptions="Center"
+                    FontSize="Medium"
+                    />
+
+            </Grid>
+            
+            
+            <!--Line-->
+            <Grid Grid.Row="1">
+                <BoxView 
+                    Color="Black" 
+                    HorizontalOptions="FillAndExpand"
+                    />
+            </Grid>
+            
+            
+            <!--Chat Bot-->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+
+                <Label  Grid.Row="0"
+                        Text="Self prescription" 
+                        HorizontalOptions="Center"
+                        TextColor="Black"
+                        FontSize="Large"
+                        >
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android,WinPhone" Value="5,10,5,2"/>
+                            <On Platform="iOS" Value="8,13,8,5"/>
+                        </OnPlatform>
+                    </Label.Margin>
+                </Label>
+
+
+                <Image 
+                    Grid.Row="1"
+                    Source="SelfPrescriptionIcon.png"
+                    Aspect="AspectFit"
+                    >
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChatBotInitilization}"/>
+                    </Image.GestureRecognizers>
+                    
+                </Image>
+
+                <Label 
+                    Grid.Row="2"
+                    Text="Self prescribe"
+                    HorizontalOptions="Center"
+                    FontSize="Medium"
+                    />
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

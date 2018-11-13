@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="SerapisPatient.TabbedPages.AppointmentPage">
+
+    <ContentPage.Resources>
+        <Style TargetType="Image" x:Key="ImageSpect">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <!--header Title-->
+            <Grid Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    Text="Set appointment"
+                    FontSize="22"
+                    TextColor="Black"
+                    />
+
+                    <BoxView 
+                    Color="Black"
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    />
+
+                </Grid>
+            </Grid>
+            
+            <!--First Block-->
+            <Grid Grid.Row="1" 
+                  VerticalOptions="Center" 
+                  HorizontalOptions="Center"
+                  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Source="SerapisBookingIcon.png" Grid.Row="0" 
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center"
+                                    >
+                            <Image.WidthRequest>
+                                <OnIdiom x:TypeArguments="x:Double">
+                                    <OnIdiom.Phone>100</OnIdiom.Phone>
+                                    <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                </OnIdiom>
+                            </Image.WidthRequest>
+                            <Image.HeightRequest>
+                                <OnIdiom x:TypeArguments="x:Double">
+                                    <OnIdiom.Phone>100</OnIdiom.Phone>
+                                    <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                </OnIdiom>
+                            </Image.HeightRequest>
+                        </Image>
+
+                        <Grid Grid.Row="1">
+                            <Label 
+                                Text="Book by date" 
+                                FontSize="Medium" 
+                                HorizontalOptions="Center"
+                            />
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SerapisBooking}"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+            
+            
+            <!--Line-->
+            <Grid Grid.Row="2">
+                <BoxView 
+                    Color="Black"
+                    HorizontalOptions="FillAndExpand"
+                    />
+
+            </Grid>
+            
+            <!--Second Block-->
+            <Grid Grid.Row="3" 
+                  VerticalOptions="Center" 
+                  HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                
+                <Image Source="CalendarIcon.png" Grid.Row="0" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       >
+                    <Image.WidthRequest>
+                        <OnIdiom x:TypeArguments="x:Double">
+                            <OnIdiom.Phone>100</OnIdiom.Phone>
+                            <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                        </OnIdiom>
+                    </Image.WidthRequest>
+                    <Image.HeightRequest>
+                        <OnIdiom x:TypeArguments="x:Double">
+                            <OnIdiom.Phone>100</OnIdiom.Phone>
+                            <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                        </OnIdiom>
+                    </Image.HeightRequest>
+                </Image>
+                
+
+                <Grid Grid.Row="1">
+                    <Label 
+                        Text="Book by date" 
+                        FontSize="Medium" 
+                        HorizontalOptions="Center"
+                        />
+                </Grid>
+
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BookByDate}"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

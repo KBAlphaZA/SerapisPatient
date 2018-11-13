@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popuppage:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.DeliveryMedicationPopUp"
+             xmlns:popuppage="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:popupanimation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:animation="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+                     >
+
+
+    <popuppage:PopupPage.Resources>
+        <Style TargetType="Label" x:Key="HeaderBanner">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+    </popuppage:PopupPage.Resources>
+
+
+    <popuppage:PopupPage.Animation>
+        <popupanimation:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="1"
+            DurationIn="400"
+            DurationOut="100"
+            EasingIn="SinInOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            />
+    </popuppage:PopupPage.Animation>
+
+    <popuppage:PopupPage.Content>
+        <Grid Margin="12, 60"
+              HeightRequest="600"
+              WidthRequest="500"
+              RowSpacing="0"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              BackgroundColor="White"
+              >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" BackgroundColor="#92da69">
+                <Label Text="Success" Style="{StaticResource HeaderBanner}"/>
+            </Grid>
+
+            
+                <animation:AnimationView 
+                            Animation="ScanComplete.json"
+                            Loop="false"
+                            AutoPlay="True"        
+                            Grid.Row="1" 
+                            VerticalOptions="FillAndExpand" 
+                            HorizontalOptions="FillAndExpand"
+                            Speed="0.4"
+                    />
+            
+
+            <Grid Grid.Row="2" BackgroundColor="DodgerBlue">
+                <Label FontSize="25" Text="OK" Style="{StaticResource HeaderBanner}"/>
+            </Grid>
+            
+        </Grid>
+    </popuppage:PopupPage.Content>
+    
+</popuppage:PopupPage>

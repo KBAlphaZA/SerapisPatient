@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SideMenuPages.PaymentPage"
+             Title="Payment"
+             >
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackLayout Orientation="Vertical">
+                       
+                        <Label 
+                           Text="Payment methods"
+                           TextColor="DodgerBlue"
+                           FontSize="22"
+                           Margin="10,10,0,0"
+                        />
+
+                        <ListView 
+                            ItemsSource="{Binding PaymentMethods}" 
+                            SeparatorVisibility="None"
+                            HasUnevenRows="True"
+                            VerticalOptions="Start"
+                            >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image 
+                                                Grid.Column="0"
+                                                Source="{Binding Icon}"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Start"
+                                             />
+
+                                            <Label
+                                                Text="{Binding Title}"
+                                                Grid.Column="1"
+                                                HorizontalOptions="Start"
+                                                TextColor="Black"
+                                                VerticalOptions="Center"
+                                            />
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.Footer>
+                                <Label Margin="10,10,0,0" Text="Add payment method" FontSize="18">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddMethodCommand}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </ListView.Footer>
+                        </ListView>
+
+
+                        <BoxView 
+                        Color="Black" 
+                        HeightRequest="1" 
+                        HorizontalOptions="FillAndExpand"
+                        />
+
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="1" VerticalOptions="Start">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Promotions"      
+                           TextColor="DodgerBlue"
+                           FontSize="22"
+                           Margin="10,10,0,0"
+                           />
+
+                        <Label Text="Add promotion code"
+                               FontSize="18"
+                               Margin="10,10,0,0"
+                         >
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PromotionCommand}"/>
+                        </Label.GestureRecognizers>
+                            
+                        </Label>
+
+                    </StackLayout>
+                </Grid>
+
+  
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

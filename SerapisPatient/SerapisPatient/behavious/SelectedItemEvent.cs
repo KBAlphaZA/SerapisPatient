@@ -1,0 +1,14 @@
+﻿using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Doctor;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SerapisPatient.behavious
+{
+    public class SelectedItemEvent : EventArgs
+    {
+        public MedicalBuildingModel SelectedBuilding { get; set; }
+        public Doctor SelectedDoctor { get; set; }
+    }
+}

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.PopUpMessages.PaymentMethodPopUp"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:popupanimation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+            
+             >
+
+    <popup:PopupPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="MethodLabel">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </popup:PopupPage.Resources>
+
+
+    <popup:PopupPage.Animation>
+        <popupanimation:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="1"
+            DurationIn="400"
+            DurationOut="100"
+            EasingIn="SinInOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            />
+
+
+    </popup:PopupPage.Animation>
+
+
+    <popup:PopupPage.Content>
+        <Grid HorizontalOptions="Center" 
+              VerticalOptions="Center" 
+              HeightRequest="250"
+              WidthRequest="300"
+              BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            
+            <!--Title-->
+            <Grid Grid.Row="0">
+                <Label Text="Add payment method" 
+                       FontSize="Large"
+                       HorizontalTextAlignment="Center"/>
+            </Grid>
+            
+            <!--Credit card options-->
+            <Grid Grid.Row="1" VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="">
+                        
+                    </Image>
+                </Grid>
+
+
+                <Grid Grid.Column="1">
+                    <Label Text="Debit or credit card" Style="{StaticResource MethodLabel}">
+
+                    </Label>
+
+                </Grid>
+                
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding .}"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+
+            <!--Medical aid scheme-->
+            <Grid Grid.Row="2" VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="">
+
+                    </Image>
+                </Grid>
+
+
+                <Grid Grid.Column="1">
+                    <Label Text="Medical aid provider" Style="{StaticResource MethodLabel}">
+                
+                    </Label>
+
+                </Grid>
+               
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding .}"/>
+                </Grid.GestureRecognizers>
+
+
+            </Grid>
+
+
+            <!--Cancel-->
+            <Grid Grid.Row="3" 
+                  BackgroundColor="#607d8b"
+                  >
+                <Label Text="Cancel" 
+                       TextColor="White" 
+                       FontSize="Medium"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding .}"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+            
+        </Grid>
+    </popup:PopupPage.Content>
+    
+</popup:PopupPage>

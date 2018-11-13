@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ProfilePicture="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="SerapisPatient.Views.SideMenuPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="MenuLabels">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="UserNameLabel">
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            
+            
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ProfilePicture:CircleImage Grid.Row="0" 
+                                                BorderColor="#607d8b" 
+                                                BorderThickness="1" 
+                                                Source="{Binding ProfileImage}"
+                                                HorizontalOptions="Center"
+                                                >
+                        <ProfilePicture:CircleImage.WidthRequest>
+                            <OnIdiom x:TypeArguments="x:Double">
+                                <OnIdiom.Tablet>120</OnIdiom.Tablet>
+                                <OnIdiom.Phone>70</OnIdiom.Phone>
+                            </OnIdiom>
+                        </ProfilePicture:CircleImage.WidthRequest>
+                        <ProfilePicture:CircleImage.HeightRequest>
+                            <OnIdiom x:TypeArguments="x:Double">
+                                <OnIdiom.Tablet>120</OnIdiom.Tablet>
+                                <OnIdiom.Phone>70</OnIdiom.Phone>
+                            </OnIdiom>
+                        </ProfilePicture:CircleImage.HeightRequest>
+                    </ProfilePicture:CircleImage>
+
+                    <Grid Grid.Row="1">
+                        <Label 
+                            Text="{Binding UserName}" 
+                            Style="{StaticResource UserNameLabel}"
+                            HorizontalOptions="Center"
+                            />
+                    </Grid>
+                </Grid>
+
+                <Grid.Margin>
+                    <OnIdiom x:TypeArguments="Thickness">
+                        <OnIdiom.Phone>10,15</OnIdiom.Phone>
+                        <OnIdiom.Tablet>15,20</OnIdiom.Tablet>
+                    </OnIdiom>
+                </Grid.Margin>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="SettingsIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Text="Settings" Style="{StaticResource MenuLabels}"/>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateSettings}"/>
+                        </Grid.GestureRecognizers>
+                        
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="PaymentsIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Text="Payment" Style="{StaticResource MenuLabels}"/>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigatePayment}"/>
+                        </Grid.GestureRecognizers>
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="ContactUsIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Text="Contact us" Style="{StaticResource MenuLabels}"/>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateContact}"/>
+                        </Grid.GestureRecognizers>
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="AppointmentHistoryIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Text="Appointment history" Style="{StaticResource MenuLabels}"/>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateAppointment}"/>
+                        </Grid.GestureRecognizers>
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="MedicationHistoryIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Text="Medication history" Style="{StaticResource MenuLabels}"/>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateMedication}"/>
+                        </Grid.GestureRecognizers>
+                        
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="LogOutIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>40</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Text="Log out" Style="{StaticResource MenuLabels}"/>
+                        </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                        </Grid.GestureRecognizers>
+                        
+                    </Grid>
+                </Grid>
+
+                <Grid.Margin>
+                    <OnIdiom x:TypeArguments="Thickness">
+                        <OnIdiom.Phone>10,5</OnIdiom.Phone>
+                    </OnIdiom>
+                </Grid.Margin>
+                
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <StackLayout>
+                    <BoxView 
+                        Color="Black" 
+                        HeightRequest="1" 
+                        HorizontalOptions="FillAndExpand"
+                        />
+
+                    <Label 
+                        HorizontalOptions="Center" 
+                        FontSize="Large"
+                        Text="{Binding NextAppointment, StringFormat='Next appointment: {0}'}"
+                        Margin="0,0,0,6"
+                        >
+                    </Label>
+                        
+                </StackLayout>
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

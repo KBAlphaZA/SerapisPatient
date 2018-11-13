@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.MasterDetailPage1"
+             xmlns:pages="clr-namespace:SerapisPatient.Views"
+             Title="Serapis Patient"
+             MasterBehavior="Popover"
+                  >
+
+    <MasterDetailPage.Master>
+        <pages:SideMenuPage x:Name="MasterPage" Title="Menu"/>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <pages:MainTabPage x:Name="DetailPage" Title="Serapis Patient"/>
+    </MasterDetailPage.Detail>
+    
+</MasterDetailPage>

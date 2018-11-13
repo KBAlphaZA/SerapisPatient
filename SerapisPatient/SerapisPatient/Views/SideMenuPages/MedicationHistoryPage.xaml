@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SideMenuPages.MedicationHistoryPage"
+             Title="Medication history"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="HeaderLabel">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="SubLabel">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="DarkGray"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <ListView 
+                 ItemsSource="{Binding TempStorage}"
+                 HasUnevenRows="True"
+                SeparatorVisibility="Default"
+                SeparatorColor="Black"
+                Grid.Row="0"
+            >
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" 
+                                   Source="MedicationHistoryIcon.png" 
+                                   VerticalOptions="Center" 
+                                   Aspect="AspectFit">
+
+                                </Image>
+
+                                <Grid Grid.Column="1" RowSpacing="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" 
+                                           Text="Date prescribed:"
+                                           Style="{StaticResource HeaderLabel}"
+                                           />
+
+                                        <Label Grid.Row="1" 
+                                           Text="{Binding DatePrescribed}"
+                                           Style="{StaticResource SubLabel}"
+                                           />
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" 
+                                           Text="Issuer:" 
+                                           Style="{StaticResource HeaderLabel}"
+                                           />
+
+                                        <Label Grid.Row="1" 
+                                           Text="{Binding Issuer}"
+                                           Style="{StaticResource SubLabel}"
+                                           />
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" 
+                                           Text="Time delivered:"
+                                           Style="{StaticResource HeaderLabel}"
+                                           />
+
+                                        <Label Grid.Row="1" 
+                                           Text="{Binding TimePrescribed}"
+                                           Style="{StaticResource SubLabel}"
+                                           />
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="3" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" 
+                                           Text="Delivery location:"
+                                           Style="{StaticResource HeaderLabel}"
+                                           />
+
+                                        <Label Grid.Row="1" 
+                                           Text="{Binding PlaceDelivered.address}"
+                                           Style="{StaticResource SubLabel}"
+                                           />
+
+                                    </Grid>
+
+                                </Grid>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Grid Grid.Row="1" VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" 
+                           Source="" 
+                           Aspect="AspectFit" 
+                           HorizontalOptions="Center"
+                           />
+
+                    <Label Grid.Row="1" 
+                           Text="Filter" 
+                           TextColor="Black" 
+                           HorizontalOptions="Center"
+                           />
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FilterCommand}"/>
+                    </Grid.GestureRecognizers>
+                    
+                </Grid>
+                
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

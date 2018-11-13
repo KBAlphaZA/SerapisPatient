@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectPractice"
+             xmlns:local="clr-namespace:SerapisPatient.Converters"
+             xmlns:control="clr-namespace:SerapisPatient.Controls"
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="BorderColor" Value="Blue" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="CornerRadius" Value="15" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0, 4" />
+        </Style>
+
+        <Style x:Key="headerLabel" TargetType="Label">
+            <Setter Property="Margin" Value="0, 8" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="Blue" />
+        </Style>
+
+        <Style TargetType="Image">
+            <Setter Property="FlexLayout.Order" Value="-1" />
+            <Setter Property="FlexLayout.AlignSelf" Value="Center" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Text" Value="Next" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ButtonColour}" />
+            <Setter Property="BorderRadius" Value="20" />
+        </Style>
+
+        
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="CenterAndExpand">
+        <ScrollView Orientation="Horizontal" Margin="0,20">
+            <control:ExtendedFlexLayout ItemsSource="{Binding Practices}">
+                <control:ExtendedFlexLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Frame WidthRequest="350"
+                                  HeightRequest="460">
+                            <FlexLayout Direction="Column">
+                                <Label Text="{Binding PracticeName}" 
+                                           Style="{StaticResource headerLabel}" HorizontalOptions="Center"
+                                       />
+                                <Label Text="Distance:" />
+                                <Label Text="{Binding Distance , StringFormat=' {0} km'}" Margin="10,0,0,0" />
+
+                                <Label Text="Expected Waiting Time:" Margin="10,0,0,0" />
+                                <Label Text="{Binding AvgTimeSpent}" Margin="10,0,0,0" />
+                                
+                                <Image Source="{Binding MedicalBuildingImage}"
+                                           WidthRequest="340"
+                                           HeightRequest="160"
+                                           />
+                                <Label FlexLayout.Grow="1" />
+                                <Button Command="{Binding NavigateToHomePageCommand}"/>
+                            </FlexLayout>
+                        </Frame>
+                    </DataTemplate>
+                </control:ExtendedFlexLayout.ItemTemplate>
+                </control:ExtendedFlexLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

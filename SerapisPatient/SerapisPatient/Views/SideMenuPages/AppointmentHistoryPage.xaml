@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SideMenuPages.AppointmentHistoryPage"
+             Title="Past appointments"
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="Labels">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="TextColor" Value="DarkGray"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="LineBreakMode" Value="TailTruncation"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="HeaderLabel">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="LineBreakMode" Value="TailTruncation"/>
+        </Style>
+        
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding AppointmentHistoryList}" 
+                  HasUnevenRows="True" 
+                 SeparatorColor="Black"
+                  SeparatorVisibility="Default"
+                  >
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="15" RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid RowSpacing="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0"
+                                                   Text="Doctor:" 
+                                                   Style="{StaticResource HeaderLabel}"
+                                                   />
+
+                                    <Label Grid.Row="1"
+                                                   Text="{Binding DoctorBooked.surname, StringFormat='Dr. {0}'}"
+                                                   Style="{StaticResource Labels}"
+                                                   />
+
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <Grid RowSpacing="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0"
+                                                   Text="Date and Time:" 
+                                                   Style="{StaticResource HeaderLabel}"
+                                                   />
+
+                                    <Label Grid.Row="1"
+                                                   Text="{Binding DateBooked}"
+                                                   Style="{StaticResource Labels}"
+                                                   />
+
+                                </Grid>
+                            </Grid>
+
+
+                            <Grid Grid.Row="2">
+                                <Grid RowSpacing="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0"
+                                                   Text="Venue:" 
+                                                   Style="{StaticResource HeaderLabel}"
+                                                   />
+
+                                    <Label Grid.Row="1"
+                                                   Text="{Binding Venue}"
+                                                   LineBreakMode="TailTruncation"
+                                                   Style="{StaticResource Labels}"
+                                                />
+
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

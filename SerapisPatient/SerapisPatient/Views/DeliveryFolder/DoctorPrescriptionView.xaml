@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.DoctorPrescriptionView"
+            Padding="0,0,0,10"
+             >
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="ButtonLabel">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="ListLabels">
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="ListHeaderLabel">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="0" 
+                      ItemsSource="{Binding PrescriptionMeds}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="Default"
+                      SeparatorColor="Black"
+                      
+                      >
+
+                <ListView.Header>
+                    <StackLayout>
+                        <Label Text="Prescribed date: 26/09/18" 
+                               Style="{StaticResource ListHeaderLabel}"
+                           />
+
+                        <Label Text="Doctor: A.X Ngcobo"
+                               Style="{StaticResource ListHeaderLabel}"
+                               />
+
+                        <BoxView 
+                        HorizontalOptions="FillAndExpand"
+                        Color="Black"
+                        HeightRequest="1.1"    
+                        />
+                    </StackLayout>
+                </ListView.Header>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Image Source="PillIconButton.png" 
+                                           HorizontalOptions="Center"
+                                           Aspect="AspectFit"
+                                           />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <Grid 
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center"
+                                        >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" 
+                                               Text="{Binding MedicationName}"/>
+
+                                        <Label Grid.Row="1" Text="{Binding MedicationInstructions}"/>
+
+                                    </Grid>
+                                </Grid>
+                                
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <Grid Grid.Row="1" 
+                  VerticalOptions="FillAndExpand" 
+                  HorizontalOptions="FillAndExpand"
+                  >
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="6*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Image Grid.Row="0" 
+                                   Source="DeliveryIconButton.png"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"
+                                   />
+
+                            <Label Grid.Row="1" 
+                                   Text="Deliver"
+                                   HorizontalTextAlignment="Center"
+                                   />
+
+                        </Grid>
+
+                        <Grid.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="Android, UWP" Value="10"/>
+                                <On Platform="iOS" Value="14"/>
+                            </OnPlatform>
+                        </Grid.Margin>
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeliveryTapped}"/>
+                        </Grid.GestureRecognizers>
+
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="6*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" 
+                                   Source="PharmacyIconButton.png" 
+                                   Aspect="AspectFit"
+                                   />
+
+                            <Label Grid.Row="1" 
+                                   Text="Pharamacy"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="Center"
+                                   />
+
+                        </Grid>
+
+                        <Grid.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="Android, UWP" Value="10"/>
+                                <On Platform="iOS" Value="14"/>
+                            </OnPlatform>
+                        </Grid.Margin>
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PharmacyTapped}"/>
+                        </Grid.GestureRecognizers>
+                        
+                    </Grid>
+                    
+                </Grid>
+                
+
+            </Grid>
+
+
+        </Grid>
+
+    </ContentPage.Content>
+    
+</ContentPage>

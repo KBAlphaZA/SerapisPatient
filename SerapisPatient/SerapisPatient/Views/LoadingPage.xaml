@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.LoadingPage"
+              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+              BackgroundColor="#80000000">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="30"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <ActivityIndicator IsRunning="True" Color="White" IsVisible="False"/>
+            <forms:AnimationView 
+	            x:Name="animationView" 
+	            Grid.Row="1"
+	            Animation="hospital_bed.json" 
+	            Loop="True" 
+	            AutoPlay="True"
+	            VerticalOptions="FillAndExpand" 
+	            HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

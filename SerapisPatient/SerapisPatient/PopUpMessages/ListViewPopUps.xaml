@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popuppage:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.PopUpMessages.ListViewPopUps"
+             xmlns:popuppage="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:popupanimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             >
+
+    <popuppage:PopupPage.Resources>
+        
+    </popuppage:PopupPage.Resources>
+
+    <popuppage:PopupPage.Animation>
+        <popupanimations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="1"
+            DurationIn="400"
+            DurationOut="100"
+            EasingIn="SinInOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            />
+    </popuppage:PopupPage.Animation>
+
+    <popuppage:PopupPage.Content>
+        <Grid>
+            
+        </Grid>
+    </popuppage:PopupPage.Content>
+
+</popuppage:PopupPage>

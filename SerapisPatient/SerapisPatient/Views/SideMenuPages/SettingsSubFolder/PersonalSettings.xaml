@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:profilepicture="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="SerapisPatient.Views.SideMenuPages.SettingsSubFolder.PersonalSettings"
+             >
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry" x:Key="SettingEntry">
+                <Setter Property="PlaceholderColor" Value="Gray"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="SettingLabel">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+            <ListView HasUnevenRows="True" 
+                      VerticalOptions="Fill" 
+                      ItemsSource="{Binding NextOfKins}"
+                      Margin="8,10,0,5"
+                      >
+                   
+            <ListView.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Profile Picture-->
+                        <Grid Grid.Row="0" HorizontalOptions="Center">
+                            <profilepicture:CircleImage Source="userplaceholder.png" 
+                                                    BorderThickness="1" 
+                                                    BorderColor="#607d8b"
+                                                    >
+
+                                <profilepicture:CircleImage.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Tablet>120</OnIdiom.Tablet>
+                                        <OnIdiom.Phone>80</OnIdiom.Phone>
+                                    </OnIdiom>
+                                </profilepicture:CircleImage.WidthRequest>
+                                <profilepicture:CircleImage.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Tablet>120</OnIdiom.Tablet>
+                                        <OnIdiom.Phone>80</OnIdiom.Phone>
+                                    </OnIdiom>
+                                </profilepicture:CircleImage.HeightRequest>
+                            </profilepicture:CircleImage>
+
+                        </Grid>
+
+                        <!--UserName-->
+                        <Grid Grid.Row="1" HorizontalOptions="Center">
+                            <Label
+                            Text="Khanyisani Buthelezi"
+                            Style="{StaticResource SettingLabel}"
+                            />
+                        </Grid>
+
+                        <!--First Name-->
+                        <Grid Grid.Row="2">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="First Name" 
+                                   Style="{StaticResource SettingLabel}"
+                             />
+
+                            <Entry Grid.Row="1"  
+                                   Placeholder="{Binding FirstNamePlaceholder}" 
+                                   Text="{Binding FirstName}"
+                                   Style="{DynamicResource SettingEntry}"
+                              />
+
+                        </Grid>
+
+                        <!--Surname-->
+                        <Grid Grid.Row="3">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="Surname" 
+                                   Style="{StaticResource SettingLabel}"
+                             />
+
+                            <Entry Grid.Row="1"  
+                                   Placeholder="{Binding surnamePlaceholder}" 
+                                   Text="{Binding Surname}"
+                                   Style="{DynamicResource SettingEntry}"
+                              />
+
+                        </Grid>
+
+                        <!--DOB-->
+                        <Grid Grid.Row="4">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="Date of Birth" 
+                                   Style="{StaticResource SettingLabel}"
+                                />
+
+
+                            <DatePicker Grid.Row="1" Date="1996/03/20">
+                            </DatePicker>
+
+                        </Grid>
+
+                        <!--Sex-->
+                        <Grid Grid.Row="5">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="Biological sex" 
+                                   Style="{StaticResource SettingLabel}"
+                                 />
+
+                            <Picker Grid.Row="1"
+                                        Title="{Binding GenderPlaceholder}" 
+                                        TextColor="Black" 
+                                        HorizontalOptions="FillAndExpand" 
+                                        Style="{DynamicResource SettingEntry}"
+                                 >
+                                <Picker.Items>
+                                    <x:String>Male</x:String>
+                                    <x:String>Female</x:String>
+                                    <x:String>Non-Binary</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                        </Grid>
+
+                        <!--Cellphone-->
+                        <Grid Grid.Row="6">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="Cellphone number" 
+                                   Style="{StaticResource SettingLabel}"
+                             />
+
+                            <Entry Grid.Row="1"  
+                                   Keyboard="Telephone" 
+                                   Placeholder="{Binding CellphonePlaceholder}" 
+                                   Text="{Binding CellphoneNumberInput}"
+                                   Style="{DynamicResource SettingEntry}"
+                              />
+
+                        </Grid>
+
+                        <!--Alternative-->
+                        <Grid Grid.Row="7">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="Alternative number" 
+                                   Style="{StaticResource SettingLabel}"
+                             />
+
+                            <Entry Grid.Row="1"  
+                                    Keyboard="Telephone" 
+                                    Placeholder="{Binding AlternativePlaceholder}" 
+                                    Style="{DynamicResource SettingEntry}"
+                                    Text="{Binding AlternativeNumber, Mode=TwoWay}"
+                              />
+
+                        </Grid>
+
+                        <!--Email-->
+                        <Grid Grid.Row="8">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Grid.Row="0" 
+                                   Text="Email" 
+                                   TextColor="Black" 
+                                   Style="{StaticResource SettingLabel}"
+                             />
+
+                            <Entry Grid.Row="1"  
+                                   Keyboard="Email" 
+                                   Text="{Binding EmailText, Mode=TwoWay}"
+                                   Placeholder="{Binding EmailPlaceholder}" 
+                                   Style="{DynamicResource SettingEntry}"
+                              />
+
+                        </Grid>
+
+
+                    </Grid>
+
+
+                    <Label Grid.Row="1" 
+                                   Text="Emergency Contacts" 
+                                   HorizontalOptions="Center" 
+                                   FontSize="Medium"
+                                   />
+                </Grid>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label  Grid.Row="0"
+                                        Text="Full name"
+                                        Style="{StaticResource SettingLabel}"
+                                        />
+
+                                <Entry Grid.Row="1"
+                                       Text="{Binding FullName}"
+                                       Style="{DynamicResource SettingEntry}"
+                                       IsSpellCheckEnabled="False"                
+                                       />
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label  Grid.Row="0"
+                                        Text="Contact number"
+                                        Style="{StaticResource SettingLabel}"
+                                        />
+
+                                <Entry Grid.Row="1"
+                                        Text="{Binding ContactNumber}"
+                                        Style="{DynamicResource SettingEntry}"
+                                        />
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label  Grid.Row="0"
+                                        Text="Relations"
+                                        Style="{StaticResource SettingLabel}"
+                                        />
+
+                                <Entry Grid.Row="1"
+                                        Text="{Binding RelationshipToPatient}"
+                                        Style="{DynamicResource SettingEntry}"
+                                        />
+                            </Grid>
+
+                            <Grid Grid.Row="3" HorizontalOptions="Center">
+                                <Label Text="REMOVE CONTACT" 
+                                        TextColor="Red"
+                                        FontSize="Medium"
+                                        />
+                            </Grid>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.Footer>
+                <!--Next Kin-->
+                <Grid Margin="0,15,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Image Source="NextOfKin.png" Grid.Column="0">
+                        <Image.WidthRequest>
+                            <OnIdiom x:TypeArguments="x:Double">
+                                <OnIdiom.Phone>30</OnIdiom.Phone>
+                            </OnIdiom>
+                        </Image.WidthRequest>
+                        <Image.HeightRequest>
+                            <OnIdiom x:TypeArguments="x:Double">
+                                <OnIdiom.Phone>30</OnIdiom.Phone>
+                            </OnIdiom>
+                        </Image.HeightRequest>
+                    </Image>
+
+                    <Label Text="Next of Kin"
+                                       Style="{StaticResource SettingLabel}"
+                                       FontSize="Large"
+                                       Grid.Column="1"
+                                         />
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddNextOfKin}"/>
+                    </Grid.GestureRecognizers>
+
+                </Grid>
+            </ListView.Footer>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

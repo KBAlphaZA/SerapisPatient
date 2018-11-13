@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SideMenuPages.SettingsPage"
+             Title="Settings"
+             >
+   
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <Grid Grid.Column="0">
+                        <Image Source="userSettingsIcon.png" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               />
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Label Text="Personal Information" 
+                               HorizontalOptions="Start" 
+                               VerticalOptions="Center"
+                               TextColor="Black"
+                               />
+                    </Grid>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PersonalButtonCommand}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <BoxView Color="Black" HorizontalOptions="FillAndExpand"/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <Grid Grid.Column="0">
+                        <Image Source="calenderSettingsIcon.png" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               />
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Label Text="Appointment settings" 
+                               HorizontalOptions="Start" 
+                               VerticalOptions="Center"
+                               TextColor="Black"
+                               />
+                    </Grid>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AppointmentButtonCommand}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <BoxView Color="Black" HorizontalOptions="FillAndExpand"/>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <Grid Grid.Column="0">
+                        <Image Source="userDeliveryIcon.png" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               />
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Label Text="Delivery settings" 
+                               HorizontalOptions="Start" 
+                               VerticalOptions="Center"
+                               TextColor="Black"
+                               />
+                    </Grid>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DeliverySettingsCommand}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <Grid Grid.Row="5">
+                    <BoxView Color="Black" HorizontalOptions="FillAndExpand"/>
+                </Grid>
+
+
+                <Grid Grid.Row="6">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <Grid Grid.Column="0">
+                        <Image Source="userDeliveryIcon.png" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               />
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Label Text="Notifications" 
+                               HorizontalOptions="Start" 
+                               VerticalOptions="Center"
+                               TextColor="Black"
+                               />
+                    </Grid>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>MinimumOSVersion</key>
+	<string>8.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>SerapisPatient</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.companyname.SerapisPatient</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleName</key>
+	<string>SerapisPatient</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
+  <key>UIAPPFonts</key>
+  <array>
+    <string>Fonts/SourceSansPro-Black.ttf</string>
+    <string>Fonts/SourceSansPro-BlackItalic.tff</string>
+    <string>Fonts/SourceSansPro-Bold.tff</string>
+    <string>Fonts/SourceSansPro-BoldItalic.tff</string>
+    <string>Fonts/SourceSansPro-ExtraLight.ttf</string>
+    <string>Fonts/SourceSansPro-ExtraLightItalic.ttf</string>
+    <string>Fonts/SourceSansPro-Italic.tff</string>
+    <string>Fonts/SourceSansPro-Light.ttf</string>
+    <string>Fonts/SourceSansPro-LightItalic.ttf</string>
+    <string>Fonts/SourceSansPro-Regular.ttf</string>
+    <string>Fonts/SourceSansPro-SemiBold.ttf</string>
+    <string>Fonts/SourceSansPro-SemiBoldItalic.ttf</string>
+    <string>Fonts/Ubuntu-Bold.ttf</string>
+    <string>Fonts/Ubuntu-BoldItalic.ttf</string>
+    <string>Fonts/Ubuntu-Italic.ttf</string>
+    <string>Fonts/Ubuntu-Light.ttf</string>
+    <string>Fonts/Ubuntu-LightItalic.ttf</string>
+    <string>Fonts/Ubuntu-LightItalic.ttf</string>
+    <string>Fonts/Ubuntu-MediumItalic.ttf</string>
+    <string>Fonts/Ubuntu-Regular.ttf</string>
+  </array>
+</dict>
+</plist>

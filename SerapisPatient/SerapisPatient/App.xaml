@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.App"
+             xmlns:mytheme="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Light">
+    
+        
+    
+    <Application.Resources>
+        
+        <ResourceDictionary>
+            <!--  colors  -->
+              
+            
+            <Color x:Key="HeaderTextColor">#555555</Color>
+            <!--Davy grey-->
+            <Color x:Key="BodyTextColor">#bababa</Color>
+            <!--Lightgray-->
+            <!--The Dark green-ish-->
+            <Color x:Key="SeconderyColour">#607d8b</Color>
+            
+            <!--The light Green-->
+            <Color x:Key="PrimaryColour">#92da69</Color>
+
+            <!--The s-dark of 607d86-->
+            <Color x:Key="ButtonColour">#355159</Color>
+
+            <!--The light green palete-->
+            <Color x:Key="StatusBar">#60a83a</Color>
+            
+            <!--  Customized font  -->
+            <OnPlatform x:Key="RegularFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS">HelveticaNeue</On>
+                <On Platform="Android">sans-serif</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="LightFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS">HelveticaNeue-Light</On>
+                <On Platform="Android">sans-serif-light</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="MediumFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS">HelveticaNeue-Medium</On>
+                <On Platform="Android">sans-serif-medium</On>
+            </OnPlatform>
+
+            <!--Navigation bar colour-->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource SeconderyColour}"/>
+                <Setter Property="BarTextColor" Value="White"/>
+            </Style>
+
+            
+            <OnPlatform x:Key="UbuntuRegular"
+                        x:TypeArguments="x:String"
+                        iOS="Ubuntu-Regular"
+                        Android="Ubuntu-Regular.tff#Ubuntu"
+                        WinPhone="/Assets/Fonts/Ubuntu-Regular.tff#Ubuntu"
+                        />
+
+            <OnPlatform x:Key="UbuntuBold"
+                        x:TypeArguments="x:String"
+                        iOS="Ubuntu-Bold.ttf"
+                        Android="Ubuntu-Bold.tff#Ubuntu"
+                        WinPhone="/Assets/Fonts/Ubuntu-Bold.tff#Ubuntu"
+                        />
+            
+        </ResourceDictionary>
+	</Application.Resources>
+</Application>

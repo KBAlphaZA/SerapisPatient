@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:profile="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="SerapisPatient.Views.DoctorSelection">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="10,10,5,0"/>
+                    <On Platform="iOS" Value="14,14,10,0"/>
+                </OnPlatform>
+            </Grid.Margin>
+            
+            <Grid Grid.Row="0" HorizontalOptions="Center">
+                <profile:CircleImage Source="profilepicturexample.jpg" BorderThickness="2" BorderColor="LightGreen">
+                    <profile:CircleImage.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android,iOS" Value="100"/>
+                            <On Platform="WinPhone" Value="60"/>
+                        </OnPlatform>
+                    </profile:CircleImage.WidthRequest>
+                    <profile:CircleImage.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS" Value="100"/>
+                            <On Platform="WinPhone" Value="60"/>
+                        </OnPlatform>
+                    </profile:CircleImage.HeightRequest>
+                </profile:CircleImage>
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+           
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                
+                    <Grid.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="10,20"/>
+                        </OnPlatform>
+                    </Grid.Margin>
+                    
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image 
+                        Grid.Column="0"
+                        Source="DoctorIcon.png"
+                        HeightRequest="45"
+                        />
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="Dr K.L Buthelezi"
+                        VerticalOptions="Center"
+                        />
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image 
+                        Grid.Column="0"
+                        HeightRequest="45"
+                        Source="SpecilizationIcon.png"
+                        />
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="General Practioner"
+                        VerticalOptions="Center"
+                        />
+
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image 
+                        Grid.Column="0"
+                        Source="UniversityIcon.png"
+                        HeightRequest="45"
+                        />
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="The University of Kwazulu-Natal"
+                        VerticalOptions="Center"
+                        />
+
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image 
+                        Grid.Column="0"
+                        Source="ExpIcon.png"
+                        HeightRequest="45"
+                        />
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="7 years expiriance"
+                        VerticalOptions="Center"
+                        />
+
+                </Grid>
+
+                <Button Grid.Row="4" Clicked="Button_Clicked" Text="Confirm"/>
+
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

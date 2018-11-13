@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.MainTabPage"
+            xmlns:pages="clr-namespace:SerapisPatient.TabbedPages"
+            BarBackgroundColor="{StaticResource SeconderyColour}"
+            Title="Serapis patient"
+            >
+  <!--Pages can be added as references or inline-->
+
+   
+        <TabbedPage.Children>
+            <pages:ProfilePage Icon="ProfilePictureIcon.png"/>
+            <pages:AppointmentPage Icon="AppointmentIcon.png"/>
+            <pages:DeliveryPage Icon="DeliveryIcon.png"/>
+            <pages:CameraPage Icon="CameraIcon.png"/>
+        </TabbedPage.Children>
+   
+
+</TabbedPage>
