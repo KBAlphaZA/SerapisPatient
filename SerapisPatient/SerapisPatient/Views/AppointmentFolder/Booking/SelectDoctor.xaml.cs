@@ -22,16 +22,6 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
             BindingContext = viewModel = new SelectDoctorViewModel();
 		}
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-
-        //    Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-        //    {
-        //        DependencyService.Get<ILoadingPageService>().HideLoadingPage();
-
-        //        return false;
-        //    });
-        //}
+        
     }
 }

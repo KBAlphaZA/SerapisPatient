@@ -33,7 +33,7 @@ namespace SerapisPatient.ViewModels
         private void SelectTheSpeclizationAsync()
         {
             //DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
-            App.Current.MainPage.Navigation.PushModalAsync(new SelectPractice());
+            App.Current.MainPage.Navigation.PushAsync(new SelectPractice(),true);
         }
         
 

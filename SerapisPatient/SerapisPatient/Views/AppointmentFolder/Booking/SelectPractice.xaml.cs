@@ -23,7 +23,16 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
             BindingContext = viewModel;
         }
 
-       
+        private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(),true);
+        }
+
+      
+
+
+        //Below is the animation code(using Lottie)
+
 
         //protected override void OnAppearing()
         //{

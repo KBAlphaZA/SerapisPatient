@@ -16,17 +16,17 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 {
     public class SelectDoctorViewModel : BaseViewModel
     {
-        public string selectedDoctor;
+        
         public ObservableCollection<Doctor> Doctors { get; set; }
         
         public ICommand NavigateToConfrimation { get; set; }
 
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
 
-        public ICommand SelectedCommand => new Command<Doctor>(async selectedDoctor =>
+        public ICommand SelectedCommand => new Command<Doctor>(async selectDoctor =>
         {
-            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectedDoctor });
-            string doctorname = selectedDoctor.LastName;
+            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectDoctor });
+            string doctorname = selectDoctor.LastName;
             //MessagingCenter.Send(this, MessegingKeys.Medicalbuilding, doctorname);
             await GoToConfirmation();
         });
@@ -63,7 +63,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //This sends the message of itemSelected
 
            
-            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking());
+            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(),true);
         }
     }
 }

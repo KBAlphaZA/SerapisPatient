@@ -21,12 +21,15 @@ namespace SerapisPatient.ViewModels.TabbedPageViewModel
 
         private void NavigateToBookByDate()
         {
-            App.Current.MainPage.Navigation.PushModalAsync(new Specilization());
+            //App.Current.MainPage.Navigation.PushModalAsync(new Specilization());
+           
+            App.Current.MainPage.Navigation.PushAsync(new Specilization());
         }
 
         private void NavigateToSerapisBooking()
         {
-             App.Current.MainPage.Navigation.PushModalAsync(new Specilization());
+            // App.Current.MainPage.Navigation.PushModalAsync(new Specilization());            
+            App.Current.MainPage.Navigation.PushAsync(new Specilization(),true);
         }
 
     }

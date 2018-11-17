@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.MainView"
+             xmlns:flex="clr-namespace:SerapisPatient.Controls">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="user1" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <!--Row 0-->
+            <RowDefinition Height="35"/>
+            <!--Row 1-->
+            <RowDefinition Height="35"/>
+            <!--Row 2-->
+
+            <RowDefinition Height="60"/>
+            <!--Row 3-->
+            <RowDefinition Height="60"/>
+            <!--Row 4-->
+            <RowDefinition Height="60"/>
+            <!--Row 5-->
+            <RowDefinition Height="20"/>
+            <!--Row 6-->
+            <RowDefinition Height="*"/>
+            <!--Row 7-->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <!--Row 0-->
+
+
+        <!-- FIRST TWO LABELS-->
+        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="1"/>
+
+        <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="2" />
+
+        <!--Row 3-->
+
+        <Frame x:Name="appointmentframe" Grid.Row="3"  Grid.Column="1" BackgroundColor="{StaticResource PrimaryButton}" CornerRadius="25" >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="TapGestureRecognizer_TappedAsync">
+                </TapGestureRecognizer>
+            </Frame.GestureRecognizers>
+            <Label TextColor="White" Text="Make An Appointment" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
+        </Frame>
+
+
+        <!--Row 4-->
+
+        <Frame x:Name="appointmentframe1" Grid.Row="4" Grid.Column="1" BackgroundColor="{StaticResource PrimaryButton}"  CornerRadius="25">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="TapGestureRecognizer_Tapped">
+                </TapGestureRecognizer>
+            </Frame.GestureRecognizers>
+            <Label TextColor="White" Text="Order Your Medication" FontAttributes="Bold" Grid.Row="4" Grid.Column="1" />
+        </Frame>
+
+        <!--Row 5-->
+
+        <Frame x:Name="appointmentframe2" Grid.Row="5" Grid.Column="1" BackgroundColor="{StaticResource PrimaryButton}"  CornerRadius="25" >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="TapGestureRecognizer_Tapped_1">
+                </TapGestureRecognizer>
+            </Frame.GestureRecognizers>
+            <Label TextColor="White" Text="Scan QR Code" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
+        </Frame>
+
+        <!--Row 6-->
+
+        <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="6"/>
+
+        <!--Row 7-->
+
+
+
+        <StackLayout Grid.Column="1" Grid.Row="7">
+            <ScrollView Orientation="Horizontal" Margin="25,10,25,10">
+                <flex:ExtendedFlexLayout ItemsSource="{Binding Doctors}">
+                    <flex:ExtendedFlexLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame WidthRequest="150" HeightRequest="130" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True"  >
+                                <FlexLayout Direction="Column">
+                                    <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Text}" />
+                                    <Label TextColor="Black" Text="26/08/2018"/>
+                                    <Label FlexLayout.Grow="1"/>
+                                </FlexLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </flex:ExtendedFlexLayout.ItemTemplate>
+                </flex:ExtendedFlexLayout>
+            </ScrollView>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

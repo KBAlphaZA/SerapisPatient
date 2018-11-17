@@ -40,8 +40,8 @@ namespace SerapisPatient
             }
             else
             {
-                //MainPage = new NavigationPage(new MasterDetailPage1());
-               MainPage = new NavigationPage(new CameraPage());
+                MainPage = new NavigationPage(new MasterDetailPage1());
+               //MainPage = new NavigationPage(new SelectPractice());
 
             }
 
