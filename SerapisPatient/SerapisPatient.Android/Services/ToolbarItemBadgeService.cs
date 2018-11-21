@@ -43,7 +43,7 @@ namespace SerapisPatient.Droid.Services
             });
         }
 
-        public void SetBadge(ChatPageViewModel chatPageViewModel, object p, string v, Color red, Color white)
+        public void SetBadge(ChatBotViewModel chatPageViewModel, object p, string v, Color red, Color white)
         {
             throw new NotImplementedException();
         }

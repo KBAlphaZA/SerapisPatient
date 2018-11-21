@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.MasterView"
              xmlns:pages="clr-namespace:SerapisPatient.Views"
+             xmlns:custom="clr-namespace:SerapisPatient.Views.CustomViews"
              Title="Serapis Patient"
              MasterBehavior="Popover">
 
@@ -11,7 +12,12 @@
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <pages:MainView />
+        <custom:CustomNavigationView>
+            <x:Arguments>
+                <pages:MainView Title="Serapis Patient" />
+            </x:Arguments>
+        </custom:CustomNavigationView>
+             
         <!--:Name="DetailPage" Title="Serapis Patient"/> -->
     </MasterDetailPage.Detail>
 

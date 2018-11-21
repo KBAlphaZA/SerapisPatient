@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
 {
-    public class ChatPageViewModel
+    public class ChatBotViewModel
     {
         public bool ShowScrollTap { get; set; } = false;
         public bool LastMessageVisible { get; set; } = true;
@@ -22,7 +22,7 @@ namespace SerapisPatient.ViewModels
         public ICommand MessageAppearingCommand { get; set; }
         public ICommand MessageDisappearingCommand { get; set; }
 
-        public ChatPageViewModel()
+        public ChatBotViewModel()
         {
             //DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, ToolbarItems.First(), "2", Color.Red, Color.White);
             #region messages

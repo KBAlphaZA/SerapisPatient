@@ -1,6 +1,8 @@
 using SerapisPatient.Services;
 using SerapisPatient.Services.Authentication;
+
 using SerapisPatient.TabbedPages;
+using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
@@ -25,7 +27,10 @@ namespace SerapisPatient
 		{
 			InitializeComponent();
             Init();
+           
         }
+
+        
 
         private void Init()
         {
@@ -35,7 +40,7 @@ namespace SerapisPatient
 
             if (checkTokenvar!=true)
             {
-                 MainPage = new NavigationPage(new MainPage());
+                 MainPage = new NavigationPage(new LoginView());
                 
             }
             else
@@ -62,7 +67,9 @@ namespace SerapisPatient
 
 		protected override void OnStart ()
 		{
-     
+        //retreive yor gpslocation
+
+            //base.OnResume();
 		}
 
 		protected override void OnSleep ()

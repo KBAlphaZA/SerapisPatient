@@ -1,4 +1,5 @@
-﻿using SerapisPatient.Services.DependencyServices;
+﻿using SerapisPatient.Models;
+using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
 using System;
@@ -16,17 +17,19 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	public partial class SelectPractice : ContentPage
 	{
         MedicalBuildingViewModel viewModel;
-        public SelectPractice ()
+        public SelectPractice (SpecilizationModel _specilizationData)
 		{
 			InitializeComponent ();
-            viewModel = new MedicalBuildingViewModel();
+            viewModel = new MedicalBuildingViewModel(_specilizationData);
             BindingContext = viewModel;
         }
 
+        
         private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(),true);
         }
+        
 
       
 

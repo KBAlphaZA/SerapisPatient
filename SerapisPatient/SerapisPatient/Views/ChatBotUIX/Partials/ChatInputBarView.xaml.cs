@@ -23,7 +23,7 @@ namespace SerapisPatient.Views.ChatBotUIX.Partials
         }
         public void Handle_Completed(object sender, EventArgs e)
         {
-            (this.Parent.Parent.BindingContext as ChatPageViewModel).OnSendCommand.Execute(null);
+            (this.Parent.Parent.BindingContext as ChatBotViewModel).OnSendCommand.Execute(null);
             chatTextInput.Focus();
         }
 

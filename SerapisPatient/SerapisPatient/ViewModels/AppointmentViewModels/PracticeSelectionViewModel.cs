@@ -1,4 +1,6 @@
-﻿using SerapisPatient.Models.Practices;
+﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Practices;
+using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using SerapisPatient.Views.AppointmentFolder.Booking;
@@ -20,7 +22,7 @@ namespace SerapisPatient.ViewModels
         public PracticeSelectionViewModel()
         {
             GenerateDummyDataList();
-
+            ShowDetails();
         }
 
 
@@ -74,7 +76,15 @@ namespace SerapisPatient.ViewModels
 
         }
 
-        
+        public void ShowDetails()
+        {
+            MessagingCenter.Subscribe<SpecilizationViewModel,SpecilizationModel>(this, MessagingKeys.Specilization, (obj, arg) =>
+             {
+                 string icon = arg.Icon;
+                 string Practicetitle = arg.Title;
+             });
+        }
+
 
     }
 }

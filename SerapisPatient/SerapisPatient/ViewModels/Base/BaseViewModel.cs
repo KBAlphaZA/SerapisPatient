@@ -1,12 +1,23 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SerapisPatient.ViewModels.Base
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+       
+        //protected readonly IDialogService DialogService;
+        public BaseViewModel()
+        {
+          
+        }
+
+        #region Propertychanged events
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -14,6 +25,7 @@ namespace SerapisPatient.ViewModels.Base
             if (propertyName != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                
             }
         }
 
@@ -29,6 +41,13 @@ namespace SerapisPatient.ViewModels.Base
                 isBusy = value;
                 OnPropertyChanged("IsBusy");
             }
+        }
+        #endregion
+
+
+        public void RaisePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

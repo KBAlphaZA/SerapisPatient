@@ -25,9 +25,14 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
         public ICommand SelectedCommand => new Command<Doctor>(async selectDoctor =>
         {
-            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectDoctor });
-            string doctorname = selectDoctor.LastName;
-            //MessagingCenter.Send(this, MessegingKeys.Medicalbuilding, doctorname);
+        NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectDoctor });
+        string doctorname = selectDoctor.LastName;
+            Device.BeginInvokeOnMainThread(() =>
+                {
+                    MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
+                });
+            // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
+
             await GoToConfirmation();
         });
 

@@ -9,6 +9,7 @@ using Xamarin.Forms.BehaviorsPack;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.PopUpMessages;
 using Xamarin.Forms;
+using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -21,22 +22,22 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public ConfirmBookingViewModel()
         {
-            
-            ShowDetails();
-            NavigateToHomePageCommand = new Command(ConfirmBooking);
-           
+            MessagingCenter.Subscribe<SelectDoctorViewModel, string>(this, MessagingKeys.Doctor, (sender, args) =>
+            {
+                string Surname = args.ToString();
+                // NameOfPractice = args;
+            });
+
+            NavigateToHomePageCommand = new Command(ConfirmBooking);    
         }
 
         #region Navigation Tasks
 
         private void ShowDetails()
         {
-            MessagingCenter.Subscribe<MedicalBuildingViewModel, string>(this, MessagingKeys.Medicalbuilding, (sender, args) =>
-            {
-
-                // NameOfPractice = args;
-
-            });
+           
+            
+            
         }
         private async void ConfirmBooking()
         {

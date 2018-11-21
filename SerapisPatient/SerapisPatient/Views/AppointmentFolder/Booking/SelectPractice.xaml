@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectPractice"
-             xmlns:local="clr-namespace:SerapisPatient.Converters"
+             xmlns:bind="clr-namespace:SerapisPatient.ViewModels.AppointmentViewModels"
              xmlns:flex="clr-namespace:SerapisPatient.Controls"
              xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              >
-   
+
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -27,8 +28,8 @@
         <!--Potiental Searchbar-->
 
         <!--Row 1-->
-        <Image  Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="DentalSurgery.png"/>
-        <Label Grid.Row="1" Grid.Column="1" Text="Dentist" TextColor="Black" FontSize="30" FontAttributes="Bold" />
+        <Image  Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" TextColor="Black" FontSize="30" FontAttributes="Bold" />
 
         <!--Row 2-->
 

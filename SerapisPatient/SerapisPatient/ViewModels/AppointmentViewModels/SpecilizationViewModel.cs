@@ -3,6 +3,7 @@ using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using System;
+using SerapisPatient.Utils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -12,28 +13,42 @@ using Xamarin.Forms;
 using System.Linq;
 using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.Views.AppointmentFolder.Booking;
+using Xamarin.Forms.BehaviorsPack;
+using SerapisPatient.behavious;
 
 namespace SerapisPatient.ViewModels
 {
     public class SpecilizationViewModel:BaseViewModel
     {
-
+        public SpecilizationModel _specilizationData;
         public List<SpecilizationModel> ListSpecilizations { get; private set; }
-
         public List<SpecilizationModel> TempList { get; set; }
+        public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
+        public SpecilizationModel sub = new SpecilizationModel();
 
-        public ICommand SelectSpecilization => new Command(SelectTheSpeclizationAsync);
 
 
         public SpecilizationViewModel()
         {
+            
             GenerateSpecilization();
+          
         }
 
-        private void SelectTheSpeclizationAsync()
+        public ICommand SpecilizationSelectCommand => new Command<SpecilizationModel>(selectspecialization =>
+        {
+            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedSpecilization = selectspecialization });
+            _specilizationData = selectspecialization;
+            
+            //MessagingCenter.Send<SpecilizationModel,string>(sub, "New", _specilizationModel.Title);           
+           // MessagingCenter.Send(_specilizationModel, "New");
+
+            SelectTheSpeclizationAsync(_specilizationData);
+        });
+        private void SelectTheSpeclizationAsync(SpecilizationModel _specilizationData)
         {
             //DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
-            App.Current.MainPage.Navigation.PushAsync(new SelectPractice(),true);
+           App.Current.MainPage.Navigation.PushAsync(new SelectPractice(_specilizationData),true);
         }
         
 
@@ -69,6 +84,8 @@ namespace SerapisPatient.ViewModels
 
 
         private string searchProffesion;
+       
+
         public string SearchProffesion
         {
             get
