@@ -26,8 +26,16 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Properties
         
         public ObservableCollection<MedicalBuildingModel> Practices { get; set; }//MockData
+        public MedicalBuildingModel _MedicalBuildingData;
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public Command NavigateToHomePageCommand { get; set; }
+        public ICommand ItemSelected { get; set; }
+
+        public MedicalBuildingModel SelectedItem
+        {
+            get { return GetValue<MedicalBuildingModel>(); }
+            set { SetValue(value); }
+        }
 
         private string title;
         public string Title 
@@ -60,26 +68,43 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         }
 
+        private string description;
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+
+                RaisePropertyChanged(nameof(Description));
+            }
+
+        }
         #endregion
+
+
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
         {
             Title = _specilizationData.Title;
             Icon = _specilizationData.Icon;
-                //MessagingCenter.Subscribe<SpecilizationModel, string>(this, "New", (sender, args) =>
-                //{
-                //    //model.Title = args;
-                //    Title = args;
-                //});
-            //Title = model.Title;
+            Description = _specilizationData.Description;
+
+
             GenerateMedicalBuildingModel();
-           
+            
+            ItemSelected = new Command<MedicalBuildingModel>(args =>
+            {
+                _MedicalBuildingData = args;
+                HandleNavigation(_MedicalBuildingData);
+            });
         }
-       
 
-
-        public void ShowDetails()
+        public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
         {
-           
+            App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(_MedicalBuildingData), true);
         }
         private void GenerateMedicalBuildingModel()
         {
@@ -97,19 +122,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         }
 
-        public ICommand SelectedPractice => new Command<MedicalBuildingModel>(async SelectBuilding =>
+        public void ItemSelected_ExecuteCommand(object state)
         {
-            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedBuilding = SelectBuilding });
-            string building = SelectBuilding.PracticeName;
-            //MessagingCenter.Send(this, MessegingKeys.Medicalbuilding, doctorname);
-            await NavigateToDoctors();
-        });
-
-        private async Task NavigateToDoctors()
-        {
-           
-             await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor());
+            SelectedItem = state as MedicalBuildingModel;
         }
+
+
         //public async Task<List<MedicalBuildingModel>> GetMedicalBuildingsBySpecializationAsync()
         //{
         //    //if (IsBusy)

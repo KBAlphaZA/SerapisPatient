@@ -9,27 +9,23 @@
         <select:NotificationBehavior
             NotificationRequest="{Binding NavigateNextPageRequest }"/>
     </ContentPage.Behaviors>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
+        <!--Row 0-->
+        <Button HeightRequest="50" Grid.Row="0" Text="Select A Date" TextColor="White" BackgroundColor="{StaticResource SeconderyColour}" />
 
-
-
-        <Button BackgroundColor="{StaticResource SeconderyColour}" Grid.Row="0" HeightRequest="80" Text="Select Date" />
-
+        <!--Row 1-->
         <ListView x:Name="DoctorList"
                   SeparatorVisibility="None" 
                   HasUnevenRows="True"
                   ItemsSource="{Binding Doctors}"
                   CachingStrategy="RecycleElement"
                   HeightRequest="16"
-                  Grid.Row="1"
-                  >
+                  Grid.Row="1">
             <ListView.Behaviors>
                 <select:SelectedItemBehavior 
                     Command="{Binding SelectedCommand}"/>

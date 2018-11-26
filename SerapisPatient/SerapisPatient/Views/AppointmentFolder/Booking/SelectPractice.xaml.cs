@@ -1,4 +1,5 @@
 ﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
@@ -24,14 +25,20 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
             BindingContext = viewModel;
         }
 
-        
-        private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TLScrollView_ItemSelected(object sender, ItemTappedEventArgs e)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(),true);
+            MedicalBuildingModel _medicalBuildingModelData = e.Item as MedicalBuildingModel;
+            Navigation.PushAsync(new SelectDoctor( _medicalBuildingModelData));
         }
-        
 
-      
+        //Come back to this, since this has to be moved to the viewmodel
+        //private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(),true);
+        //}
+
+
+
 
 
         //Below is the animation code(using Lottie)

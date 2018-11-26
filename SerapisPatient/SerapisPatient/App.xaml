@@ -48,7 +48,7 @@
             <!--Navigation bar colour-->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource SeconderyColour}"/>
-                <Setter Property="BarTextColor" Value="White"/>
+                <Setter Property="BarTextColor" Value="Black"/>
             </Style>
 
             

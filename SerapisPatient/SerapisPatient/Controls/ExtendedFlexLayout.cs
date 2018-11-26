@@ -12,6 +12,7 @@ namespace SerapisPatient.Controls
             typeof(IEnumerable),
             typeof(ExtendedFlexLayout),
             propertyChanged: OnItemsSourceChanged);
+
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate),
             typeof(DataTemplate),
             typeof(ExtendedFlexLayout));

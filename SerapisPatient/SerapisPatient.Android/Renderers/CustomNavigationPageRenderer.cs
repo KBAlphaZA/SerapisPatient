@@ -16,11 +16,16 @@ using SerapisPatient.Droid.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android.AppCompat;
 
-[assembly: ExportRenderer(typeof(SerapisPatient.Views.MasterView), typeof(CustomNavigationPageRenderer))]
+[assembly: ExportRenderer(typeof(SerapisPatient.Views.MainViews.MasterView), typeof(CustomNavigationPageRenderer))]
 namespace SerapisPatient.Droid.Renderers
 {
     public class CustomNavigationPageRenderer : MasterDetailPageRenderer
     {
+        public CustomNavigationPageRenderer(Context context) : base(context)
+        {
+
+        }
+
         private static Android.Support.V7.Widget.Toolbar GetToolbar() => (CrossCurrentActivity.Current?.Activity as MainActivity)?.FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
@@ -39,7 +44,7 @@ namespace SerapisPatient.Droid.Renderers
                     if (drawerArrow == null)
                         continue;
 
-                    imageButton.SetImageDrawable(Context.GetDrawable(Resource.Drawable.menu));
+                    imageButton.SetImageDrawable(Forms.Context.GetDrawable(Resource.Drawable.menu));
                 }
             }
         }

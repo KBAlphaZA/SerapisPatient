@@ -1,4 +1,5 @@
 ﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
@@ -17,7 +18,7 @@ namespace SerapisPatient.ViewModels
     {
         public ObservableCollection<PracticeInfo> PracticeList { get; set; }
 
-        public ICommand GoToDocList => new Command(NavigateToDoctorsList);
+        //public ICommand GoToDocList => new Command(NavigateToDoctorsList);
 
         public PracticeSelectionViewModel()
         {
@@ -27,9 +28,9 @@ namespace SerapisPatient.ViewModels
 
 
 
-        private void NavigateToDoctorsList()
+        private void NavigateToDoctorsList(MedicalBuildingModel _medicalBuildingModelData)
         {
-            App.Current.MainPage.Navigation.PushModalAsync(new SelectDoctor());
+            App.Current.MainPage.Navigation.PushModalAsync(new SelectDoctor(_medicalBuildingModelData));
         }
 
 

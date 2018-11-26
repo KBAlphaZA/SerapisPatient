@@ -1,4 +1,5 @@
 ﻿using SerapisPatient.behavious;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
@@ -16,27 +17,25 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 {
     public class SelectDoctorViewModel : BaseViewModel
     {
-        
+        #region Properties
+        Doctor enquiredDoctor;
         public ObservableCollection<Doctor> Doctors { get; set; }
         
         public ICommand NavigateToConfrimation { get; set; }
 
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
-
+        #endregion
         public ICommand SelectedCommand => new Command<Doctor>(async selectDoctor =>
         {
         NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectDoctor });
-        string doctorname = selectDoctor.LastName;
-            Device.BeginInvokeOnMainThread(() =>
-                {
-                    MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
-                });
+             enquiredDoctor = selectDoctor;               
             // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
 
-            await GoToConfirmation();
+            await GoToConfirmation(enquiredDoctor);
         });
 
-        public SelectDoctorViewModel()
+        //Important
+        public SelectDoctorViewModel(MedicalBuildingModel _MedicalBuildingData)
         {
             GenerateDoctorList();
             // NavigateToConfrimation = new Command(async () => await GoToConfirmation());
@@ -63,12 +62,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                   };
         }
 
-        private async Task GoToConfirmation()
+        private async Task GoToConfirmation(Doctor enquiredDoctor )
         {
-            //This sends the message of itemSelected
-
-           
-            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(),true);
+            //This sends the message of itemSelected       
+            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor), true);
         }
     }
 }

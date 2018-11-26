@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SerapisPatient.Views.MasterView"
+             x:Class="SerapisPatient.Views.MainViews.MasterView"
              xmlns:pages="clr-namespace:SerapisPatient.Views"
+             xmlns:pages1="clr-namespace:SerapisPatient.Views.MainViews"
              xmlns:custom="clr-namespace:SerapisPatient.Views.CustomViews"
              Title="Serapis Patient"
+                 Icon="menu.png"
              MasterBehavior="Popover">
 
     <MasterDetailPage.Master>
-        <pages:SideMenuPage x:Name="MasterPage" Title="Menu"/>
+        <pages:SideMenuPage Icon="menu.png" x:Name="MasterPage" Title="Menu"/>
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
         <custom:CustomNavigationView>
             <x:Arguments>
-                <pages:MainView Title="Serapis Patient" />
+                <pages1:MainView  Title="Serapis Patient" />
             </x:Arguments>
         </custom:CustomNavigationView>
-             
-        <!--:Name="DetailPage" Title="Serapis Patient"/> -->
     </MasterDetailPage.Detail>
 
 </MasterDetailPage>

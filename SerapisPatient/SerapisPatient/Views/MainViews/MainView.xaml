@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SerapisPatient.Views.MainView"
-             xmlns:flex="clr-namespace:SerapisPatient.Controls">
+             x:Class="SerapisPatient.Views.MainViews.MainView"
+             xmlns:flex="clr-namespace:SerapisPatient.Controls"
+             Icon="menu.png">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="user1" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
     </ContentPage.ToolbarItems>
     <Grid RowSpacing="10">
         <Grid.RowDefinitions>
@@ -42,10 +43,10 @@
 
         <!--Row 3-->
 
-        <Frame x:Name="appointmentframe" Grid.Row="3"  Grid.Column="1" BackgroundColor="{StaticResource PrimaryButton}" CornerRadius="25" >
+        <Frame x:Name="appointmentframe" Grid.Row="3"  Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="25" >
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
-                    Tapped="TapGestureRecognizer_TappedAsync">
+                    Command="{Binding NavigateToAppointmentPageCommand }">
                 </TapGestureRecognizer>
             </Frame.GestureRecognizers>
             <Label TextColor="White" Text="Make An Appointment" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
@@ -54,10 +55,10 @@
 
         <!--Row 4-->
 
-        <Frame x:Name="appointmentframe1" Grid.Row="4" Grid.Column="1" BackgroundColor="{StaticResource PrimaryButton}"  CornerRadius="25">
+        <Frame x:Name="appointmentframe1" Grid.Row="4" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
-                    Tapped="TapGestureRecognizer_Tapped">
+                    Command="{Binding NavigateToDeliveryPageCommand}" >
                 </TapGestureRecognizer>
             </Frame.GestureRecognizers>
             <Label TextColor="White" Text="Order Your Medication" FontAttributes="Bold" Grid.Row="4" Grid.Column="1" />
@@ -65,10 +66,10 @@
 
         <!--Row 5-->
 
-        <Frame x:Name="appointmentframe2" Grid.Row="5" Grid.Column="1" BackgroundColor="{StaticResource PrimaryButton}"  CornerRadius="25" >
+        <Frame x:Name="appointmentframe2" Grid.Row="5" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25" >
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
-                    Tapped="TapGestureRecognizer_Tapped_1">
+                    Command="{Binding NavigateToCameraPageCommand}">
                 </TapGestureRecognizer>
             </Frame.GestureRecognizers>
             <Label TextColor="White" Text="Scan QR Code" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
@@ -79,18 +80,18 @@
         <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="6"/>
 
         <!--Row 7-->
-
+        
 
 
         <StackLayout Grid.Column="1" Grid.Row="7">
             <ScrollView Orientation="Horizontal" Margin="25,10,25,10">
-                <flex:ExtendedFlexLayout ItemsSource="{Binding Doctors}">
+                <flex:ExtendedFlexLayout ItemsSource="{Binding Notifications}">
                     <flex:ExtendedFlexLayout.ItemTemplate>
                         <DataTemplate>
                             <Frame WidthRequest="150" HeightRequest="130" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True"  >
                                 <FlexLayout Direction="Column">
-                                    <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Text}" />
-                                    <Label TextColor="Black" Text="26/08/2018"/>
+                                    <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
+                                    <Label TextColor="Black"  Text="{Binding Body}"/>
                                     <Label FlexLayout.Grow="1"/>
                                 </FlexLayout>
                             </Frame>

@@ -1,4 +1,5 @@
-﻿using SerapisPatient.ViewModels;
+﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.ViewModels.AppointmentViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,18 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SerapisPatient.Views.AppointmentFolder.Booking
+namespace SerapisPatient.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ConfirmBooking : ContentPage
+	public partial class Dummy : ContentPage
 	{
-        ConfirmBookingViewModel viewModel;
-		public ConfirmBooking (Models.Doctor.Doctor enquiredDoctor)
+        MedicalBuildingViewModel viewModel; 
+		public Dummy (SpecilizationModel _specilizationData)
 		{
 			InitializeComponent ();
-            viewModel = new ConfirmBookingViewModel(enquiredDoctor);
+            viewModel = new MedicalBuildingViewModel(_specilizationData);
             BindingContext = viewModel;
-        }
+            
+		}
 	}
 }

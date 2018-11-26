@@ -9,6 +9,7 @@ namespace SerapisPatient.Models
     {
         private string title;
         private string icon;
+        private string description;
         public string Title
         {
             get
@@ -30,6 +31,18 @@ namespace SerapisPatient.Models
             {
                 icon = value;
                 RaisePropertyChanged("Icon");
+            }
+        }
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+                RaisePropertyChanged("Description");
             }
         }
     }

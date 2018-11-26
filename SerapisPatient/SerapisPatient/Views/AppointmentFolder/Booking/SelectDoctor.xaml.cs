@@ -1,4 +1,5 @@
-﻿using SerapisPatient.Services.DependencyServices;
+﻿using SerapisPatient.Models.Appointments;
+using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	public partial class SelectDoctor : ContentPage
     {
         SelectDoctorViewModel viewModel;
-		public SelectDoctor ()
+		public SelectDoctor ( MedicalBuildingModel _MedicalBuildingData)
 		{
 			InitializeComponent ();
 
-            BindingContext = viewModel = new SelectDoctorViewModel();
+            BindingContext = viewModel = new SelectDoctorViewModel(_MedicalBuildingData);
 		}
 
         

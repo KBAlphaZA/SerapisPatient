@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.AppointmentFolder.Booking.ConfirmBooking"
-            >
+            xmlns:bind="clr-namespace:SerapisPatient.ViewModels.AppointmentViewModels"
+             >
     
     <ScrollView >
         
@@ -40,7 +41,7 @@
                     <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
 
                     <Label Text="Doctor:" FontSize="Large" FontAttributes="Bold" Grid.Row="2"/>
-                    <Label Text="Dr Duma" FontSize="Medium" 
+                    <Label Text="{Binding LastName,StringFormat='Dr. {0:N}'}" FontSize="Medium" 
                            Grid.Row="3"/>
                     <BoxView Grid.Row="4" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
 

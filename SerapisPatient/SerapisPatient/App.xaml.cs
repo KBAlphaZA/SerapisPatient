@@ -1,3 +1,4 @@
+using SerapisPatient.Models;
 using SerapisPatient.Services;
 using SerapisPatient.Services.Authentication;
 
@@ -5,6 +6,8 @@ using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using SerapisPatient.Views.AppointmentFolder.Booking;
+using SerapisPatient.Views.CustomViews;
+using SerapisPatient.Views.MainViews;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -21,6 +24,7 @@ namespace SerapisPatient
         GoogleAuthentication googleToken = new GoogleAuthentication();
         FacebookAuthentication facebookToken = new FacebookAuthentication();
         MicrosoftAuthentication microsoftToken = new MicrosoftAuthentication();
+        private SpecilizationModel _specilizationData;
         #endregion
 
         public App ()
@@ -45,9 +49,10 @@ namespace SerapisPatient
             }
             else
             {
-                MainPage = new NavigationPage(new MasterDetailPage1());
-               //MainPage = new NavigationPage(new SelectPractice());
-
+               
+                //MainPage = new NavigationPage(new MasterDetailPage1());
+                MainPage = new CustomNavigationView(new MasterView());
+               // MainPage = new MasterView();
             }
 
         }
