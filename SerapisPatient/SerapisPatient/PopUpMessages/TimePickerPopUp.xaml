@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popUp:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.PopUpMessages.TimePickerPopUp"
+              xmlns:popUp="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:popUpAnimation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup">
+
+    <popUp:PopupPage.Animation>
+        <popUpAnimation:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="1"
+            DurationIn="400"
+            DurationOut="100"
+            EasingIn="SinInOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            />
+    </popUp:PopupPage.Animation>
+    
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
+        <Frame WidthRequest="300" HeightRequest="450" Padding="15" CornerRadius="6">
+            <ListView
+                SeparatorVisibility="None"
+                HasUnevenRows="True"
+                CachingStrategy="RecycleElement"
+                ItemsSource="{Binding AvaliableTime}"
+                HeightRequest="8">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView Padding="7">
+                                <Frame OutlineColor="Black" HasShadow="True" CornerRadius="7">
+                                    <!--Add design here-->
+                                    <StackLayout >
+                                        <Label Text="{Binding Time}" FontAttributes="Bold"  TextColor="Black" VerticalOptions="StartAndExpand"/>
+                                    </StackLayout>
+                                </Frame>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+    </StackLayout>
+    
+</popUp:PopupPage>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.AppointmentFolder.CalemderView"
+             xmlns:controls="clr-namespace:SerapisPatient.Controls.Calender">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="380"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <controls:Calendar
+            Grid.Row="0"
+                x:Name="Calender"
+                TranslationY="0"
+                SelectedDates="{Binding Dates, Mode=TwoWay}"
+                        StartDay="Sunday" 
+                        DatesFontSize="11" SelectedFontSize="11" WeekdaysFontSize="11" TitleLabelFontSize="16"
+                        SelectedBorderWidth="0" BorderWidth="0" DisabledFontSize="12"
+                        DisabledBorderWidth="6"
+                        EnableTitleMonthYearView="True"
+                        WeekdaysShow="True"
+                        WeekdaysFontAttributes="Bold"
+                        DisabledBorderColor="White" DisabledBackgroundColor="White" BorderColor="White" DatesBackgroundColor="White"
+                        TitleLeftArrowTextColor="DarkGray"
+                        TitleRightArrowTextColor="DarkGray"
+                        SelectedTextColor="Green" SelectedBorderColor="Gray"
+                        MultiSelectDates="True" 
+                        SelectRange="False"
+                        DateCommand="{Binding SelectedDateCommand}"
+                        HorizontalOptions="Center">
+        
+        </controls:Calendar>
+
+        <Button Grid.Row="1"  Text="NEXT" Clicked="Button_ClickedAsync"/>
+    </Grid>
+</ContentPage>

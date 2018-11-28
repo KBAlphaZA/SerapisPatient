@@ -5,6 +5,7 @@ using SerapisPatient.Services.Authentication;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
+using SerapisPatient.Views.AppointmentFolder;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using SerapisPatient.Views.CustomViews;
 using SerapisPatient.Views.MainViews;
@@ -51,8 +52,8 @@ namespace SerapisPatient
             {
                
                 //MainPage = new NavigationPage(new MasterDetailPage1());
-                MainPage = new CustomNavigationView(new MasterView());
-               // MainPage = new MasterView();
+                //MainPage = new CustomNavigationView(new MasterView());
+               MainPage = new NavigationPage(new CalemderView());
             }
 
         }

@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using SerapisPatient.Models.Appointments;
 using System;
 using System.Collections.Generic;
 using System.Text;

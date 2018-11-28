@@ -74,6 +74,7 @@
     <Compile Include="DependencyServiceAndroid\Reminder_android.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\BadgeDrawable.cs" />
+    <Compile Include="Renderers\CalendarButtonRenderer.cs" />
     <Compile Include="Renderers\CustomEditorRenderer.cs" />
     <Compile Include="Renderers\CustomNavigationPageRenderer.cs" />
     <Compile Include="Renderers\LodingPageServiceDroid.cs" />
@@ -1016,6 +1017,12 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_left_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_right_normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
