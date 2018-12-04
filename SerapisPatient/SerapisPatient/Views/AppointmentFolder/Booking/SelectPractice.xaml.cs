@@ -42,6 +42,7 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 
 
         //Below is the animation code(using Lottie)
+        //transition between pages
 
 
         //protected override void OnAppearing()

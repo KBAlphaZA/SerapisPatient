@@ -1,14 +1,39 @@
-﻿using SerapisPatient.Models.Appointments;
+﻿using SerapisPatient.behavious;
+using SerapisPatient.Models.Appointments;
+using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
+using Xamarin.Forms.BehaviorsPack;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 {
     public class TimePickerPopUpVM
     {
+        #region Properties
+        BookedTimes SetBookedTimes;
         public ObservableCollection<BookedTimes> AvaliableTime { get; private set; }
+        public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
+        #endregion
+
+        public ICommand SelectedCommand => new Command<BookedTimes>(async selectedTime =>
+        {
+            NavigateNextPageRequest.Raise(new SelectedItemEvent { BookedTimes = selectedTime });
+            SetBookedTimes = selectedTime;
+            // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
+
+            await GoToDoctorsAsync();
+        });
+
+        private async Task GoToDoctorsAsync()
+        {
+            //await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(), true);
+        }
+
         public TimePickerPopUpVM()
         {
             GenerateTimeList();

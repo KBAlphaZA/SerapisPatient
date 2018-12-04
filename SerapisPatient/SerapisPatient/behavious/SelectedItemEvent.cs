@@ -12,6 +12,7 @@ namespace SerapisPatient.behavious
         public MedicalBuildingModel SelectedBuilding { get; set; }
         public Doctor SelectedDoctor { get; set; }
         public SpecilizationModel SelectedSpecilization { get; set; }
+        public BookedTimes BookedTimes { get; set; }
 
     }
 }

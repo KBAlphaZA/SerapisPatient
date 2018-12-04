@@ -11,6 +11,7 @@ using SerapisPatient.PopUpMessages;
 using Xamarin.Forms;
 using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -19,6 +20,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
         public bool BookingSuccess = true;
+        public string DateSelected;
 
         private string doctorLastName;
         public string LastName
@@ -36,6 +38,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         }
         private string practiceName;
+        private string SelectedMonth;
+
         public string PracticeName
         {
             get
@@ -54,13 +58,24 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public ConfirmBookingViewModel(Doctor enquiredDoctor)
         {
+            SelectedMonth = "December";
+            ConfrimData();
             LastName = enquiredDoctor.LastName;
             NavigateToHomePageCommand = new Command(ConfirmBooking);    
         }
 
         #region Navigation Tasks
 
-       
+       private void ConfrimData()
+        {
+            MessagingCenter.Subscribe<SelectBookingViewModel, SelectedMonths>(this, "ItemSelected", (obj, item) =>
+            {
+                   DateSelected = item.MonthValue.ToString();
+            }); 
+            
+
+            
+        }
         private async void ConfirmBooking()
         {
             // await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, Problem has been occurred while submitting your data."));

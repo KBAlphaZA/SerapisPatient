@@ -59,7 +59,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                     new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
                     new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
                     
-                  };
+            };
         }
 
         private async Task GoToConfirmation(Doctor enquiredDoctor )

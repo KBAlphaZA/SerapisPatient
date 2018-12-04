@@ -2,6 +2,7 @@
 <popUp:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.PopUpMessages.TimePickerPopUp"
+                  xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
               xmlns:popUp="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:popUpAnimation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup">
 
@@ -18,6 +19,9 @@
             HasBackgroundAnimation="True"
             />
     </popUp:PopupPage.Animation>
+    <popUp:PopupPage.Behaviors>
+        <select:NotificationBehavior NotificationRequest="{Binding NavigateNextPageRequest}"/>
+    </popUp:PopupPage.Behaviors>
     
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
         <Frame WidthRequest="300" HeightRequest="450" Padding="15" CornerRadius="6">
@@ -27,6 +31,9 @@
                 CachingStrategy="RecycleElement"
                 ItemsSource="{Binding AvaliableTime}"
                 HeightRequest="8">
+                <ListView.Behaviors>
+                    <select:SelectedItemBehavior Command="{Binding SelectedCommand}"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

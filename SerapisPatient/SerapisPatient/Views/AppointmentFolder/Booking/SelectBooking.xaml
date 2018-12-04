@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectBooking"
+              xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             xmlns:control="clr-namespace:SerapisPatient.Controls">
+
+    <ContentPage.Behaviors>
+        <select:NotificationBehavior NotificationRequest="{Binding NavigateNextPageRequest}"/>
+    </ContentPage.Behaviors>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Row 0-->
+        <Picker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding value}" SelectedItem="{Binding MonthsSelectedIndex}"  FontAttributes="Bold" Title="Choose your month"/>
+        <!-- label text={Binding MyMonth} TextColor="Black" --> 
+        
+        <!--Row 1-->
+        <Label Text="Date Selection:" FontSize="Large" TextColor="Black" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+        <Label Text="{Binding DateSelected,StringFormat='{0} th'}" Grid.Row="1" Grid.Column="2"  FontSize="Large" TextColor="Black"/>
+        
+        <!--Row 2-->
+        <!-- Date picker based on the month selected-->
+        <control:HorizontalListView ItemsSource="{Binding Days}"
+                                    HorizontalOptions="FillAndExpand"
+                                    SelectedItem="{Binding SelectedItem}"
+                                    ItemHeightRequest="50"
+                                    ItemWidthRequest="50"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3">
+            <control:HorizontalListView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView Padding="5">
+                        <Frame CornerRadius="23" OutlineColor="Gray" HasShadow="True" BackgroundColor="{StaticResource SeconderyColour}" Padding="8">
+                            <Label Text="{Binding MonthValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                        </Frame>
+                    </ContentView>
+                </DataTemplate>
+            </control:HorizontalListView.ItemTemplate>
+        </control:HorizontalListView>
+        
+        <!--Row 3-->
+        <Label Text="Select Doctor" FontSize="Large" TextColor="Black" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" />
+        
+        <!--Row 4-->
+        <!--DoctorListView-->
+        <ActivityIndicator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Color="Red" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        <ListView x:Name="DocList"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding Doctors}"
+                  CachingStrategy="RecycleElement"
+                  HeightRequest="14"
+                  Grid.Row="4"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  IsVisible="{Binding Showlistview}">
+            <ListView.Behaviors>
+                <select:SelectedItemBehavior
+                    Command="{Binding SelectedCommand}"/>
+
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView Padding="5">
+
+                            <Frame OutlineColor="Gray" HasShadow="True"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
+
+                                <Grid RowSpacing="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="2"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" Text="9:30" FontSize="20" VerticalOptions="StartAndExpand" TextColor="Black"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="AM" FontSize="14" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                                    
+                                    <BoxView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Fill" HorizontalOptions="Center" WidthRequest="2" Color="Black" />
+                                    <Image Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Source="{Binding ProfileImageUrl}" HeightRequest="60" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding LastName, StringFormat='Dr. {0:N}'}" FontSize="20" VerticalOptions="StartAndExpand" TextColor="Black"/>
+                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding University}" FontSize="14" VerticalOptions="CenterAndExpand" TextColor="Green"/>
+
+
+                                </Grid>
+
+
+                            </Frame>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+    </Grid>
+</ContentPage>

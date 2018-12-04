@@ -29,6 +29,9 @@
     <Compile Update="PopUpMessages\TimePickerPopUp.xaml.cs">
       <DependentUpon>TimePickerPopUp.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AppointmentFolder\Booking\SelectBooking.xaml.cs">
+      <DependentUpon>SelectBooking.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -86,7 +89,7 @@
     <EmbeddedResource Update="Views\AppointmentFolder\Booking\ConfirmBooking.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AppointmentFolder\Booking\SelectDateAndTime.xaml">
+    <EmbeddedResource Update="Views\AppointmentFolder\Booking\SelectBooking.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AppointmentFolder\Booking\SelectDoctor.xaml">

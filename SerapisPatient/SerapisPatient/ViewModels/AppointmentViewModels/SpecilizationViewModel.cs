@@ -20,19 +20,18 @@ namespace SerapisPatient.ViewModels
 {
     public class SpecilizationViewModel:BaseViewModel
     {
+        #region Properties
         public SpecilizationModel _specilizationData;
         public List<SpecilizationModel> ListSpecilizations { get; private set; }
         public List<SpecilizationModel> TempList { get; set; }
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public SpecilizationModel sub = new SpecilizationModel();
 
-
+        #endregion
 
         public SpecilizationViewModel()
-        {
-            
-            GenerateSpecilization();
-          
+        {   
+            GenerateSpecilization(); 
         }
 
         public ICommand SpecilizationSelectCommand => new Command<SpecilizationModel>(selectspecialization =>

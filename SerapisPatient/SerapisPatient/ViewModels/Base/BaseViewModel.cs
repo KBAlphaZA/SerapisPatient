@@ -17,7 +17,7 @@ namespace SerapisPatient.ViewModels.Base
         private const string EXECUTECOMMAND_SUFFIX = "_ExecuteCommand";
         private const string CANEXECUTECOMMAND_SUFFIX = "_CanExecuteCommand";
 
-        //protected readonly IDialogService DialogService;
+        
         public BaseViewModel()
         {
             this.commands =
@@ -30,6 +30,8 @@ namespace SerapisPatient.ViewModels.Base
         
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName =  null)
         {
             var handler = PropertyChanged;
@@ -40,6 +42,22 @@ namespace SerapisPatient.ViewModels.Base
             }
         }
 
+        #region Horizontalscroll code
+        protected bool SetProperty<T>(ref T backingStore, T value,
+            [CallerMemberName]string propertyName = "",
+            Action onChanged = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        #endregion
+
+        #region TLSSCROLL CODE
         /*
            Better and simplest. To accomplish this,
         //you can implement the GetValue and SetValue methods in the ViewModelBase class and stores the properties values in a Dictionary:
@@ -72,6 +90,8 @@ namespace SerapisPatient.ViewModels.Base
                 return (T)properties[propertyName];
             }
         }
+
+
         /*A further step forward in your ViewModelBase consists in develop an automatic and simple way to delegate the execution of commands.
          * In MVVM, a command is a piece of code executed in response of a view interaction.
          * To create a command, you must implement the ICommand interface and put your code in it.
@@ -80,8 +100,10 @@ namespace SerapisPatient.ViewModels.Base
          */
         private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
 
+        //Im rewriting this method which is the same as SetValue<T>(on line 49) because i wanted to customized the picker on SelectBookingView
         
-
+        //protected bool SetProperty<T>(ref T backfield,T value [CallerMemberName]string propertyName = null)
+        //method goes here
         
 
         private string GetCommandName(MethodInfo mi)
@@ -105,6 +127,9 @@ namespace SerapisPatient.ViewModels.Base
                 return cmd;
             }
         }
+
+        #endregion
+
         private bool isBusy;
         public bool IsBusy
         {
@@ -125,5 +150,6 @@ namespace SerapisPatient.ViewModels.Base
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+       
     }
 }

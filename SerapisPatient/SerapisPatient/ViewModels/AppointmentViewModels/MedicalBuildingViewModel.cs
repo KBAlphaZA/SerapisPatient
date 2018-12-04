@@ -100,6 +100,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 _MedicalBuildingData = args;
                 HandleNavigation(_MedicalBuildingData);
             });
+
+            
         }
 
         public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)

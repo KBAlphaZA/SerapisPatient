@@ -53,7 +53,7 @@ namespace SerapisPatient
                
                 //MainPage = new NavigationPage(new MasterDetailPage1());
                 //MainPage = new CustomNavigationView(new MasterView());
-               MainPage = new NavigationPage(new CalemderView());
+               MainPage = new NavigationPage(new SelectBooking());
             }
 
         }
