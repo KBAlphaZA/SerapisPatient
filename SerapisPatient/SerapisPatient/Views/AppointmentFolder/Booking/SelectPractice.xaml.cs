@@ -1,4 +1,6 @@
-﻿using SerapisPatient.Services.DependencyServices;
+﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
+using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
 using System;
@@ -16,22 +18,31 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	public partial class SelectPractice : ContentPage
 	{
         MedicalBuildingViewModel viewModel;
-        public SelectPractice ()
+        public SelectPractice (SpecilizationModel _specilizationData)
 		{
 			InitializeComponent ();
-            viewModel = new MedicalBuildingViewModel();
+            viewModel = new MedicalBuildingViewModel(_specilizationData);
             BindingContext = viewModel;
         }
 
-        private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TLScrollView_ItemSelected(object sender, ItemTappedEventArgs e)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(),true);
+            MedicalBuildingModel _medicalBuildingModelData = e.Item as MedicalBuildingModel;
+            Navigation.PushAsync(new SelectBooking( _medicalBuildingModelData));
         }
 
-      
+        //Come back to this, since this has to be moved to the viewmodel
+        //private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(),true);
+        //}
+
+
+
 
 
         //Below is the animation code(using Lottie)
+        //transition between pages
 
 
         //protected override void OnAppearing()

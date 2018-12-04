@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviour="clr-namespace:SerapisPatient.behavious"
-             x:Class="SerapisPatient.Views.Specilization">
+             x:Class="SerapisPatient.Views.Specilization"
+             xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack">
 
 
     <ContentPage.Resources>
@@ -15,17 +16,24 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    <ContentPage.Behaviors>
+        <select:NotificationBehavior NotificationRequest="{Binding NavigatePracticePageRequest}" />
+    </ContentPage.Behaviors>
     <ContentPage.Content>
         <ListView
             ItemsSource="{Binding ListSpecilizations}"
             SeparatorColor="Black"
             SeparatorVisibility="Default"
             HasUnevenRows="True"
-            behaviour:ListItemSelected.ItemTappedCommand="{Binding SelectSpecilization}"
+           
             x:Name="specilalties" 
             >
 
+            <!--This handles the selecteditem property-->
+            <ListView.Behaviors>
+                <select:SelectedItemBehavior Command="{Binding SpecilizationSelectCommand}" />
+            </ListView.Behaviors>
+            
             <ListView.Header>
                 <Frame BorderColor="Black" 
                        BackgroundColor="White"

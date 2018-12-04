@@ -3,21 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              xmlns:profile="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"             
+             xmlns:expandable="clr-namespace:Expandable;assembly=ExpandableView"
              x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectDoctor">
 
     <ContentPage.Behaviors>
         <select:NotificationBehavior
             NotificationRequest="{Binding NavigateNextPageRequest }"/>
     </ContentPage.Behaviors>
-    <ContentPage.Content>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--Row 0-->
+        <Button HeightRequest="50" Grid.Row="0" Text="Select A Date" TextColor="White" BackgroundColor="{StaticResource SeconderyColour}" />
+
+        <!--Row 1-->
         <ListView x:Name="DoctorList"
                   SeparatorVisibility="None" 
                   HasUnevenRows="True"
                   ItemsSource="{Binding Doctors}"
                   CachingStrategy="RecycleElement"
                   HeightRequest="16"
-                  >
+                  Grid.Row="1">
             <ListView.Behaviors>
                 <select:SelectedItemBehavior 
                     Command="{Binding SelectedCommand}"/>
@@ -27,7 +36,7 @@
                     <ViewCell>
                         <ContentView Padding="5">
 
-                            <Frame OutlineColor="Gray"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
+                            <Frame OutlineColor="Gray" HasShadow="True"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
 
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -36,7 +45,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackLayout Grid.Column="0">
-                                        <Image Source="{Binding ProfileImageUrl}" HeightRequest="80" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
+                                        <Image  Source="{Binding ProfileImageUrl}" HeightRequest="60" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
                                     </StackLayout>
 
                                     <StackLayout Grid.Column="1" VerticalOptions="Center">
@@ -69,6 +78,6 @@
 
         </ListView>
 
-    </ContentPage.Content>
+    </Grid>
 
 </ContentPage>

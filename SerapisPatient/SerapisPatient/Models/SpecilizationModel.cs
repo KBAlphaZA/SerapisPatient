@@ -1,12 +1,49 @@
-﻿using System;
+﻿using SerapisPatient.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SerapisPatient.Models
 {
-    public class SpecilizationModel
+    public class SpecilizationModel : BaseViewModel
     {
-        public string Title { get; set; }
-        public string Icon { get; set; }
+        private string title;
+        private string icon;
+        private string description;
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                RaisePropertyChanged(nameof(Title));
+            }
+        }
+        public string Icon {
+            get
+            {
+                return icon;
+            }
+            set
+            {
+                icon = value;
+                RaisePropertyChanged("Icon");
+            }
+        }
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+                RaisePropertyChanged("Description");
+            }
+        }
     }
 }

@@ -8,14 +8,14 @@ using Xamarin.Forms;
 
 namespace SerapisPatient
 {
-	public partial class MainPage : ContentPage
+	public partial class LoginView : ContentPage
 	{
-        MainPageViewModel viewModel;
+        LoginViewModel viewModel;
 
-        public MainPage()
+        public LoginView()
 		{
 			InitializeComponent();
-            viewModel = new MainPageViewModel();
+            viewModel = new LoginViewModel();
             BindingContext = viewModel;
 		}
 	}

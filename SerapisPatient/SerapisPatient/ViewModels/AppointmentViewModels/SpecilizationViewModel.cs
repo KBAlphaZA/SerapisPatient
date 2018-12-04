@@ -3,6 +3,7 @@ using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using System;
+using SerapisPatient.Utils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -12,28 +13,41 @@ using Xamarin.Forms;
 using System.Linq;
 using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.Views.AppointmentFolder.Booking;
+using Xamarin.Forms.BehaviorsPack;
+using SerapisPatient.behavious;
 
 namespace SerapisPatient.ViewModels
 {
     public class SpecilizationViewModel:BaseViewModel
     {
-
+        #region Properties
+        public SpecilizationModel _specilizationData;
         public List<SpecilizationModel> ListSpecilizations { get; private set; }
-
         public List<SpecilizationModel> TempList { get; set; }
+        public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
+        public SpecilizationModel sub = new SpecilizationModel();
 
-        public ICommand SelectSpecilization => new Command(SelectTheSpeclizationAsync);
-
+        #endregion
 
         public SpecilizationViewModel()
-        {
-            GenerateSpecilization();
+        {   
+            GenerateSpecilization(); 
         }
 
-        private void SelectTheSpeclizationAsync()
+        public ICommand SpecilizationSelectCommand => new Command<SpecilizationModel>(selectspecialization =>
+        {
+            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedSpecilization = selectspecialization });
+            _specilizationData = selectspecialization;
+            
+            //MessagingCenter.Send<SpecilizationModel,string>(sub, "New", _specilizationModel.Title);           
+           // MessagingCenter.Send(_specilizationModel, "New");
+
+            SelectTheSpeclizationAsync(_specilizationData);
+        });
+        private void SelectTheSpeclizationAsync(SpecilizationModel _specilizationData)
         {
             //DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
-            App.Current.MainPage.Navigation.PushAsync(new SelectPractice(),true);
+           App.Current.MainPage.Navigation.PushAsync(new SelectPractice(_specilizationData),true);
         }
         
 
@@ -41,34 +55,36 @@ namespace SerapisPatient.ViewModels
         {
             ListSpecilizations = new List<SpecilizationModel>()
             {
-                new SpecilizationModel{ Title=FieldsOfExpertise.audiologist, Icon=FieldsOfExpertise.audiologyIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.bioKineticist, Icon=FieldsOfExpertise.bioKineticistIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.cardiologist, Icon=FieldsOfExpertise.cardioIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.chiropractor, Icon=FieldsOfExpertise.chiropractorIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.clicincalPsychologist, Icon=FieldsOfExpertise.clinicalIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.dentalSurgeon, Icon=FieldsOfExpertise.dentalSurgeryIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.dentist, Icon=FieldsOfExpertise.dentalSurgeryIcon2},
-                new SpecilizationModel{Title=FieldsOfExpertise.dermatologist, Icon=FieldsOfExpertise.dermatologistIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.dietician, Icon=FieldsOfExpertise.dieticianIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.eNT_Specilist, Icon=FieldsOfExpertise.eNT_SpecilistIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.gp, Icon=FieldsOfExpertise.gpIcon}, 
-                new SpecilizationModel{Title=FieldsOfExpertise.gynaecologist, Icon=FieldsOfExpertise.gynaecologistIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.haematology, Icon=FieldsOfExpertise.haematologyIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.nerosurgeon, Icon=FieldsOfExpertise.neuroIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.oncologist, Icon=FieldsOfExpertise.OncologyIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.optometrist, Icon=FieldsOfExpertise.optomotristIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.OrthopedicSurgeon, Icon=FieldsOfExpertise.OrthopaedicSurgeonIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.paediatrician, Icon=FieldsOfExpertise.paediatricianIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.physiotherapist, Icon=FieldsOfExpertise.physiotherapistIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.plasticSurgeon, Icon=FieldsOfExpertise.plasticIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.psychiatrist, Icon=FieldsOfExpertise.psychiatristIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.radiologist, Icon=FieldsOfExpertise.radiologistIcon},
-                new SpecilizationModel{Title=FieldsOfExpertise.urologist, Icon=FieldsOfExpertise.urologistIcon }
+                new SpecilizationModel{ Title=FieldsOfExpertise.audiologist, Icon=FieldsOfExpertise.audiologyIcon, Description=FieldsOfExpertise.audiologist_Description },
+                 new SpecilizationModel{Title=FieldsOfExpertise.bioKineticist, Icon=FieldsOfExpertise.bioKineticistIcon,Description=FieldsOfExpertise.biokineticist_Description},
+                  new SpecilizationModel{Title=FieldsOfExpertise.cardiologist, Icon=FieldsOfExpertise.cardioIcon,Description=FieldsOfExpertise.cardiologist_Description},
+                   new SpecilizationModel{Title=FieldsOfExpertise.chiropractor, Icon=FieldsOfExpertise.chiropractorIcon,Description=FieldsOfExpertise.chiropractor_Description},
+                    new SpecilizationModel{Title=FieldsOfExpertise.clicincalPsychologist, Icon=FieldsOfExpertise.clinicalIcon,Description=FieldsOfExpertise.clicincalPsychologist_Description},
+                     new SpecilizationModel{Title=FieldsOfExpertise.dentalSurgeon, Icon=FieldsOfExpertise.dentalSurgeryIcon, Description=FieldsOfExpertise.dentalSurgeon_Description},
+                      new SpecilizationModel{Title=FieldsOfExpertise.dentist, Icon=FieldsOfExpertise.dentalSurgeryIcon2, Description=FieldsOfExpertise.dentist_Description},
+                       new SpecilizationModel{Title=FieldsOfExpertise.dermatologist, Icon=FieldsOfExpertise.dermatologistIcon,Description=FieldsOfExpertise.dermatologist_Description},
+                        new SpecilizationModel{Title=FieldsOfExpertise.dietician, Icon=FieldsOfExpertise.dieticianIcon,Description=FieldsOfExpertise.dietician_Description},
+                         new SpecilizationModel{Title=FieldsOfExpertise.eNT_Specilist, Icon=FieldsOfExpertise.eNT_SpecilistIcon, Description=FieldsOfExpertise.eNT_Specilist_Description},
+                          new SpecilizationModel{Title=FieldsOfExpertise.gp, Icon=FieldsOfExpertise.gpIcon,Description=FieldsOfExpertise.audiologist_Description}, 
+                           new SpecilizationModel{Title=FieldsOfExpertise.gynaecologist, Icon=FieldsOfExpertise.gynaecologistIcon,Description=FieldsOfExpertise.audiologist_Description},
+                            new SpecilizationModel{Title=FieldsOfExpertise.haematology, Icon=FieldsOfExpertise.haematologyIcon,Description=FieldsOfExpertise.audiologist_Description},
+                             new SpecilizationModel{Title=FieldsOfExpertise.nerosurgeon, Icon=FieldsOfExpertise.neuroIcon, Description=FieldsOfExpertise.nerosurgeon_Description},
+                              new SpecilizationModel{Title=FieldsOfExpertise.oncologist, Icon=FieldsOfExpertise.OncologyIcon,Description=FieldsOfExpertise.audiologist_Description},
+                               new SpecilizationModel{Title=FieldsOfExpertise.optometrist, Icon=FieldsOfExpertise.optomotristIcon,Description=FieldsOfExpertise.audiologist_Description},
+                                new SpecilizationModel{Title=FieldsOfExpertise.OrthopedicSurgeon, Icon=FieldsOfExpertise.OrthopaedicSurgeonIcon,Description=FieldsOfExpertise.audiologist_Description},
+                                 new SpecilizationModel{Title=FieldsOfExpertise.paediatrician, Icon=FieldsOfExpertise.paediatricianIcon,Description=FieldsOfExpertise.audiologist_Description},
+                                  new SpecilizationModel{Title=FieldsOfExpertise.physiotherapist, Icon=FieldsOfExpertise.physiotherapistIcon,Description=FieldsOfExpertise.audiologist_Description},
+                                   new SpecilizationModel{Title=FieldsOfExpertise.plasticSurgeon, Icon=FieldsOfExpertise.plasticIcon,Description=FieldsOfExpertise.audiologist_Description},
+                                    new SpecilizationModel{Title=FieldsOfExpertise.psychiatrist, Icon=FieldsOfExpertise.psychiatristIcon,Description=FieldsOfExpertise.audiologist_Description},
+                                     new SpecilizationModel{Title=FieldsOfExpertise.radiologist, Icon=FieldsOfExpertise.radiologistIcon,Description=FieldsOfExpertise.radiologist_Description},
+                                      new SpecilizationModel{Title=FieldsOfExpertise.urologist, Icon=FieldsOfExpertise.urologistIcon,Description=FieldsOfExpertise.audiologist_Description }
             };
         }
 
 
         private string searchProffesion;
+       
+
         public string SearchProffesion
         {
             get

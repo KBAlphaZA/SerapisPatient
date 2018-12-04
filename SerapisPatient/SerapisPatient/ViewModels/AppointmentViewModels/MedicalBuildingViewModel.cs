@@ -1,8 +1,10 @@
 ﻿
 using MongoDB.Driver.Linq;
 using SerapisPatient.behavious;
+using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Services.Cloud;
+using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
@@ -20,27 +22,92 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
     public class MedicalBuildingViewModel : BaseViewModel
     {
+
+        #region Properties
         
         public ObservableCollection<MedicalBuildingModel> Practices { get; set; }//MockData
+        public MedicalBuildingModel _MedicalBuildingData;
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public Command NavigateToHomePageCommand { get; set; }
+        public ICommand ItemSelected { get; set; }
 
-        public MedicalBuildingViewModel()
-        {           
-            //GetMedicalBuildingsBySpecializationAsync();
-            GenerateMedicalBuildingModel();
-           
+        public MedicalBuildingModel SelectedItem
+        {
+            get { return GetValue<MedicalBuildingModel>(); }
+            set { SetValue(value); }
+        }
+
+        private string title;
+        public string Title 
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+
+                RaisePropertyChanged(nameof(Title));
+            }
+        }
+
+        private string icon;
+        public string Icon
+        {
+            get
+            {
+                return icon;
+            }
+            set
+            {
+                icon = value;
+
+                RaisePropertyChanged(nameof(Icon));
+            }
 
         }
-        public ICommand SelectedPractice => new Command<MedicalBuildingModel>(async SelectBuilding =>
-        {
-            NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedBuilding = SelectBuilding });
-            string building = SelectBuilding.PracticeName;
-            //MessagingCenter.Send(this, MessegingKeys.Medicalbuilding, doctorname);
-            await NavigateToDoctors();
-        });
-        
 
+        private string description;
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+
+                RaisePropertyChanged(nameof(Description));
+            }
+
+        }
+        #endregion
+
+
+        public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
+        {
+            Title = _specilizationData.Title;
+            Icon = _specilizationData.Icon;
+            Description = _specilizationData.Description;
+
+
+            GenerateMedicalBuildingModel();
+            
+            ItemSelected = new Command<MedicalBuildingModel>(args =>
+            {
+                _MedicalBuildingData = args;
+                HandleNavigation(_MedicalBuildingData);
+            });
+
+            
+        }
+
+        public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
+        }
         private void GenerateMedicalBuildingModel()
         {
             Practices = new ObservableCollection<MedicalBuildingModel>
@@ -57,12 +124,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         }
 
-
-        private async Task NavigateToDoctors()
+        public void ItemSelected_ExecuteCommand(object state)
         {
-           
-             await App.Current.MainPage.Navigation.PushAsync(new SelectDoctor());
+            SelectedItem = state as MedicalBuildingModel;
         }
+
+
         //public async Task<List<MedicalBuildingModel>> GetMedicalBuildingsBySpecializationAsync()
         //{
         //    //if (IsBusy)

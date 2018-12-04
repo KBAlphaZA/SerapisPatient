@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectPractice"
-             xmlns:local="clr-namespace:SerapisPatient.Converters"
-             xmlns:flex="clr-namespace:SerapisPatient.Controls"
+             xmlns:bind="clr-namespace:SerapisPatient.ViewModels.AppointmentViewModels"
+             xmlns:control="clr-namespace:SerapisPatient.Controls"
              xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              >
-   
+
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -27,51 +28,50 @@
         <!--Potiental Searchbar-->
 
         <!--Row 1-->
-        <Image  Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="DentalSurgery.png"/>
-        <Label Grid.Row="1" Grid.Column="1" Text="Dentist" TextColor="Black" FontSize="30" FontAttributes="Bold" />
+        <Image  Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" TextColor="Black" FontSize="30" FontAttributes="Bold" />
 
         <!--Row 2-->
 
-        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="A dentist,also referred to as a dental surgeon, is a surgeon who speacialises in dentistry, the diagnosis prevention,and treatment of diseases and condition of the oral cavity"/>
+        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Description}"/>
 
         <!--Row 3-->
 
 
 
-        <StackLayout  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
-            <ScrollView Orientation="Horizontal" Margin="25,10,25,10">
-                <flex:ExtendedFlexLayout ItemsSource="{Binding Practices}">
-                    
-                    <flex:ExtendedFlexLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Frame WidthRequest="180" HeightRequest="260" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True"  >
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped"/>
-                                </Frame.GestureRecognizers>
-                                <FlexLayout Direction="Column">
-                                   <!--Design of the frame-->
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="130"/>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Source="{Binding MedicalBuildingImage}" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                        <Label Text="{Binding PracticeName}" Grid.Row="1" TextColor="Black" FontAttributes="Bold" />
 
-                                        <Label Grid.Row="2" Text="{Binding Distance,StringFormat=' Distance is Approximately {0} Kms'}" />
-                                    </Grid>
-                                    <Label FlexLayout.Grow="1"/>
-                                </FlexLayout>
+        <control:TLScrollView Orientation="Horizontal"
+                         ItemsSource="{Binding Practices}"
+                              ItemSelected="TLScrollView_ItemSelected"
+                         SelectedCommand="{Binding [ItemSelected]}"
+                         HeightRequest="270"
+                                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+
+            <control:TLScrollView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame WidthRequest="180" HeightRequest="260" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True">
+                                <!--Design of the frame-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="130"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{Binding MedicalBuildingImage}" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                    <Label Text="{Binding PracticeName}" Grid.Row="1" TextColor="Black" FontAttributes="Bold" />
+
+                                    <Label Grid.Row="2" Text="{Binding Distance,StringFormat=' Distance is Approximately {0} Kms'}" />
+                                </Grid>
                             </Frame>
-                        </DataTemplate>
-                    </flex:ExtendedFlexLayout.ItemTemplate>
-                </flex:ExtendedFlexLayout>
-            </ScrollView>
-        </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </control:TLScrollView.ItemTemplate>
+            </control:TLScrollView>
+        
     </Grid>
 
 </ContentPage>

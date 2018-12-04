@@ -8,10 +8,10 @@ using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
 {
-    public class MainPageViewModel:BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
 
-        public MainPageViewModel()
+        public LoginViewModel()
         {
             RestThePassword = new Command(RestPassword);
         }

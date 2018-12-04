@@ -8,7 +8,7 @@
                   >
 
     <MasterDetailPage.Master>
-        <pages:SideMenuPage x:Name="MasterPage" Title="Menu"/>
+        <pages:SideMenuPage x:Name="MasterPage"  Title="Menu"/>
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>

@@ -1,4 +1,7 @@
-﻿using SerapisPatient.Models.Practices;
+﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Practices;
+using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using SerapisPatient.Views.AppointmentFolder.Booking;
@@ -15,19 +18,19 @@ namespace SerapisPatient.ViewModels
     {
         public ObservableCollection<PracticeInfo> PracticeList { get; set; }
 
-        public ICommand GoToDocList => new Command(NavigateToDoctorsList);
+        //public ICommand GoToDocList => new Command(NavigateToDoctorsList);
 
         public PracticeSelectionViewModel()
         {
             GenerateDummyDataList();
-
+            ShowDetails();
         }
 
 
 
-        private void NavigateToDoctorsList()
+        private void NavigateToDoctorsList(MedicalBuildingModel _medicalBuildingModelData)
         {
-            App.Current.MainPage.Navigation.PushModalAsync(new SelectDoctor());
+            App.Current.MainPage.Navigation.PushModalAsync(new SelectDoctor(_medicalBuildingModelData));
         }
 
 
@@ -74,7 +77,15 @@ namespace SerapisPatient.ViewModels
 
         }
 
-        
+        public void ShowDetails()
+        {
+            MessagingCenter.Subscribe<SpecilizationViewModel,SpecilizationModel>(this, MessagingKeys.Specilization, (obj, arg) =>
+             {
+                 string icon = arg.Icon;
+                 string Practicetitle = arg.Title;
+             });
+        }
+
 
     }
 }

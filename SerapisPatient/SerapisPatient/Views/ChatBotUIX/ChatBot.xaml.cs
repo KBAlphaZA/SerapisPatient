@@ -17,7 +17,7 @@ namespace SerapisPatient.Views
 		public ChatBot ()
 		{
 			InitializeComponent ();
-            this.BindingContext = new ChatPageViewModel();
+            this.BindingContext = new ChatBotViewModel();
             
         }
         public void ScrollTap(object sender, System.EventArgs e)
@@ -26,7 +26,7 @@ namespace SerapisPatient.Views
             {
                 if (BindingContext != null)
                 {
-                    var vm = BindingContext as ChatPageViewModel;
+                    var vm = BindingContext as ChatBotViewModel;
 
                     Device.BeginInvokeOnMainThread(() =>
                     {

@@ -1,4 +1,7 @@
-﻿using SerapisPatient.ViewModels;
+﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Doctor;
+using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,10 +18,13 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	public partial class ConfirmBooking : ContentPage
 	{
         ConfirmBookingViewModel viewModel;
-		public ConfirmBooking ()
+
+        
+
+        public ConfirmBooking (Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData)
 		{
 			InitializeComponent ();
-            viewModel = new ConfirmBookingViewModel();
+            viewModel = new ConfirmBookingViewModel(enquiredDoctor, _medicalBuildingData);
             BindingContext = viewModel;
         }
 	}
