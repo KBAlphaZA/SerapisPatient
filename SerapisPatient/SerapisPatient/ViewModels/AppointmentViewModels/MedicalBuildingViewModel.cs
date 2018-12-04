@@ -106,7 +106,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
         {
-            App.Current.MainPage.Navigation.PushAsync(new SelectDoctor(_MedicalBuildingData), true);
+            App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
         }
         private void GenerateMedicalBuildingModel()
         {

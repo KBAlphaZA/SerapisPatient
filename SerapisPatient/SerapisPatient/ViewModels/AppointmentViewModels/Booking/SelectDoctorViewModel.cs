@@ -18,7 +18,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
     public class SelectDoctorViewModel : BaseViewModel
     {
         #region Properties
-        Doctor enquiredDoctor;
+        public Doctor enquiredDoctor;
+        public MedicalBuildingModel _medicalBuildingData;
         public ObservableCollection<Doctor> Doctors { get; set; }
         
         public ICommand NavigateToConfrimation { get; set; }
@@ -31,8 +32,9 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
              enquiredDoctor = selectDoctor;               
             // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
 
-            await GoToConfirmation(enquiredDoctor);
+            await GoToConfirmation(enquiredDoctor, _medicalBuildingData);
         });
+
 
         //Important
         public SelectDoctorViewModel(MedicalBuildingModel _MedicalBuildingData)
@@ -62,10 +64,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             };
         }
 
-        private async Task GoToConfirmation(Doctor enquiredDoctor )
+        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData )
         {
             //This sends the message of itemSelected       
-            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor), true);
+            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData), true);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SerapisPatient.Models
     public partial class Month
     {
         public int key { get; set; }
-        public string value { get; set; }
+        public string Value { get; set; }
 
     }
     public partial class Months

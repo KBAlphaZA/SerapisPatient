@@ -4,9 +4,9 @@
              x:Class="SerapisPatient.Views.AppointmentFolder.Booking.ConfirmBooking"
             xmlns:bind="clr-namespace:SerapisPatient.ViewModels.AppointmentViewModels"
              >
-    
-    
-        
+
+    <ScrollView>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -46,7 +46,7 @@
                     <BoxView Grid.Row="4" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
 
                     <Label Text="Venue:" FontSize="Large" FontAttributes="Bold" Grid.Row="5"/>
-                    <Label Text="Greys' Hospital, Pietermartizburg" FontSize="Medium" Grid.Row="6"/>
+                    <Label Text="{Binding PracticeName}" FontSize="Medium" Grid.Row="6"/>
                     <BoxView Grid.Row="7" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
 
                     <!--Row 8-->
@@ -66,5 +66,6 @@
             </Frame>
 
         </Grid>
-    
+    </ScrollView>
+        
 </ContentPage>

@@ -45,7 +45,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackLayout Grid.Column="0">
-                                        <Image Source="{Binding ProfileImageUrl}" HeightRequest="60" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
+                                        <Image  Source="{Binding ProfileImageUrl}" HeightRequest="60" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
                                     </StackLayout>
 
                                     <StackLayout Grid.Column="1" VerticalOptions="Center">

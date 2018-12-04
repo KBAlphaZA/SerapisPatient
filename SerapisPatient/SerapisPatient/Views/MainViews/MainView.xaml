@@ -67,7 +67,8 @@
         <!--Row 5-->
 
         <Frame x:Name="appointmentframe2" Grid.Row="5" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25" >
-            <Frame.GestureRecognizers>
+            
+            .<Frame.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToCameraPageCommand}">
                 </TapGestureRecognizer>

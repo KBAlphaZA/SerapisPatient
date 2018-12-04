@@ -1,5 +1,6 @@
 ﻿using SerapisPatient.behavious;
 using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
@@ -17,11 +18,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
     public class SelectBookingViewModel :BaseViewModel 
     {
         #region Properties
-        Doctor enquiredDoctor;
+        public Doctor enquiredDoctor;
+        public MedicalBuildingModel _medicalBuildingData;
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
-        SelectedMonths selected;
+        //SelectedMonths selected;
 
         public ObservableCollection<Doctor> Doctors { get; set; }
 
@@ -37,18 +39,18 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         }
         
         //this selected_item command is for the horizontallistview
-        private SelectedMonths selectedItem;
-        public SelectedMonths SelectedItem
+        private SelectedMonths selectedDay;
+        public SelectedMonths SelectedDay
         {
-            get => selectedItem;
+            get => selectedDay;
             set
             {
-                SetProperty(ref selectedItem, value);
-               
+                SetProperty(ref selectedDay, value);
+
                 ItemSelected();
             }
         }
-
+        //value is being converted to a string
         private string dateSelected;
         public string DateSelected
         {
@@ -59,6 +61,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                 RaisePropertyChanged(nameof(DateSelected));
             }
         }
+
         private int monthsSelectedIndex;
         public int MonthsSelectedIndex
         {
@@ -70,10 +73,23 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             {
                 monthsSelectedIndex = value;
                 RaisePropertyChanged(nameof(MonthsSelectedIndex));
-                
+                      
+
                 //this method was meant to accept the selected value and allow the method to consume it straight away
                 //then add fire the activityloader while the new UI loads up.
                 //GenerateDaysOfTheMonth(MonthsSelectedIndex);
+            }
+        }
+        private string monthText;
+        public string MonthText
+        {
+            get
+            {
+                return monthText;
+            }
+            set
+            {
+                SetProperty(ref monthText, value);
             }
         }
 
@@ -93,8 +109,9 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
 
         #endregion
-        public SelectBookingViewModel()
+        public SelectBookingViewModel(MedicalBuildingModel _medicalBuildingData1)
         {
+            _medicalBuildingData = _medicalBuildingData1;
             GenerateDoctorList();
             IsBusy = false;
             Showlistview = false;
@@ -110,18 +127,18 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         {
              var months = new List<Month>
             {
-                new Month(){key=1, value = Models.Months.January },
-                 new Month(){key=2, value = Models.Months.February },
-                  new Month(){key=3, value = Models.Months.March},
-                   new Month(){key=4, value = Models.Months.April },
-                    new Month(){key=5, value = Models.Months.May },
-                     new Month(){key=6, value = Models.Months.June },
-                      new Month(){key=7, value = Models.Months.July },
-                       new Month(){key=8, value = Models.Months.August },
-                        new Month(){key=9, value = Models.Months.September },
-                         new Month(){key=10, value = Models.Months.October},
-                          new Month(){key=11, value = Models.Months.November },
-                           new Month(){key=12, value = Models.Months.December },
+                new Month(){key=1, Value = Models.Months.January },
+                 new Month(){key=2, Value = Models.Months.February },
+                  new Month(){key=3, Value = Models.Months.March},
+                   new Month(){key=4, Value = Models.Months.April },
+                    new Month(){key=5, Value = Models.Months.May },
+                     new Month(){key=6, Value = Models.Months.June },
+                      new Month(){key=7, Value = Models.Months.July },
+                       new Month(){key=8, Value = Models.Months.August },
+                        new Month(){key=9, Value = Models.Months.September },
+                         new Month(){key=10, Value = Models.Months.October},
+                          new Month(){key=11, Value = Models.Months.November },
+                           new Month(){key=12, Value = Models.Months.December },
             };
             return months;
             
@@ -246,21 +263,30 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         #region Methods
         private async Task ItemSelected()
         {
-            IsBusy = true;
-            await Task.Delay(700);
-            // MessagingCenter.Send(this, "ItemSelected", SelectedItem);
-            DateSelected = SelectedItem.MonthValue.ToString();
-            //force this task on the UI thread so changes can be made on the listview
-            Device.BeginInvokeOnMainThread(() =>
+            try
             {
-                Showlistview = true;
-                GenerateDoctorList();
-               
-                
-            });
-            
+                IsBusy = true;
+                await Task.Delay(800);
+                // MessagingCenter.Send(this, "ItemSelected", SelectedItem);
+                //Date Value eg.7th
+                DateSelected = SelectedDay.MonthValue.ToString();
+                //force this task on the UI thread so changes can be made on the listview
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Showlistview = true;
+                    GenerateDoctorList();
 
-            IsBusy = false;
+
+                });
+            }
+            catch(Exception e) {
+                
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+             
         }
         public ICommand SelectedCommand => new Command<Doctor>(async selectDoctor =>
         {
@@ -268,13 +294,16 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             enquiredDoctor = selectDoctor;
             // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
 
-            await GoToConfirmation(enquiredDoctor);
+            await GoToConfirmation(enquiredDoctor, _medicalBuildingData);
         });
-        private async Task GoToConfirmation(Doctor enquiredDoctor)
+
+        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData)
         {
             //This sends the message of itemSelected       
-            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor), true);
+            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData), true);
         }
+
+       
         #endregion
 
         //Notes

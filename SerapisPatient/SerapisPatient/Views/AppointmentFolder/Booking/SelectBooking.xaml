@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
         
         <!--Row 0-->
-        <Picker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding value}" SelectedItem="{Binding MonthsSelectedIndex}"  FontAttributes="Bold" Title="Choose your month"/>
+        <Picker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MonthsSelectedIndex}"  FontAttributes="Bold" Title="Choose your month"/>
         <!-- label text={Binding MyMonth} TextColor="Black" --> 
         
         <!--Row 1-->
@@ -35,7 +35,7 @@
         <!-- Date picker based on the month selected-->
         <control:HorizontalListView ItemsSource="{Binding Days}"
                                     HorizontalOptions="FillAndExpand"
-                                    SelectedItem="{Binding SelectedItem}"
+                                    SelectedItem="{Binding SelectedDay}"
                                     ItemHeightRequest="50"
                                     ItemWidthRequest="50"
                                     Grid.Row="2"

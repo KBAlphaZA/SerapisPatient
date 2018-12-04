@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -20,7 +21,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
         public bool BookingSuccess = true;
-        public string DateSelected;
+        public string DateSelected = " ";
 
         private string doctorLastName;
         public string LastName
@@ -56,9 +57,11 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
         #endregion
 
-        public ConfirmBookingViewModel(Doctor enquiredDoctor)
+        public ConfirmBookingViewModel(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel)
         {
-            SelectedMonth = "December";
+            PracticeName = _medicalBuildingModel.PracticeName;
+            //string var = MonthsSelectedIndex.ToString();
+            //DateSelected = var + SelectedDay.MonthValue
             ConfrimData();
             LastName = enquiredDoctor.LastName;
             NavigateToHomePageCommand = new Command(ConfirmBooking);    
@@ -70,7 +73,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
             MessagingCenter.Subscribe<SelectBookingViewModel, SelectedMonths>(this, "ItemSelected", (obj, item) =>
             {
-                   DateSelected = item.MonthValue.ToString();
+                  // DateSelected = item.MonthValue.ToString();
             }); 
             
 

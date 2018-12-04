@@ -1,4 +1,5 @@
 ﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	{
         SelectBookingViewModel viewModel;
         public string DateSelected;
-		public SelectBooking()
+		public SelectBooking(MedicalBuildingModel _MedicalBuildingData)
 		{
 			InitializeComponent ();
 
-            BindingContext = new SelectBookingViewModel();
+            BindingContext = new SelectBookingViewModel(_MedicalBuildingData);
             MessagingCenter.Subscribe<SelectBookingViewModel, SelectedMonths>(this, "ItemSelected", (obj, item) =>
             {
                 DisplayAlert("Alert", "You've choosen the date " + item.MonthValue, "cancel");

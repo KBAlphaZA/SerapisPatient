@@ -28,7 +28,7 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
         private void TLScrollView_ItemSelected(object sender, ItemTappedEventArgs e)
         {
             MedicalBuildingModel _medicalBuildingModelData = e.Item as MedicalBuildingModel;
-            Navigation.PushAsync(new SelectDoctor( _medicalBuildingModelData));
+            Navigation.PushAsync(new SelectBooking( _medicalBuildingModelData));
         }
 
         //Come back to this, since this has to be moved to the viewmodel
