@@ -1,8 +1,11 @@
 ﻿using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
+using SerapisPatient.Views.MainViews;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,9 +16,20 @@ namespace SerapisPatient.ViewModels
 
         public LoginViewModel()
         {
+            LoginOnClick = new Command(LoginRequestAsync);
             RestThePassword = new Command(RestPassword);
+            RegisterOnClick = new Command(RegisterUser);
+
+
         }
 
+        private void RegisterUser()
+        {
+            App.Current.MainPage.Navigation.PushAsync(new RegisterView());
+        }
+
+        public ICommand RegisterOnClick { get; set; }
+        public ICommand LoginOnClick { get; set; }
         public ICommand RestThePassword { get; set; }
 
         private string email;
@@ -46,20 +60,16 @@ namespace SerapisPatient.ViewModels
             }
         }
 
-
-        private void LoginOnClick(string username, string userPassword)
+        private void LoginRequestAsync()
         {
-            username = Email;
-            userPassword = Password;
 
-            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(userPassword))
-            {
-
-            }
-            else
-            {
-
-            }
+             HandleAuth();
+        }
+        private async Task HandleAuth()
+        {
+            App.CheckLogin = true;
+            App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
+            await App.Current.MainPage.Navigation.PopAsync();
 
         }
 

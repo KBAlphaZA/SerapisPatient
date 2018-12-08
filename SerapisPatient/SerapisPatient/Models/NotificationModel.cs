@@ -11,6 +11,13 @@ namespace SerapisPatient.Models
         public string Type { get; set; }
     }
 
+    public partial class NotificationDetailModel
+    {
+        public string Status { get; set; }
+        public string DeliveryMode { get; set; }
+        public DateTime Time { get; set; }
+    }
+
    
 
    

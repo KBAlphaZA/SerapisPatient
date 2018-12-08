@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.MainViews.MainView"
-             xmlns:flex="clr-namespace:SerapisPatient.Controls"
+             xmlns:control="clr-namespace:SerapisPatient.Controls"
+             xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
              Icon="menu.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
@@ -43,12 +44,17 @@
 
         <!--Row 3-->
 
-        <Frame x:Name="appointmentframe" Grid.Row="3"  Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="25" >
+        <Frame  Grid.Row="3"  Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="25" >
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToAppointmentPageCommand }">
                 </TapGestureRecognizer>
             </Frame.GestureRecognizers>
+            <Frame.Triggers>
+                <EventTrigger Event="NavigateToAppointmentPageCommand ">
+                    <triggers:ExpandFrameTriggerAction/>
+                </EventTrigger>
+            </Frame.Triggers>
             <Label TextColor="White" Text="Make An Appointment" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
         </Frame>
 
@@ -68,7 +74,7 @@
 
         <Frame x:Name="appointmentframe2" Grid.Row="5" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25" >
             
-            .<Frame.GestureRecognizers>
+            <Frame.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToCameraPageCommand}">
                 </TapGestureRecognizer>
@@ -81,26 +87,28 @@
         <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="6"/>
 
         <!--Row 7-->
-        
+
+        <control:HorizontalListView ItemsSource="{Binding Notifications}"
+                                    HorizontalOptions="FillAndExpand"
+                                    SelectedItem="{Binding SelectedCard}"
+                                    ItemHeightRequest="140"
+                                    ItemWidthRequest="230"
+                                     Grid.Column="1" Grid.Row="7">
+            <control:HorizontalListView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView Padding="5">
+                        <Frame  WidthRequest="220" HeightRequest="130" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True" >
+                            <StackLayout>
+                                <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
+                                <Label TextColor="Black"  Text="{Binding Body}"/>
+                            </StackLayout>
+                        </Frame>
+                    </ContentView>
+                </DataTemplate>
+            </control:HorizontalListView.ItemTemplate>
+        </control:HorizontalListView>
 
 
-        <StackLayout Grid.Column="1" Grid.Row="7">
-            <ScrollView Orientation="Horizontal" Margin="25,10,25,10">
-                <flex:ExtendedFlexLayout ItemsSource="{Binding Notifications}">
-                    <flex:ExtendedFlexLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Frame WidthRequest="150" HeightRequest="130" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True"  >
-                                <FlexLayout Direction="Column">
-                                    <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
-                                    <Label TextColor="Black"  Text="{Binding Body}"/>
-                                    <Label FlexLayout.Grow="1"/>
-                                </FlexLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </flex:ExtendedFlexLayout.ItemTemplate>
-                </flex:ExtendedFlexLayout>
-            </ScrollView>
-        </StackLayout>
 
     </Grid>
 </ContentPage>

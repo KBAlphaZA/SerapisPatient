@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
         
         <!--Row 0-->
-        <Picker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MonthsSelectedIndex}"  FontAttributes="Bold" Title="Choose your month"/>
+        <Picker x:Name="MonthPicker" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MonthsSelectedIndex}"  FontAttributes="Bold" Title="Choose your month"/>
         <!-- label text={Binding MyMonth} TextColor="Black" --> 
         
         <!--Row 1-->

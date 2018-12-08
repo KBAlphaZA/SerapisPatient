@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.NotificationViews.MedicationNotificatonView">
+    <ListView
+         x:Name="timelineListView"
+         ItemsSource="{Binding Delivery}"
+         RowHeight="75"
+         SeparatorVisibility="None">
+
+        <ListView.Footer>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Image Grid.RowSpan="2" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Start" Source="medication.jpg" />
+                <Image Aspect="Fill" Grid.RowSpan="2" HorizontalOptions="Fill" Source="FadeToWhite.png" />
+            </Grid>
+        </ListView.Footer>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid ColumnSpacing="0" RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label HorizontalOptions="Center"  Text="{Binding Time, StringFormat='{0:H:mm}'}" />
+
+                        <Label Grid.Column="2" Margin="20,0" Text="{Binding Status}" />
+
+                        <Label Grid.Row="1" Grid.Column="2" Margin="20,0" Text="{Binding DeliveryMode}" />
+
+                        <BoxView Grid.RowSpan="2" Grid.Column="1" BackgroundColor="Red" HorizontalOptions="Center" IsVisible="True" VerticalOptions="Fill" WidthRequest="3" />
+
+                        <Image Grid.Column="1" Source="deliverytruck.png" />
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

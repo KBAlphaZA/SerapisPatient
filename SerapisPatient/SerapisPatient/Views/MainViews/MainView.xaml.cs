@@ -23,13 +23,7 @@ namespace SerapisPatient.Views.MainViews
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            appointmentframe.FadeTo(0.3, 500);
-            appointmentframe.FadeTo(1, 500);
-             appointmentframe1.FadeTo(0.3, 500);
-            appointmentframe1.FadeTo(1, 500);
-
-            appointmentframe2.FadeTo(0.3, 500);
-            appointmentframe2.FadeTo(1, 500);
+           
         }
         
 

@@ -3,6 +3,7 @@ using SerapisPatient.Models.Doctor;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.MainViews;
+using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,12 +16,26 @@ namespace SerapisPatient.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+
         //public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
         public Command NavigateToProfilePageCommand { get; set; }
         public Command NavigateToAppointmentPageCommand { get; set; }
         public Command NavigateToDeliveryPageCommand { get; set; }
         public Command NavigateToCameraPageCommand { get; set; }
         public ObservableCollection<NotificationModel> Notifications { get; private set; }
+        private NotificationModel selectedCard;
+        public NotificationModel SelectedCard
+        {
+            get => selectedCard;
+            set
+            {
+                SetProperty(ref selectedCard, value);
+
+                MedicationDelvery(SelectedCard);
+            }
+        }
+
+
 
         public MainViewModel()
         {
@@ -67,5 +82,33 @@ namespace SerapisPatient.ViewModels
             //var Camera_navigation = new NavigationPage(new AppointmentPage());
             await App.Current.MainPage.Navigation.PushAsync(new CameraPage());
         }
+
+        private async void TakeMedication()
+        {            
+            //await App.Current.MainPage.Navigation.PushAsync();
+        }
+
+        private async void FollowUp()
+        {           
+            await App.Current.MainPage.Navigation.PushAsync(new CameraPage());
+        }
+
+        private async void MedicationDelvery(NotificationModel _SelectedCard)
+        {
+            if(bool.Equals(_SelectedCard.Title," "))
+            {
+
+            }
+            else if(bool.Equals(_SelectedCard.Title, " "))
+            {
+
+            }
+            else if(bool.Equals(_SelectedCard.Title, "MEDICATION DELIVERY"))
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new MedicationNotificatonView());
+            }
+            
+        }
+       
     }
 }
