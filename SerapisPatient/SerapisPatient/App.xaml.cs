@@ -21,6 +21,7 @@ namespace SerapisPatient
 	{
         //public static PublicClientApplication AuthenticationClient { get; set; }
         public static string User = "Ceba";
+        public static bool CheckLogin { get; set; }
         #region Login services
         GoogleAuthentication googleToken = new GoogleAuthentication();
         FacebookAuthentication facebookToken = new FacebookAuthentication();
@@ -41,35 +42,24 @@ namespace SerapisPatient
         {
             //check if the user still has a token for login
 
-            var checkTokenvar=CheckLogin(true);
+            //CheckLogin(true);
 
-            if (checkTokenvar!=true)
+            if (!CheckLogin)
             {
                  MainPage = new NavigationPage(new LoginView());
                 
             }
             else
-            {
-               
-                //MainPage = new NavigationPage(new MasterDetailPage1());
-                MainPage = new CustomNavigationView(new MasterView());
-               //MainPage = new NavigationPage(new SelectBooking());
+            {   
+                //MainPage = new NavigationPage(new LoginView());
+                //MainPage = new CustomNavigationView(new MasterView()); //this is the transparent navbar
+                MainPage = new NavigationPage(new MasterView());
+                
             }
 
         }
 
-        private bool CheckLogin(bool tokenPresent)
-        {
-
-            if (tokenPresent)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+       
 
 		protected override void OnStart ()
 		{

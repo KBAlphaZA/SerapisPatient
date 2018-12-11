@@ -28,7 +28,7 @@
         <!--Potiental Searchbar-->
 
         <!--Row 1-->
-        <Image  Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
+        <Image  Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" TextColor="Black" FontSize="30" FontAttributes="Bold" />
 
         <!--Row 2-->
@@ -44,7 +44,7 @@
                          ItemsSource="{Binding Practices}"
                               ItemSelected="TLScrollView_ItemSelected"
                          SelectedCommand="{Binding [ItemSelected]}"
-                         HeightRequest="270"
+                         HeightRequest="240"
                                 Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
 
             <control:TLScrollView.ItemTemplate>

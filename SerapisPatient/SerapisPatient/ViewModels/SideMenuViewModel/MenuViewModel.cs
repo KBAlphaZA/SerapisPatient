@@ -98,12 +98,12 @@ namespace SerapisPatient.ViewModels
 
         private async void GoToMedicationHistoryPage()
         {
-            await App.Current.MainPage.Navigation.PushModalAsync(new MedicationHistoryPage());
+            await App.Current.MainPage.Navigation.PushAsync(new MedicationHistoryPage());
         }
 
         private async void Logout()
         {
-
+            await App.Current.MainPage.Navigation.PushAsync(new LoginView());
         }
         #endregion
 
