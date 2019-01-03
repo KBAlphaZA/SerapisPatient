@@ -8,6 +8,7 @@ namespace SerapisPatient.Models.Appointments
     public class Appointment
     {
         public bool IsSerapisBooking { get; set; }
+        public bool HasSeenGp{get; set;}
         public string DateBooked { get; set; }
         public string TimeBooked { get; set; }
         public string Venue { get; set; }
