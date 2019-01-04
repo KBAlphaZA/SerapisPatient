@@ -80,26 +80,28 @@
 
                             <Frame OutlineColor="Gray" HasShadow="True"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
 
-                                <Grid RowSpacing="10">
+                                <Grid RowSpacing="2">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="30"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="2"/>
-                                        <ColumnDefinition Width="120"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="45"/><!--Column 0-->
+                                        <ColumnDefinition Width="2"/><!--Column 1-->
+                                        <ColumnDefinition Width="90"/><!--Column 2-->
+                                        <ColumnDefinition Width="*"/><!-- Column 3-->
                                     </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Row="0" Grid.Column="0" Text="9:30" FontSize="20" VerticalOptions="StartAndExpand" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="AM" FontSize="14" VerticalOptions="CenterAndExpand" TextColor="Black"/>
                                     
-                                    <BoxView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Fill" HorizontalOptions="Center" WidthRequest="2" Color="Black" />
+                                    <!--Row 0-->
                                     <Image Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Source="{Binding ProfileImageUrl}" HeightRequest="60" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="9:30" FontSize="18" VerticalOptions="StartAndExpand" TextColor="Black"/>
+                                    <BoxView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Fill" HorizontalOptions="Center" WidthRequest="2" Color="Black" />
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding LastName, StringFormat='Dr. {0:N}'}" FontSize="18" VerticalOptions="StartAndExpand" TextColor="Black"/>
                                     
-                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding LastName, StringFormat='Dr. {0:N}'}" FontSize="20" VerticalOptions="StartAndExpand" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding University}" FontSize="14" VerticalOptions="CenterAndExpand" TextColor="Green"/>
+                                    
+                                    <!--Row 1-->
+                                    <Label Grid.Row="1" Grid.Column="0" Text="AM" FontSize="12" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding University}" FontSize="12" VerticalOptions="CenterAndExpand" TextColor="Green"/>
 
 
                                 </Grid>

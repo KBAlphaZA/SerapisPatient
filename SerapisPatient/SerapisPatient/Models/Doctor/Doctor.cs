@@ -12,6 +12,7 @@ namespace SerapisPatient.Models.Doctor
         public string LastName { get; set; }
         public string University { get; set; }
         public string ProfileImageUrl { get; set; }
+        public string Time { get; set; }
         public List<Qualification> Qualifications { get; set; }
         public List<object> practices { get; set; }
         public string YearsOfExp { get; set; }

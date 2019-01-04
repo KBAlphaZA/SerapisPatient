@@ -15,7 +15,7 @@ using Xamarin.Forms.BehaviorsPack;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 {
-    public class SelectBookingViewModel :BaseViewModel 
+    public class SelectBookingViewModel : BaseViewModel 
     {
         #region Properties
         public Doctor enquiredDoctor;
