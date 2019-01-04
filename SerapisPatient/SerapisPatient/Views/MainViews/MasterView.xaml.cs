@@ -16,7 +16,8 @@ namespace SerapisPatient.Views.MainViews
 		public MasterView ()
 		{
 			InitializeComponent ();
-            Detail = new CustomNavigationView(new MainView());
+            //Detail = new CustomNavigationView(new MainView());
+            Detail = new NavigationPage(new MainView());
             NavigationPage.SetHasNavigationBar(this, false);
 
         }

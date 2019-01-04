@@ -12,7 +12,12 @@ namespace SerapisPatient.Services
 {
     public class GoogleAuthentication
     {
-        Account account;
+        //clientid : 146806431671-mc2okbks55i70e532tl90cccdd146sg1.apps.googleusercontent.com
+        // clientsecret: L-sms1KEEJhDZKJwkeKAeYos
+
+
+
+                Account account;
         AccountStore store;
         AccountResult result;
 

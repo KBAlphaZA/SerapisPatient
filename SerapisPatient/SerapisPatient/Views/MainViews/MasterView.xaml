@@ -14,11 +14,16 @@
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <custom:CustomNavigationView>
+        <NavigationPage>
             <x:Arguments>
                 <pages1:MainView  Title="Serapis Patient" />
             </x:Arguments>
-        </custom:CustomNavigationView>
+        </NavigationPage>
+        <!--<custom:CustomNavigationView>
+            <x:Arguments>
+                <pages1:MainView  Title="Serapis Patient" />
+            </x:Arguments>
+        </custom:CustomNavigationView>-->
     </MasterDetailPage.Detail>
 
 </MasterDetailPage>
