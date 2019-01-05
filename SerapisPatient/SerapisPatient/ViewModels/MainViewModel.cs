@@ -1,5 +1,6 @@
 ﻿using SerapisPatient.Models;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.MainViews;
@@ -7,6 +8,7 @@ using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,12 +19,20 @@ namespace SerapisPatient.ViewModels
     public class MainViewModel : BaseViewModel
     {
 
+        //The Title of the Page
+        private readonly string _title = "Serapis Patient";
+
         //public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
+
         public Command NavigateToProfilePageCommand { get; set; }
         public Command NavigateToAppointmentPageCommand { get; set; }
         public Command NavigateToDeliveryPageCommand { get; set; }
         public Command NavigateToCameraPageCommand { get; set; }
         public ObservableCollection<NotificationModel> Notifications { get; private set; }
+
+        //The instance for getting the user location
+        UserCurrentLocation usersLocation;
+
         private NotificationModel selectedCard;
         public NotificationModel SelectedCard
         {
@@ -39,11 +49,14 @@ namespace SerapisPatient.ViewModels
 
         public MainViewModel()
         {
+            
             GenerateNotificationList();
             NavigateToProfilePageCommand = new Command(ProfilePage);
             NavigateToAppointmentPageCommand = new Command(AppointmentPage);
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
             NavigateToCameraPageCommand = new Command(CameraPage);
+
+            Title = _title;
         }
 
         //ListView
@@ -70,7 +83,28 @@ namespace SerapisPatient.ViewModels
         private async void AppointmentPage()
         {
             //var Appointment_navigation = new  NavigationPage( new AppointmentPage());
-            await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage());
+
+            try
+            {
+                #region Getting user location code
+
+                //Get the users location before moving on to the next page
+                usersLocation = new UserCurrentLocation();
+
+
+                await usersLocation.GetCurrentLocationAsync();
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Debug.Write("Failed to get user location: "+  ex.Data);
+            }
+            finally
+            {
+                //Navigate to the next page
+                await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage());
+            }
+
         }
         private async void DeliveryPage()
         {

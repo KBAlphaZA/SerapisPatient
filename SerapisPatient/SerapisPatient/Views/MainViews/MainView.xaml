@@ -4,7 +4,9 @@
              x:Class="SerapisPatient.Views.MainViews.MainView"
              xmlns:control="clr-namespace:SerapisPatient.Controls"
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
-             Icon="menu.png">
+             Icon="menu.png"
+             Title="{Binding Title}"
+             >
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
     </ContentPage.ToolbarItems>
