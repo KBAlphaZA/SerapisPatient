@@ -66,6 +66,14 @@ namespace SerapisPatient.Services.LocationServices
 
             location.PositionChanged += PositionChanged;
 
+
+            location.PositionError += PositionError;
+        }
+
+        //Event handler method for errors getting location while updating
+        private void PositionError(object sender, PositionErrorEventArgs e)
+        {
+            Debug.WriteLine(e.Error);
         }
 
         //Event handler method for updating the users location
