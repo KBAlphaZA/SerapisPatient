@@ -56,6 +56,23 @@ namespace SerapisPatient.Services.LocationServices
             return userPostion;
         }
 
+        public async Task TrackUserLocation()
+        {
+            var location = CrossGeolocator.Current;
+
+            location.DesiredAccuracy = GpsAccurecy;
+
+            await location.StartListeningAsync(TimeSpan.FromSeconds(5), 10, true);
+
+            location.PositionChanged += PositionChanged;
+
+        }
+
+        //Event handler method for updating the users location
+        private void PositionChanged(object sender, PositionEventArgs e)
+        {
+            var postion = e.Position;
+        }
 
         public async Task<Position> CacheUserLocation(Position cachedUserLocation)
         {

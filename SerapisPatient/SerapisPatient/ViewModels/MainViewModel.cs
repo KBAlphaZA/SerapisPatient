@@ -84,6 +84,9 @@ namespace SerapisPatient.ViewModels
         {
             //var Appointment_navigation = new  NavigationPage( new AppointmentPage());
 
+            //Busy status
+            IsBusy = true;
+
             try
             {
                 #region Getting user location code
@@ -102,6 +105,9 @@ namespace SerapisPatient.ViewModels
             finally
             {
                 //Navigate to the next page
+
+                IsBusy = false;
+
                 await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage());
             }
 
