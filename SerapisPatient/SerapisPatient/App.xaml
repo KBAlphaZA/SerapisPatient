@@ -48,10 +48,9 @@
             <!--Navigation bar colour-->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource SeconderyColour}"/>
-                <Setter Property="BarTextColor" Value="Black"/>
+                <Setter Property="BarTextColor" Value="White"/>
             </Style>
 
-            
             <OnPlatform x:Key="UbuntuRegular"
                         x:TypeArguments="x:String"
                         iOS="Ubuntu-Regular"
@@ -65,6 +64,8 @@
                         Android="Ubuntu-Bold.tff#Ubuntu"
                         WinPhone="/Assets/Fonts/Ubuntu-Bold.tff#Ubuntu"
                         />
+            
+            
             
         </ResourceDictionary>
 	</Application.Resources>
