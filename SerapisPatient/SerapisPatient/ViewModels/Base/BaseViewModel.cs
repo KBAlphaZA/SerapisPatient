@@ -141,6 +141,22 @@ namespace SerapisPatient.ViewModels.Base
             {
                 isBusy = value;
                 OnPropertyChanged("IsBusy");
+                isBusy = value;
+            }
+        }
+
+        private string title;
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged("Title");
+                title = value;
             }
         }
         #endregion

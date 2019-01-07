@@ -1,4 +1,5 @@
-﻿using SerapisPatient.Views;
+﻿using SerapisPatient.ViewModels.Base;
+using SerapisPatient.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,16 +7,21 @@ using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.TabbedPageViewModel
 {
-    public class AppointmentViewModel
+    public class AppointmentViewModel:BaseViewModel
     {
         public Command BookByDate { get; set; }
 
         public Command SerapisBooking { get; set; }
 
+        //Title Of the Page
+        private readonly string _title = "Set Appointment";
+
         public AppointmentViewModel()
         {
             BookByDate = new Command(NavigateToBookByDate);
             SerapisBooking = new Command(NavigateToSerapisBooking);
+
+            Title = _title;
         }
 
 

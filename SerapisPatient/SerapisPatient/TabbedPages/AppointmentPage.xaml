@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             x:Class="SerapisPatient.TabbedPages.AppointmentPage">
+             x:Class="SerapisPatient.TabbedPages.AppointmentPage"
+             Title="{Binding Title}"
+             >
 
     <ContentPage.Resources>
         <Style TargetType="Image" x:Key="ImageSpect">
@@ -15,39 +17,13 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="1"/>
+                <RowDefinition Height="2"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <!--header Title-->
-            <Grid Grid.Row="0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="1"/>
-                    </Grid.RowDefinitions>
-
-                    <Label 
-                    Grid.Row="0"
-                    HorizontalOptions="Center"
-                    Text="Set appointment"
-                    FontSize="22"
-                    TextColor="Black"
-                    />
-
-                    <BoxView 
-                    Color="Black"
-                    Grid.Row="1"
-                    HorizontalOptions="FillAndExpand"
-                    />
-
-                </Grid>
-            </Grid>
-            
             <!--First Block-->
-            <Grid Grid.Row="1" 
+            <Grid Grid.Row="0" 
                   VerticalOptions="Center" 
                   HorizontalOptions="Center"
                   >
@@ -99,7 +75,7 @@
             
             
             <!--Line-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <BoxView 
                     Color="Black"
                     HorizontalOptions="FillAndExpand"
@@ -108,7 +84,7 @@
             </Grid>
             
             <!--Second Block-->
-            <Grid Grid.Row="3" 
+            <Grid Grid.Row="2" 
                   VerticalOptions="Center" 
                   HorizontalOptions="Center">
                 <Grid.RowDefinitions>
