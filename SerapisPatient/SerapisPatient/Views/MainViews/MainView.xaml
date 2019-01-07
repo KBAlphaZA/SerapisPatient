@@ -43,24 +43,19 @@
         <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="2" />
 
         <!--Row 3-->
-
-        <Frame  Grid.Row="3"  Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="25" >
-            <Frame.GestureRecognizers>
+        <BoxView x:Name="appointmentframe" Grid.Row="3" Grid.ColumnSpan="2"  Grid.Column="1" BackgroundColor="Gray" CornerRadius="60,0,60,0" >
+            <BoxView.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToAppointmentPageCommand }">
                 </TapGestureRecognizer>
-            </Frame.GestureRecognizers>
-            <Frame.Triggers>
-                <EventTrigger Event="NavigateToAppointmentPageCommand ">
-                    <triggers:ExpandFrameTriggerAction/>
-                </EventTrigger>
-            </Frame.Triggers>
-            <Label TextColor="White" Text="Make An Appointment" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
-        </Frame>
+            </BoxView.GestureRecognizers>
 
+        </BoxView>
+        <Label TextColor="White" Text="Make An Appointment" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" />
+        <Image Grid.Column="1" Grid.Row="3" Source="AppointmentIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+        
 
         <!--Row 4-->
-
         <Frame x:Name="appointmentframe1" Grid.Row="4" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
