@@ -19,13 +19,13 @@
             <RowDefinition Height="35"/>
             <!--Row 2-->
 
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <!--Row 3-->
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <!--Row 4-->
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <!--Row 5-->
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <!--Row 6-->
             <RowDefinition Height="*"/>
             <!--Row 7-->
@@ -33,19 +33,20 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="7.5*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <!--Row 0-->
 
 
         <!-- FIRST TWO LABELS-->
-        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="1"/>
+        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1"/>
 
-        <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="2" />
+        <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" />
 
         <!--Row 3-->
-        <BoxView x:Name="appointmentframe" Grid.Row="3" Grid.ColumnSpan="2"  Grid.Column="1" BackgroundColor="Gray" CornerRadius="60,0,60,0" >
+        <BoxView x:Name="appointmentframe" HeightRequest="60" Grid.Row="3" Grid.ColumnSpan="4"  Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="60,0,60,0" >
             <BoxView.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToAppointmentPageCommand }">
@@ -58,30 +59,34 @@
         
 
         <!--Row 4-->
-        <Frame x:Name="appointmentframe1" Grid.Row="4" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25">
-            <Frame.GestureRecognizers>
+        <BoxView x:Name="appointmentframe1" HeightRequest="60" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0">
+            <BoxView.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToDeliveryPageCommand}" >
                 </TapGestureRecognizer>
-            </Frame.GestureRecognizers>
-            <Label TextColor="White" Text="Order Your Medication" FontAttributes="Bold" Grid.Row="4" Grid.Column="1" />
-        </Frame>
+            </BoxView.GestureRecognizers>
+
+        </BoxView>
+        <Label TextColor="White" Text="Order Your Medication" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="4" Grid.Column="2" />
+        <Image Grid.Column="1" Grid.Row="4" Source="DeliveryIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
 
         <!--Row 5-->
 
-        <Frame x:Name="appointmentframe2" Grid.Row="5" Grid.Column="1" BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="25" >
-            
-            <Frame.GestureRecognizers>
+        <BoxView x:Name="appointmentframe2" HeightRequest="60" Grid.Row="5" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0" >
+
+
+            <BoxView.GestureRecognizers>
                 <TapGestureRecognizer
                     Command="{Binding NavigateToCameraPageCommand}">
                 </TapGestureRecognizer>
-            </Frame.GestureRecognizers>
-            <Label TextColor="White" Text="Scan QR Code" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" />
-        </Frame>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+        <Label TextColor="White" Text="Scan Delivery Code" Grid.ColumnSpan="2" FontAttributes="Bold" Grid.Row="5" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+        <Image Grid.Column="1" Grid.Row="5" Source="QrCodeIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
 
         <!--Row 6-->
 
-        <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="6"/>
+        <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="6"/>
 
         <!--Row 7-->
 
@@ -90,7 +95,7 @@
                                     SelectedItem="{Binding SelectedCard}"
                                     ItemHeightRequest="140"
                                     ItemWidthRequest="230"
-                                     Grid.Column="1" Grid.Row="7">
+                                     Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7">
             <control:HorizontalListView.ItemTemplate>
                 <DataTemplate>
                     <ContentView Padding="5">

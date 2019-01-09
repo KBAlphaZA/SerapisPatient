@@ -2,11 +2,100 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.DeliveryFolder.MedicationCart">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="300" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Medication Cart" TextColor="Black" FontAttributes="Bold" FontSize="20" />
+
+            <ListView ItemsSource="{Binding Basket}"
+                  SeparatorVisibility="Default"
+                  CachingStrategy="RecycleElement"
+                  HeightRequest="16"
+                  HasUnevenRows="True"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView Padding="5">
+                                <Frame OutlineColor="Black" Padding="12" CornerRadius="10"  VerticalOptions="StartAndExpand" >
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="7*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Grid.Column="0">
+                                            <Image  Source="MyMedication.png" HeightRequest="40" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
+                                        </StackLayout>
+
+                                        <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                            <Grid RowSpacing="10">
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="6*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                </Grid.ColumnDefinitions>
+                                            </Grid>
+
+                                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding name}" FontSize="16" VerticalOptions="StartAndExpand" TextColor="Black"/>
+
+                                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding price,StringFormat='R{0:N}'}}" FontSize="14" VerticalOptions="CenterAndExpand" TextColor="Green"/>
+
+
+                                        </StackLayout>
+
+                                    </Grid>
+                                </Frame>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <Label Grid.Column="1"
+                  Grid.ColumnSpan="2"  Grid.Row="2" Text="Medication SubTotal" TextColor="Black" />
+
+            <Label Grid.Row="2" Grid.Column="2"
+                   TextColor="Black" Text="R150" HorizontalOptions="StartAndExpand" />
+
+            <Label Grid.Column="1"
+                  Grid.ColumnSpan="2"  Grid.Row="3" Text="Delivery Fee" TextColor="Black" />
+
+            <Label Grid.Column="2"
+                    Grid.Row="3"  Text="R20" TextColor="Black" HorizontalOptions="StartAndExpand" />
+
+            <Label Grid.Column="1"
+                  Grid.ColumnSpan="2"  Grid.Row="4" FontSize="20" FontAttributes="Bold" Text="Cart Total" TextColor="Black" />
+
+            <Label Grid.Column="2"
+                    Grid.Row="4" FontSize="20" FontAttributes="Bold" Text="R170" TextColor="Green" HorizontalOptions="StartAndExpand"  />
+
+
+            <Button  Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10" BackgroundColor="LightGray" Text="Proceed" TextColor="White" Grid.Row="7" />
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -10,10 +10,10 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="320"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
 
         </Grid.RowDefinitions>
@@ -29,7 +29,7 @@
 
         <!--Row 1-->
         <Image  Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
-        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" TextColor="Black" FontSize="30" FontAttributes="Bold" />
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="30" FontAttributes="Bold" />
 
         <!--Row 2-->
 

@@ -67,10 +67,25 @@ namespace SerapisPatient.ViewModels
         }
         private async Task HandleAuth()
         {
-            App.CheckLogin = true;
-            App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
-            await App.Current.MainPage.Navigation.PopAsync();
+            IsBusy = true;
+            try
+            {
+                Task.Delay(3000);
+                //App.CheckLogin = true;
+                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
+                await App.Current.MainPage.Navigation.PopAsync();
 
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+          
         }
 
         private void RestPassword()
