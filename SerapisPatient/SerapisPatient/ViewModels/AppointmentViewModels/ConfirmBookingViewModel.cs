@@ -20,7 +20,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
     {
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
-        public bool BookingSuccess = true;
+        public bool BookingSuccess = false;
         public string DateSelected = " ";
 
         private string doctorLastName;
@@ -62,33 +62,29 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             PracticeName = _medicalBuildingModel.PracticeName;
             //string var = MonthsSelectedIndex.ToString();
             //DateSelected = var + SelectedDay.MonthValue
-            ConfrimData();
+           
             LastName = enquiredDoctor.LastName;
             NavigateToHomePageCommand = new Command(ConfirmBooking);    
         }
 
         #region Navigation Tasks
 
-       private void ConfrimData()
-        {
-            MessagingCenter.Subscribe<SelectBookingViewModel, SelectedMonths>(this, "ItemSelected", (obj, item) =>
-            {
-                  // DateSelected = item.MonthValue.ToString();
-            }); 
-            
-
-            
-        }
+      
         private async void ConfirmBooking()
         {
             // await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, Problem has been occurred while submitting your data."));
             //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "Warning!, There was a problem with your Network Connection"));
             //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("N", "Note!, Please read the comments carefully."));
-            if(BookingSuccess !=true)
+            await MakeBookingAsync();
+            //if the booking fails dont navigate anywhere just notify the user that there was an error
+
+            if (BookingSuccess !=true)
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, Problem has been occurred while submitting your data."));
+
             else
             {
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully completed your booking"));
+                
                 await Task.Delay(100);
                 await App.Current.MainPage.Navigation.PopToRootAsync();
             }
@@ -113,6 +109,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             }
             finally
             {
+                BookingSuccess = true;
                 IsBusy = false;
             }
         }
