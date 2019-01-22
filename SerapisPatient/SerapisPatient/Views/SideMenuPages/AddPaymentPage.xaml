@@ -2,11 +2,57 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.SideMenuPages.AddPaymentPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="190" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+
+        <Frame HeightRequest="120" Grid.Column="1" Grid.Row="1" HasShadow="True" BackgroundColor="Black" CornerRadius="20">
+            <Grid ColumnSpacing="3">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Visa" FontSize="28" TextColor="White" Grid.Row="0" FontAttributes="Bold" />
+                <Label Text="Privite Client" FontSize="12" TextColor="White" Grid.Row="0"  Grid.Column="3" FontAttributes="Italic" />
+
+                <Label Grid.Row="2" Grid.Column="0" FontSize="16"  Text="XXXX" TextColor="White" />
+                <Label Grid.Row="2" Grid.Column="1" FontSize="16" Text="XXXX" TextColor="White" />
+                <Label Grid.Row="2" Grid.Column="2" FontSize="16" Text="XXXX" TextColor="White" />
+                <Label Grid.Row="2" Grid.Column="3" FontSize="16" Text="9899" TextColor="White" />
+
+                <Label Grid.Row="3" Text="Card Holder" TextColor="White" />
+                <Label Grid.Row="3" Grid.Column="3" Text="Expires" TextColor="White" />
+                <Label Grid.Row="4" Text="B Ngcobo" TextColor="White" />
+                <Label Grid.Row="4" Grid.Column="3" Text="07/21" TextColor="White" />
+
+            </Grid>
+        </Frame>
+
+        <Button Text="Use This Card" Grid.Row="3" Grid.Column="1" FontAttributes="Bold" CornerRadius="20" FontSize="Large" TextColor="White" BackgroundColor="Gray" />
+        <Button Text="Edit Card" Grid.Row="4" Grid.Column="1" FontAttributes="Bold" CornerRadius="20" FontSize="Large" TextColor="White" BackgroundColor="Gray" />
+        <Button Text="Remove Card" Grid.Row="5" Grid.Column="1" FontAttributes="Bold" CornerRadius="20" FontSize="Large" TextColor="White" BackgroundColor="Gray" />
+    </Grid>
 </ContentPage>

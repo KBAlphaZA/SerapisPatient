@@ -10,10 +10,10 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="320"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
 
         </Grid.RowDefinitions>
@@ -42,10 +42,12 @@
 
         <control:TLScrollView Orientation="Horizontal"
                          ItemsSource="{Binding Practices}"
-                              ItemSelected="TLScrollView_ItemSelected"
+                         ItemSelected="TLScrollView_ItemSelected"
                          SelectedCommand="{Binding [ItemSelected]}"
                          HeightRequest="240"
-                                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                         Grid.Row="3"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3">
 
             <control:TLScrollView.ItemTemplate>
                     <DataTemplate>
