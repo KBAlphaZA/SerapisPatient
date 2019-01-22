@@ -8,6 +8,7 @@ namespace SerapisPatient.Models.Doctor
     {
         pill,
         syrip,
-        bandage
+        bandage,
+        ointment
     }
 }
