@@ -3,67 +3,123 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.TabbedPages.ProfilePage">
 
+    <ScrollView>
+        <Grid RowSpacing="5" ColumnSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <!--Row 0-->
+                <RowDefinition Height="auto" />
+                <!--Row 1-->
+                <RowDefinition Height="auto" />
+                <!--Row 2-->
+                <RowDefinition Height="auto" />
+                <!--Row 3-->
+                <RowDefinition Height="auto" />
+                <!--Row 4-->
+                <RowDefinition Height="auto" />
+                <!--Row 5-->
+                <RowDefinition Height="auto" />
+                <!--Row 6-->
+                <RowDefinition Height="*" />
+                <!--Row 7-->
+            </Grid.RowDefinitions>
 
-    <ContentPage.Content>
-        <ListView ItemsSource="{Binding PatientCondtions}"
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="2.5*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" Source="userplaceholder.png" HeightRequest="60"  />
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="20"  TextColor="Black" Text="Khanyisani Buthelezi" />
+            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"  TextColor="Gray" FontSize="14" Text="Main Memeber" />
+
+            <Frame Grid.Row="3" Grid.Column="1" HeightRequest="20" CornerRadius="25" OutlineColor="Black" BackgroundColor="Gray">
+                <Label Text="Andiswa" FontSize="10" TextColor="Black" />
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="2" HeightRequest="20" CornerRadius="25" OutlineColor="Black" BackgroundColor="Gray">
+                <Label Text="Andiswa" FontSize="10" TextColor="Black" />
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="3" HeightRequest="20" CornerRadius="25" OutlineColor="Black" BackgroundColor="Gray">
+                <Label Text="Andiswa" FontSize="10" TextColor="Black" />
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="0" HeightRequest="20" CornerRadius="25" OutlineColor="Black" BackgroundColor="Gray">
+                <Label Text="Andiswa" FontSize="10" TextColor="Black" />
+            </Frame>
+
+            <!--Healt levels-->
+            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Text="Health Levels :" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+
+            <Frame Grid.Row="5" OutlineColor="Black" CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" />
+
+            <Frame Grid.Row="5" OutlineColor="Black" CornerRadius="20" Grid.Column="2" Grid.ColumnSpan="2"  />
+
+
+            <BoxView Grid.Row="6" Grid.Column="0" HeightRequest="40" Grid.ColumnSpan="4" BackgroundColor="Pink" />
+
+            <ListView ItemsSource="{Binding PatientCondtions}"
                   SeparatorColor="Black"
                   SeparatorVisibility="Default"
                   VerticalOptions="Fill"
                   HasUnevenRows="True"
+                   Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"
                   >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="5*"/>
-                                <RowDefinition Height="5*"/>
-                            </Grid.RowDefinitions>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="5*"/>
-                            </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Grid Grid.RowSpan="1" Grid.Column="0" VerticalOptions="Center">
-                                <Image 
+                                <Grid Grid.RowSpan="1" Grid.Column="0" VerticalOptions="Center">
+                                    <Image 
                                         Source="{Binding Icon}" 
                                         VerticalOptions="Center" 
                                         HorizontalOptions="Center" 
                                         Aspect="AspectFit"
                                         />
-                            </Grid>
+                                </Grid>
 
 
-                            <Grid Grid.Column="1" Grid.Row="0" VerticalOptions="Center">
-                                <Label 
+                                <Grid Grid.Column="1" Grid.Row="0" VerticalOptions="Center">
+                                    <Label 
                                           VerticalOptions="Center" 
                                           HorizontalOptions="Center" 
                                           Text="{Binding SubTitle}" 
                                           />
-                            </Grid>
+                                </Grid>
 
 
-                            <Grid Grid.Column="1" Grid.Row="1" VerticalOptions="Center">
-                                <Label
+                                <Grid Grid.Column="1" Grid.Row="1" VerticalOptions="Center">
+                                    <Label
                                           VerticalOptions="Center" 
                                           HorizontalOptions="Center" 
                                           Text="{Binding Title}" 
                                           />
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-            <ListView.Footer>
-                <Image Source="MoreIcon.png" HorizontalOptions="Center">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding LoadMoreIcons}"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </ListView.Footer>
-            
-        </ListView>
-    </ContentPage.Content>
+                <ListView.Footer>
+                    <Image Source="MoreIcon.png" HorizontalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoadMoreIcons}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </ListView.Footer>
+
+            </ListView>
+        </Grid>
+
+    </ScrollView>
 </ContentPage>

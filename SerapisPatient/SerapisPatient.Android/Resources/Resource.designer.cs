@@ -30,13 +30,131 @@ namespace SerapisPatient.Droid
 			global::PCLCrypto.Resource.String.Hello = global::SerapisPatient.Droid.Resource.String.Hello;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::SerapisPatient.Droid.Resource.Animation.slide_in_right;
 			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::SerapisPatient.Droid.Resource.Animation.slide_out_left;
+			global::Xamarin.Auth.Resource.Attribute.font = global::SerapisPatient.Droid.Resource.Attribute.font;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderAuthority = global::SerapisPatient.Droid.Resource.Attribute.fontProviderAuthority;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderCerts = global::SerapisPatient.Droid.Resource.Attribute.fontProviderCerts;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderFetchStrategy = global::SerapisPatient.Droid.Resource.Attribute.fontProviderFetchStrategy;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderFetchTimeout = global::SerapisPatient.Droid.Resource.Attribute.fontProviderFetchTimeout;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderPackage = global::SerapisPatient.Droid.Resource.Attribute.fontProviderPackage;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderQuery = global::SerapisPatient.Droid.Resource.Attribute.fontProviderQuery;
+			global::Xamarin.Auth.Resource.Attribute.fontStyle = global::SerapisPatient.Droid.Resource.Attribute.fontStyle;
+			global::Xamarin.Auth.Resource.Attribute.fontWeight = global::SerapisPatient.Droid.Resource.Attribute.fontWeight;
+			global::Xamarin.Auth.Resource.Boolean.abc_action_bar_embed_tabs = global::SerapisPatient.Droid.Resource.Boolean.abc_action_bar_embed_tabs;
+			global::Xamarin.Auth.Resource.Color.notification_action_color_filter = global::SerapisPatient.Droid.Resource.Color.notification_action_color_filter;
+			global::Xamarin.Auth.Resource.Color.notification_icon_bg_color = global::SerapisPatient.Droid.Resource.Color.notification_icon_bg_color;
+			global::Xamarin.Auth.Resource.Color.notification_material_background_media_default_color = global::SerapisPatient.Droid.Resource.Color.notification_material_background_media_default_color;
+			global::Xamarin.Auth.Resource.Color.primary_text_default_material_dark = global::SerapisPatient.Droid.Resource.Color.primary_text_default_material_dark;
+			global::Xamarin.Auth.Resource.Color.ripple_material_light = global::SerapisPatient.Droid.Resource.Color.ripple_material_light;
+			global::Xamarin.Auth.Resource.Color.secondary_text_default_material_dark = global::SerapisPatient.Droid.Resource.Color.secondary_text_default_material_dark;
+			global::Xamarin.Auth.Resource.Color.secondary_text_default_material_light = global::SerapisPatient.Droid.Resource.Color.secondary_text_default_material_light;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_inset_horizontal_material = global::SerapisPatient.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_inset_vertical_material = global::SerapisPatient.Droid.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_padding_horizontal_material = global::SerapisPatient.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_padding_vertical_material = global::SerapisPatient.Droid.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_control_corner_material = global::SerapisPatient.Droid.Resource.Dimension.compat_control_corner_material;
+			global::Xamarin.Auth.Resource.Dimension.notification_action_icon_size = global::SerapisPatient.Droid.Resource.Dimension.notification_action_icon_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_action_text_size = global::SerapisPatient.Droid.Resource.Dimension.notification_action_text_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_big_circle_margin = global::SerapisPatient.Droid.Resource.Dimension.notification_big_circle_margin;
+			global::Xamarin.Auth.Resource.Dimension.notification_content_margin_start = global::SerapisPatient.Droid.Resource.Dimension.notification_content_margin_start;
+			global::Xamarin.Auth.Resource.Dimension.notification_large_icon_height = global::SerapisPatient.Droid.Resource.Dimension.notification_large_icon_height;
+			global::Xamarin.Auth.Resource.Dimension.notification_large_icon_width = global::SerapisPatient.Droid.Resource.Dimension.notification_large_icon_width;
+			global::Xamarin.Auth.Resource.Dimension.notification_main_column_padding_top = global::SerapisPatient.Droid.Resource.Dimension.notification_main_column_padding_top;
+			global::Xamarin.Auth.Resource.Dimension.notification_media_narrow_margin = global::SerapisPatient.Droid.Resource.Dimension.notification_media_narrow_margin;
+			global::Xamarin.Auth.Resource.Dimension.notification_right_icon_size = global::SerapisPatient.Droid.Resource.Dimension.notification_right_icon_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_right_side_padding_top = global::SerapisPatient.Droid.Resource.Dimension.notification_right_side_padding_top;
+			global::Xamarin.Auth.Resource.Dimension.notification_small_icon_background_padding = global::SerapisPatient.Droid.Resource.Dimension.notification_small_icon_background_padding;
+			global::Xamarin.Auth.Resource.Dimension.notification_small_icon_size_as_large = global::SerapisPatient.Droid.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Xamarin.Auth.Resource.Dimension.notification_subtext_size = global::SerapisPatient.Droid.Resource.Dimension.notification_subtext_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_top_pad = global::SerapisPatient.Droid.Resource.Dimension.notification_top_pad;
+			global::Xamarin.Auth.Resource.Dimension.notification_top_pad_large_text = global::SerapisPatient.Droid.Resource.Dimension.notification_top_pad_large_text;
 			global::Xamarin.Auth.Resource.Drawable.ic_arrow_back = global::SerapisPatient.Droid.Resource.Drawable.ic_arrow_back;
+			global::Xamarin.Auth.Resource.Drawable.notification_action_background = global::SerapisPatient.Droid.Resource.Drawable.notification_action_background;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg = global::SerapisPatient.Droid.Resource.Drawable.notification_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low = global::SerapisPatient.Droid.Resource.Drawable.notification_bg_low;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low_normal = global::SerapisPatient.Droid.Resource.Drawable.notification_bg_low_normal;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low_pressed = global::SerapisPatient.Droid.Resource.Drawable.notification_bg_low_pressed;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_normal = global::SerapisPatient.Droid.Resource.Drawable.notification_bg_normal;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_normal_pressed = global::SerapisPatient.Droid.Resource.Drawable.notification_bg_normal_pressed;
+			global::Xamarin.Auth.Resource.Drawable.notification_icon_background = global::SerapisPatient.Droid.Resource.Drawable.notification_icon_background;
+			global::Xamarin.Auth.Resource.Drawable.notification_template_icon_bg = global::SerapisPatient.Droid.Resource.Drawable.notification_template_icon_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_template_icon_low_bg = global::SerapisPatient.Droid.Resource.Drawable.notification_template_icon_low_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_tile_bg = global::SerapisPatient.Droid.Resource.Drawable.notification_tile_bg;
+			global::Xamarin.Auth.Resource.Drawable.notify_panel_notification_icon_bg = global::SerapisPatient.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Xamarin.Auth.Resource.Id.action0 = global::SerapisPatient.Droid.Resource.Id.action0;
+			global::Xamarin.Auth.Resource.Id.action_container = global::SerapisPatient.Droid.Resource.Id.action_container;
+			global::Xamarin.Auth.Resource.Id.action_divider = global::SerapisPatient.Droid.Resource.Id.action_divider;
+			global::Xamarin.Auth.Resource.Id.action_image = global::SerapisPatient.Droid.Resource.Id.action_image;
+			global::Xamarin.Auth.Resource.Id.action_text = global::SerapisPatient.Droid.Resource.Id.action_text;
+			global::Xamarin.Auth.Resource.Id.actions = global::SerapisPatient.Droid.Resource.Id.actions;
+			global::Xamarin.Auth.Resource.Id.async = global::SerapisPatient.Droid.Resource.Id.async;
+			global::Xamarin.Auth.Resource.Id.blocking = global::SerapisPatient.Droid.Resource.Id.blocking;
+			global::Xamarin.Auth.Resource.Id.cancel_action = global::SerapisPatient.Droid.Resource.Id.cancel_action;
+			global::Xamarin.Auth.Resource.Id.chronometer = global::SerapisPatient.Droid.Resource.Id.chronometer;
+			global::Xamarin.Auth.Resource.Id.end_padder = global::SerapisPatient.Droid.Resource.Id.end_padder;
+			global::Xamarin.Auth.Resource.Id.forever = global::SerapisPatient.Droid.Resource.Id.forever;
+			global::Xamarin.Auth.Resource.Id.icon = global::SerapisPatient.Droid.Resource.Id.icon;
+			global::Xamarin.Auth.Resource.Id.icon_group = global::SerapisPatient.Droid.Resource.Id.icon_group;
+			global::Xamarin.Auth.Resource.Id.info = global::SerapisPatient.Droid.Resource.Id.info;
+			global::Xamarin.Auth.Resource.Id.italic = global::SerapisPatient.Droid.Resource.Id.italic;
+			global::Xamarin.Auth.Resource.Id.line1 = global::SerapisPatient.Droid.Resource.Id.line1;
+			global::Xamarin.Auth.Resource.Id.line3 = global::SerapisPatient.Droid.Resource.Id.line3;
+			global::Xamarin.Auth.Resource.Id.media_actions = global::SerapisPatient.Droid.Resource.Id.media_actions;
+			global::Xamarin.Auth.Resource.Id.normal = global::SerapisPatient.Droid.Resource.Id.normal;
+			global::Xamarin.Auth.Resource.Id.notification_background = global::SerapisPatient.Droid.Resource.Id.notification_background;
+			global::Xamarin.Auth.Resource.Id.notification_main_column = global::SerapisPatient.Droid.Resource.Id.notification_main_column;
+			global::Xamarin.Auth.Resource.Id.notification_main_column_container = global::SerapisPatient.Droid.Resource.Id.notification_main_column_container;
+			global::Xamarin.Auth.Resource.Id.right_icon = global::SerapisPatient.Droid.Resource.Id.right_icon;
+			global::Xamarin.Auth.Resource.Id.right_side = global::SerapisPatient.Droid.Resource.Id.right_side;
+			global::Xamarin.Auth.Resource.Id.status_bar_latest_event_content = global::SerapisPatient.Droid.Resource.Id.status_bar_latest_event_content;
+			global::Xamarin.Auth.Resource.Id.text = global::SerapisPatient.Droid.Resource.Id.text;
+			global::Xamarin.Auth.Resource.Id.text2 = global::SerapisPatient.Droid.Resource.Id.text2;
+			global::Xamarin.Auth.Resource.Id.time = global::SerapisPatient.Droid.Resource.Id.time;
+			global::Xamarin.Auth.Resource.Id.title = global::SerapisPatient.Droid.Resource.Id.title;
 			global::Xamarin.Auth.Resource.Id.webview = global::SerapisPatient.Droid.Resource.Id.webview;
+			global::Xamarin.Auth.Resource.Integer.cancel_button_image_alpha = global::SerapisPatient.Droid.Resource.Integer.cancel_button_image_alpha;
+			global::Xamarin.Auth.Resource.Integer.status_bar_notification_info_maxnum = global::SerapisPatient.Droid.Resource.Integer.status_bar_notification_info_maxnum;
 			global::Xamarin.Auth.Resource.Layout.activity_webview = global::SerapisPatient.Droid.Resource.Layout.activity_webview;
-			global::Xamarin.Auth.Resource.String.ApplicationName = global::SerapisPatient.Droid.Resource.String.ApplicationName;
-			global::Xamarin.Auth.Resource.String.Hello = global::SerapisPatient.Droid.Resource.String.Hello;
+			global::Xamarin.Auth.Resource.Layout.notification_action = global::SerapisPatient.Droid.Resource.Layout.notification_action;
+			global::Xamarin.Auth.Resource.Layout.notification_action_tombstone = global::SerapisPatient.Droid.Resource.Layout.notification_action_tombstone;
+			global::Xamarin.Auth.Resource.Layout.notification_media_action = global::SerapisPatient.Droid.Resource.Layout.notification_media_action;
+			global::Xamarin.Auth.Resource.Layout.notification_media_cancel_action = global::SerapisPatient.Droid.Resource.Layout.notification_media_cancel_action;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media = global::SerapisPatient.Droid.Resource.Layout.notification_template_big_media;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media_custom = global::SerapisPatient.Droid.Resource.Layout.notification_template_big_media_custom;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media_narrow = global::SerapisPatient.Droid.Resource.Layout.notification_template_big_media_narrow;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media_narrow_custom = global::SerapisPatient.Droid.Resource.Layout.notification_template_big_media_narrow_custom;
+			global::Xamarin.Auth.Resource.Layout.notification_template_custom_big = global::SerapisPatient.Droid.Resource.Layout.notification_template_custom_big;
+			global::Xamarin.Auth.Resource.Layout.notification_template_icon_group = global::SerapisPatient.Droid.Resource.Layout.notification_template_icon_group;
+			global::Xamarin.Auth.Resource.Layout.notification_template_lines_media = global::SerapisPatient.Droid.Resource.Layout.notification_template_lines_media;
+			global::Xamarin.Auth.Resource.Layout.notification_template_media = global::SerapisPatient.Droid.Resource.Layout.notification_template_media;
+			global::Xamarin.Auth.Resource.Layout.notification_template_media_custom = global::SerapisPatient.Droid.Resource.Layout.notification_template_media_custom;
+			global::Xamarin.Auth.Resource.Layout.notification_template_part_chronometer = global::SerapisPatient.Droid.Resource.Layout.notification_template_part_chronometer;
+			global::Xamarin.Auth.Resource.Layout.notification_template_part_time = global::SerapisPatient.Droid.Resource.Layout.notification_template_part_time;
 			global::Xamarin.Auth.Resource.String.library_name = global::SerapisPatient.Droid.Resource.String.library_name;
+			global::Xamarin.Auth.Resource.String.status_bar_notification_info_overflow = global::SerapisPatient.Droid.Resource.String.status_bar_notification_info_overflow;
 			global::Xamarin.Auth.Resource.String.title_activity_webview = global::SerapisPatient.Droid.Resource.String.title_activity_webview;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Info = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Info_Media = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Info_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Line2_Media = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Media = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Time = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Time_Media = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Time_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Title = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Title_Media = global::SerapisPatient.Droid.Resource.Style.TextAppearance_Compat_Notification_Title_Media;
+			global::Xamarin.Auth.Resource.Style.Widget_Compat_NotificationActionContainer = global::SerapisPatient.Droid.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Xamarin.Auth.Resource.Style.Widget_Compat_NotificationActionText = global::SerapisPatient.Droid.Resource.Style.Widget_Compat_NotificationActionText;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily = global::SerapisPatient.Droid.Resource.Styleable.FontFamily;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderAuthority = global::SerapisPatient.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderCerts = global::SerapisPatient.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::SerapisPatient.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::SerapisPatient.Droid.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderPackage = global::SerapisPatient.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderQuery = global::SerapisPatient.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont = global::SerapisPatient.Droid.Resource.Styleable.FontFamilyFont;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_font = global::SerapisPatient.Droid.Resource.Styleable.FontFamilyFont_font;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontStyle = global::SerapisPatient.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontWeight = global::SerapisPatient.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::SerapisPatient.Droid.Resource.Attribute.actionBarSize;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscanneractivitylayout = global::SerapisPatient.Droid.Resource.Layout.zxingscanneractivitylayout;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscannerfragmentlayout = global::SerapisPatient.Droid.Resource.Layout.zxingscannerfragmentlayout;
@@ -2416,26 +2534,26 @@ namespace SerapisPatient.Droid
 			// aapt resource value: 0x7f020057
 			public const int avd_hide_password = 2130837591;
 			
-			// aapt resource value: 0x7f020185
-			public const int avd_hide_password_1 = 2130837893;
-			
-			// aapt resource value: 0x7f020186
-			public const int avd_hide_password_2 = 2130837894;
-			
 			// aapt resource value: 0x7f020187
-			public const int avd_hide_password_3 = 2130837895;
+			public const int avd_hide_password_1 = 2130837895;
+			
+			// aapt resource value: 0x7f020188
+			public const int avd_hide_password_2 = 2130837896;
+			
+			// aapt resource value: 0x7f020189
+			public const int avd_hide_password_3 = 2130837897;
 			
 			// aapt resource value: 0x7f020058
 			public const int avd_show_password = 2130837592;
 			
-			// aapt resource value: 0x7f020188
-			public const int avd_show_password_1 = 2130837896;
-			
-			// aapt resource value: 0x7f020189
-			public const int avd_show_password_2 = 2130837897;
-			
 			// aapt resource value: 0x7f02018a
-			public const int avd_show_password_3 = 2130837898;
+			public const int avd_show_password_1 = 2130837898;
+			
+			// aapt resource value: 0x7f02018b
+			public const int avd_show_password_2 = 2130837899;
+			
+			// aapt resource value: 0x7f02018c
+			public const int avd_show_password_3 = 2130837900;
 			
 			// aapt resource value: 0x7f020059
 			public const int BabyIcon = 2130837593;
@@ -3077,265 +3195,271 @@ namespace SerapisPatient.Droid
 			public const int ic_vol_type_tv_light = 2130837805;
 			
 			// aapt resource value: 0x7f02012e
-			public const int LogOutIcon = 2130837806;
+			public const int Location = 2130837806;
 			
 			// aapt resource value: 0x7f02012f
-			public const int mastercardIcon = 2130837807;
+			public const int LogOutIcon = 2130837807;
 			
 			// aapt resource value: 0x7f020130
-			public const int medication = 2130837808;
+			public const int mastercardIcon = 2130837808;
 			
 			// aapt resource value: 0x7f020131
-			public const int MedicationHistoryIcon = 2130837809;
+			public const int medication = 2130837809;
 			
 			// aapt resource value: 0x7f020132
-			public const int MedicrossPinetown = 2130837810;
+			public const int MedicationHistoryIcon = 2130837810;
 			
 			// aapt resource value: 0x7f020133
-			public const int menu = 2130837811;
+			public const int MedicrossPinetown = 2130837811;
 			
 			// aapt resource value: 0x7f020134
-			public const int MicrosoftSignIn = 2130837812;
+			public const int menu = 2130837812;
 			
 			// aapt resource value: 0x7f020135
-			public const int MoreIcon = 2130837813;
+			public const int MicrosoftSignIn = 2130837813;
 			
 			// aapt resource value: 0x7f020136
-			public const int MoreInfo = 2130837814;
+			public const int MoreIcon = 2130837814;
 			
 			// aapt resource value: 0x7f020137
-			public const int mr_button_connected_dark = 2130837815;
+			public const int MoreInfo = 2130837815;
 			
 			// aapt resource value: 0x7f020138
-			public const int mr_button_connected_light = 2130837816;
+			public const int mr_button_connected_dark = 2130837816;
 			
 			// aapt resource value: 0x7f020139
-			public const int mr_button_connecting_dark = 2130837817;
+			public const int mr_button_connected_light = 2130837817;
 			
 			// aapt resource value: 0x7f02013a
-			public const int mr_button_connecting_light = 2130837818;
+			public const int mr_button_connecting_dark = 2130837818;
 			
 			// aapt resource value: 0x7f02013b
-			public const int mr_button_dark = 2130837819;
+			public const int mr_button_connecting_light = 2130837819;
 			
 			// aapt resource value: 0x7f02013c
-			public const int mr_button_light = 2130837820;
+			public const int mr_button_dark = 2130837820;
 			
 			// aapt resource value: 0x7f02013d
-			public const int mr_dialog_close_dark = 2130837821;
+			public const int mr_button_light = 2130837821;
 			
 			// aapt resource value: 0x7f02013e
-			public const int mr_dialog_close_light = 2130837822;
+			public const int mr_dialog_close_dark = 2130837822;
 			
 			// aapt resource value: 0x7f02013f
-			public const int mr_dialog_material_background_dark = 2130837823;
+			public const int mr_dialog_close_light = 2130837823;
 			
 			// aapt resource value: 0x7f020140
-			public const int mr_dialog_material_background_light = 2130837824;
+			public const int mr_dialog_material_background_dark = 2130837824;
 			
 			// aapt resource value: 0x7f020141
-			public const int mr_group_collapse = 2130837825;
+			public const int mr_dialog_material_background_light = 2130837825;
 			
 			// aapt resource value: 0x7f020142
-			public const int mr_group_expand = 2130837826;
+			public const int mr_group_collapse = 2130837826;
 			
 			// aapt resource value: 0x7f020143
-			public const int mr_media_pause_dark = 2130837827;
+			public const int mr_group_expand = 2130837827;
 			
 			// aapt resource value: 0x7f020144
-			public const int mr_media_pause_light = 2130837828;
+			public const int mr_media_pause_dark = 2130837828;
 			
 			// aapt resource value: 0x7f020145
-			public const int mr_media_play_dark = 2130837829;
+			public const int mr_media_pause_light = 2130837829;
 			
 			// aapt resource value: 0x7f020146
-			public const int mr_media_play_light = 2130837830;
+			public const int mr_media_play_dark = 2130837830;
 			
 			// aapt resource value: 0x7f020147
-			public const int mr_media_stop_dark = 2130837831;
+			public const int mr_media_play_light = 2130837831;
 			
 			// aapt resource value: 0x7f020148
-			public const int mr_media_stop_light = 2130837832;
+			public const int mr_media_stop_dark = 2130837832;
 			
 			// aapt resource value: 0x7f020149
-			public const int mr_vol_type_audiotrack_dark = 2130837833;
+			public const int mr_media_stop_light = 2130837833;
 			
 			// aapt resource value: 0x7f02014a
-			public const int mr_vol_type_audiotrack_light = 2130837834;
+			public const int mr_vol_type_audiotrack_dark = 2130837834;
 			
 			// aapt resource value: 0x7f02014b
-			public const int MyAge = 2130837835;
+			public const int mr_vol_type_audiotrack_light = 2130837835;
 			
 			// aapt resource value: 0x7f02014c
-			public const int MyAllergies = 2130837836;
+			public const int MyAge = 2130837836;
 			
 			// aapt resource value: 0x7f02014d
-			public const int MyBloodType = 2130837837;
+			public const int MyAllergies = 2130837837;
 			
 			// aapt resource value: 0x7f02014e
-			public const int MyChronicDiseases = 2130837838;
+			public const int MyBloodType = 2130837838;
 			
 			// aapt resource value: 0x7f02014f
-			public const int MyGender = 2130837839;
+			public const int MyChronicDiseases = 2130837839;
 			
 			// aapt resource value: 0x7f020150
-			public const int MyMedicalAid = 2130837840;
+			public const int MyGender = 2130837840;
 			
 			// aapt resource value: 0x7f020151
-			public const int MyMedicalFiles = 2130837841;
+			public const int MyMedicalAid = 2130837841;
 			
 			// aapt resource value: 0x7f020152
-			public const int MyMedication = 2130837842;
+			public const int MyMedicalFiles = 2130837842;
 			
 			// aapt resource value: 0x7f020153
-			public const int navigation_empty_icon = 2130837843;
+			public const int MyMedication = 2130837843;
 			
 			// aapt resource value: 0x7f020154
-			public const int Nero = 2130837844;
+			public const int navigation_empty_icon = 2130837844;
 			
 			// aapt resource value: 0x7f020155
-			public const int NextOfKin = 2130837845;
+			public const int Nero = 2130837845;
 			
 			// aapt resource value: 0x7f020156
-			public const int notification_action_background = 2130837846;
+			public const int NextOfKin = 2130837846;
 			
 			// aapt resource value: 0x7f020157
-			public const int notification_bg = 2130837847;
+			public const int notification_action_background = 2130837847;
 			
 			// aapt resource value: 0x7f020158
-			public const int notification_bg_low = 2130837848;
+			public const int notification_bg = 2130837848;
 			
 			// aapt resource value: 0x7f020159
-			public const int notification_bg_low_normal = 2130837849;
+			public const int notification_bg_low = 2130837849;
 			
 			// aapt resource value: 0x7f02015a
-			public const int notification_bg_low_pressed = 2130837850;
+			public const int notification_bg_low_normal = 2130837850;
 			
 			// aapt resource value: 0x7f02015b
-			public const int notification_bg_normal = 2130837851;
+			public const int notification_bg_low_pressed = 2130837851;
 			
 			// aapt resource value: 0x7f02015c
-			public const int notification_bg_normal_pressed = 2130837852;
+			public const int notification_bg_normal = 2130837852;
 			
 			// aapt resource value: 0x7f02015d
-			public const int notification_icon_background = 2130837853;
-			
-			// aapt resource value: 0x7f020183
-			public const int notification_template_icon_bg = 2130837891;
-			
-			// aapt resource value: 0x7f020184
-			public const int notification_template_icon_low_bg = 2130837892;
+			public const int notification_bg_normal_pressed = 2130837853;
 			
 			// aapt resource value: 0x7f02015e
-			public const int notification_tile_bg = 2130837854;
+			public const int notification_icon_background = 2130837854;
+			
+			// aapt resource value: 0x7f020185
+			public const int notification_template_icon_bg = 2130837893;
+			
+			// aapt resource value: 0x7f020186
+			public const int notification_template_icon_low_bg = 2130837894;
 			
 			// aapt resource value: 0x7f02015f
-			public const int notify_panel_notification_icon_bg = 2130837855;
+			public const int notification_tile_bg = 2130837855;
 			
 			// aapt resource value: 0x7f020160
-			public const int Oncology = 2130837856;
+			public const int notify_panel_notification_icon_bg = 2130837856;
 			
 			// aapt resource value: 0x7f020161
-			public const int OperatingIcon = 2130837857;
+			public const int Oncology = 2130837857;
 			
 			// aapt resource value: 0x7f020162
-			public const int OptomatristIcon = 2130837858;
+			public const int OperatingIcon = 2130837858;
 			
 			// aapt resource value: 0x7f020163
-			public const int OrthopedicIcon = 2130837859;
+			public const int OptomatristIcon = 2130837859;
 			
 			// aapt resource value: 0x7f020164
-			public const int PaymentsIcon = 2130837860;
+			public const int OrthopedicIcon = 2130837860;
 			
 			// aapt resource value: 0x7f020165
-			public const int personIcon = 2130837861;
+			public const int PaymentsIcon = 2130837861;
 			
 			// aapt resource value: 0x7f020166
-			public const int PharmacyIconButton = 2130837862;
+			public const int personIcon = 2130837862;
 			
 			// aapt resource value: 0x7f020167
-			public const int PhysioIcon = 2130837863;
+			public const int PharmacyIconButton = 2130837863;
 			
 			// aapt resource value: 0x7f020168
-			public const int PillIconButton = 2130837864;
+			public const int PhysioIcon = 2130837864;
 			
 			// aapt resource value: 0x7f020169
-			public const int PlasticIcon = 2130837865;
+			public const int PillIconButton = 2130837865;
 			
 			// aapt resource value: 0x7f02016a
-			public const int PopDialogScooterIcon = 2130837866;
+			public const int PlasticIcon = 2130837866;
 			
 			// aapt resource value: 0x7f02016b
-			public const int PracticeNameIcon = 2130837867;
+			public const int PopDialogScooterIcon = 2130837867;
 			
 			// aapt resource value: 0x7f02016c
-			public const int ProfilePictureIcon = 2130837868;
+			public const int PracticeNameIcon = 2130837868;
 			
 			// aapt resource value: 0x7f02016d
-			public const int profilepicturexample = 2130837869;
+			public const int ProfilePictureIcon = 2130837869;
 			
 			// aapt resource value: 0x7f02016e
-			public const int PsychiatristIcon = 2130837870;
+			public const int profilepicturexample = 2130837870;
 			
 			// aapt resource value: 0x7f02016f
-			public const int PulseIcon = 2130837871;
+			public const int PsychiatristIcon = 2130837871;
 			
 			// aapt resource value: 0x7f020170
-			public const int QrCodeIcon = 2130837872;
+			public const int PulseIcon = 2130837872;
 			
 			// aapt resource value: 0x7f020171
-			public const int QueIcon = 2130837873;
+			public const int QrCodeIcon = 2130837873;
 			
 			// aapt resource value: 0x7f020172
-			public const int Radiology = 2130837874;
+			public const int QueIcon = 2130837874;
 			
 			// aapt resource value: 0x7f020173
-			public const int RefreshButtonIcon = 2130837875;
+			public const int Radiology = 2130837875;
 			
 			// aapt resource value: 0x7f020174
-			public const int SelfPrescriptionIcon = 2130837876;
+			public const int RefreshButtonIcon = 2130837876;
 			
 			// aapt resource value: 0x7f020175
-			public const int SerapisBookingIcon = 2130837877;
+			public const int route = 2130837877;
 			
 			// aapt resource value: 0x7f020176
-			public const int SettingsIcon = 2130837878;
+			public const int SelfPrescriptionIcon = 2130837878;
 			
 			// aapt resource value: 0x7f020177
-			public const int SkinIcon = 2130837879;
+			public const int SerapisBookingIcon = 2130837879;
 			
 			// aapt resource value: 0x7f020178
-			public const int SpecilizationIcon = 2130837880;
+			public const int SettingsIcon = 2130837880;
 			
 			// aapt resource value: 0x7f020179
-			public const int SpineIcon = 2130837881;
+			public const int SkinIcon = 2130837881;
 			
 			// aapt resource value: 0x7f02017a
-			public const int tooltip_frame_dark = 2130837882;
+			public const int SpecilizationIcon = 2130837882;
 			
 			// aapt resource value: 0x7f02017b
-			public const int tooltip_frame_light = 2130837883;
+			public const int SpineIcon = 2130837883;
 			
 			// aapt resource value: 0x7f02017c
-			public const int UniversityIcon = 2130837884;
+			public const int tooltip_frame_dark = 2130837884;
 			
 			// aapt resource value: 0x7f02017d
-			public const int UrologyIcon = 2130837885;
+			public const int tooltip_frame_light = 2130837885;
 			
 			// aapt resource value: 0x7f02017e
-			public const int user1 = 2130837886;
+			public const int UniversityIcon = 2130837886;
 			
 			// aapt resource value: 0x7f02017f
-			public const int userDeliveryIcon = 2130837887;
+			public const int UrologyIcon = 2130837887;
 			
 			// aapt resource value: 0x7f020180
-			public const int userplaceholder = 2130837888;
+			public const int user1 = 2130837888;
 			
 			// aapt resource value: 0x7f020181
-			public const int userSettingsIcon = 2130837889;
+			public const int userDeliveryIcon = 2130837889;
 			
 			// aapt resource value: 0x7f020182
-			public const int WaveIcon = 2130837890;
+			public const int userplaceholder = 2130837890;
+			
+			// aapt resource value: 0x7f020183
+			public const int userSettingsIcon = 2130837891;
+			
+			// aapt resource value: 0x7f020184
+			public const int WaveIcon = 2130837892;
 			
 			static Drawable()
 			{

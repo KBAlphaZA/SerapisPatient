@@ -50,11 +50,11 @@ namespace SerapisPatient.ViewModels
                 var rootpage = App.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
                 if(rootpage != null)
                 {
-                    App.CheckLogin = true;
+                    //App.CheckLogin = true;
                     await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Registered"));
                     App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
 
-                    await Task.Delay(600);
+                   // await Task.Delay(600);
                     await App.Current.MainPage.Navigation.PopToRootAsync();
                 }
                 //App.Current.MainPage = null;

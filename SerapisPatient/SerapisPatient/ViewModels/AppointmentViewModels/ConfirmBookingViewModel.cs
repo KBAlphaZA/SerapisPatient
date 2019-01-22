@@ -13,6 +13,8 @@ using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
+using Plugin.Connectivity;
+using SerapisPatient.Services;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -20,8 +22,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
     {
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
-        public bool BookingSuccess = true;
+        public Doctor SelectedDoctor { get; set; }
+        public MedicalBuildingModel SelectedMedicalBuilding { get; set; }
+        public DateTime FullDateAndMonth { get; set; }
+
+        public bool BookingSuccess = false;
         public string DateSelected = " ";
+        APIServices services = new APIServices();
 
         private string doctorLastName;
         public string LastName
@@ -57,42 +64,50 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
         #endregion
 
-        public ConfirmBookingViewModel(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel)
+        public ConfirmBookingViewModel(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel, string _FullDateAndMonth)
         {
-            PracticeName = _medicalBuildingModel.PracticeName;
-            //string var = MonthsSelectedIndex.ToString();
-            //DateSelected = var + SelectedDay.MonthValue
-            ConfrimData();
-            LastName = enquiredDoctor.LastName;
-            NavigateToHomePageCommand = new Command(ConfirmBooking);    
+            //  1)Xamlbindings. 2) One method to handle all bindings & keep things neat
+            XamlBindings(enquiredDoctor, _medicalBuildingModel, _FullDateAndMonth);
+
+            NavigateToHomePageCommand = new Command(ConfirmBooking);
         }
 
         #region Navigation Tasks
 
-       private void ConfrimData()
+        private void XamlBindings(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel, string _FullDateAndMonth)
         {
-            MessagingCenter.Subscribe<SelectBookingViewModel, SelectedMonths>(this, "ItemSelected", (obj, item) =>
-            {
-                  // DateSelected = item.MonthValue.ToString();
-            }); 
-            
+            SelectedDoctor = enquiredDoctor;
+            SelectedMedicalBuilding = _medicalBuildingModel;
 
-            
+            PracticeName = _medicalBuildingModel.PracticeName;
+            LastName = enquiredDoctor.LastName;
+            ConvertTimeDate(_FullDateAndMonth);
         }
-        private async void ConfirmBooking()
+        private void ConvertTimeDate(string _FullDateAndMonth)
         {
-            // await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, Problem has been occurred while submitting your data."));
+            //converts to DateTime format for Storage purposes
+            FullDateAndMonth = DateTime.Parse(_FullDateAndMonth);
+        }
+
+        private async void ConfirmBooking() //this method can pass through an object -Bonga
+        {
+
             //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "Warning!, There was a problem with your Network Connection"));
-            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("N", "Note!, Please read the comments carefully."));
-            if(BookingSuccess !=true)
-                await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, Problem has been occurred while submitting your data."));
+
+            await MakeBookingAsync();
+
+            //if the booking fails dont navigate anywhere just notify the user that there was an error
+            if (BookingSuccess != true)
+                await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
+
             else
             {
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully completed your booking"));
+
                 await Task.Delay(100);
                 await App.Current.MainPage.Navigation.PopToRootAsync();
             }
-            
+
         }
         #endregion
 
@@ -105,17 +120,27 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             IsBusy = true;
             try
             {
-
+                //Task.Delay(300);
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                   // var isSuccess = await services.CreateAppointment(SelectedDoctor, SelectedMedicalBuilding);
+                }
+                else
+                {
+                    BookingSuccess = false;
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex);
             }
             finally
             {
+                BookingSuccess = true;
                 IsBusy = false;
             }
         }
+
         #endregion
     }
 }

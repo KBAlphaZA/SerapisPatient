@@ -29,11 +29,11 @@
 
         <!--Row 1-->
         <Image  Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
-        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" TextColor="Black" FontSize="30" FontAttributes="Bold" />
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="30" FontAttributes="Bold" />
 
         <!--Row 2-->
 
-        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Description}"/>
+        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10,10,10" Text="{Binding Description}"/>
 
         <!--Row 3-->
 
@@ -52,21 +52,31 @@
                         <ViewCell>
                             <Frame WidthRequest="180" HeightRequest="260" Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True">
                                 <!--Design of the frame-->
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="130"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="{Binding MedicalBuildingImage}" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                    <Label Text="{Binding PracticeName}" Grid.Row="1" TextColor="Black" FontAttributes="Bold" />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
 
-                                    <Label Grid.Row="2" Text="{Binding Distance,StringFormat=' Distance is Approximately {0} Kms'}" />
-                                </Grid>
-                            </Frame>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding MedicalBuildingImage}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding PracticeName}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Black" FontAttributes="Bold" />
+
+                                <Image Grid.Column="0" Grid.Row="2" Source="Location.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                <Label Grid.Column="1"   Grid.Row="2" VerticalOptions="CenterAndExpand" TextColor="Black" Text="{Binding TownOrCity}" />
+
+                                <Image Grid.Column="0" Grid.Row="3" Source="route.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                <Label Grid.Column="1" Grid.Row="3" VerticalOptions="CenterAndExpand"  TextColor="Black"  Text="{Binding Distance,StringFormat=' Distance is Approximately {0} Kms'}" />
+                                <Label Grid.Row="4" Grid.Column="1" Text="Estimated Waiting Time: 5 mins " TextColor="Black"  />
+
+                            </Grid>
+                        </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </control:TLScrollView.ItemTemplate>

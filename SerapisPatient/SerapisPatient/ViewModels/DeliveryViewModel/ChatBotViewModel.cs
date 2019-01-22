@@ -50,7 +50,7 @@ namespace SerapisPatient.ViewModels
             });
 
             //Code to simulate reveing a new message procces
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(6), () =>
             {
                 if (LastMessageVisible)
                 {

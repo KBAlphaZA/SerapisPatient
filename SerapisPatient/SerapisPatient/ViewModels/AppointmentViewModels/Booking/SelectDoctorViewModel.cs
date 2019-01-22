@@ -21,7 +21,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public Doctor enquiredDoctor;
         public MedicalBuildingModel _medicalBuildingData;
         public ObservableCollection<Doctor> Doctors { get; set; }
-        
+        string FullDateAndMonth;
         public ICommand NavigateToConfrimation { get; set; }
 
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
@@ -32,7 +32,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
              enquiredDoctor = selectDoctor;               
             // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
 
-            await GoToConfirmation(enquiredDoctor, _medicalBuildingData);
+            await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
         });
 
 
@@ -64,10 +64,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             };
         }
 
-        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData )
+        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth )
         {
             //This sends the message of itemSelected       
-            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData), true);
+            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);
         }
     }
 }

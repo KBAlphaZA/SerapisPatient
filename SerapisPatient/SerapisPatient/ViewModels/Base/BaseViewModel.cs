@@ -17,7 +17,7 @@ namespace SerapisPatient.ViewModels.Base
         private const string EXECUTECOMMAND_SUFFIX = "_ExecuteCommand";
         private const string CANEXECUTECOMMAND_SUFFIX = "_CanExecuteCommand";
 
-        
+
         public BaseViewModel()
         {
             this.commands =
@@ -27,18 +27,18 @@ namespace SerapisPatient.ViewModels.Base
         }
 
         #region Propertychanged events
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
 
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName =  null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
-                
+
             }
         }
 
@@ -101,10 +101,10 @@ namespace SerapisPatient.ViewModels.Base
         private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
 
         //Im rewriting this method which is the same as SetValue<T>(on line 49) because i wanted to customized the picker on SelectBookingView
-        
+
         //protected bool SetProperty<T>(ref T backfield,T value [CallerMemberName]string propertyName = null)
         //method goes here
-        
+
 
         private string GetCommandName(MethodInfo mi)
         {
@@ -144,6 +144,21 @@ namespace SerapisPatient.ViewModels.Base
                 isBusy = value;
             }
         }
+        // ShowUI is for the xamrin IsEnabled feature
+        private bool showUI;
+        public bool ShowUI
+        {
+            get
+            {
+                return showUI;
+            }
+            set
+            {
+                showUI = value;
+                OnPropertyChanged("ShowUI");
+                showUI = value;
+            }
+        }
 
         private string title;
         public string Title
@@ -166,6 +181,7 @@ namespace SerapisPatient.ViewModels.Base
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-       
+
+
     }
 }

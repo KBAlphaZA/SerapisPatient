@@ -32,6 +32,6 @@
         
         </controls:Calendar>
 
-        <Button Grid.Row="1"  Text="NEXT" Clicked="Button_ClickedAsync"/>
+       
     </Grid>
 </ContentPage>

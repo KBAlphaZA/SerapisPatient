@@ -19,6 +19,6 @@ namespace SerapisPatient.Models.Delivery
         public string MedicationInstructions { get; set; }
         public string MedicationAddedNotes { get; set; }
         public TypeOfMedication MedicationType { get; set; }
-
+        public int Price { get; internal set; }
     }
 }

@@ -21,10 +21,10 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 
         
 
-        public ConfirmBooking (Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData)
+        public ConfirmBooking (Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
 		{
 			InitializeComponent ();
-            viewModel = new ConfirmBookingViewModel(enquiredDoctor, _medicalBuildingData);
+            viewModel = new ConfirmBookingViewModel(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
             BindingContext = viewModel;
         }
 	}

@@ -1,7 +1,10 @@
-﻿using SerapisPatient.behavious;
+﻿using Plugin.Connectivity;
+using Rg.Plugins.Popup.Extensions;
+using SerapisPatient.behavious;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.PopUpMessages;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
@@ -19,6 +22,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
     {
         #region Properties
         public Doctor enquiredDoctor;
+        public string FullDateAndMonth = " ";
         public MedicalBuildingModel _medicalBuildingData;
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
@@ -37,7 +41,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             get => days;
             set => SetProperty(ref days, value);
         }
-        
+
         //this selected_item command is for the horizontallistview
         private SelectedMonths selectedDay;
         public SelectedMonths SelectedDay
@@ -47,9 +51,11 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             {
                 SetProperty(ref selectedDay, value);
 
+                //Method requests and loads up data(Avaliable doctors)
                 ItemSelected();
             }
         }
+
         //value is being converted to a string
         private string dateSelected;
         public string DateSelected
@@ -62,8 +68,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             }
         }
 
-        private int monthsSelectedIndex;
-        public int MonthsSelectedIndex
+        private Month monthsSelectedIndex;
+        public Month MonthsSelectedIndex
         {
             get
             {
@@ -73,8 +79,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             {
                 monthsSelectedIndex = value;
                 RaisePropertyChanged(nameof(MonthsSelectedIndex));
-                      
 
+                ShowUI = true;
                 //this method was meant to accept the selected value and allow the method to consume it straight away
                 //then add fire the activityloader while the new UI loads up.
                 //GenerateDaysOfTheMonth(MonthsSelectedIndex);
@@ -114,18 +120,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             _medicalBuildingData = _medicalBuildingData1;
             GenerateDoctorList();
             IsBusy = false;
+            ShowUI = false;
             Showlistview = false;
             //DateSelected = SelectedItem.MonthValue.ToString();
             Months = GetMonths();
             GenerateDaysOfTheMonth();
-            
+
         }
 
         #region ListViews
         //This list is for the picker
         public List<Month> GetMonths()
         {
-             var months = new List<Month>
+            var months = new List<Month>
             {
                 new Month(){key=1, Value = Models.Months.January },
                  new Month(){key=2, Value = Models.Months.February },
@@ -141,7 +148,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                            new Month(){key=12, Value = Models.Months.December },
             };
             return months;
-            
+
         }
 
         //mockdata for the number of days in the current month
@@ -187,21 +194,21 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //OLD CODE -->
             //
             // int x = 0;
-           //while(x < DateTime.DaysInMonth(DateTime.Now.Year, monthvalue) ) //25
-           //{
-                //int value = x + 1;
-                //selected.MonthValue = value;
-               // Days.Add(selected);
-                
-                //this is the replacement code using no object but a string
-                // int value = x + 1;
-                //Days.Add(value);
-                
-               // x++;
-           //}
-             //return Days;
+            //while(x < DateTime.DaysInMonth(DateTime.Now.Year, monthvalue) ) //25
+            //{
+            //int value = x + 1;
+            //selected.MonthValue = value;
+            // Days.Add(selected);
+
+            //this is the replacement code using no object but a string
+            // int value = x + 1;
+            //Days.Add(value);
+
+            // x++;
+            //}
+            //return Days;
         }
-       
+
         //yhis is the same as having the list
         public void GetMonthDict()
         {
@@ -260,33 +267,52 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         }
         #endregion
 
+
         #region Methods
         private async Task ItemSelected()
         {
             try
             {
                 IsBusy = true;
-                await Task.Delay(800);
-                // MessagingCenter.Send(this, "ItemSelected", SelectedItem);
-                //Date Value eg.7th
-                DateSelected = SelectedDay.MonthValue.ToString();
-                //force this task on the UI thread so changes can be made on the listview
-                Device.BeginInvokeOnMainThread(() =>
+                await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "Warning!, We Are loading Avaliable Doctors "));
+                await Task.Delay(1500);
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    Showlistview = true;
-                    GenerateDoctorList();
+
+                    // MessagingCenter.Send(this, "ItemSelected", SelectedItem);
+
+                    //Date Value eg.7th
+                    //should add the month value also to one string
+                    DateSelected = SelectedDay.MonthValue.ToString();
+                    //should add the month value also to one string
+                    MonthText = MonthsSelectedIndex.Value.ToString();
+                    FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
+
+                    //force this task on the UI thread so changes can be made on the listview
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Showlistview = true;
+                        GenerateDoctorList();
 
 
-                });
+                    });
+
+                }
+                else
+                {
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
+                }
+
             }
-            catch(Exception e) {
-                
+            catch (Exception e)
+            {
+
             }
             finally
             {
                 IsBusy = false;
             }
-             
+
         }
         public ICommand SelectedCommand => new Command<Doctor>(async selectDoctor =>
         {
@@ -294,31 +320,17 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             enquiredDoctor = selectDoctor;
             // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
 
-            await GoToConfirmation(enquiredDoctor, _medicalBuildingData);
+            await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
         });
 
-        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData)
+        //Navigation
+        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
         {
             //This sends the message of itemSelected       
-            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData), true);
+            await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);
         }
 
-       
+
         #endregion
-
-        //Notes
-
-        //Create an object with properties for the list and return it:
-
-        //public class YourType
-        //{
-        //    public List<object> Prop1 { get; set; }
-        //    public List<int> Prop2 { get; set; }
-        //}
-
-        //public static YourType Method2(int[] array, int number)
-        //{
-        //    return new YourType { Prop1 = list1, Prop2 = list2 };
-        //}
     }
 }

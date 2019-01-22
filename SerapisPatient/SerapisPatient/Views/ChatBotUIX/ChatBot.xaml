@@ -6,7 +6,7 @@
              xmlns:partials="clr-namespace:SerapisPatient.Views.ChatBotUIX.Partials" 
             xmlns:controls="clr-namespace:SerapisPatient.Controls">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Name="MenuItem1" Order="Primary" Icon="Cart" Text="Item 1" Priority="0" />
+        <ToolbarItem  Name="MenuItem1" Order="Primary" Clicked="MenuItem1_Clicked" Icon="Cart" Text="Item 1" Priority="0" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>

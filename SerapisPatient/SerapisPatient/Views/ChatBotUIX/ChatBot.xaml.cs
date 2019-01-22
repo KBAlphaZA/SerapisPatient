@@ -1,5 +1,6 @@
 ﻿using SerapisPatient.Services;
 using SerapisPatient.ViewModels;
+using SerapisPatient.Views.DeliveryFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,13 @@ namespace SerapisPatient.Views
         public void OnListTapped(object sender, ItemTappedEventArgs e)
         {
             chatInput.UnFocusEntry();
+        }
+
+        private void MenuItem1_Clicked(object sender, EventArgs e)
+        {
+           
+                Navigation.PushAsync(new MedicationCart());
+            
         }
     }
 }
