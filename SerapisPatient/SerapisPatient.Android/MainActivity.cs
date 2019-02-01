@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Plugin.CurrentActivity;
+using Plugin.GoogleClient;
 
 namespace SerapisPatient.Droid
 {
@@ -26,11 +27,15 @@ namespace SerapisPatient.Droid
 
             //Location Services permission Android
             CrossCurrentActivity.Current.Init(this, bundle);
-
+            GoogleClientManager.Initialize(this);
             LoadApplication(new App());
         }
+        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
+        }
 
-       
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             //Qr Code Scanner

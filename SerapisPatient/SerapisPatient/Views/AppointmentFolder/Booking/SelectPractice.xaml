@@ -15,6 +15,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
+            
 
         </Grid.RowDefinitions>
 
@@ -30,7 +31,6 @@
         <!--Row 1-->
         <Image  Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Source="{Binding Icon}"/>
         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Title}" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="30" FontAttributes="Bold" />
-
         <!--Row 2-->
 
         <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10,10,10" Text="{Binding Description}"/>

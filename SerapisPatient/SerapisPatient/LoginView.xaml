@@ -180,7 +180,7 @@
                     </Grid.ColumnDefinitions>
                     
                     <!--Google-->
-                    <Grid Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid Grid.Column="0" HorizontalOptions="CenterAndExpand" >
                         <Image Source="GoogleSignIn.png">
                             <Image.WidthRequest>
                                 <OnPlatform x:TypeArguments="x:Double">
@@ -197,13 +197,13 @@
                         </Image>
 
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding .}"/>
+                            <TapGestureRecognizer Command="{Binding LoginCommand}"/>
                         </Grid.GestureRecognizers>
                     
                     </Grid>
                     
                     <!--facebook-->
-                    <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                    <Grid Grid.Column="1" HorizontalOptions="CenterAndExpand">
                         <Image Source="FacebookSignIn.png">
                             <Image.WidthRequest>
                                 <OnPlatform x:TypeArguments="x:Double">
@@ -227,7 +227,7 @@
                     </Grid>
                     
                     <!--Microsoft-->
-                    <Grid Grid.Column="2" Grid.ColumnSpan="2">
+                    <Grid Grid.Column="2" HorizontalOptions="CenterAndExpand">
                         <Image Source="MicrosoftSignIn.png">
                             <Image.WidthRequest>
                                 <OnPlatform x:TypeArguments="x:Double">
