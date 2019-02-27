@@ -4,7 +4,7 @@
              x:Class="SerapisPatient.Views.MainViews.MainView"
              xmlns:control="clr-namespace:SerapisPatient.Controls"
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
-             Icon="menu.png"
+             xmlns:behaviors="clr-namespace:SerapisPatient.behavious"            
              Title="{Binding Title}"
              >
     <ContentPage.ToolbarItems>
@@ -41,29 +41,27 @@
 
 
         <!-- FIRST TWO LABELS-->
-        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.Row="1"/>
+        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
 
         <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" />
 
         <BoxView x:Name="appointmentframe" HeightRequest="60" Grid.Row="3" Grid.ColumnSpan="4"  Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="60,0,60,0" >
-            <BoxView.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding NavigateToAppointmentPageCommand }">
-                </TapGestureRecognizer>
-            </BoxView.GestureRecognizers>
+            <BoxView.Behaviors>
+                <control:ViewTappedButtonBehavior Command="{Binding NavigateToAppointmentPageCommand}" AnimationType="Scale" />
+            </BoxView.Behaviors>         
 
         </BoxView>
-        <Label TextColor="White" Text="Make An Appointment" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" />
+        <Label TextColor="White" Text="Make An Appointment" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"/>
+
+
         <Image Grid.Column="1" Grid.Row="3" Source="AppointmentIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
 
 
         <!--Row 4-->
         <BoxView x:Name="appointmentframe1" HeightRequest="60" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0">
-            <BoxView.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding NavigateToDeliveryPageCommand}" >
-                </TapGestureRecognizer>
-            </BoxView.GestureRecognizers>
+            <BoxView.Behaviors>
+                <control:ViewTappedButtonBehavior Command="{Binding NavigateToDeliveryPageCommand}" AnimationType="Scale" />
+            </BoxView.Behaviors>
 
         </BoxView>
         <Label TextColor="White" Text="Order Your Medication" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="4" Grid.Column="2" />
@@ -72,13 +70,11 @@
         <!--Row 5-->
 
         <BoxView x:Name="appointmentframe2" HeightRequest="60" Grid.Row="5" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0" >
-
-
-            <BoxView.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding NavigateToCameraPageCommand}">
-                </TapGestureRecognizer>
-            </BoxView.GestureRecognizers>
+            
+            <BoxView.Behaviors>
+                <control:ViewTappedButtonBehavior Command="{Binding NavigateToCameraPageCommand}" AnimationType="Scale" />
+            </BoxView.Behaviors>
+            
         </BoxView>
         <Label TextColor="White" Text="Scan Delivery Code" Grid.ColumnSpan="2" FontAttributes="Bold" Grid.Row="5" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
         <Image Grid.Column="1" Grid.Row="5" Source="QrCodeIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />

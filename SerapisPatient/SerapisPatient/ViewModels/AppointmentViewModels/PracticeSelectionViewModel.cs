@@ -22,8 +22,8 @@ namespace SerapisPatient.ViewModels
 
         public PracticeSelectionViewModel()
         {
-            GenerateDummyDataList();
-            ShowDetails();
+          
+           
         }
 
 
@@ -34,48 +34,48 @@ namespace SerapisPatient.ViewModels
         }
 
 
-        public void GenerateDummyDataList()
-        {
-            PracticeContact contact = new PracticeContact()
-            {
-                PracticeEmail = "Khanyisani.Buthelezi03@gmail.com",
-                PracticeTelephoneNumber = "03170123423",
-                TwitterHandle = "@Medicross"
-            };
+        //public void GenerateDummyDataList()
+        //{
+        //    PracticeContact contact = new PracticeContact()
+        //    {
+        //        PracticeEmail = "Khanyisani.Buthelezi03@gmail.com",
+        //        PracticeTelephoneNumber = "03170123423",
+        //        TwitterHandle = "@Medicross"
+        //    };
 
-            PracticeLocation location = new PracticeLocation()
-            {
-                 Distance=10
-            };
+        //    PracticeLocation location = new PracticeLocation()
+        //    {
+        //         Distance=10
+        //    };
 
-            PracticeLocation location2 = new PracticeLocation()
-            {
-                Distance = 12
-            };
+        //    PracticeLocation location2 = new PracticeLocation()
+        //    {
+        //        Distance = 12
+        //    };
 
-            PracticeList = new ObservableCollection<PracticeInfo>()
-            {
-                new PracticeInfo
-                {
-                    PracticeImage ="MedicrossPinetown.jpg",
-                    NumOfPatientsInPractice =5,
-                    OperatingTime ="8:00am-5:30pm",
-                    PracticeName="MediCross: Pintown",
-                    ContactP=contact,
-                    Location=location
-                }, 
-                new PracticeInfo
-                {
-                    PracticeImage ="MedicrossPinetown.jpg",
-                    NumOfPatientsInPractice =12,
-                    OperatingTime ="7:00am-3:30pm",
-                    PracticeName="Ja and Partners",
-                    Location=location2
-                }
-            };
+        //    PracticeList = new ObservableCollection<PracticeInfo>()
+        //    {
+        //        new PracticeInfo
+        //        {
+        //            PracticeImage ="MedicrossPinetown.jpg",
+        //            NumOfPatientsInPractice =5,
+        //            OperatingTime ="8:00am-5:30pm",
+        //            PracticeName="MediCross: Pintown",
+        //            ContactP=contact,
+        //            Location=location
+        //        }, 
+        //        new PracticeInfo
+        //        {
+        //            PracticeImage ="MedicrossPinetown.jpg",
+        //            NumOfPatientsInPractice =12,
+        //            OperatingTime ="7:00am-3:30pm",
+        //            PracticeName="Ja and Partners",
+        //            Location=location2
+        //        }
+        //    };
 
 
-        }
+        //}
 
         public void ShowDetails()
         {

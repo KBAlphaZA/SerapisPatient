@@ -13,7 +13,7 @@ namespace SerapisPatient.Models.Practices
         public string PracticeImage { get; set; }
         public string PracticeBio { get; set; }
         public int NumOfPatientsInPractice { get; set; }
-        public PracticeLocation Location { get; set; }
+        public Location Location { get; set; }
         public string OperatingTime { get; set; }
         public PracticeContact ContactP { get; set; }
       

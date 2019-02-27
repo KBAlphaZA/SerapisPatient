@@ -5,6 +5,7 @@ using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.PopUpMessages;
+using SerapisPatient.Services;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
@@ -21,13 +22,24 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
     public class SelectBookingViewModel : BaseViewModel 
     {
         #region Properties
+        private readonly APIServices _apiServices = new APIServices();
         public Doctor enquiredDoctor;
         public string FullDateAndMonth = " ";
         public MedicalBuildingModel _medicalBuildingData;
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
-        //SelectedMonths selected;
+        private List<Doctor> _doctors;
+
+        public List<Doctor> DoctorAvaliable
+        {
+            get { return _doctors; }
+            set
+            {
+                _doctors = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Doctor> Doctors { get; set; }
 
@@ -118,7 +130,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public SelectBookingViewModel(MedicalBuildingModel _medicalBuildingData1)
         {
             _medicalBuildingData = _medicalBuildingData1;
-            GenerateDoctorList();
+            //GenerateDoctorList();
+            
             IsBusy = false;
             ShowUI = false;
             Showlistview = false;
@@ -244,27 +257,35 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             NumofDays.Add(Models.Months.December, DateTime.DaysInMonth(DateTime.Now.Year, 12));
         }
 
-        //DoctorListview
-        public void GenerateDoctorList()
+        //API Call for DoctorView
+        public async Task GetDoctors()
         {
-            Doctors = new ObservableCollection<Doctor>
-                  {
-                    new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png" },
-                    new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Ronaldo ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Buthelezi ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Moodley", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Matsoso ", University="MBchB(UP)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-
-            };
+            DoctorAvaliable = await _apiServices.GetDoctorsAsync();
+           
         }
+
+        //DoctorListview
+
+        //public void GenerateDoctorList()
+        //{
+        //    Doctors = new ObservableCollection<Doctor>
+        //          {
+        //            new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png" },
+        //            new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Ronaldo ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Buthelezi ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Moodley", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Matsoso ", University="MBchB(UP)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
+        //            new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
+
+        //    };
+        //}
         #endregion
 
 
@@ -274,12 +295,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             try
             {
                 IsBusy = true;
-                await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "Warning!, We Are loading Avaliable Doctors "));
-                await Task.Delay(1500);
+                await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "We Are loading Avaliable Doctors "));
+                //2await Task.Delay(1500);
                 if (CrossConnectivity.Current.IsConnected)
                 {
 
-                    // MessagingCenter.Send(this, "ItemSelected", SelectedItem);
+                   
 
                     //Date Value eg.7th
                     //should add the month value also to one string
@@ -291,9 +312,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                     //force this task on the UI thread so changes can be made on the listview
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        Showlistview = true;
-                        GenerateDoctorList();
 
+                        //GenerateDoctorList();
+                        GetDoctors();
+                        //Task.WaitAll(GetDoctors());
+                        Task.Delay(200);
+                        Showlistview = true;
 
                     });
 

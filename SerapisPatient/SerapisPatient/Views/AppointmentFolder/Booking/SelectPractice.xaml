@@ -41,7 +41,7 @@
 
 
         <control:TLScrollView Orientation="Horizontal"
-                         ItemsSource="{Binding Practices}"
+                         ItemsSource="{Binding _Practices}"
                          ItemSelected="TLScrollView_ItemSelected"
                          SelectedCommand="{Binding [ItemSelected]}"
                          HeightRequest="240"
@@ -71,7 +71,7 @@
                                 <Label Text="{Binding PracticeName}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Black" FontAttributes="Bold" />
 
                                 <Image Grid.Column="0" Grid.Row="2" Source="Location.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
-                                <Label Grid.Column="1"   Grid.Row="2" VerticalOptions="CenterAndExpand" TextColor="Black" Text="{Binding TownOrCity}" />
+                                <Label Grid.Column="1"   Grid.Row="2" VerticalOptions="CenterAndExpand" TextColor="Black" Text="{Binding WokAddressLine}" />
 
                                 <Image Grid.Column="0" Grid.Row="3" Source="route.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                                 <Label Grid.Column="1" Grid.Row="3" VerticalOptions="CenterAndExpand"  TextColor="Black"  Text="{Binding Distance,StringFormat=' Distance is Approximately {0} Kms'}" />

@@ -6,11 +6,11 @@
              xmlns:pages1="clr-namespace:SerapisPatient.Views.MainViews"
              xmlns:custom="clr-namespace:SerapisPatient.Views.CustomViews"
              Title="Serapis Patient"
-                 Icon="menu.png"
+                 
              MasterBehavior="Popover">
 
     <MasterDetailPage.Master>
-        <pages:SideMenuPage Icon="menu.png" x:Name="MasterPage" Title="Menu"/>
+        <pages:SideMenuPage x:Name="MasterPage" Title="Menu"/>
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
@@ -13,7 +14,8 @@ namespace SerapisPatient.Services
 {
     public class APIServices
     {
-        private string APIURL = "http://localhost:62575/api";
+        private string APIURL = "http://35.224.114.206/api/doctor";//
+       
         HttpClient _httpClient = new HttpClient();
 
         public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
@@ -55,6 +57,7 @@ namespace SerapisPatient.Services
 
 
         }
+
         public async Task<string> GetAccountDetails()
         {
             var model = new PatientUser
@@ -69,5 +72,30 @@ namespace SerapisPatient.Services
 
             return response.ToString();
         }
+
+        //Used for DoctorListView
+        //Pulls All Doctors from the Cloud so far
+        //SHould add more features for filters 
+        public async Task<List<Doctor>> GetDoctorsAsync()
+        {
+            //Getting JSON data from the WebAPI
+            var content = await _httpClient.GetStringAsync(APIURL);
+            //We deserialize the JSON data from this line
+            var result = JsonConvert.DeserializeObject<List<Doctor>>(content);
+
+            return result;         
+
+        }
+        
+        public async Task<List<MedicalBuildingModel>> GetAllMedicalBuildingsAsync()
+        {
+            //Getting JSON data from the WebAPI
+            var content = await _httpClient.GetStringAsync("http://35.224.114.206/api/practice");
+            //We deserialize the JSON data from this line
+            var result = JsonConvert.DeserializeObject<List<MedicalBuildingModel>>(content);
+
+            return result;
+        }
+
     }
 }

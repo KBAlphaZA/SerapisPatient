@@ -61,7 +61,7 @@
         <ListView x:Name="DocList"
                   SeparatorVisibility="None"
                   HasUnevenRows="True"
-                  ItemsSource="{Binding Doctors}"
+                  ItemsSource="{Binding DoctorAvaliable}"
                   CachingStrategy="RecycleElement"
                   HeightRequest="14"
                   Grid.Row="4"
