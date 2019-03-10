@@ -178,9 +178,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac">
-      <Version>4.8.1</Version>
-    </PackageReference>
     <PackageReference Include="LiteDB">
       <Version>4.1.4</Version>
     </PackageReference>

@@ -32,8 +32,9 @@ namespace SerapisPatient
         public App ()
 		{
 			InitializeComponent();
+            //MainPage = new NavigationPage(new CameraPage());
             Init();
-           
+
         }
 
         
@@ -51,8 +52,7 @@ namespace SerapisPatient
             }
             else
             {   
-                //MainPage = new NavigationPage(new LoginView());
-                //MainPage = new CustomNavigationView(new MasterView()); //this is the transparent navbar
+               
                 MainPage = new NavigationPage(new MasterView());
                 
             }
