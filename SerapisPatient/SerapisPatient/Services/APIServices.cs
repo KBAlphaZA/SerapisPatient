@@ -73,9 +73,13 @@ namespace SerapisPatient.Services
             return response.ToString();
         }
 
-        //Used for DoctorListView
-        //Pulls All Doctors from the Cloud so far
-        //SHould add more features for filters 
+
+        /// <summary>
+        ///  <c a="GetDoctorsAsync"/>
+        ///   Used for DoctorListView, so it
+        /// Pulls All Doctors from the Cloud so far, but
+        /// Should add more features for filters
+        /// </summary>
         public async Task<List<Doctor>> GetDoctorsAsync()
         {
             //Getting JSON data from the WebAPI

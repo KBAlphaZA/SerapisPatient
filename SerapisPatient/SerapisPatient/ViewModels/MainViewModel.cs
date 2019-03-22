@@ -18,7 +18,7 @@ namespace SerapisPatient.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-
+        #region Properties
         //The Title of the Page
         private readonly string _title = "Serapis Patient";
 
@@ -45,7 +45,7 @@ namespace SerapisPatient.ViewModels
             }
         }
 
-
+        #endregion
 
         public MainViewModel()
         {
@@ -59,6 +59,7 @@ namespace SerapisPatient.ViewModels
             Title = _title;
         }
 
+        #region Methods
         //ListView
         private void GenerateNotificationList()
         {
@@ -80,6 +81,11 @@ namespace SerapisPatient.ViewModels
             await App.Current.MainPage.Navigation.PushAsync(new ProfilePage());
         }
 
+        /// <summary>
+        /// <c a="AppointmentPAge"/>
+        /// First Gets the user location, then
+        /// Navigates to AppointmentPage(Passes Location)
+        /// </summary>
         private async void AppointmentPage()
         {
             //var Appointment_navigation = new  NavigationPage( new AppointmentPage());
@@ -114,22 +120,12 @@ namespace SerapisPatient.ViewModels
         }
         private async void DeliveryPage()
         {
-           // var Delivery_navigation = new NavigationPage(new AppointmentPage());
+           
             await App.Current.MainPage.Navigation.PushAsync(new DeliveryPage());
         }
         private async void CameraPage()
         {
-            //var Camera_navigation = new NavigationPage(new AppointmentPage());
-            await App.Current.MainPage.Navigation.PushAsync(new CameraPage());
-        }
-
-        private async void TakeMedication()
-        {            
-            //await App.Current.MainPage.Navigation.PushAsync();
-        }
-
-        private async void FollowUp()
-        {           
+            
             await App.Current.MainPage.Navigation.PushAsync(new CameraPage());
         }
 
@@ -137,11 +133,11 @@ namespace SerapisPatient.ViewModels
         {
             if(bool.Equals(_SelectedCard.Title," "))
             {
-
+                //await App.Current.MainPage.Navigation.PushAsync(new  );
             }
             else if(bool.Equals(_SelectedCard.Title, " "))
             {
-
+                //await App.Current.MainPage.Navigation.PushAsync(new );
             }
             else if(bool.Equals(_SelectedCard.Title, "MEDICATION DELIVERY"))
             {
@@ -149,6 +145,6 @@ namespace SerapisPatient.ViewModels
             }
             
         }
-       
+        #endregion
     }
 }

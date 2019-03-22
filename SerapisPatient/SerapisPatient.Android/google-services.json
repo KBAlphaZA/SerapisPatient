@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146806431671:android:64f0fa02fb4f45bd",
+        "android_client_info": {
+          "package_name": "com.companyname.serapismedical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146806431671-20bqt7ac3r07ihhevcqaaf3sh61f1cbu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.serapismedical",
+            "certificate_hash": "2cbd0c07bee8625f975877c1a42324e4744a9d8e"
+          }
+        },
+        {
+          "client_id": "146806431671-0i7ssql1g80d6o0ejiaks2vre0ig63nr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZusF2htFvdKJzLafTbqGF-A1j2zdxLmc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146806431671-0i7ssql1g80d6o0ejiaks2vre0ig63nr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

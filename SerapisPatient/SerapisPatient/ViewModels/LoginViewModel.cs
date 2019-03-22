@@ -17,6 +17,7 @@ namespace SerapisPatient.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        #region Properties
         public UserProfile User { get; set; } = new UserProfile();
         public string Name
         {
@@ -35,29 +36,37 @@ namespace SerapisPatient.ViewModels
             get => User.Picture;
             set => User.Picture = value;
         }
+        public string Token { get; set; }
 
         public bool IsLoggedIn { get; set; }
 
-        public string Token { get; set; }
+        
 
         public ICommand LoginCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
         private readonly IGoogleClientManager _googleClientManager;
-
+        #endregion
         public LoginViewModel()
         {
             //GoogleLogin
             LoginCommand = new Command(LoginAsync);
-
+            _googleClientManager = CrossGoogleClient.Current;
+            //Custom Login
             LoginOnClick = new Command(LoginRequestAsync);
             RestThePassword = new Command(RestPassword);
             RegisterOnClick = new Command(RegisterUser);
 
-            _googleClientManager = CrossGoogleClient.Current;
+            
 
             IsLoggedIn = false;
         }
 
+        /// <summary>
+        ///  <c a="LoginAsync"/>
+        /// Below is the Authentication Code using Plugin.google
+        /// </summary>
+        
+        #region Methods
         public async void LoginAsync()
         {
             _googleClientManager.OnLogin += OnLoginCompleted;
@@ -137,6 +146,10 @@ namespace SerapisPatient.ViewModels
             _googleClientManager.Logout();
         }
 
+        /// <summary>
+        /// <c a="RegisterUser"/>
+        /// Custom Registeration
+        /// </summary>
         private void RegisterUser()
         {
             App.Current.MainPage.Navigation.PushAsync(new RegisterView());
@@ -146,44 +159,24 @@ namespace SerapisPatient.ViewModels
         public ICommand LoginOnClick { get; set; }
         public ICommand RestThePassword { get; set; }
 
-        //private string email;
-        //public string Email
-        //{
-        //    get
-        //    {
-        //        return email;
-        //    }
-        //    set
-        //    {
-        //        email = value;
-        //        OnPropertyChanged("Email");
-        //    }
-        //}
-
-        //private string password;
-        //public string Password
-        //{
-        //    get
-        //    {
-        //        return password;
-        //    }
-        //    set
-        //    {
-        //        string password = value;
-        //        OnPropertyChanged("Password");
-        //    }
-        //}
-
+       
         private void LoginRequestAsync()
         {
 
              HandleAuth();
         }
+        /// <summary>
+        /// <c a="HandleAuth"/>
+        /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
+        /// 
+        /// </summary>
         private async Task HandleAuth()
         {
             IsBusy = true;
             try
             {
+                
+
                 //App.CheckLogin = true;
                 App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
                 await App.Current.MainPage.Navigation.PopAsync();
@@ -206,6 +199,6 @@ namespace SerapisPatient.ViewModels
             //for now move on to the main page
             App.Current.MainPage.Navigation.PushModalAsync(new MasterDetailPage1());
         }
-
+        #endregion
     }
 }
