@@ -53,7 +53,7 @@
         </control:HorizontalListView>
         
         <!--Row 3-->
-        <Label Text="Select Doctor" FontSize="Large" TextColor="Black" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" />
+        <Label Text="Select Your Doctor Below" FontSize="Large" TextColor="Black" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" />
         
         <!--Row 4-->
         <!--DoctorListView-->
@@ -67,6 +67,7 @@
                   Grid.Row="4"
                   Grid.Column="0"
                   Grid.ColumnSpan="3"
+                  
                   IsVisible="{Binding Showlistview}">
             <ListView.Behaviors>
                 <select:SelectedItemBehavior
@@ -78,7 +79,7 @@
                     <ViewCell>
                         <ContentView Padding="5">
 
-                            <Frame OutlineColor="Gray" HasShadow="True"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
+                            <Frame x:Name="DoctorFrame" OutlineColor="Gray" HasShadow="True"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
 
                                 <Grid RowSpacing="2">
                                     <Grid.RowDefinitions>

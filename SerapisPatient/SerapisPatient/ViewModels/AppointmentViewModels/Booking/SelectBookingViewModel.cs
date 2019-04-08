@@ -141,7 +141,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
         }
 
-        #region ListViews
+        #region Lists
         //This list is for the picker
         public List<Month> GetMonths()
         {
@@ -299,9 +299,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                 //2await Task.Delay(1500);
                 if (CrossConnectivity.Current.IsConnected)
                 {
-
-                   
-
                     //Date Value eg.7th
                     //should add the month value also to one string
                     DateSelected = SelectedDay.MonthValue.ToString();
@@ -312,13 +309,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                     //force this task on the UI thread so changes can be made on the listview
                     Device.BeginInvokeOnMainThread(() =>
                     {
-
+                        //Dummy Data
                         //GenerateDoctorList();
+
                         GetDoctors();
                         //Task.WaitAll(GetDoctors());
-                        Task.Delay(200);
-                        Showlistview = true;
 
+                        //Task.Delay(200);
                     });
 
                 }
@@ -335,6 +332,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             finally
             {
                 IsBusy = false;
+                
+                Showlistview = true;
             }
 
         }
@@ -351,6 +350,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
         {
             //This sends the message of itemSelected       
+            Task.Delay(500);
             await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);
         }
 

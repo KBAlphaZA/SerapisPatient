@@ -29,5 +29,19 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
             });
 
         }
-	}
+
+        //private async void ViewCell_Disappearing(object sender, EventArgs e)
+        //{
+
+        //    var viewCell = (ViewCell)sender;
+        //    await viewCell.View.TranslateTo(300, 0, 500, Easing.BounceOut);
+        //    ViewExtensions.CancelAnimations(viewCell.View);
+        //}
+        //protected override void OnDisappearing()
+        //{
+        //    InitializeComponent();
+        //    base.OnDisappearing();
+        //}
+        
+    }
 }

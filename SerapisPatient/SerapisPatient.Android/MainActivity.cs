@@ -27,7 +27,9 @@ namespace SerapisPatient.Droid
 
             //Location Services permission Android
             CrossCurrentActivity.Current.Init(this, bundle);
+            //Plugin code(Google authentication
             GoogleClientManager.Initialize(this);
+
             LoadApplication(new App());
         }
         protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
@@ -46,6 +48,7 @@ namespace SerapisPatient.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        //Basketcart code
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
             //BadgeDrawable.SetBadgeCount(this, menu.GetItem(0), 3);

@@ -24,27 +24,23 @@ namespace SerapisPatient.ViewModels
             get => User.Name;
             set => User.Name = value;
         }
-
         public string Email
         {
             get => User.Email;
             set => User.Email = value;
         }
-
         public Uri Picture
         {
             get => User.Picture;
             set => User.Picture = value;
         }
         public string Token { get; set; }
-
         public bool IsLoggedIn { get; set; }
-
-        
-
         public ICommand LoginCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
         private readonly IGoogleClientManager _googleClientManager;
+        
+        //New Google Auth
         #endregion
         public LoginViewModel()
         {
@@ -67,6 +63,9 @@ namespace SerapisPatient.ViewModels
         /// </summary>
         
         #region Methods
+            
+            //Plugin Google Code
+
         public async void LoginAsync()
         {
             _googleClientManager.OnLogin += OnLoginCompleted;
@@ -99,8 +98,7 @@ namespace SerapisPatient.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
             }
 
-        }
-         
+        } 
         private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
         {
             if (loginEventArgs.Data != null)
