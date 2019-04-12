@@ -1,4 +1,4 @@
-﻿Uousing Plugin.Connectivity;
+﻿using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.behavious;
 using SerapisPatient.Models;
