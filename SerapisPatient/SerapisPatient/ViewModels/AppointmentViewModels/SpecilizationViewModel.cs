@@ -118,7 +118,7 @@ namespace SerapisPatient.ViewModels
                 for(int i=0; i<queryText.Length; i++) 
                 {
                     int j = 0;
-                    //Use Case: input is 'L'
+                   
                     characterContainer[i] = letter;
 
                     //charcterContainer must compare the Title string in listSpec
@@ -129,17 +129,13 @@ namespace SerapisPatient.ViewModels
                     foreach(var item in TempList)
                     {
                          if(item.Title[j] == characterContainer[i])
-                        {
-                            ListSpecilizations.Add(item);
-                        }
+                         {
+                            //Perform a check if object exists in the list & Edit the list
+                            CheckListIfExist(item);
+                            //ListSpecilizations.Add(item);
+                         }
 
-                    }
-
-
-                    //Perform a check if object exists in the list
-                    //CheckList(model);
-                    
-                    j++;
+                    }j++;
 
                 }
             }
@@ -166,13 +162,13 @@ namespace SerapisPatient.ViewModels
 
         }
 
-        private void CheckList(SpecilizationModel model)
+        private void CheckListIfExist(SpecilizationModel item)
         {
 
-            if (!ListSpecilizations.Exists(x => x.Title == model.Title))
+            if (!ListSpecilizations.Exists(x => x.Title == item.Title))
             {
                //add all matches to Mainlist
-                ListSpecilizations.Add(model);
+                ListSpecilizations.Add(item);
             }
             else
             {
