@@ -51,7 +51,8 @@ namespace SerapisPatient.ViewModels
            App.Current.MainPage.Navigation.PushAsync(new SelectPractice(_specilizationData),true);
         }
         
-
+        //List
+        
         private void GenerateSpecilization()
         {
             ListSpecilizations = new List<SpecilizationModel>()
@@ -109,41 +110,38 @@ namespace SerapisPatient.ViewModels
             //Run Procedural method
             Procedural();
 
-            queryText.ToArray();
-
+            var arrayOfQueryString = queryText.ToArray();
+            
             //Add each letter of the string to the declared char array
-            foreach (var letter in queryText) 
-            { 
-
+            
                 for(int i=0; i<queryText.Length; i++) 
                 {
                     int j = 0;
                    
-                    characterContainer[i] = letter;
-
+                    characterContainer[i] = arrayOfQueryString[i];
                     //charcterContainer must compare the Title string in listSpec
-                   //1. cycle through the list
-                   //2. compare each char to the first index, Must not be case sensetive !!!
-                   //3. if true add to list if false do nothing
+                   
 
+                    //Returns A twice when i enter a second char
                     foreach(var item in TempList)
                     {
                          if(item.Title[j] == characterContainer[i])
                          {
                             //Perform a check if object exists in the list & Edit the list
-                            CheckListIfExist(item);
-                            //ListSpecilizations.Add(item);
+                           CheckListIfExist(item);
+                           ListSpecilizations.RemoveAll(x => x.Title[i] != item.Title[j]);
                          }
+                            
+                   
+                    }
+                j++;
 
-                    }j++;
 
-                }
             }
-
             return ListSpecilizations;
         }
 
-        //Method 
+        // start Method 
         private void Procedural() 
         {
             //First copy Everything To temp list
@@ -162,19 +160,22 @@ namespace SerapisPatient.ViewModels
 
         }
 
+        
         private void CheckListIfExist(SpecilizationModel item)
         {
-
+            //Perform a check here
             if (!ListSpecilizations.Exists(x => x.Title == item.Title))
-            {
-               //add all matches to Mainlist
+            {            
+                //add all matches to Mainlist
                 ListSpecilizations.Add(item);
+                
             }
             else
             {
                 //Do nothing
             }
         }
+        
         #endregion
     }
 }
