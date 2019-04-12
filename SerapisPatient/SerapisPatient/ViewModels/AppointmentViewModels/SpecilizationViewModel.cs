@@ -156,11 +156,7 @@ namespace SerapisPatient.ViewModels
             }
 
             //Then clear ListSpec..., first check if empty or not
-            if(ListSpecilizations != null) 
-            {
-                ListSpecilizations.Clear();
-            }
-
+            
         }
         
         private void CheckListIfExist(SpecilizationModel item)
@@ -171,12 +167,16 @@ namespace SerapisPatient.ViewModels
                 //add all matches to Mainlist
                 ListSpecilizations.Add(item);
 
-                //ListSpecilizations
+                //List<string> lstNew = new List<string>();
+                //lstNew.AddRange(lstTest);
+
+                //AddRange() -> Adds the elements of the specified collection to the end of the List<T>.
+                //The result is that the current elements of the list are added to the end of the list, duplicating all the elements.
 
 
-                
+
             }
-            
+
         }
         
         #endregion
