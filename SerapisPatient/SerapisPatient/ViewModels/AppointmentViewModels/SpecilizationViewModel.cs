@@ -20,13 +20,14 @@ namespace SerapisPatient.ViewModels
 {
     public class SpecilizationViewModel:BaseViewModel
     {
+        object CopyOfList;
+
         #region Properties
         public SpecilizationModel _specilizationData;
-        public List<SpecilizationModel> ListSpecilizations { get; private set; }
+        public List<SpecilizationModel> ListSpecilizations { get; set; }
         public List<SpecilizationModel> TempList { get; set; }
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public SpecilizationModel sub = new SpecilizationModel();
-
         #endregion
 
         public SpecilizationViewModel()
@@ -83,8 +84,6 @@ namespace SerapisPatient.ViewModels
 
 
         private string searchProffesion;
-       
-
         public string SearchProffesion
         {
             get
@@ -96,24 +95,90 @@ namespace SerapisPatient.ViewModels
                 searchProffesion = value;
                 OnPropertyChanged("SearchProffesion");
                 //an event needs to go here
-                searchProffesion = value;
+                Search(SearchProffesion);
             }
         }
 
+        #region Methods
         //will go to the event handler
-        private void Search()
+        private  List<SpecilizationModel> Search(string queryText)
         {
-            char[] characterContainer = new char[SearchProffesion.Length];
+            
+            char[] characterContainer = new char[queryText.Length];
 
-            foreach (char character in characterContainer)
+            //Run Procedural method
+            Procedural();
+
+            queryText.ToArray();
+
+            //Add each letter of the string to the declared char array
+            foreach (var letter in queryText) 
+            { 
+
+                for(int i=0; i<queryText.Length; i++) 
+                {
+                    int j = 0;
+                    //Use Case: input is 'L'
+                    characterContainer[i] = letter;
+
+                    //charcterContainer must compare the Title string in listSpec
+                   //1. cycle through the list
+                   //2. compare each char to the first index, Must not be case sensetive !!!
+                   //3. if true add to list if false do nothing
+
+                    foreach(var item in TempList)
+                    {
+                         if(item.Title[j] == characterContainer[i])
+                        {
+                            ListSpecilizations.Add(item);
+                        }
+
+                    }
+
+
+                    //Perform a check if object exists in the list
+                    //CheckList(model);
+                    
+                    j++;
+
+                }
+            }
+
+            return ListSpecilizations;
+        }
+
+        //Method 
+        private void Procedural() 
+        {
+            //First copy Everything To temp list
+            TempList = new List<SpecilizationModel>();
+
+            foreach(var specility in ListSpecilizations) 
             {
-                var result = from query in characterContainer
-                             where query == character
-                             select query;
+                TempList.Add(specility);
+            }
 
+            //Then clear ListSpec..., first check if empty or not
+            if(ListSpecilizations != null) 
+            {
+                ListSpecilizations.Clear();
+            }
 
+        }
+
+        private void CheckList(SpecilizationModel model)
+        {
+
+            if (!ListSpecilizations.Exists(x => x.Title == model.Title))
+            {
+               //add all matches to Mainlist
+                ListSpecilizations.Add(model);
+            }
+            else
+            {
+                //Do nothing
             }
         }
-        
+        #endregion
     }
 }
