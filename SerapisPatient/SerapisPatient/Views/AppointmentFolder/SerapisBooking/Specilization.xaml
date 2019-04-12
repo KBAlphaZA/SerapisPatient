@@ -25,7 +25,7 @@
             SeparatorColor="Black"
             SeparatorVisibility="Default"
             HasUnevenRows="True"
-           
+            IsVisible="{Binding ShowUI}"
             x:Name="specilalties" 
             >
 

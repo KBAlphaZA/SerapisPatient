@@ -1,4 +1,4 @@
-﻿using Plugin.Connectivity;
+﻿Uousing Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.behavious;
 using SerapisPatient.Models;
@@ -202,24 +202,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
 
             };
-
-
-            //OLD CODE -->
-            //
-            // int x = 0;
-            //while(x < DateTime.DaysInMonth(DateTime.Now.Year, monthvalue) ) //25
-            //{
-            //int value = x + 1;
-            //selected.MonthValue = value;
-            // Days.Add(selected);
-
-            //this is the replacement code using no object but a string
-            // int value = x + 1;
-            //Days.Add(value);
-
-            // x++;
-            //}
-            //return Days;
         }
 
         //yhis is the same as having the list
@@ -264,28 +246,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
            
         }
 
-        //DoctorListview
-
-        //public void GenerateDoctorList()
-        //{
-        //    Doctors = new ObservableCollection<Doctor>
-        //          {
-        //            new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png" },
-        //            new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Ronaldo ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Buthelezi ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Moodley", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Matsoso ", University="MBchB(UP)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-        //            new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-
-        //    };
-        //}
         #endregion
 
 

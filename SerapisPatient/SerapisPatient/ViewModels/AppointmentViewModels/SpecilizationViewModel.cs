@@ -18,7 +18,7 @@ using SerapisPatient.behavious;
 
 namespace SerapisPatient.ViewModels
 {
-    public class SpecilizationViewModel:BaseViewModel
+    public class SpecilizationViewModel : BaseViewModel
     {
         object CopyOfList;
 
@@ -31,8 +31,10 @@ namespace SerapisPatient.ViewModels
         #endregion
 
         public SpecilizationViewModel()
-        {   
-            GenerateSpecilization(); 
+        {
+            ShowUI = true;
+            GenerateSpecilization();
+            
         }
 
         public ICommand SpecilizationSelectCommand => new Command<SpecilizationModel>(selectspecialization =>
@@ -81,6 +83,7 @@ namespace SerapisPatient.ViewModels
                                      new SpecilizationModel{Title=FieldsOfExpertise.radiologist, Icon=FieldsOfExpertise.radiologistIcon,Description=FieldsOfExpertise.radiologist_Description},
                                       new SpecilizationModel{Title=FieldsOfExpertise.urologist, Icon=FieldsOfExpertise.urologistIcon,Description=FieldsOfExpertise.audiologist_Description }
             };
+            
         }
 
 
@@ -104,40 +107,41 @@ namespace SerapisPatient.ViewModels
         //will go to the event handler
         private  List<SpecilizationModel> Search(string queryText)
         {
-            
-            char[] characterContainer = new char[queryText.Length];
-
+            string capdQueryText = queryText.Substring(0, 1).ToUpper() + queryText.Substring(1,queryText.Length-1);
+                   
             //Run Procedural method
             Procedural();
 
-            var arrayOfQueryString = queryText.ToArray();
+            var arrayOfQueryString = capdQueryText.ToArray();
             
             //Add each letter of the string to the declared char array
             
-                for(int i=0; i<queryText.Length; i++) 
+                for(int i=0; i< capdQueryText.Length; i++) 
                 {
                     int j = 0;
-                   
-                    characterContainer[i] = arrayOfQueryString[i];
+                                  
                     //charcterContainer must compare the Title string in listSpec
                    
-
                     //Returns A twice when i enter a second char
                     foreach(var item in TempList)
                     {
-                         if(item.Title[j] == characterContainer[i])
+                         if(item.Title[j] == arrayOfQueryString[i])
                          {
-                            //Perform a check if object exists in the list & Edit the list
+                           //Perform a check if object exists in the list & Edit the list
                            CheckListIfExist(item);
-                           ListSpecilizations.RemoveAll(x => x.Title[i] != item.Title[j]);
+                        
+                        //Usecase: string 1 = dentist & string 2 = diet 
+                            if (item.Title[j] != arrayOfQueryString[i])
+                            {
+                              ListSpecilizations.Remove(item);
+                            }
                          }
-                            
-                   
                     }
-                j++;
 
-            }
+                    j++;
+                }
             return ListSpecilizations;
+            
         }
 
         // start Method 
@@ -158,7 +162,6 @@ namespace SerapisPatient.ViewModels
             }
 
         }
-
         
         private void CheckListIfExist(SpecilizationModel item)
         {
@@ -167,12 +170,13 @@ namespace SerapisPatient.ViewModels
             {            
                 //add all matches to Mainlist
                 ListSpecilizations.Add(item);
+
+                //ListSpecilizations
+
+
                 
             }
-            else
-            {
-                //Do nothing
-            }
+            
         }
         
         #endregion
