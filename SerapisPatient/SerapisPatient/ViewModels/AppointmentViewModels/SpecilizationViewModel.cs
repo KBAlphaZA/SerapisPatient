@@ -136,7 +136,6 @@ namespace SerapisPatient.ViewModels
                     }
                 j++;
 
-
             }
             return ListSpecilizations;
         }
