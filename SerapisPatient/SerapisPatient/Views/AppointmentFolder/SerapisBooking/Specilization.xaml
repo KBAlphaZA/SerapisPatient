@@ -37,7 +37,7 @@
             <ListView.Header>
                 <Frame BorderColor="Black" 
                        BackgroundColor="White"
-                       HeightRequest="20"
+                       HeightRequest="35"
                        WidthRequest="200"
                        CornerRadius="12"
                        Margin="15,8"
@@ -46,6 +46,8 @@
                                Placeholder="Find specialist"
                                PlaceholderColor="Gray"
                                HorizontalTextAlignment="Center"
+                               HeightRequest="35"
+                               
                                Text="{Binding SearchProffesion}"
                                />
                 </Frame>

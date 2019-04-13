@@ -88,7 +88,6 @@
 
         <control:HorizontalListView ItemsSource="{Binding Notifications}"
                                     HorizontalOptions="FillAndExpand"
-                                    SelectedItem="{Binding SelectedCard}"
                                     ItemHeightRequest="140"
                                     ItemWidthRequest="230"
                                      Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7">
@@ -96,6 +95,9 @@
                 <DataTemplate>
                     <ContentView Padding="5">
                         <Frame  WidthRequest="220"  Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
                             <StackLayout>
                                 <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
                                 <Label TextColor="Black"  Text="{Binding Body}"/>

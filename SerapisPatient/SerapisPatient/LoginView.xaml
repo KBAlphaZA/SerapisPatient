@@ -43,7 +43,7 @@
             </Grid.ColumnDefinitions>
 
             <!--#region The Logo goes here-->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
 
                 <Grid.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -53,6 +53,13 @@
                 </Grid.Margin>
                 
                <!--The Logo here 150x150-->
+                <Label Text="Serapis Patient" 
+                    FontSize="35" 
+                    HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                    VerticalOptions="Center"
+                    TextColor="{StaticResource SeconderyColour}"
+                    FontAttributes="Bold"/>
             </Grid>
             <!--#endregion-->
 
@@ -92,6 +99,7 @@
                     Placeholder="USERNAME"
                     Style="{StaticResource LoginEntryLabels}"
                     Text="{Binding Email, Mode=TwoWay}"
+                    Margin="15,0,15,0"
                     />
             </Grid>
             <!--#endregion-->
@@ -113,6 +121,7 @@
                     IsPassword="True"
                     Style="{StaticResource LoginEntryLabels}"
                     Text="{Binding Password, Mode=TwoWay}"
+                    Margin="15,0,15,0"
                     />
             </Grid>
             <!--#endregion-->

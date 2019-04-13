@@ -2585,26 +2585,26 @@ namespace SerapisPatient.Droid
 			// aapt resource value: 0x7f020057
 			public const int avd_hide_password = 2130837591;
 			
-			// aapt resource value: 0x7f02019c
-			public const int avd_hide_password_1 = 2130837916;
-			
 			// aapt resource value: 0x7f02019d
-			public const int avd_hide_password_2 = 2130837917;
+			public const int avd_hide_password_1 = 2130837917;
 			
 			// aapt resource value: 0x7f02019e
-			public const int avd_hide_password_3 = 2130837918;
+			public const int avd_hide_password_2 = 2130837918;
+			
+			// aapt resource value: 0x7f02019f
+			public const int avd_hide_password_3 = 2130837919;
 			
 			// aapt resource value: 0x7f020058
 			public const int avd_show_password = 2130837592;
 			
-			// aapt resource value: 0x7f02019f
-			public const int avd_show_password_1 = 2130837919;
-			
 			// aapt resource value: 0x7f0201a0
-			public const int avd_show_password_2 = 2130837920;
+			public const int avd_show_password_1 = 2130837920;
 			
 			// aapt resource value: 0x7f0201a1
-			public const int avd_show_password_3 = 2130837921;
+			public const int avd_show_password_2 = 2130837921;
+			
+			// aapt resource value: 0x7f0201a2
+			public const int avd_show_password_3 = 2130837922;
 			
 			// aapt resource value: 0x7f020059
 			public const int BabyIcon = 2130837593;
@@ -3455,11 +3455,11 @@ namespace SerapisPatient.Droid
 			// aapt resource value: 0x7f020173
 			public const int notification_icon_background = 2130837875;
 			
-			// aapt resource value: 0x7f02019a
-			public const int notification_template_icon_bg = 2130837914;
-			
 			// aapt resource value: 0x7f02019b
-			public const int notification_template_icon_low_bg = 2130837915;
+			public const int notification_template_icon_bg = 2130837915;
+			
+			// aapt resource value: 0x7f02019c
+			public const int notification_template_icon_low_bg = 2130837916;
 			
 			// aapt resource value: 0x7f020174
 			public const int notification_tile_bg = 2130837876;
@@ -3528,52 +3528,55 @@ namespace SerapisPatient.Droid
 			public const int RefreshButtonIcon = 2130837897;
 			
 			// aapt resource value: 0x7f02018a
-			public const int route = 2130837898;
+			public const int rightarrow = 2130837898;
 			
 			// aapt resource value: 0x7f02018b
-			public const int SelfPrescriptionIcon = 2130837899;
+			public const int route = 2130837899;
 			
 			// aapt resource value: 0x7f02018c
-			public const int SerapisBookingIcon = 2130837900;
+			public const int SelfPrescriptionIcon = 2130837900;
 			
 			// aapt resource value: 0x7f02018d
-			public const int SettingsIcon = 2130837901;
+			public const int SerapisBookingIcon = 2130837901;
 			
 			// aapt resource value: 0x7f02018e
-			public const int SkinIcon = 2130837902;
+			public const int SettingsIcon = 2130837902;
 			
 			// aapt resource value: 0x7f02018f
-			public const int SpecilizationIcon = 2130837903;
+			public const int SkinIcon = 2130837903;
 			
 			// aapt resource value: 0x7f020190
-			public const int SpineIcon = 2130837904;
+			public const int SpecilizationIcon = 2130837904;
 			
 			// aapt resource value: 0x7f020191
-			public const int tooltip_frame_dark = 2130837905;
+			public const int SpineIcon = 2130837905;
 			
 			// aapt resource value: 0x7f020192
-			public const int tooltip_frame_light = 2130837906;
+			public const int tooltip_frame_dark = 2130837906;
 			
 			// aapt resource value: 0x7f020193
-			public const int UniversityIcon = 2130837907;
+			public const int tooltip_frame_light = 2130837907;
 			
 			// aapt resource value: 0x7f020194
-			public const int UrologyIcon = 2130837908;
+			public const int UniversityIcon = 2130837908;
 			
 			// aapt resource value: 0x7f020195
-			public const int user1 = 2130837909;
+			public const int UrologyIcon = 2130837909;
 			
 			// aapt resource value: 0x7f020196
-			public const int userDeliveryIcon = 2130837910;
+			public const int user1 = 2130837910;
 			
 			// aapt resource value: 0x7f020197
-			public const int userplaceholder = 2130837911;
+			public const int userDeliveryIcon = 2130837911;
 			
 			// aapt resource value: 0x7f020198
-			public const int userSettingsIcon = 2130837912;
+			public const int userplaceholder = 2130837912;
 			
 			// aapt resource value: 0x7f020199
-			public const int WaveIcon = 2130837913;
+			public const int userSettingsIcon = 2130837913;
+			
+			// aapt resource value: 0x7f02019a
+			public const int WaveIcon = 2130837914;
 			
 			static Drawable()
 			{

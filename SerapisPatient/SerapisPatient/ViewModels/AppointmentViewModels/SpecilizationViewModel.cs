@@ -119,9 +119,13 @@ namespace SerapisPatient.ViewModels
                 for(int i=0; i< capdQueryText.Length; i++) 
                 {
                     int j = 0;
-                                  
-                    //charcterContainer must compare the Title string in listSpec
-                   
+
+                //charcterContainer must compare the Title string in listSpec
+                lock (this)
+                {
+                    ListSpecilizations.Clear();
+                }
+                
                     //Returns A twice when i enter a second char
                     foreach(var item in TempList)
                     {
@@ -143,6 +147,7 @@ namespace SerapisPatient.ViewModels
             return ListSpecilizations;
             
         }
+        //EmployeeListView.BeginRefresh();
 
         // start Method 
         private void Procedural() 
@@ -166,13 +171,6 @@ namespace SerapisPatient.ViewModels
             {            
                 //add all matches to Mainlist
                 ListSpecilizations.Add(item);
-
-                //List<string> lstNew = new List<string>();
-                //lstNew.AddRange(lstTest);
-
-                //AddRange() -> Adds the elements of the specified collection to the end of the List<T>.
-                //The result is that the current elements of the list are added to the end of the list, duplicating all the elements.
-
 
 
             }
