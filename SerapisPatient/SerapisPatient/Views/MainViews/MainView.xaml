@@ -4,7 +4,9 @@
              x:Class="SerapisPatient.Views.MainViews.MainView"
              xmlns:control="clr-namespace:SerapisPatient.Controls"
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
-             xmlns:behaviors="clr-namespace:SerapisPatient.behavious"            
+             xmlns:behaviors="clr-namespace:SerapisPatient.behavious"   
+             xmlns:views="clr-namespace:SerapisPatient.PopUpMessages"
+            
              Title="{Binding Title}"
              >
     <ContentPage.ToolbarItems>
@@ -95,9 +97,7 @@
                 <DataTemplate>
                     <ContentView Padding="5">
                         <Frame  WidthRequest="220"  Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True" >
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                            </Frame.GestureRecognizers>
+                            
                             <StackLayout>
                                 <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
                                 <Label TextColor="Black"  Text="{Binding Body}"/>
@@ -107,6 +107,8 @@
                 </DataTemplate>
             </control:HorizontalListView.ItemTemplate>
         </control:HorizontalListView>
+        
+       
 
 
 

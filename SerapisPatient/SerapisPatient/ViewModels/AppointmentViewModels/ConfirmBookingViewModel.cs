@@ -23,6 +23,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
         public Doctor SelectedDoctor { get; set; }
+        public PatientUser patient { get; set; } 
         public MedicalBuildingModel SelectedMedicalBuilding { get; set; }
         public DateTime FullDateAndMonth { get; set; }
 
@@ -66,7 +67,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public ConfirmBookingViewModel(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel, string _FullDateAndMonth)
         {
-            //  1)Xamlbindings. 2) One method to handle all bindings & keep things neat
+            // 1) Xamlbindings. 
+            // 2) One method to handle all bindings & keep things neat
             XamlBindings(enquiredDoctor, _medicalBuildingModel, _FullDateAndMonth);
 
             NavigateToHomePageCommand = new Command(ConfirmBooking);
@@ -123,7 +125,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 //Task.Delay(300);
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                   // var isSuccess = await services.CreateAppointment(SelectedDoctor, SelectedMedicalBuilding);
+                    //var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
                 }
                 else
                 {

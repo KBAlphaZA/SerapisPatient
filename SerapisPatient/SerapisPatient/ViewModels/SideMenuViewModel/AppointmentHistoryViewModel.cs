@@ -26,7 +26,7 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel
         {
             AppointmentHistoryList = new ObservableCollection<Appointment>()
             {
-                 new Appointment{ DateBooked=DateTime.Now.ToString(), DoctorBooked=doctorSeen, TimeBooked="13h00", Venue="Grays hospital, 6 Calsi gardens, 11 Sunnyside Lane, Pinetown, 3610"}
+                 new Appointment{ DateBooked=DateTime.Now.ToString(), DoctorBooked=doctorSeen.LastName, TimeBooked="13h00", Venue="Grays hospital, 6 Calsi gardens, 11 Sunnyside Lane, Pinetown, 3610"}
             };
         }
         

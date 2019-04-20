@@ -21,6 +21,7 @@ namespace SerapisPatient
 	{
         //public static PublicClientApplication AuthenticationClient { get; set; }
         public static string User = "Ceba";
+        //public PatientUser patient { get; set; }
         public static bool CheckLogin { get; set; }
         #region Login services
         GoogleAuthentication googleToken = new GoogleAuthentication();
@@ -32,7 +33,7 @@ namespace SerapisPatient
         public App ()
 		{
 			InitializeComponent();
-            //MainPage = new NavigationPage(new CameraPage());
+           
             Init();
 
         }
@@ -43,9 +44,9 @@ namespace SerapisPatient
         {
             //check if the user still has a token for login
 
-            //CheckLogin(true);
+            CheckLogin = false;
 
-            if (!CheckLogin)
+            if (!CheckLogin == true)
             {
                  MainPage = new NavigationPage(new LoginView());
                 

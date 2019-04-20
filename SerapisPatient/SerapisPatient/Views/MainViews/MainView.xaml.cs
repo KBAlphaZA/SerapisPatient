@@ -26,7 +26,7 @@ namespace SerapisPatient.Views.MainViews
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //ConfirmBookingPopUp.OnExpandTapped += Expand
+            
             
         }
         protected override void OnDisappearing()
@@ -35,11 +35,6 @@ namespace SerapisPatient.Views.MainViews
            
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            var pageHeight = Height;
-            //var section = ConfirmBookingPopUp.FirstSectionHeight;
-            
-        }
+       
     }
 }
