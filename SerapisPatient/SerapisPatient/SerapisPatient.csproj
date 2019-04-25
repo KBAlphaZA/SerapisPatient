@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="2.5.4" />
     <PackageReference Include="LiteDB" Version="4.1.4" />
     <PackageReference Include="MongoDB.Bson" Version="2.7.0" />
@@ -83,6 +84,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="TabbedPages\ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TemplateViews\PracticeViewCard.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AppointmentFolder\Booking\BookingSpecialization.xaml">

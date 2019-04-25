@@ -1,4 +1,5 @@
 ﻿
+using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Driver.Linq;
 using SerapisPatient.behavious;
 using SerapisPatient.Models;
@@ -21,6 +22,7 @@ using Xamarin.Forms.BehaviorsPack;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
+
     public class MedicalBuildingViewModel : BaseViewModel
     {
 
@@ -96,26 +98,101 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             }
 
         }
+
+        #region Khanyisani carousel code
+        private int myPostion;
+
+        public int MyPostion
+        {
+            get
+            {
+                return myPostion;
+            }
+            set
+            {
+                myPostion = value;
+                OnPropertyChanged("MyPostion");
+                myPostion = value;
+            }
+        }
+
+        //public ObservableCollection<MedicalBuildingModel> PracticesList;
+
+        private ObservableCollection<MedicalBuildingModel> practiceList;
+
+        public ObservableCollection<MedicalBuildingModel> PracticesList
+        {
+            get
+            {
+                return practiceList;
+            }
+            set
+            {
+                practiceList = value;
+            }
+        }
+
+
+        private void MedicalBuildingViewInit(SpecilizationModel _specilizationData)
+        {
+            var myCarsoul = new CarouselViewControl();
+
+            Title = _specilizationData.Title;
+
+            Icon = _specilizationData.Icon;
+
+            Description = _specilizationData.Description;
+
+            myCarsoul.ItemsSource = PracticesList;
+            myCarsoul.Position = 0;
+            
+        }
+
         #endregion
 
+        #endregion
 
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
         {
-            GenerateMedicalBuildingModel();
-            //GetAllPracticesAsync().Start();
-            //Bindings
-            Title = _specilizationData.Title;
-            Icon = _specilizationData.Icon;
-            Description = _specilizationData.Description;
 
-
-           // GenerateMedicalBuildingModel();
-            
-            ItemSelected = new Command<MedicalBuildingModel>(args =>
+            PracticesList = new ObservableCollection<MedicalBuildingModel>()
             {
-                _MedicalBuildingData = args;
-                HandleNavigation(_MedicalBuildingData);
-            });
+                new MedicalBuildingModel{Distance=7.8, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=5},
+                new MedicalBuildingModel{Distance=7.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Cromptom Hospital", PatientsCurrentlyAtPractice=3},
+                new MedicalBuildingModel{Distance=6.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "GrooteSchuurHospital",PatientsCurrentlyAtPractice=12},
+                new MedicalBuildingModel{Distance=12.5,MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Pinetown Clinic", PatientsCurrentlyAtPractice=20},
+                new MedicalBuildingModel{Distance=8.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Westville Hospital", PatientsCurrentlyAtPractice=8},
+                new MedicalBuildingModel{Distance=5.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Medicross: Pinetown", PatientsCurrentlyAtPractice=11},
+                new MedicalBuildingModel{Distance=2.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=15},
+            };
+
+            MedicalBuildingViewInit(_specilizationData);
+        }
+
+        //BONG'S Constructor//
+
+        //public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
+        //{
+        //    GenerateMedicalBuildingModel();
+        //    //GetAllPracticesAsync().Start();
+        //    //Bindings
+        //    Title = _specilizationData.Title;
+        //    Icon = _specilizationData.Icon;
+        //    Description = _specilizationData.Description;
+
+
+        //   // GenerateMedicalBuildingModel();
+            
+        //    ItemSelected = new Command<MedicalBuildingModel>(args =>
+        //    {
+        //        _MedicalBuildingData = args;
+        //        HandleNavigation(_MedicalBuildingData);
+        //    });
+        //}
+
+        public MedicalBuildingViewModel()
+        {
+
         }
 
         public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
@@ -180,6 +257,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         //    //filter function, this will filter by Medical building and specialization
         //    return null;
         //}
+
+
 
     }
 }

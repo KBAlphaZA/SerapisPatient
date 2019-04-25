@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using CarouselView.FormsPlugin.iOS;
 using Foundation;
 using Lottie.Forms.iOS.Renderers;
 using UIKit;
@@ -26,6 +26,7 @@ namespace SerapisPatient.iOS
 
             AnimationViewRenderer.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+            CarouselViewRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

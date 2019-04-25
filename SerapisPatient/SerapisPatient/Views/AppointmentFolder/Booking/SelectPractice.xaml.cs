@@ -18,9 +18,9 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	public partial class SelectPractice : ContentPage
 	{
         MedicalBuildingViewModel viewModel;
-        public SelectPractice (SpecilizationModel _specilizationData)
-		{
-			InitializeComponent ();
+        public SelectPractice(SpecilizationModel _specilizationData)
+        {
+            InitializeComponent();
             viewModel = new MedicalBuildingViewModel(_specilizationData);
             BindingContext = viewModel;
         }

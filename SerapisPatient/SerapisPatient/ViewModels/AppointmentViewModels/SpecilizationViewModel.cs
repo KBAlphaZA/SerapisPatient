@@ -20,7 +20,8 @@ namespace SerapisPatient.ViewModels
 {
     public class SpecilizationViewModel : BaseViewModel
     {
-        object CopyOfList;
+     
+        private char[] searchString=new char[30];
 
         #region Properties
         public SpecilizationModel _specilizationData;
@@ -167,18 +168,51 @@ namespace SerapisPatient.ViewModels
                 //add all matches to Mainlist
                 ListSpecilizations.Add(item);
 
-                //List<string> lstNew = new List<string>();
-                //lstNew.AddRange(lstTest);
-
-                //AddRange() -> Adds the elements of the specified collection to the end of the List<T>.
-                //The result is that the current elements of the list are added to the end of the list, duplicating all the elements.
-
-
-
             }
 
         }
-        
+
+
+
+        #endregion
+
+        #region Beta Search Methods
+
+        private void SearchBetaInitalization(string userInput)
+        {
+            foreach (var letter in userInput)
+            {
+                for (int i = 0; i < userInput.Length; i++)
+                {
+                    searchString[i] = letter;
+                }
+            }
+
+            SearchListForMatch(searchString);
+        }
+
+        private List<SpecilizationModel> SearchListForMatch(char[] word)
+        {
+            TempList = ListSpecilizations;
+
+            ListSpecilizations.Clear();
+
+            if (word != null)
+            {
+                foreach (var item in TempList)
+                {
+                    
+                }
+
+                return null;
+            }
+            else
+            {
+                //Return the full list
+               return ListSpecilizations=TempList;
+            }
+        }
+
         #endregion
     }
 }
