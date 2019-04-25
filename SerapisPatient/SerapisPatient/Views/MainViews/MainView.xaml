@@ -4,7 +4,9 @@
              x:Class="SerapisPatient.Views.MainViews.MainView"
              xmlns:control="clr-namespace:SerapisPatient.Controls"
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
-             xmlns:behaviors="clr-namespace:SerapisPatient.behavious"            
+             xmlns:behaviors="clr-namespace:SerapisPatient.behavious"   
+             xmlns:views="clr-namespace:SerapisPatient.PopUpMessages"
+            
              Title="{Binding Title}"
              >
     <ContentPage.ToolbarItems>
@@ -88,7 +90,6 @@
 
         <control:HorizontalListView ItemsSource="{Binding Notifications}"
                                     HorizontalOptions="FillAndExpand"
-                                    SelectedItem="{Binding SelectedCard}"
                                     ItemHeightRequest="140"
                                     ItemWidthRequest="230"
                                      Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7">
@@ -96,6 +97,7 @@
                 <DataTemplate>
                     <ContentView Padding="5">
                         <Frame  WidthRequest="220"  Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True" >
+                            
                             <StackLayout>
                                 <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
                                 <Label TextColor="Black"  Text="{Binding Body}"/>
@@ -105,6 +107,8 @@
                 </DataTemplate>
             </control:HorizontalListView.ItemTemplate>
         </control:HorizontalListView>
+        
+       
 
 
 

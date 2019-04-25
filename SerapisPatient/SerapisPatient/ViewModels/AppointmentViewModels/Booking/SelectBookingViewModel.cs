@@ -30,6 +30,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
         private List<Doctor> _doctors;
+        private List<Doctor> convert_doctors;
 
         public List<Doctor> DoctorAvaliable
         {
@@ -39,6 +40,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                 _doctors = value;
                 OnPropertyChanged();
             }
+            
         }
 
         public ObservableCollection<Doctor> Doctors { get; set; }
@@ -133,11 +135,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //GenerateDoctorList();
             
             IsBusy = false;
-            ShowUI = false;
+            //Animation
+            ShowUI = true;
             Showlistview = false;
             //DateSelected = SelectedItem.MonthValue.ToString();
             Months = GetMonths();
             GenerateDaysOfTheMonth();
+            
 
         }
 
@@ -243,7 +247,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public async Task GetDoctors()
         {
             DoctorAvaliable = await _apiServices.GetDoctorsAsync();
-           
+            
         }
 
         #endregion
@@ -292,7 +296,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             finally
             {
                 IsBusy = false;
-                
+                ShowUI = false;
                 Showlistview = true;
             }
 

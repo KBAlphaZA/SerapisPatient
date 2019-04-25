@@ -128,6 +128,7 @@
     <AndroidAsset Include="Assets\ErrorAnimation.json" />
     <AndroidAsset Include="Assets\NetworkError.json" />
     <AndroidAsset Include="Assets\hospital_bed.json" />
+    <AndroidAsset Include="Assets\Doctorlistanimation.json" />
     <None Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
@@ -1068,6 +1069,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\rightarrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using SerapisPatient.ViewModels;
+﻿using SerapisPatient.PopUpMessages;
+using SerapisPatient.ViewModels;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,19 @@ namespace SerapisPatient.Views.MainViews
 			InitializeComponent ();
             BindingContext = viewModel = new MainViewModel();
         }
+        //SelectedItem="{Binding SelectedCard}"
+        const uint AnimationSpeed = 300;
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
+            
+        }
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
            
         }
-        
 
        
     }

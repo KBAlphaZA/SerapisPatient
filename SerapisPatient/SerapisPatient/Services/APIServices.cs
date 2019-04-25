@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
@@ -37,15 +38,18 @@ namespace SerapisPatient.Services
 
             return response.IsSuccessStatusCode;// this should return a bool
         }
-        public async Task<bool> CreateAppointment(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel)
+        public async Task<bool> CreateAppointment(PatientUser patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel)
         {
 
             var model = new Appointment
             {
-
-                DoctorBooked = enquiredDoctor,
-                //MedicalBuildingBooked = _medicalBuildingModel
-                //i edited out the above for the timebeing
+                appointmentId = ObjectId.GenerateNewId(),
+                Patient = patient.Id.ToString(),
+                DateandTime = bookedDate,
+                Venue = medicalBuildingModel.Id,
+                DoctorBooked = enquiredDoctor.Id,
+                IsSerapisBooking = false,
+                HasSeenGp = false
             };
             var json = JsonConvert.SerializeObject(model);
 

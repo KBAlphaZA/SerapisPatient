@@ -125,6 +125,7 @@
     <BundleResource Include="Resources\ErrorAnimation.json" />
     <BundleResource Include="Resources\NetworkError.json" />
     <BundleResource Include="Resources\BarCodeScan.json" />
+    <BundleResource Include="Resources\Doctorlistanimation.json" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -198,5 +199,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DependencyServiceiOS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rightarrow.png" />
   </ItemGroup>
 </Project>

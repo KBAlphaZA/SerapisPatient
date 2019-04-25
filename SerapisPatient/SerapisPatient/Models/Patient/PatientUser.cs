@@ -12,17 +12,17 @@ namespace SerapisPatient.Models
     {
         [BsonId]
         public ObjectId Id { get; set; }
-        
-        [JsonProperty("password")]
-        public string Password { get; set; }
 
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 
+        [JsonProperty("password")]
+        public string Password { get; set; }
+
         [JsonProperty("profilePicture")]
         public string ProfilePicture { get; set; }
 
-        [JsonProperty("surname")]
+        [JsonProperty(";astName")]
         public string Surname { get; set; }
 
         [JsonProperty("age")]
