@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Plugin.CurrentActivity;
 using Plugin.GoogleClient;
+using CarouselView.FormsPlugin.Android;
 
 namespace SerapisPatient.Droid
 {
@@ -24,6 +25,9 @@ namespace SerapisPatient.Droid
             //ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Rg.Plugins.Popup.Popup.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            //Carousel view package inint
+            CarouselViewRenderer.Init();
 
             //Location Services permission Android
             CrossCurrentActivity.Current.Init(this, bundle);

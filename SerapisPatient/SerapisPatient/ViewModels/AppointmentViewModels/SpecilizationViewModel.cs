@@ -20,7 +20,8 @@ namespace SerapisPatient.ViewModels
 {
     public class SpecilizationViewModel : BaseViewModel
     {
-        object CopyOfList;
+     
+        private char[] searchString=new char[30];
 
         #region Properties
         public SpecilizationModel _specilizationData;
@@ -119,13 +120,9 @@ namespace SerapisPatient.ViewModels
                 for(int i=0; i< capdQueryText.Length; i++) 
                 {
                     int j = 0;
-
-                //charcterContainer must compare the Title string in listSpec
-                lock (this)
-                {
-                    ListSpecilizations.Clear();
-                }
-                
+                                  
+                    //charcterContainer must compare the Title string in listSpec
+                   
                     //Returns A twice when i enter a second char
                     foreach(var item in TempList)
                     {
@@ -147,7 +144,6 @@ namespace SerapisPatient.ViewModels
             return ListSpecilizations;
             
         }
-        //EmployeeListView.BeginRefresh();
 
         // start Method 
         private void Procedural() 
@@ -172,11 +168,51 @@ namespace SerapisPatient.ViewModels
                 //add all matches to Mainlist
                 ListSpecilizations.Add(item);
 
-
             }
 
         }
-        
+
+
+
+        #endregion
+
+        #region Beta Search Methods
+
+        private void SearchBetaInitalization(string userInput)
+        {
+            foreach (var letter in userInput)
+            {
+                for (int i = 0; i < userInput.Length; i++)
+                {
+                    searchString[i] = letter;
+                }
+            }
+
+            SearchListForMatch(searchString);
+        }
+
+        private List<SpecilizationModel> SearchListForMatch(char[] word)
+        {
+            TempList = ListSpecilizations;
+
+            ListSpecilizations.Clear();
+
+            if (word != null)
+            {
+                foreach (var item in TempList)
+                {
+                    
+                }
+
+                return null;
+            }
+            else
+            {
+                //Return the full list
+               return ListSpecilizations=TempList;
+            }
+        }
+
         #endregion
     }
 }

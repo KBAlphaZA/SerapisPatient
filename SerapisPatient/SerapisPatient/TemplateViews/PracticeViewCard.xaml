@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.TemplateViews.PracticeViewCard">
+    <ContentView.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" 
+                       Source="{Binding MedicalBuildingImage}"
+                       Aspect="AspectFill"
+                       />
+
+                <Grid Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+
+                    <!--Practice name-->
+                    <Grid Grid.Row="0" BackgroundColor="Yellow">
+                        <Label Text="{Binding PracticeName}"
+                               TextColor="Black" 
+                               FontAttributes="Bold"
+                               FontSize="25"
+                               />
+                    </Grid>
+
+                    <!--The distance-->
+                    <Grid Grid.Row="1" BackgroundColor="Green">
+                        <Grid ColumnSpacing="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+
+                        <Image Grid.Column="0"
+                               Aspect="AspectFit"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Source="route.png"
+                               />
+
+                        <Label Grid.Column="1"
+                               VerticalOptions="Center"  
+                               TextColor="Black"  
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
+                               HorizontalOptions="Start"
+                               FontSize="Medium"
+                               Text="{Binding Distance,StringFormat=' {0} Kilometers away'}" 
+                               />
+
+                    </Grid>
+
+                    <!--Full details-->
+                    <Grid Grid.Row="2">
+                        <Button 
+                            BackgroundColor="White" 
+                            HorizontalOptions="Center" 
+                            BorderColor="Pink" 
+                            Text="Full details" 
+                            TextColor="Pink"
+                            VerticalOptions="Center"
+                            BorderWidth="6"
+                            />
+                    </Grid>
+                    
+                </Grid>
+                
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
