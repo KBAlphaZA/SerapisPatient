@@ -122,7 +122,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             IsBusy = true;
             try
             {
-                //Task.Delay(300);
+                
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     //var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
