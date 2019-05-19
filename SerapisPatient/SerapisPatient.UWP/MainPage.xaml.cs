@@ -21,6 +21,7 @@ namespace SerapisPatient.UWP
         public MainPage()
         {
             this.InitializeComponent();
+
             ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
             AnimationViewRenderer.Init();
             LoadApplication(new SerapisPatient.App());

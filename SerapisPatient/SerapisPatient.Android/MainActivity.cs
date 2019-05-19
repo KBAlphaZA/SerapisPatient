@@ -9,6 +9,7 @@ using Android.OS;
 using Plugin.CurrentActivity;
 using Plugin.GoogleClient;
 using CarouselView.FormsPlugin.Android;
+using Xamarin.Forms.PancakeView.Droid;
 
 namespace SerapisPatient.Droid
 {
@@ -24,13 +25,18 @@ namespace SerapisPatient.Droid
             base.OnCreate(bundle);
             //ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Rg.Plugins.Popup.Popup.Init(this, bundle);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             //Carousel view package inint
             CarouselViewRenderer.Init();
 
+            //Pancakeview package(gradients)
+            PancakeViewRenderer.Init();
+
             //Location Services permission Android
             CrossCurrentActivity.Current.Init(this, bundle);
+            
             //Plugin code(Google authentication
             GoogleClientManager.Initialize(this);
 
