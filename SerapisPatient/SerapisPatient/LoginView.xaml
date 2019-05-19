@@ -5,6 +5,7 @@
              x:Class="SerapisPatient.LoginView"
              BackgroundColor="#e7e7e7"
             NavigationPage.HasNavigationBar="False"
+            xmlns:paint="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              >
 
 
@@ -42,6 +43,15 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
 
+            <!--Background Color-->
+            <paint:PancakeView Grid.Row="0" Grid.RowSpan="9" 
+                               Grid.Column="0" Grid.ColumnSpan="2"
+                               BackgroundGradientStartColor="#BBD2C5"
+                               BackgroundColor="#536976"
+                               BackgroundGradientEndColor="#292E49"
+                               BackgroundGradientAngle="45"
+                               HorizontalOptions="FillAndExpand" 
+                               />
             <!--#region The Logo goes here-->
             <Grid Grid.Row="0" Grid.ColumnSpan="2">
 
@@ -53,13 +63,11 @@
                 </Grid.Margin>
                 
                <!--The Logo here 150x150-->
-                <Label Text="Serapis Patient" 
-                    FontSize="35" 
-                    HorizontalOptions="CenterAndExpand"
-                       HorizontalTextAlignment="Center"
-                    VerticalOptions="Center"
-                    TextColor="{StaticResource SeconderyColour}"
-                    FontAttributes="Bold"/>
+                <Image Source="logo_transparent.png"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HeightRequest="200"
+                       />
             </Grid>
             <!--#endregion-->
 
@@ -72,14 +80,7 @@
                         <On Platform="iOS" Value="14,0,0,0"/>
                     </OnPlatform>
                 </Grid.Margin>
-                <Label 
-                    Text="Sign in" 
-                    FontSize="20" 
-                    HorizontalOptions="Start" 
-                    VerticalOptions="Center"
-                    TextColor="{StaticResource SeconderyColour}"
-                    FontAttributes="Bold"
-                    />
+              
             </Grid>
             <!--#endregion-->
 
@@ -95,8 +96,10 @@
 
                 <Entry 
                     HorizontalOptions="Fill" 
-                    VerticalOptions="End" 
-                    Placeholder="USERNAME"
+                    PlaceholderColor="White"
+                    VerticalOptions="End"
+                    TextColor="White"
+                    Placeholder="E-Mail"
                     Style="{StaticResource LoginEntryLabels}"
                     Text="{Binding Email, Mode=TwoWay}"
                     Margin="15,0,15,0"
@@ -116,6 +119,8 @@
 
                 <Entry 
                     Placeholder="PASSWORD" 
+                    PlaceholderColor="White"
+                    TextColor="White"
                     VerticalOptions="End" 
                     HorizontalOptions="Fill"
                     IsPassword="True"
@@ -143,9 +148,10 @@
                 </Grid.Margin>
 
                 <Button Text="Login" 
+                        FontSize="20"
                         CornerRadius="20" 
                         TextColor="White"
-                        BackgroundColor="{StaticResource ButtonColour}"
+                        BackgroundColor="#a5b6c0"
                         Command="{Binding LoginOnClick}"
                         />
             </Grid>
@@ -162,8 +168,10 @@
 
                 <Button Text="Sign Up" 
                         CornerRadius="20" 
+                        FontSize="20"
                         TextColor="White"
-                        BackgroundColor="{StaticResource ButtonColour}"
+                        BorderColor="White"
+                        BackgroundColor="#a5b6c0"
                         Command="{Binding RegisterOnClick}"
                         />
             </Grid>
@@ -172,6 +180,7 @@
             <!--#region sign in lable:with other services-->
             <Grid Grid.Row="6" Grid.ColumnSpan="2">
                 <Label Text="Or sign in with:" 
+                       TextColor="White"
                        HorizontalOptions="Center" 
                        VerticalOptions="Center"
                        FontSize="Medium"
@@ -273,7 +282,7 @@
                     </OnPlatform>
                 </Grid.Margin>
 
-                <Label Text="Forgot Password" HorizontalOptions="Center" FontSize="Medium">
+                <Label Text="Forgot Password" HorizontalOptions="Center" TextColor="White" FontSize="Medium">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RestThePassword}"/>
                     </Label.GestureRecognizers>

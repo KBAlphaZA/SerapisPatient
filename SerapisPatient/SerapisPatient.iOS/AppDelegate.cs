@@ -5,6 +5,7 @@ using CarouselView.FormsPlugin.iOS;
 using Foundation;
 using Lottie.Forms.iOS.Renderers;
 using UIKit;
+using Xamarin.Forms.PancakeView.iOS;
 
 namespace SerapisPatient.iOS
 {
@@ -25,8 +26,14 @@ namespace SerapisPatient.iOS
         {
 
             AnimationViewRenderer.Init();
+
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+
             CarouselViewRenderer.Init();
+
+            //Pancakeview package(gradients)
+            PancakeViewRenderer.Init();
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
