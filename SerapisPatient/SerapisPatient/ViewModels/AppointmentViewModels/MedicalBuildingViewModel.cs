@@ -100,6 +100,9 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
 
         #region Khanyisani carousel code
+
+        public Command selectedItem {get; set; }
+
         private int myPostion;
 
         public int MyPostion
@@ -154,6 +157,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
         {
+
+            selectedItem = new Command<MedicalBuildingModel>(args => 
+            {
+                _MedicalBuildingData = args;
+                HandleNavigation(_MedicalBuildingData);
+            });
 
             PracticesList = new ObservableCollection<MedicalBuildingModel>()
             {
