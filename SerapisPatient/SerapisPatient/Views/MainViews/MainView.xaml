@@ -6,111 +6,112 @@
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
              xmlns:behaviors="clr-namespace:SerapisPatient.behavious"   
              xmlns:views="clr-namespace:SerapisPatient.PopUpMessages"
-            
+             xmlns:flex="clr-namespace:Flex.Controls;assembly=Flex"
              Title="{Binding Title}"
              >
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
     </ContentPage.ToolbarItems>
+
     <Grid RowSpacing="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <!--Row 0-->
-            <RowDefinition Height="35"/>
-            <!--Row 1-->
-            <RowDefinition Height="35"/>
-            <!--Row 2-->
-
-            <RowDefinition Height="auto"/>
-            <!--Row 3-->
-            <RowDefinition Height="auto"/>
-            <!--Row 4-->
-            <RowDefinition Height="auto"/>
-            <!--Row 5-->
-            <RowDefinition Height="auto"/>
-            <!--Row 6-->
-            <RowDefinition Height="*"/>
-            <!--Row 7-->
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="7.5*"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-        <!--Row 0-->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <!--Row 0-->
+                <RowDefinition Height="10"/>
+                <!--Row 1-->
+                <RowDefinition Height="35"/>
+                <!--Row 2-->
+                <RowDefinition Height="35"/>
+                <!--Row 3-->
+
+                <RowDefinition Height="auto"/>
+                <!--Row 4-->
+                <RowDefinition Height="auto"/>
+                <!--Row 5-->
+                <RowDefinition Height="auto"/>
+                <!--Row 6-->
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="7.5*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- FIRST TWO LABELS-->
+            <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
+
+            <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" />
+
+            <BoxView x:Name="appointmentframe" HeightRequest="60" Grid.Row="3" Grid.ColumnSpan="4"  Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="60,0,60,0" >
+                <BoxView.Behaviors>
+                    <control:ViewTappedButtonBehavior Command="{Binding NavigateToAppointmentPageCommand}" AnimationType="Scale" />
+                </BoxView.Behaviors>
+
+            </BoxView>
+            <Label TextColor="White" Text="Make An Appointment" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"/>
 
 
-        <!-- FIRST TWO LABELS-->
-        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
-
-        <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" />
-
-        <BoxView x:Name="appointmentframe" HeightRequest="60" Grid.Row="3" Grid.ColumnSpan="4"  Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}" CornerRadius="60,0,60,0" >
-            <BoxView.Behaviors>
-                <control:ViewTappedButtonBehavior Command="{Binding NavigateToAppointmentPageCommand}" AnimationType="Scale" />
-            </BoxView.Behaviors>         
-
-        </BoxView>
-        <Label TextColor="White" Text="Make An Appointment" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <Image Grid.Column="1" Grid.Row="3" Source="AppointmentIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
 
 
-        <Image Grid.Column="1" Grid.Row="3" Source="AppointmentIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+            <!--Row 4-->
+            <BoxView x:Name="appointmentframe1" HeightRequest="60" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0">
+                <BoxView.Behaviors>
+                    <control:ViewTappedButtonBehavior Command="{Binding NavigateToDeliveryPageCommand}" AnimationType="Scale" />
+                </BoxView.Behaviors>
+
+            </BoxView>
+            <Label TextColor="White" Text="Order Your Medication" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="4" Grid.Column="2" />
+            <Image Grid.Column="1" Grid.Row="4" Source="DeliveryIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+
+            <!--Row 5-->
+
+            <BoxView x:Name="appointmentframe2" HeightRequest="60" Grid.Row="5" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0" >
+
+                <BoxView.Behaviors>
+                    <control:ViewTappedButtonBehavior Command="{Binding NavigateToCameraPageCommand}" AnimationType="Scale" />
+                </BoxView.Behaviors>
+
+            </BoxView>
+            <Label TextColor="White" Text="Scan Delivery Code" Grid.ColumnSpan="2" FontAttributes="Bold" Grid.Row="5" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Image Grid.Column="1" Grid.Row="5" Source="QrCodeIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
 
 
-        <!--Row 4-->
-        <BoxView x:Name="appointmentframe1" HeightRequest="60" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0">
-            <BoxView.Behaviors>
-                <control:ViewTappedButtonBehavior Command="{Binding NavigateToDeliveryPageCommand}" AnimationType="Scale" />
-            </BoxView.Behaviors>
+            <!--Row 6-->
 
-        </BoxView>
-        <Label TextColor="White" Text="Order Your Medication" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontAttributes="Bold" Grid.Row="4" Grid.Column="2" />
-        <Image Grid.Column="1" Grid.Row="4" Source="DeliveryIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+            <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="6"/>
+        </Grid>
+        
+        <!--Collectionview-->
+        <Grid Grid.Row="1">
 
-        <!--Row 5-->
-
-        <BoxView x:Name="appointmentframe2" HeightRequest="60" Grid.Row="5" Grid.ColumnSpan="4" Grid.Column="1"  BackgroundColor="{StaticResource SeconderyColour}"  CornerRadius="60,0,60,0" >
-            
-            <BoxView.Behaviors>
-                <control:ViewTappedButtonBehavior Command="{Binding NavigateToCameraPageCommand}" AnimationType="Scale" />
-            </BoxView.Behaviors>
-            
-        </BoxView>
-        <Label TextColor="White" Text="Scan Delivery Code" Grid.ColumnSpan="2" FontAttributes="Bold" Grid.Row="5" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-        <Image Grid.Column="1" Grid.Row="5" Source="QrCodeIcon.png" HeightRequest="60" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
-
-
-        <!--Row 6-->
-
-        <Label Text="Notice Board: " TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="6"/>
-
-        <!--Row 7-->
-
-        <control:HorizontalListView ItemsSource="{Binding Notifications}"
+            <control:HorizontalListView ItemsSource="{Binding Notifications}"
                                     HorizontalOptions="FillAndExpand"
                                     ItemHeightRequest="140"
                                     ItemWidthRequest="230"
-                                     Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7">
-            <control:HorizontalListView.ItemTemplate>
-                <DataTemplate>
-                    <ContentView Padding="5">
-                        <Frame  WidthRequest="220"  Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True" >
-                            
-                            <StackLayout>
-                                <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
-                                <Label TextColor="Black"  Text="{Binding Body}"/>
-                            </StackLayout>
-                        </Frame>
-                    </ContentView>
-                </DataTemplate>
-            </control:HorizontalListView.ItemTemplate>
-        </control:HorizontalListView>
-        
-       
+                                    >
+                <control:HorizontalListView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Padding="5">
+                            <Frame  WidthRequest="220"  Margin="10,0" BorderColor="LightGray" CornerRadius="18" HasShadow="True" >
 
-
+                                <StackLayout>
+                                    <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
+                                    <Label TextColor="Black"  Text="{Binding Body}"/>
+                                </StackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </control:HorizontalListView.ItemTemplate>
+            </control:HorizontalListView>
+        </Grid>
 
     </Grid>
 </ContentPage>
