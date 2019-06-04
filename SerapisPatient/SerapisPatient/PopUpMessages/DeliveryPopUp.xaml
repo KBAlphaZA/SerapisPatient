@@ -1,13 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<popUp:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popUp:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.PopUpMessages.DeliveryPopUp"
              xmlns:popUp="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             xmlns:popUpAnimation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             >
-
-    <!--The thing left to do on this pop up is format the message text and make the text a little bit bigger than now-->
-
+             xmlns:popUpAnimation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup">
     <popUp:PopupPage.Resources>
         <Style TargetType="Label" x:Key="ButtonLabel">
             <Setter Property="FontSize" Value="Large"/>
@@ -74,7 +70,7 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer  Command="{Binding StartProcessCommand}"/>
                             </Grid.GestureRecognizers>
-                            
+
                         </Grid>
 
 
@@ -86,15 +82,14 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding CloseCommand}"/>
                             </Grid.GestureRecognizers>
-                            
+
                         </Grid>
-                    
+
                     </Grid>
                 </Grid>
-                
+
             </Grid>
-            
+
         </Grid>
     </popUp:PopupPage.Content>
-    
 </popUp:PopupPage>

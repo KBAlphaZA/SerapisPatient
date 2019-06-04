@@ -93,9 +93,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         private async void ConfirmBooking() //this method can pass through an object -Bonga
         {
-
-            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "Warning!, There was a problem with your Network Connection"));
-
             await MakeBookingAsync();
 
             //if the booking fails dont navigate anywhere just notify the user that there was an error

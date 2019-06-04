@@ -313,8 +313,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         //Navigation
         private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
         {
-            //This sends the message of itemSelected       
-            Task.Delay(500);
             await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);
         }
 

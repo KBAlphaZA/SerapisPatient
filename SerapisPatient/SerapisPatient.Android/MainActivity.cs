@@ -37,16 +37,11 @@ namespace SerapisPatient.Droid
             //Location Services permission Android
             CrossCurrentActivity.Current.Init(this, bundle);
             
-            //Plugin code(Google authentication
-            GoogleClientManager.Initialize(this);
+           
 
             LoadApplication(new App());
         }
-        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
-        }
+        
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {

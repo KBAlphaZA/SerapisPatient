@@ -45,8 +45,7 @@ namespace SerapisPatient.ViewModels
         public LoginViewModel()
         {
             //GoogleLogin
-            LoginCommand = new Command(LoginAsync);
-            _googleClientManager = CrossGoogleClient.Current;
+            
             //Custom Login
             LoginOnClick = new Command(LoginRequestAsync);
             RestThePassword = new Command(RestPassword);
@@ -63,87 +62,6 @@ namespace SerapisPatient.ViewModels
         /// </summary>
         
         #region Methods
-            
-            //Plugin Google Code
-
-        public async void LoginAsync()
-        {
-            _googleClientManager.OnLogin += OnLoginCompleted;
-            try
-            {
-                await _googleClientManager.LoginAsync();
-            }
-            catch (GoogleClientSignInNetworkErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInCanceledErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInInvalidAccountErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInInternalErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientNotInitializedErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientBaseException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-
-        } 
-        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
-        {
-            if (loginEventArgs.Data != null)
-            {
-                GoogleUser googleUser = loginEventArgs.Data;
-                User.Name = googleUser.Name;
-                User.Email = googleUser.Email;
-                User.Picture = googleUser.Picture;
-                var GivenName = googleUser.GivenName;
-                var FamilyName = googleUser.FamilyName;
-
-
-                // Log the current User email
-                Debug.WriteLine(User.Email);
-                IsLoggedIn = true;
-
-                var token = CrossGoogleClient.Current.ActiveToken;
-                Token = token;
-
-                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
-                App.Current.MainPage.Navigation.PopAsync();
-
-            }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
-            }
-
-            _googleClientManager.OnLogin -= OnLoginCompleted;
-
-        }
-        private void OnLogoutCompleted(object sender, EventArgs loginEventArgs)
-        {
-            IsLoggedIn = false;
-            User.Email = "Offline";
-            _googleClientManager.OnLogout -= OnLogoutCompleted;
-        }
-        //end of google code
-
-        public void Logout()
-        {
-            _googleClientManager.OnLogout += OnLogoutCompleted;
-            _googleClientManager.Logout();
-        }
-
         /// <summary>
         /// <c a="RegisterUser"/>
         /// Custom Registeration
