@@ -119,7 +119,7 @@
             <!--Row 6-->
 
             <Label Text="Notice Board: " TextColor="Black" 
-                   FontAttributes="Bold" FontSize="20" 
+                   FontAttributes="Bold" FontSize="24" 
                    Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="6"/>
         </Grid>
         
@@ -128,7 +128,7 @@
 
             <control:HorizontalListView ItemsSource="{Binding Notifications}"
                                     HorizontalOptions="FillAndExpand"
-                                    ItemHeightRequest="140"
+                                    ItemHeightRequest="200"
                                     ItemWidthRequest="230"
                                     >
                 <control:HorizontalListView.ItemTemplate>
@@ -142,8 +142,8 @@
                                 </Frame.GestureRecognizers>
 
                                 <StackLayout>
-                                    <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Title}" />
-                                    <Label TextColor="Black"  Text="{Binding Body}"/>
+                                    <Label TextColor="Black" FontSize="Large" FontAttributes="Bold" Text="{Binding Title}" />
+                                    <Label TextColor="Black" FontSize="Medium" Text="{Binding Body}"/>
                                 </StackLayout>
                             </Frame>
                         </ContentView>
@@ -162,7 +162,14 @@
             </BoxView.GestureRecognizers>
         </BoxView>
 
-       
+        <popviews:CheckUpPopUp
+                x:Name="CheckUp"
+                Grid.Row="0"
+                Grid.RowSpan="1"
+                TranslationY="{Binding Source={x:Reference RootPage},Path=Height}"
+                />
+    
+
 
     </Grid>
 </ContentPage>

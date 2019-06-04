@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:popviews="clr-namespace:SerapisPatient.PopUpMessages.NotificationsPopUp"
              x:Class="SerapisPatient.PopUpMessages.NotificationsPopUp.CheckUpPopUp"
              VerticalOptions="Start">
 
@@ -11,7 +12,7 @@
         </Grid.RowDefinitions>
 
         <BoxView  x:Name="FirstSection"
-            BackgroundColor="Gray"
+            BackgroundColor="White"
             CornerRadius="20,20,0,0"
             HeightRequest="200">
             <BoxView.GestureRecognizers>
@@ -24,11 +25,12 @@
             Grid.Row="0"
             Margin="30"
             InputTransparent="True">
-            <Label Style="{StaticResource TitleText}" Text="Auction of Pure Art" />
-            <Label Style="{StaticResource SubtitleText}" Text="21 Mar, 2019 - 10:30am" />
+            
+            <Label TextColor="Green" FontSize="30" Text="Your Delivery Status:" />
+            <Label TextColor="Green" FontSize="30" Text="Expect it at : 21 Mar, 2019 - 10:30am" />
             <BoxView
                 Margin="-30,20,-30,10"
-                BackgroundColor="{StaticResource SubtitleTextColor}"
+                BackgroundColor="Gold"
                 HeightRequest="1" />
 
             <StackLayout
@@ -36,79 +38,20 @@
                 Orientation="Horizontal"
                 Spacing="15">
                 <Label
-                    Style="{StaticResource BodyText}"
+                    FontSize="Medium"
+                    TextColor="Blue"
                     Text="Estimated cost"
                     VerticalOptions="Center" />
 
                 <Label
-                    Style="{StaticResource BodyText}"
+                    FontSize="Medium"
+                    TextColor="Blue"
                     Text="Starting Bid"
                     VerticalOptions="Center" />
 
             </StackLayout>
 
-            <Grid ColumnSpacing="10" RowSpacing="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Image Source="BCIcon" VerticalOptions="Center" />
-                <Label
-                    Grid.Column="1"
-                    Style="{StaticResource BodyText}"
-                    Text="BTC"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Column="2"
-                    HorizontalTextAlignment="End"
-                    Style="{StaticResource BodyText}"
-                    Text="1,2570 - 5,8914"
-                    VerticalOptions="Center" />
-
-                <Image
-                    Grid.Row="1"
-                    Source="ETHIcon"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Style="{StaticResource BodyText}"
-                    Text="ETH"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    HorizontalTextAlignment="End"
-                    Style="{StaticResource BodyText}"
-                    Text="36,64 - 171.62"
-                    VerticalOptions="Center" />
-
-
-                <Image
-                    Grid.Row="2"
-                    Source="USDIcon"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Style="{StaticResource BodyText}"
-                    Text="USD"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    HorizontalTextAlignment="End"
-                    Style="{StaticResource BodyText}"
-                    Text="4,000 - 20,000"
-                    VerticalOptions="Center" />
-            </Grid>
+           
 
         </StackLayout>
 
@@ -118,7 +61,6 @@
             CornerRadius="10,10,0,0"
             HeightRequest="200" />
 
-
     </Grid>
-    
+
 </ContentView>

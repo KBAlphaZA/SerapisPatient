@@ -48,8 +48,8 @@ namespace SerapisPatient
 
             if (!CheckLogin == true)
             {
-                 MainPage = new NavigationPage(new LoginView());
-                
+                MainPage = new NavigationPage(new LoginView());
+               
             }
             else
             {   
