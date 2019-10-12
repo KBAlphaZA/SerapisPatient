@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.MainViews.NotificationView">
+
+    
+  
+        <ContentView.Resources>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#fdfdfd" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="CornerRadius" Value="15" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0, 5" />
+            </Style>
+
+            <Style x:Key="headerLabel" TargetType="Label">
+                <Setter Property="Margin" Value="0, 8" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
+            <Style TargetType="Image">
+                <Setter Property="FlexLayout.Order" Value="-1" />
+                <Setter Property="FlexLayout.AlignSelf" Value="Center" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Text" Value="MoreInfo" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#4c90ee" />
+                <Setter Property="BorderRadius" Value="30" />
+            </Style>
+        </ContentView.Resources>
+    
+    <ScrollView Orientation="Both">
+        <FlexLayout>
+            <Frame WidthRequest="230"
+                   HeightRequest="240"
+                   HorizontalOptions="CenterAndExpand">
+
+                <FlexLayout Direction="Column">
+                    <Label Text="Check Ups sas"
+                           Style="{StaticResource headerLabel}" />
+                    <Label Text="Nickname(s)" />
+                    <Label Text="  &#x2022; Les Bleus (The Blues)" />
+
+                    
+                    <Label FlexLayout.Grow="1" />
+
+                    <Grid Grid.Row="1" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout>
+                            <StackLayout.Children>
+
+                                <Image Source="http://bbcpersian7.com/images/facebook-clipart-png-circle-14.jpg" HeightRequest="50" WidthRequest="50"></Image>
+
+                            </StackLayout.Children>
+
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="103" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Likes" />
+
+
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+
+                            <StackLayout.Children>
+                                <Image Source="https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w300" HeightRequest="50" WidthRequest="50"></Image>
+                            </StackLayout.Children>
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="164" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Follow Us" />
+
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2">
+
+                            <StackLayout.Children>
+                                <Image Source="https://seeklogo.com/images/T/twitter-icon-circle-blue-logo-94339974C6-seeklogo.com.png" HeightRequest="50" WidthRequest="50"></Image>
+                            </StackLayout.Children>
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="107" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Tweet Us" />
+                        </StackLayout>
+                    </Grid>
+
+
+                    <Button/>
+                </FlexLayout>
+            </Frame>
+
+            <Frame  WidthRequest="230"
+                   HeightRequest="240">
+
+                <FlexLayout Direction="Column">
+                    <Label Text="Belgium national football team "
+                           Style="{StaticResource headerLabel}" />
+                    <Label Text="Nickname(s)" />
+                    <Label Text="  &#x2022; De Rode Duivels Les Diables Rouges Die Roten Teufel(The Red Devils)" />
+
+                    <Image Source="https://s.s-bol.com/imgbase0/imagebase3/large/FC/1/5/5/8/9200000076228551.jpg"
+                           WidthRequest="240"
+                           HeightRequest="180" />
+                    <Label FlexLayout.Grow="1" />
+
+                    <Grid Grid.Row="1" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout>
+                            <StackLayout.Children>
+
+                                <Image Source="http://bbcpersian7.com/images/facebook-clipart-png-circle-14.jpg" HeightRequest="50" WidthRequest="50"></Image>
+
+                            </StackLayout.Children>
+
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="103" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Likes" />
+
+
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+
+                            <StackLayout.Children>
+                                <Image Source="https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w300" HeightRequest="50" WidthRequest="50"></Image>
+                            </StackLayout.Children>
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="164" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Follow Us" />
+
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2">
+
+                            <StackLayout.Children>
+                                <Image Source="https://seeklogo.com/images/T/twitter-icon-circle-blue-logo-94339974C6-seeklogo.com.png" HeightRequest="50" WidthRequest="50"></Image>
+                            </StackLayout.Children>
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="107" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Tweet Us" />
+                        </StackLayout>
+                    </Grid>
+                    <Button />
+                </FlexLayout>
+            </Frame>
+            <Frame  WidthRequest="230"
+                   HeightRequest="240">
+
+                <FlexLayout Direction="Column">
+                    <Label Text="Brazil national football team"
+                           Style="{StaticResource headerLabel}" />
+                    <Label Text="Nickname(s)" />
+                    <Label Text="  &#x2022; Seleção (The National Team)" />
+
+                    <Image Source="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png"
+                           WidthRequest="180"
+                           HeightRequest="180" />
+                    <Label FlexLayout.Grow="1" />
+
+                    <Grid Grid.Row="1" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout>
+                            <StackLayout.Children>
+
+                                <Image Source="http://bbcpersian7.com/images/facebook-clipart-png-circle-14.jpg" HeightRequest="50" WidthRequest="50"></Image>
+
+                            </StackLayout.Children>
+
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="103" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Likes" />
+
+
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+
+                            <StackLayout.Children>
+                                <Image Source="https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w300" HeightRequest="50" WidthRequest="50"></Image>
+                            </StackLayout.Children>
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="164" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Follow Us" />
+
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2">
+
+                            <StackLayout.Children>
+                                <Image Source="https://seeklogo.com/images/T/twitter-icon-circle-blue-logo-94339974C6-seeklogo.com.png" HeightRequest="50" WidthRequest="50"></Image>
+                            </StackLayout.Children>
+                            <Label Style="{StaticResource StatsNumberLabel}" Text="107" />
+                            <Label Style="{StaticResource StatsCaptionLabel}" Text="Tweet Us" />
+                        </StackLayout>
+                    </Grid>
+
+                    <Button />
+                </FlexLayout>
+            </Frame>
+        </FlexLayout>
+    </ScrollView>
+</ContentView>

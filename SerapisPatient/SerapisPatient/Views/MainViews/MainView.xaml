@@ -43,7 +43,7 @@
 
 
         <!-- FIRST TWO LABELS-->
-        <Label Text="Hi Khanyisani !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Label Text="Hi Alexa !" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
 
         <Label  Text="Lets see how can we help you!"  TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" />
 

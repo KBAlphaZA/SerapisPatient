@@ -10,6 +10,8 @@ using Plugin.CurrentActivity;
 using Plugin.GoogleClient;
 using CarouselView.FormsPlugin.Android;
 using Xamarin.Forms.PancakeView.Droid;
+using Plugin.FacebookClient;
+using Android.Content;
 
 namespace SerapisPatient.Droid
 {
@@ -26,7 +28,12 @@ namespace SerapisPatient.Droid
             //ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Rg.Plugins.Popup.Popup.Init(this, bundle);
 
+            //Google PLugin
+            GoogleClientManager.Initialize(this, null, "146806431671-0i7ssql1g80d6o0ejiaks2vre0ig63nr.apps.googleusercontent.com ");
+            FacebookClientManager.Initialize(this);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
+           
 
             //Carousel view package inint
             CarouselViewRenderer.Init();
@@ -36,18 +43,21 @@ namespace SerapisPatient.Droid
 
             //Location Services permission Android
             CrossCurrentActivity.Current.Init(this, bundle);
-            
-            //Plugin code(Google authentication
-            GoogleClientManager.Initialize(this);
+
+            Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
 
             LoadApplication(new App());
         }
-        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
+        //protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
+        //{
+        //    base.OnActivityResult(requestCode, resultCode, data);
+        //    GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
+        //}
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
-            base.OnActivityResult(requestCode, resultCode, data);
-            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
+            base.OnActivityResult(requestCode, resultCode, intent);
+            FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
         }
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             //Qr Code Scanner

@@ -129,7 +129,7 @@ namespace SerapisPatient.ViewModels
             await App.Current.MainPage.Navigation.PushAsync(new CameraPage());
         }
 
-        private async void MedicationDelvery(NotificationModel _SelectedCard)
+        private async void MedicationDelvery(NotificationModel _SelectedCard) 
         {
             if(bool.Equals(_SelectedCard.Title," "))
             {
