@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CarouselView.FormsPlugin.iOS;
+using Flex;
 using Foundation;
 using Lottie.Forms.iOS.Renderers;
 using Plugin.FacebookClient;
@@ -31,6 +32,9 @@ namespace SerapisPatient.iOS
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
             CarouselViewRenderer.Init();
+
+            //Fancy buttons
+            FlexButton.Init();
 
             //Pancakeview package(gradients)
             PancakeViewRenderer.Init();

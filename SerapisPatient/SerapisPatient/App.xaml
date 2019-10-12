@@ -10,8 +10,8 @@
         
         <ResourceDictionary>
             <!--  colors  -->
-              
-            
+            <Color x:Key="AccentColor">#FF910A</Color>
+            <Color x:Key="PageFadeColor">#AA000000</Color>
             <Color x:Key="HeaderTextColor">#555555</Color>
             <!--Davy grey-->
             <Color x:Key="BodyTextColor">#bababa</Color>

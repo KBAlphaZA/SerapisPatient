@@ -39,7 +39,7 @@ DATA DRIVEN APP.(So always think how will the data flow)
 	Method Naming must make sense. 
 	If method populates a list dont name it EmptyList() for example.
 
-		
+	-Add comments for none boilerplate code	
 
 4.
 

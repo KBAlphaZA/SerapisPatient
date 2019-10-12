@@ -14,8 +14,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,7 +25,11 @@
         </Grid.ColumnDefinitions>
         
         <!--Row 0-->
-        <Picker x:Name="MonthPicker" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MonthsSelectedIndex}"  FontAttributes="Bold" Title="Choose your month"/>
+        <Picker x:Name="MonthPicker" Grid.Row="0" 
+                Grid.Column="0" Grid.ColumnSpan="3" 
+                ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding Value}" 
+                SelectedItem="{Binding MonthsSelectedIndex}" WidthRequest="100"  
+                FontAttributes="Bold" Title="Choose your month"/>
         <!-- label text={Binding MyMonth} TextColor="Black" --> 
         
         <!--Row 1-->
@@ -54,29 +58,31 @@
         </control:HorizontalListView>
         
         <!--Row 3-->
-        <Label Text="Select Your Doctor Below" FontSize="Large" TextColor="Black" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" />
+        <Label Text="Select Your Doctor Below : " FontSize="Large" 
+               TextColor="Black" FontAttributes="Bold" 
+               Grid.Row="3" Grid.Column="0" 
+               Grid.ColumnSpan="3" />
         
         <!--Row 4-->
         <!--DoctorListView-->
-        <ActivityIndicator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Color="Red" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        <ActivityIndicator Grid.Row="4" Grid.Column="0"
+                           Grid.ColumnSpan="3" Color="Red" 
+                           IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        
+        <!--Lottie -->
         <animation:AnimationView 
-            Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
-                Animation="Doctorlistanimation.json"
-                AutoPlay="True"
-                Loop="True"
-                Speed="0.4"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+           BackgroundColor="White" Grid.Row="4"
+           Grid.Column="0" Grid.ColumnSpan="3"
+                Animation="Doctorlistanimation.json" AutoPlay="True"
+                Loop="True" Speed="0.4"
+                HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
                 IsVisible="{Binding ShowUI}"
                 />
-        <ListView x:Name="DocList"
-                  SeparatorVisibility="None"
-                  HasUnevenRows="True"
-                  ItemsSource="{Binding DoctorAvaliable}"
-                  CachingStrategy="RecycleElement"
-                  HeightRequest="14"
-                  Grid.Row="4"
-                  Grid.Column="0"
+        <ListView x:Name="DocList" SeparatorVisibility="None"
+                  HasUnevenRows="True" ItemsSource="{Binding DoctorAvaliable}"
+                  CachingStrategy="RecycleElement" HeightRequest="14" 
+                  Grid.Row="4" Grid.Column="0"
                   Grid.ColumnSpan="3"
                   
                   IsVisible="{Binding Showlistview}">
@@ -90,7 +96,9 @@
                     <ViewCell>
                         <ContentView Padding="5">
 
-                            <Frame x:Name="DoctorFrame" OutlineColor="Gray" HasShadow="True"  Padding="8"  CornerRadius="7"  VerticalOptions="StartAndExpand">
+                            <Frame x:Name="DoctorFrame" OutlineColor="Gray"
+                                   HasShadow="True"  Padding="8"  
+                                   CornerRadius="7"  VerticalOptions="StartAndExpand">
 
                                 <Grid RowSpacing="2">
                                     <Grid.RowDefinitions>
@@ -105,16 +113,37 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <!--Row 0-->
-                                    <Image Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Source="user1.png" HeightRequest="60" Margin=" 8" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit"/>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="9:30" FontSize="18" VerticalOptions="StartAndExpand" TextColor="Black"/>
-                                    <BoxView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Fill" HorizontalOptions="Center" WidthRequest="2" Color="Black" />
-                                    <Label  Grid.Row="0" Grid.Column="3" Text="{Binding LastName, StringFormat='Dr. {0:N}'}" FontSize="18" VerticalOptions="StartAndExpand" TextColor="Black"/>
+                                    <Image Grid.Column="2" Grid.Row="0" 
+                                           Grid.RowSpan="2" Source="user1.png" 
+                                           HeightRequest="60" Margin=" 8" 
+                                           VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" 
+                                           Aspect="AspectFit"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0" 
+                                           Text="9:30" FontSize="18" 
+                                           VerticalOptions="StartAndExpand" TextColor="Black"/>
+                                    
+                                    <BoxView Grid.Column="1" Grid.Row="0" 
+                                             Grid.RowSpan="2" VerticalOptions="Fill" 
+                                             HorizontalOptions="Center" WidthRequest="2" 
+                                             Color="Black" />
+                                    
+                                    <Label  Grid.Row="0" Grid.Column="3" 
+                                            Text="{Binding LastName, StringFormat='Dr. {0:N}'}" FontSize="18" 
+                                            VerticalOptions="StartAndExpand" TextColor="Black"/>
                                     
                                     
                                     <!--Row 1-->
-                                    <Label Grid.Row="1" Grid.Column="0" Text="  AM" FontSize="16" VerticalOptions="CenterAndExpand" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding University}" FontSize="12" VerticalOptions="CenterAndExpand" TextColor="{Binding SeconderyColour}"/>
-                                    <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="2"  HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="End"  Source="rightarrow.png" Margin="0,0,5,0"/>
+                                    <Label Grid.Row="1" Grid.Column="0" 
+                                           Text="  AM" FontSize="16" 
+                                           VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                                    <Label Grid.Row="1" Grid.Column="3" 
+                                           Text="University Of Kwa-Zulu Natal" FontSize="14" 
+                                           VerticalOptions="CenterAndExpand" TextColor="{StaticResource SeconderyColour}"/>
+                                    <Image Grid.Row="0" Grid.Column="3" 
+                                           Grid.RowSpan="2"  HeightRequest="40" 
+                                           VerticalOptions="CenterAndExpand" HorizontalOptions="End" 
+                                           Source="rightarrow.png" Margin="0,0,5,0"/>
 
                                 </Grid>
 
