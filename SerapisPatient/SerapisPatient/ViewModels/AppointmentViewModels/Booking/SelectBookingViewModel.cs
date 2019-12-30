@@ -246,8 +246,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         //API Call for DoctorView
         public async Task GetDoctors()
         {
-            DoctorAvaliable = await _apiServices.GetDoctorsAsync();
-             //GenerateDoctorList();
+            //DoctorAvaliable = await _apiServices.GetDoctorsAsync();
+             GenerateDoctorList();
             
         }
 
