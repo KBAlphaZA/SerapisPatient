@@ -135,7 +135,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             }
         }
 
-
         private void MedicalBuildingViewInit(SpecilizationModel _specilizationData)
         {
             var myCarsoul = new CarouselViewControl();
@@ -201,7 +200,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public MedicalBuildingViewModel()
         {
-
+            
         }
 
         public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
@@ -221,22 +220,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             SelectedItem = state as MedicalBuildingModel;
         }
 
-        //DummyData
-        private void GenerateMedicalBuildingModel()
-        {
-            _Practices = new ObservableCollection<MedicalBuildingModel>
-            {
-                new MedicalBuildingModel{Distance=7.8, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=5},
-                new MedicalBuildingModel{Distance=7.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "CromptomHospital", PatientsCurrentlyAtPractice=3},
-                new MedicalBuildingModel{Distance=6.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "GrooteSchuurHospital",PatientsCurrentlyAtPractice=12},
-                new MedicalBuildingModel{Distance=12.5,MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "PinetownClinic", PatientsCurrentlyAtPractice=20},
-                new MedicalBuildingModel{Distance=8.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "WestvilleHospital", PatientsCurrentlyAtPractice=8},
-                new MedicalBuildingModel{Distance=5.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Medicross:Pinetown", PatientsCurrentlyAtPractice=11},
-                new MedicalBuildingModel{Distance=2.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=15},
-            };
-
-
-        }
         //public async Task<List<MedicalBuildingModel>> GetMedicalBuildingsBySpecializationAsync()
         //{
         //    //if (IsBusy)
@@ -266,8 +249,5 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         //    //filter function, this will filter by Medical building and specialization
         //    return null;
         //}
-
-
-
     }
 }

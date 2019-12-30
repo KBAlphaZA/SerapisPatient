@@ -244,10 +244,32 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         }
 
         //API Call for DoctorView
-        public async Task GetDoctors()
+
+        public async Task<List<Doctor>> GetDoctors()
         {
-            DoctorAvaliable = await _apiServices.GetDoctorsAsync();
-            
+            //Production code line
+            //DoctorAvaliable = await _apiServices.GetDoctorsAsync();
+
+            //Temp offline doctor list for testing
+            DoctorAvaliable = new List<Doctor>()
+            {
+                new Doctor()
+                {
+                    FirstName="Khanyisani",
+                    LastName="Buthelezi",
+                    Id="",
+                    YearsOfExp="20" 
+                },
+                new Doctor()
+                {
+                    FirstName="Robert", 
+                    LastName="Mbappe",
+                    Id="",
+                    YearsOfExp="20"
+                }
+            };
+
+            return DoctorAvaliable;
         }
 
         #endregion

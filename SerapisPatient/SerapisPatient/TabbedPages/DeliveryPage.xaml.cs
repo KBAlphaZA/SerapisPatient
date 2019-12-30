@@ -21,5 +21,18 @@ namespace SerapisPatient.TabbedPages
             viewModel = new DeliveryPageViewModel();
             BindingContext = viewModel;
         }
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			doctorPrescriptionButton.TranslationX = -400;
+
+			selfPrescribeButton.TranslationX = -400;
+
+			doctorPrescriptionButton.TranslateTo(0, 0, 600, Easing.CubicOut);
+
+			selfPrescribeButton.TranslateTo(0, 0, 1000, Easing.CubicOut);
+		}
 	}
 }

@@ -4,127 +4,132 @@
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="SerapisPatient.TabbedPages.AppointmentPage"
              Title="{Binding Title}"
+             xmlns:buttonAnimation="clr-namespace:SerapisPatient.Controls.Triggers"
              >
 
     <ContentPage.Resources>
         <Style TargetType="Image" x:Key="ImageSpect">
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            
         </Style>
+
+        <Style TargetType="Frame" x:Key="CustomButton">
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+            <Setter Property="BorderColor" Value="Black"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource  SeconderyColour}"/>
+            <Style.Triggers>
+                <Trigger TargetType="Frame" Property="IsFocused" Value="True">
+                    <Trigger.EnterActions>
+                        <buttonAnimation:CustomButtonPressScaleAction Scale="2"/>
+                    </Trigger.EnterActions>
+
+                    <Trigger.ExitActions>
+                        <buttonAnimation:CustomButtonPressScaleAction Scale="1"/>
+                    </Trigger.ExitActions>
+                    
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Label" x:Key="CustomeButtonLabel" >
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+        
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid>
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="2"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <!--First Block-->
-            <Grid Grid.Row="0" 
-                  VerticalOptions="Center" 
-                  HorizontalOptions="Center"
-                  >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
+            <Grid Grid.Row="0" VerticalOptions="End" Margin="15" x:Name="CustomButtonOne">
+                <Frame Style="{StaticResource CustomButton}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="6*"/>
+                            <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
 
-                        <Image Source="SerapisBookingIcon.png" Grid.Row="0" 
-                                    HorizontalOptions="Center" 
-                                    VerticalOptions="Center"
-                                    >
-                            <Image.WidthRequest>
-                                <OnIdiom x:TypeArguments="x:Double">
-                                    <OnIdiom.Phone>100</OnIdiom.Phone>
-                                    <OnIdiom.Tablet>150</OnIdiom.Tablet>
-                                </OnIdiom>
-                            </Image.WidthRequest>
-                            <Image.HeightRequest>
-                                <OnIdiom x:TypeArguments="x:Double">
-                                    <OnIdiom.Phone>100</OnIdiom.Phone>
-                                    <OnIdiom.Tablet>150</OnIdiom.Tablet>
-                                </OnIdiom>
-                            </Image.HeightRequest>
-                        </Image>
+                        <Grid Grid.Row="0"/>
 
-                        <Grid Grid.Row="1">
-                            <Label 
-                                Text="Book by date" 
-                                FontSize="Medium" 
-                                HorizontalOptions="Center"
-                            />
+                        <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center">
+                            <Image Style="{StaticResource ImageSpect}" Source="SerapisBookingIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Style="{StaticResource CustomeButtonLabel}" Text="Book by date"/>
+                        </Grid>
+                        
+                    </Grid>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SerapisBooking}"/>
+                    </Frame.GestureRecognizers>
+                    
+                </Frame>
+            </Grid>
+
+            <Grid Grid.Row="1" VerticalOptions="Center" Margin="15" x:Name="CustomButtonTwo">
+                <Frame Style="{StaticResource CustomButton}">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="6*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0"/>
+
+                        <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center">
+                            <Image Style="{StaticResource ImageSpect}" Source="CalendarIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Style="{StaticResource CustomeButtonLabel}" Text="Serpis Booking"/>
                         </Grid>
 
                     </Grid>
-                </Grid>
 
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SerapisBooking}"/>
-                </Grid.GestureRecognizers>
-                
-            </Grid>
-            
-            
-            <!--Line-->
-            <Grid Grid.Row="1">
-                <BoxView 
-                    Color="Black"
-                    HorizontalOptions="FillAndExpand"
-                    />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BookByDate}"/>
+                    </Frame.GestureRecognizers>
 
-            </Grid>
-            
-            <!--Second Block-->
-            <Grid Grid.Row="2" 
-                  VerticalOptions="Center" 
-                  HorizontalOptions="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                
-                <Image Source="CalendarIcon.png" Grid.Row="0" 
-                       HorizontalOptions="Center" 
-                       VerticalOptions="Center"
-                       >
-                    <Image.WidthRequest>
-                        <OnIdiom x:TypeArguments="x:Double">
-                            <OnIdiom.Phone>100</OnIdiom.Phone>
-                            <OnIdiom.Tablet>150</OnIdiom.Tablet>
-                        </OnIdiom>
-                    </Image.WidthRequest>
-                    <Image.HeightRequest>
-                        <OnIdiom x:TypeArguments="x:Double">
-                            <OnIdiom.Phone>100</OnIdiom.Phone>
-                            <OnIdiom.Tablet>150</OnIdiom.Tablet>
-                        </OnIdiom>
-                    </Image.HeightRequest>
-                </Image>
-                
-
-                <Grid Grid.Row="1">
-                    <Label 
-                        Text="Book by date" 
-                        FontSize="Medium" 
-                        HorizontalOptions="Center"
-                        />
-                </Grid>
-
-
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BookByDate}"/>
-                </Grid.GestureRecognizers>
-                
+                </Frame>
             </Grid>
             
         </Grid>
