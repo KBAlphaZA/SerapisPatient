@@ -6,12 +6,12 @@
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
              xmlns:behaviors="clr-namespace:SerapisPatient.behavious"   
              xmlns:views="clr-namespace:SerapisPatient.PopUpMessages"
-            
              Title="{Binding Title}"
              >
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
     </ContentPage.ToolbarItems>
+    
     <Grid RowSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -20,7 +20,6 @@
             <!--Row 1-->
             <RowDefinition Height="35"/>
             <!--Row 2-->
-
             <RowDefinition Height="auto"/>
             <!--Row 3-->
             <RowDefinition Height="auto"/>
