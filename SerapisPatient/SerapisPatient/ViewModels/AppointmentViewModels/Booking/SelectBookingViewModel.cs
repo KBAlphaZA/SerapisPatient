@@ -244,32 +244,11 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         }
 
         //API Call for DoctorView
-
-        public async Task<List<Doctor>> GetDoctors()
+        public async Task GetDoctors()
         {
-            //Production code line
-            //DoctorAvaliable = await _apiServices.GetDoctorsAsync();
-
-            //Temp offline doctor list for testing
-            DoctorAvaliable = new List<Doctor>()
-            {
-                new Doctor()
-                {
-                    FirstName="Khanyisani",
-                    LastName="Buthelezi",
-                    Id="",
-                    YearsOfExp="20" 
-                },
-                new Doctor()
-                {
-                    FirstName="Robert", 
-                    LastName="Mbappe",
-                    Id="",
-                    YearsOfExp="20"
-                }
-            };
-
-            return DoctorAvaliable;
+            DoctorAvaliable = await _apiServices.GetDoctorsAsync();
+             //GenerateDoctorList();
+            
         }
 
         #endregion
@@ -332,6 +311,26 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
         });
 
+        private void GenerateDoctorList()
+        {
+            Doctors = new ObservableCollection<Doctor>
+                  {
+                    new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png" },
+                    new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Ronaldo ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Buthelezi ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Moodley", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Matsoso ", University="MBchB(UP)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
+                    new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
+
+            };
+        }
         //Navigation
         private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
         {

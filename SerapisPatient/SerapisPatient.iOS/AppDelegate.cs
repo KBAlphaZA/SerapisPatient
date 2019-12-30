@@ -5,6 +5,7 @@ using CarouselView.FormsPlugin.iOS;
 using Flex;
 using Foundation;
 using Lottie.Forms.iOS.Renderers;
+using Plugin.FacebookClient;
 using UIKit;
 using Xamarin.Forms.PancakeView.iOS;
 
@@ -37,11 +38,25 @@ namespace SerapisPatient.iOS
 
             //Pancakeview package(gradients)
             PancakeViewRenderer.Init();
-
+            global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            //Facebook plugin
+            FacebookClientManager.Initialize(app, options);
+            FacebookClientManager.OnActivated();
+
+
 
             return base.FinishedLaunching(app, options);
+        }
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            return FacebookClientManager.OpenUrl(app, url, options);
+        }
+
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
+            return FacebookClientManager.OpenUrl(application, url, sourceApplication, annotation);
         }
     }
 }

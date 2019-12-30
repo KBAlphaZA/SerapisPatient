@@ -15,9 +15,16 @@ namespace SerapisPatient.Services
         //clientid : 146806431671-mc2okbks55i70e532tl90cccdd146sg1.apps.googleusercontent.com
         // clientsecret: L-sms1KEEJhDZKJwkeKAeYos
 
+        /// <summary>
+        /// Create a new app and get new creadentials: 
+        /// https://console.developers.google.com/apis/
+        /// </summary>
+        //public static readonly string ClientId = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
+        //public static readonly string ClientSecret = "bx0l0C9lhcuF8cF8gfW9h8A7 ";
+        public static readonly string RedirectUri = "https://www.youtube.com";
 
 
-                Account account;
+        Account account;
         AccountStore store;
         AccountResult result;
 
@@ -31,8 +38,8 @@ namespace SerapisPatient.Services
         public void OnLoginClicked()
         {
 
-            const string clientIdConstant = "655782672996-f7n91tloeocgksh8dogfuijhpfcre2m1.apps.googleusercontent.com";
-            const string redirectUriConstant = "";
+            const string clientIdConstant = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
+            const string redirectUriConstant = "https://www.youtube.com";
 
             string clientId = null;
             string redirectUri = null;
@@ -63,8 +70,8 @@ namespace SerapisPatient.Services
                      null,
                      "profile",
                      new Uri("https://accounts.google.com/o/oauth2/auth"),
-                     new Uri("https://Something.net"),
-                     new Uri("https://Something.net"),
+                     new Uri(RedirectUri),
+                     new Uri("https://www.googleapis.com/oauth2/v4/token"),
                      null,
                      true
                 );

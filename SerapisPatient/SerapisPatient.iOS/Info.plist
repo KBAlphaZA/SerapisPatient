@@ -57,5 +57,68 @@
     <string>Fonts/Ubuntu-MediumItalic.ttf</string>
     <string>Fonts/Ubuntu-Regular.ttf</string>
   </array>
+
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>facebook.com</key>
+      <dict>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+        <false/>
+      </dict>
+      <key>fbcdn.net</key>
+      <dict>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+        <false/>
+      </dict>
+      <key>akamaihd.net</key>
+      <dict>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+        <false/>
+      </dict>
+    </dict>
+    <key>NSAllowsArbitraryLoadsInWebContent</key>
+    <true/>
+  </dict>
+
+  <key>otherExternalDomainYouNeedToCall</key>
+  <dict>
+    <key>NSIncludesSubdomains</key>
+    <true/>
+    <key>NSExceptionAllowsInsecureHTTPLoads</key>
+    <true/>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>
+
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>fb</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb206219933444281</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>206219933444281</string>
+  <key>FacebookDisplayName</key>
+  <string>SerapisMedical</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
 </dict>
 </plist>

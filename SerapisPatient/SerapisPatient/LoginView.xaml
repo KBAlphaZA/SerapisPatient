@@ -238,7 +238,7 @@
                         </Image>
 
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding .}"/>
+                            <TapGestureRecognizer Command="{Binding OnLoginCommand}"/>
                         </Grid.GestureRecognizers>
                     
                     
@@ -273,7 +273,7 @@
             <!--#endregion-->  
             
             <!--#region The Other Labels for forgot passwords-->
-            <Grid Grid.Row="8">
+            <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" >
 
                 <Grid.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -282,7 +282,7 @@
                     </OnPlatform>
                 </Grid.Margin>
 
-                <Label Text="Forgot Password" HorizontalOptions="Center" TextColor="White" FontSize="Medium">
+                <Label Text="Forgot Password" HorizontalOptions="CenterAndExpand"  TextColor="White" FontSize="Medium">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RestThePassword}"/>
                     </Label.GestureRecognizers>

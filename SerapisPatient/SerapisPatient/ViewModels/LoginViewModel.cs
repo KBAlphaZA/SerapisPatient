@@ -12,11 +12,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using SerapisPatient.Services;
+using Plugin.FacebookClient;
+using Plugin.FacebookClient.Abstractions;
+using Newtonsoft.Json.Linq;
 
 namespace SerapisPatient.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+
         #region Properties
         public UserProfile User { get; set; } = new UserProfile();
         public string Name
@@ -24,44 +29,162 @@ namespace SerapisPatient.ViewModels
             get => User.Name;
             set => User.Name = value;
         }
+
         public string Email
         {
             get => User.Email;
             set => User.Email = value;
         }
+
         public Uri Picture
         {
             get => User.Picture;
             set => User.Picture = value;
         }
+
         public string Token { get; set; }
         public bool IsLoggedIn { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
-        private readonly IGoogleClientManager _googleClientManager;
-        
         //New Google Auth
+        private readonly IGoogleClientManager _googleClientManager;
+        public ICommand RegisterOnClick { get; set; }
+        public ICommand LoginOnClick { get; set; }
+        public ICommand RestThePassword { get; set; }
+
+        //FACEBOOK AUTH
+        string[] permisions = new string[] { "email", "public_profile", "user_posts" };
+
+        public bool IsBusy { get; set; } = false;
+        public bool IsNotBusy { get { return !IsBusy; } }
+        public FacebookProfile Profile { get; set; }
+
+        public Command OnLoginCommand { get; set; }
+        public Command OnShareDataCommand { get; set; }
+        public Command OnLoadDataCommand { get; set; }
+        public Command OnLogoutCommand { get; set; }
         #endregion
         public LoginViewModel()
         {
+
+            //Facebook Login
+            Profile = new FacebookProfile();
+
+            OnLoginCommand = new Command(async () => await FacebookLoginAsync());
+            OnShareDataCommand = new Command(async () => await FacebookShareDataAsync());
+            OnLoadDataCommand = new Command(async () => await FacebookLoadData());
+            OnLogoutCommand = new Command(() =>
+            {
+                if (CrossFacebookClient.Current.IsLoggedIn)
+                {
+                    CrossFacebookClient.Current.Logout();
+                    IsLoggedIn = false;
+                }
+            });
             //GoogleLogin
-            
+
+            LoginCommand = new Command(LoginAsync);
+            _googleClientManager = CrossGoogleClient.Current;
             //Custom Login
             LoginOnClick = new Command(LoginRequestAsync);
             RestThePassword = new Command(RestPassword);
-            RegisterOnClick = new Command(RegisterUser);
+            //RegisterOnClick = new Command(RegisterUser);
 
             
 
             IsLoggedIn = false;
         }
 
-        /// <summary>
-        ///  <c a="LoginAsync"/>
-        /// Below is the Authentication Code using Plugin.google
-        /// </summary>
-        
+       
+
         #region Methods
+
+        //Plugin Google Code
+
+
+        public async void LoginAsync()
+        {
+            _googleClientManager.OnLogin += OnLoginCompleted;
+          
+            try
+            {
+                await _googleClientManager.LoginAsync();
+            }
+            catch (GoogleClientSignInNetworkErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInCanceledErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInInvalidAccountErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInInternalErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientNotInitializedErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientBaseException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+
+        }
+    
+
+        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
+        {
+            if (loginEventArgs.Data != null)
+            {
+                GoogleUser googleUser = loginEventArgs.Data;
+                User.Name = googleUser.Name;
+                User.Email = googleUser.Email;
+                User.Picture = googleUser.Picture;
+                var GivenName = googleUser.GivenName;
+                var FamilyName = googleUser.FamilyName;
+
+
+                //Log the current User email
+                Debug.WriteLine(User.Email);
+                IsLoggedIn = true;
+
+                var token = CrossGoogleClient.Current.ActiveToken;
+                Token = token;
+
+                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
+                App.Current.MainPage.Navigation.PopAsync();
+
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+            }
+
+            _googleClientManager.OnLogin -= OnLoginCompleted;
+
+        }
+        private void OnLogoutCompleted(object sender, EventArgs loginEventArgs)
+        {
+            IsLoggedIn = false;
+            User.Email = "Offline";
+            _googleClientManager.OnLogout -= OnLogoutCompleted;
+            //end of google code
+        }
+            public void Logout()
+        {
+            _googleClientManager.OnLogout += OnLogoutCompleted;
+            _googleClientManager.Logout();
+        }
+
+
+
+
         /// <summary>
         /// <c a="RegisterUser"/>
         /// Custom Registeration
@@ -70,11 +193,55 @@ namespace SerapisPatient.ViewModels
         {
             App.Current.MainPage.Navigation.PushAsync(new RegisterView());
         }
+        public async Task FacebookLoginAsync()
+        {
+            FacebookResponse<bool> response = await CrossFacebookClient.Current.LoginAsync(permisions);
+            switch (response.Status)
+            {
+                case FacebookActionStatus.Completed:
+                    IsLoggedIn = true;
+                    OnLoadDataCommand.Execute(null);
+                    break;
+                case FacebookActionStatus.Canceled:
 
-        public ICommand RegisterOnClick { get; set; }
-        public ICommand LoginOnClick { get; set; }
-        public ICommand RestThePassword { get; set; }
+                    break;
+                case FacebookActionStatus.Unauthorized:
+                    await App.Current.MainPage.DisplayAlert("Unauthorized", response.Message, "Ok");
+                    break;
+                case FacebookActionStatus.Error:
+                    await App.Current.MainPage.DisplayAlert("Error", response.Message, "Ok");
+                    break;
+            }
 
+        }
+
+        async Task FacebookShareDataAsync()
+        {
+            FacebookShareLinkContent linkContent = new FacebookShareLinkContent("Awesome team of developers, making the world a better place one project or plugin at the time!",
+                                                                                new Uri("http://www.github.com/crossgeeks"));
+            var ret = await CrossFacebookClient.Current.ShareAsync(linkContent);
+        }
+
+        public async Task FacebookLoadData()
+        {
+
+            var jsonData = await CrossFacebookClient.Current.RequestUserDataAsync
+            (
+                  new string[] { "id", "name", "email", "picture", "cover", "friends" }, new string[] { }
+            );
+
+            var data = JObject.Parse(jsonData.Data);
+            Profile = new FacebookProfile()
+            {
+                FullName = data["name"].ToString(),
+                Picture = new UriImageSource { Uri = new Uri($"{data["picture"]["data"]["url"]}") },
+                Email = data["email"].ToString()
+            };
+
+
+
+            // await LoadPosts();
+        }
        
         private void LoginRequestAsync()
         {
@@ -115,6 +282,11 @@ namespace SerapisPatient.ViewModels
             //for now move on to the main page
             App.Current.MainPage.Navigation.PushModalAsync(new MasterDetailPage1());
         }
+
+        /// <summary>
+        ///  <c a="LoginAsync"/>
+        /// Below is the Authentication Code using Plugin.google
+        /// </summary>
         #endregion
     }
 }
