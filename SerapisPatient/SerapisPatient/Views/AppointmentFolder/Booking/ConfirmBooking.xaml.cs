@@ -19,13 +19,29 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	{
         ConfirmBookingViewModel viewModel;
 
-        
-
         public ConfirmBooking (Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
 		{
 			InitializeComponent ();
             viewModel = new ConfirmBookingViewModel(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
             BindingContext = viewModel;
         }
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			summaryCard.TranslationY = 2000;
+
+			backgroundImage.Opacity = 0;
+
+			summaryCard.TranslateTo(0, 0, 2000, Easing.SpringOut);
+
+			backgroundImage.FadeTo(1, 1800, Easing.SinIn);
+		}
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+		}
 	}
 }

@@ -80,7 +80,7 @@
         <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Margin="15,15,15,10" Text="Treatment Timeline :" TextColor="Black" FontAttributes="Bold" FontSize="Small"/>
 
         <!--Row 7-->
-        <Frame Grid.Row="10" BackgroundColor="Green" Grid.Column="0" Grid.ColumnSpan="5" Margin="15,15,15,10" />
+        <Frame Grid.Row="10"  Grid.Column="0" Grid.ColumnSpan="5" Margin="15,15,15,10" />
         <!--Row 8-->
 
     </Grid>

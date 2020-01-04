@@ -13,7 +13,7 @@
             </Style>
 
             <Style TargetType="Label" x:Key="QuadLabels">
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
@@ -80,8 +80,8 @@
                                     <Grid Grid.Column="0" Grid.Row="0" Margin="10">
                                         <Grid VerticalOptions="Center" HorizontalOptions="Start">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="4*"/>
-                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <Image Grid.Column="0" 
@@ -93,35 +93,37 @@
                                             <Label Grid.Column="1" 
                                                    Text="{Binding Distance,StringFormat=' {0} Km'}" 
                                                    Style="{StaticResource QuadLabels}"
+                                                   HorizontalOptions="Center"
                                                    />
 
                                         </Grid>
                                     </Grid>
 
-                                    <!--Quad two-->
-                                    <Grid Grid.Column="0" Grid.Row="2" Margin="10">
+                                    <!--Quad two Operational times-->
+                                    <Grid Grid.Column="0" Grid.Row="2" Margin="10, 0, 0, 0">
                                         <Grid VerticalOptions="Center" HorizontalOptions="Start">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="4*"/>
-                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <Image Grid.Column="0" 
                                                    Aspect="AspectFit" 
                                                    Source="OperatingIcon.png"
                                                    Style="{StaticResource QuadIcons}"
+                                                   
                                                    />
 
                                             <Label Grid.Column="1" 
                                                    Text="08h00-17h00" 
-                                                   Style="{StaticResource QuadIcons}"
+                                                   Style="{StaticResource QuadLabels}"
                                                    />
 
                                         </Grid>
                                     </Grid>
 
-                                    <!--Quad three-->
-                                    <Grid Grid.Column="2" Grid.Row="0" Margin="10">
+                                    <!--Quad three Number of people-->
+                                    <Grid Grid.Column="2" Grid.Row="0" Margin="10, 0, 0, 0">
                                         <Grid VerticalOptions="Center" HorizontalOptions="Start">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="4*"/>
@@ -136,18 +138,18 @@
 
                                             <Label Grid.Column="1" 
                                                    Text="10" 
-                                                   Style="{StaticResource QuadIcons}"
+                                                   Style="{StaticResource QuadLabels}"
                                                    />
 
                                         </Grid>
                                     </Grid>
 
                                     <!--Quad four-->
-                                    <Grid Grid.Column="2" Grid.Row="2" Margin="10">
-                                        <Grid VerticalOptions="Center" HorizontalOptions="Start">
+                                    <Grid Grid.Column="2" Grid.Row="2" Margin="10, 0, 0, 0">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="4*"/>
-                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <Image Grid.Column="0" 
@@ -157,8 +159,9 @@
                                                    />
 
                                             <Label Grid.Column="1" 
-                                                   Text="Tel: 031 702 456 43" 
-                                                   Style="{StaticResource QuadIcons}"
+                                                   Text="031 702 456 43" 
+                                                   Style="{StaticResource QuadLabels}"
+                                                   HorizontalTextAlignment="Start"
                                                    />
 
                                         </Grid>
