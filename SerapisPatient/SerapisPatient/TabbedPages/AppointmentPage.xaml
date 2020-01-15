@@ -61,7 +61,7 @@
                         <Grid Grid.Row="0"/>
 
                         <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center">
-                            <Image Style="{StaticResource ImageSpect}" Source="SerapisBookingIcon.png">
+                            <Image Style="{StaticResource ImageSpect}" Source="CalendarIcon.png">
                                 <Image.WidthRequest>
                                     <OnIdiom x:TypeArguments="x:Double">
                                         <OnIdiom.Phone>100</OnIdiom.Phone>
@@ -103,7 +103,7 @@
                         <Grid Grid.Row="0"/>
 
                         <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center">
-                            <Image Style="{StaticResource ImageSpect}" Source="CalendarIcon.png">
+                            <Image Style="{StaticResource ImageSpect}" Source="SerapisBookingIcon.png">
                                 <Image.WidthRequest>
                                     <OnIdiom x:TypeArguments="x:Double">
                                         <OnIdiom.Phone>100</OnIdiom.Phone>

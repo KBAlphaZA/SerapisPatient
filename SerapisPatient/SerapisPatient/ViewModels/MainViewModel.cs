@@ -1,17 +1,11 @@
 ﻿using SerapisPatient.Models;
-using SerapisPatient.Models.Doctor;
 using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
-using SerapisPatient.Views.MainViews;
 using SerapisPatient.Views.NotificationViews;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
