@@ -6,7 +6,6 @@ namespace SerapisPatient.Models
 {
     public class Address
     {
-        public string EstblishmentName { get; set; }
 
         public string AddressLineOne { get; set; }
 

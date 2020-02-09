@@ -52,7 +52,6 @@ namespace SerapisPatient.Services
                     DateBooked = bookedDate,
                     Venue = new Address
                     {
-                         EstblishmentName = "Grays Hospital",
                          AddressLineOne="",
                          AddressLineTwo="",
                          CityTown="",
