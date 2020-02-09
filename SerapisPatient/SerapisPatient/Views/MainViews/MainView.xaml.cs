@@ -1,18 +1,11 @@
-﻿using SerapisPatient.PopUpMessages;
-using SerapisPatient.ViewModels;
-using SerapisPatient.Views.AppointmentFolder.Booking;
+﻿using SerapisPatient.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SerapisPatient.Views.MainViews
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainView : ContentPage
 	{
         MainViewModel viewModel;
@@ -81,10 +74,11 @@ namespace SerapisPatient.Views.MainViews
         {
             //var pageHeight = Height;
             //var firstSection = CheckUp.FirstSectionHeight;
-         
+
             //PageFader.IsVisible = true;
             //PageFader.FadeTo(1, AnimationSpeed, Easing.SinInOut);
             //CheckUp.TranslateTo(0, pageHeight - firstSection, AnimationSpeed, Easing.SinInOut);
+            DisplayAlert("Worked", "Finally", "Cancel");
         }
 
         private async void PageFader_Tapped(object sender, EventArgs e)

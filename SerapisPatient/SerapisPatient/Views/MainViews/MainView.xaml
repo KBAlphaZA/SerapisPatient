@@ -177,7 +177,13 @@
                                             <Label TextColor="Black"  Text="{Binding Body}"/>
                                         </StackLayout>
                                     </Frame>
+
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OpenNotificationCard}"/>
+                                    </ContentView.GestureRecognizers>
+                                    
                                 </ContentView>
+                                
                             </DataTemplate>
                         </control:HorizontalListView.ItemTemplate>
                     </control:HorizontalListView>

@@ -47,13 +47,19 @@ namespace SerapisPatient.Services
                 string api = $"{APIURL}Bookings";
                 var model = new Appointment
                 {
-                    appointmentId = ObjectId.GenerateNewId(),
-                    Patient = patient.Id.ToString(),
-                    DateandTime = bookedDate,
-                    Venue = medicalBuildingModel.Id,
-                    DoctorBooked = enquiredDoctor.Id,
+                    BookingId = ObjectId.GenerateNewId(),
+                    PatientId = patient.Id,
+                    DateBooked = bookedDate,
+                    Venue = new Address 
+                    { 
+                         AddressLineOne="",
+                         AddressLineTwo="",
+                         CityTown="",
+                         PostalCode=""
+                    },
+                    DoctorsId =ObjectId.Parse(enquiredDoctor.Id),
                     IsSerapisBooking = false,
-                    HasSeenGp = false
+                    HasSeenGP = false
                 };
                 var json = JsonConvert.SerializeObject(model);
 

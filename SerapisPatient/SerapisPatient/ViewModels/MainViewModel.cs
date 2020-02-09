@@ -1,4 +1,5 @@
-﻿using SerapisPatient.Models;
+﻿using Rg.Plugins.Popup.Services;
+using SerapisPatient.Models;
 using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
@@ -6,6 +7,8 @@ using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
@@ -18,10 +21,16 @@ namespace SerapisPatient.ViewModels
 
         //public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
 
+
+        private NotificationBoardExpanded CardExpanded;
+
         public Command NavigateToProfilePageCommand { get; set; }
         public Command NavigateToAppointmentPageCommand { get; set; }
         public Command NavigateToDeliveryPageCommand { get; set; }
         public Command NavigateToCameraPageCommand { get; set; }
+
+        public Command OpenNotificationCard { get; set; }
+
         public ObservableCollection<NotificationModel> Notifications { get; private set; }
 
         //The instance for getting the user location
@@ -41,6 +50,8 @@ namespace SerapisPatient.ViewModels
 
         #endregion
 
+        NotificationModel mockUp = new NotificationModel() {Title= "MEDICATION DELIVERY" };
+
         public MainViewModel()
         {
             
@@ -49,8 +60,16 @@ namespace SerapisPatient.ViewModels
             NavigateToAppointmentPageCommand = new Command(AppointmentPage);
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
             NavigateToCameraPageCommand = new Command(CameraPage);
-
+            OpenNotificationCard = new Command(MockMethod);
             Title = _title;
+        }
+
+        private async void MockMethod()
+        {
+
+            await PopupNavigation.Instance.PushAsync(CardExpanded);
+
+            await App.Current.MainPage.Navigation.PushAsync(new MedicationNotificatonView());
         }
 
         #region Methods
@@ -62,8 +81,6 @@ namespace SerapisPatient.ViewModels
                     new NotificationModel{ Title = "FOLLOW UP", Body ="You have a follow up with Dr. Duma ", Type="FollowUp" },
                      new NotificationModel{ Title = "MEDICATION DELIVERY", Body ="Your ordered medication should be with you in a few hours ", Type="Delivery" },
                       new NotificationModel{ Title = "DELVIERED", Body =" View your reciept below" },
-
-
                   };
         }
 
