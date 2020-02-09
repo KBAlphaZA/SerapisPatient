@@ -50,8 +50,9 @@ namespace SerapisPatient.Services
                     BookingId = ObjectId.GenerateNewId(),
                     PatientId = patient.Id,
                     DateBooked = bookedDate,
-                    Venue = new Address 
-                    { 
+                    Venue = new Address
+                    {
+                         EstblishmentName = "Grays Hospital",
                          AddressLineOne="",
                          AddressLineTwo="",
                          CityTown="",
@@ -70,10 +71,6 @@ namespace SerapisPatient.Services
 
                 return response.IsSuccessStatusCode;
             }
-
-           
-
-           
 
         }
 
