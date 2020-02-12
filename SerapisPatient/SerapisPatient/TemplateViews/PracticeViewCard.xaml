@@ -30,7 +30,7 @@
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0" 
-                       Source="{Binding MedicalBuildingImage}"
+                       Source="{Binding PracticePicture}"
                        Aspect="AspectFill"
                        />
 
@@ -115,7 +115,7 @@
                                                    />
 
                                             <Label Grid.Column="1" 
-                                                   Text="08h00-17h00" 
+                                                   Text="{Binding ContactNumber}" 
                                                    Style="{StaticResource QuadLabels}"
                                                    />
 
@@ -137,7 +137,7 @@
                                                    />
 
                                             <Label Grid.Column="1" 
-                                                   Text="10" 
+                                                   Text="{Binding NumberOfPatientsAtPractice}" 
                                                    Style="{StaticResource QuadLabels}"
                                                    />
 
@@ -159,7 +159,7 @@
                                                    />
 
                                             <Label Grid.Column="1" 
-                                                   Text="031 702 456 43" 
+                                                   Text="{Binding ContactNumber}" 
                                                    Style="{StaticResource QuadLabels}"
                                                    HorizontalTextAlignment="Start"
                                                    />
