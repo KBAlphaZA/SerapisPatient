@@ -21,5 +21,7 @@ namespace SerapisPatient.Views.SideMenuPages.SettingsSubFolder
             viewModel = new AppointmentSettingsViewModel();
             BindingContext = viewModel;
 		}
+
+
 	}
 }

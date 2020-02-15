@@ -1,5 +1,9 @@
-﻿using SerapisPatient.Models.Patient;
+﻿using MongoDB.Driver;
+using SerapisPatient.Helpers;
+using SerapisPatient.Models.Patient;
+using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
+using SerapisPatient.Views.SideMenuPages.SettingsSubFolder;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,21 +46,16 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 
         public Command AddNextOfKin{ get; set; }
 
-        private string cellphoneNumberInput;
         public string CellphoneNumberInput
         {
             get
             {
-                return cellphoneNumberInput;
+                return Settings.Cellphone;
             }
             set
             {
-                if (cellphoneNumberInput != value)
-                {
-                    cellphoneNumberInput = value;
-                    OnPropertyChanged("CellphoneNumberInput");
-                    SaveButtonVisability = true;
-                }
+                Settings.Cellphone = value;
+                OnPropertyChanged("CellphoneNumberInput");
             }
         }
 
@@ -74,22 +73,19 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             }
         }
 
-        private string alternativeNumber;
         public string AlternativeNumber
         {
             get
             {
-                return alternativeNumber;
+                return Settings.AltPhoneNumber;
             }
             set
             {
-                if (alternativeNumber != null)
-                {
-                    alternativeNumber = value;
-                    OnPropertyChanged("AlternativeNumber");
-                    SaveButtonVisability = true;
-                }
+                Settings.AltPhoneNumber = value;
+                OnPropertyChanged("AlternativeNumber");
             }
+
+            
         }
 
         private string alternativePlaceholder;
@@ -121,35 +117,17 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             }
         }
 
-        private string emailText;
+        
         public string EmailText
         {
             get
             {
-                return emailText;
+                return Settings.Email;
             }
             set
             {
-                if (emailText != value)
-                {
-                    emailText = value;
-                    OnPropertyChanged("EmailText");
-                    SaveButtonVisability = true;
-                }
-            }
-        }
-
-        private string bloodTypePlaceholder;
-        public string BloodTypePlaceholder
-        {
-            get
-            {
-                return bloodTypePlaceholder;
-            }
-            set
-            {
-                bloodTypePlaceholder = value;
-                OnPropertyChanged("BloodTypePlaceholder");
+                Settings.Email = value;
+                OnPropertyChanged("EmailText");
             }
         }
 
@@ -169,57 +147,61 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             }
         }
 
-        private string firstName;
         public string FirstName
         {
             get
             {
-                return firstName;
+                return Settings.FirstName;
             }
             set
             {
-                if (firstName != null)
-                {
-                    firstName = value;
-                    OnPropertyChanged("FirstName");
-                    SaveButtonVisability = true;
-                }
+                Settings.FirstName = value;
+                OnPropertyChanged("FirstName");
             }
         }
 
-        private string surname;
         public string Surname
         {
             get
             {
-                return surname;
+                return Settings.LastName;
             }
             set
             {
-                if (surname != null)
-                {
-                    surname = value;
-                    OnPropertyChanged("Surname");
-                    SaveButtonVisability = true;
-                }
+                Settings.LastName = value;
+                OnPropertyChanged("Surname");
             }
         }
 
-        private string birthday;
-        public string Birthday
+        public string FullName 
         {
-            get
+            get 
             {
-                return birthday;
+                return FirstName+" "+Surname;
             }
             set
             {
-                if (birthday != null)
+                FullName = value;
+                OnPropertyChanged("FullName");
+            }
+        }
+
+        public string Birthdate
+        {
+            get
+            {
+                return Settings.DateOfBirth;
+            }
+            set
+            {
+                 MessagingCenter.Subscribe<PersonalSettings, string>(this, MessagingKeys.SaveSettings, (obj, sender)=> 
                 {
-                    birthday = value;
-                    OnPropertyChanged("Birthday");
-                    SaveButtonVisability = true;
-                }
+                     value=sender;
+                });
+
+                 Settings.DateOfBirth = value;
+
+                OnPropertyChanged("Birthdate");
             }
         }
 
@@ -294,7 +276,6 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 
         }
 
-
         private void AddToList()
         {
             //generate the template
@@ -305,6 +286,7 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
         private void SavePersonalSettings()
         {
             //Stick a messaging center here to send all the properties.
+
         }
 
         private void MaketheButtonVisable()

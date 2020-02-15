@@ -1,4 +1,5 @@
-﻿using SerapisPatient.ViewModels.Base;
+﻿using SerapisPatient.Helpers;
+using SerapisPatient.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,28 +12,13 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 
         public AppointmentSettingsViewModel()
         {
-            
+            ButtonAppearanceLogic(Settings.UberRideRequestEnabled);
             ButtonCommand = new Command(UberRideRequest);
         }
 
    
 
         public Command ButtonCommand { get; set; }
-
-        private bool saveButtonVisability;
-        public bool SaveButtonVisability
-        {
-            get
-            {
-                return saveButtonVisability;
-            }
-            set
-            {
-                saveButtonVisability = value;
-                OnPropertyChanged("SaveButtonVisability");
-                ShowSaveButton();
-            }
-        }
 
         private string buttonText="Disable";
         public string ButtonText
@@ -65,18 +51,16 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
         }
 
 
-        private int distanceLabel=0;
-        public int DistanceLabel
+        public string DistanceLabel
         {
             get
             {
-                return distanceLabel;
+                return Settings.MaximumDistance;
             }
             set
             {
-                distanceLabel = value;
+                Settings.MaximumDistance = value;
                 OnPropertyChanged("DistanceLabel");
-                distanceLabel = value;
             }
         }
 
@@ -112,26 +96,25 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             TextColour = "Black";
         }
 
-        private void ButtonAppearanceLogic()
+        private void ButtonAppearanceLogic(string isSwitchedOn)
         {
-            if (BackgroundColour.Equals(Color.FromHex("#607d8b")))
+            isSwitchedOn = Settings.UberRideRequestEnabled;
+
+            if (isSwitchedOn != "Enabled")
             {
                 DisableButtonProperties();
+                Settings.UberRideRequestEnabled = "Enabled";
             }
             else
             {
                 EnableButtonProperties();
+                Settings.UberRideRequestEnabled = "Disabled";
             }
-        }
-
-        private void ShowSaveButton()
-        {
-            
         }
 
         private void UberRideRequest()
         {
-            ButtonAppearanceLogic();
+            ButtonAppearanceLogic(Settings.UberRideRequestEnabled);
             //Save in Settings
         }
     }

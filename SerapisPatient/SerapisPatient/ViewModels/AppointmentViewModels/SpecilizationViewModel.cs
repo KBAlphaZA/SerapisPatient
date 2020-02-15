@@ -8,6 +8,7 @@ using System.Linq;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using Xamarin.Forms.BehaviorsPack;
 using SerapisPatient.behavious;
+using SerapisPatient.Services.LocationServices;
 
 namespace SerapisPatient.ViewModels
 {
@@ -41,10 +42,11 @@ namespace SerapisPatient.ViewModels
 
             SelectTheSpeclizationAsync(_specilizationData);
         });
-        private void SelectTheSpeclizationAsync(SpecilizationModel _specilizationData)
+        private async void SelectTheSpeclizationAsync(SpecilizationModel _specilizationData)
         {
             //DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
-           App.Current.MainPage.Navigation.PushAsync(new SelectPractice(_specilizationData),true);
+
+           await App.Current.MainPage.Navigation.PushAsync(new SelectPractice(_specilizationData),true);
         }
         
         //List

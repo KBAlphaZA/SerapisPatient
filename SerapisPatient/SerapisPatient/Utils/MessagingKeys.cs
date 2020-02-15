@@ -17,5 +17,8 @@ namespace SerapisPatient.Utils
 
         public const string Medicalbuilding = "Medicalbuilding";
         public const string Doctor = "DoctorRequest";
+
+        //Settings
+        public const string SaveSettings = "SaveSettings";
     }
 }

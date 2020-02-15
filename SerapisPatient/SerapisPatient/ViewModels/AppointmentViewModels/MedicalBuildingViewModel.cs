@@ -3,6 +3,7 @@ using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.Services;
 using SerapisPatient.ViewModels.Base;
@@ -23,11 +24,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Properties
         private readonly APIServices _apiServices = new APIServices();
         //MockData List
-        public ObservableCollection<MedicalBuildingModel> _Practices { get; set; }//MockData
+        
         public MedicalBuildingModel _MedicalBuildingData;
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public Command NavigateToHomePageCommand { get; set; }
         public ICommand ItemSelected { get; set; }
+
         private List<MedicalBuildingModel> _practices;
 
         public MedicalBuildingModel SelectedItem
@@ -36,16 +38,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             set { SetValue(value); }
         }
 
-        public List<MedicalBuildingModel> Practices
-        {
-            get { return _practices; }
-            set
-            {
-                _practices = value;
-                OnPropertyChanged();
-            }
-        }
-
+     
         private string title;
         public string Title 
         {
@@ -225,10 +218,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
         }
 
-       public async Task GetAllPracticesAsync()
+       public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
        {
-           // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+            // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+            PracticesList = new ObservableCollection<PracticeDto>();
 
+            var Practices=await _apiServices.GetAllMedicalBuildingsAsync();
+
+            foreach (var _practice in Practices)
+            {
+                PracticesList.Add(_practice);
+            }
+
+            return PracticesList;
        }
 
 
