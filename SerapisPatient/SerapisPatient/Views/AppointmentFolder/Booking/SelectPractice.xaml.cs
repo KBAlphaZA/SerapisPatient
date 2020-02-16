@@ -31,6 +31,19 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
             Navigation.PushAsync(new SelectBooking( _medicalBuildingModelData));
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            practiceViewCard.TranslationX = -400;
+
+            practiceViewCard.TranslateTo(0, 0, 1250, Easing.CubicInOut);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
         //Come back to this, since this has to be moved to the viewmodel
         //private async Task TapGestureRecognizer_Tapped(object sender, EventArgs e)
         //{

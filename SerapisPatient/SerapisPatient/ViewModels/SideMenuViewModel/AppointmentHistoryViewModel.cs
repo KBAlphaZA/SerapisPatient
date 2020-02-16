@@ -1,4 +1,5 @@
-﻿using SerapisPatient.Models.Appointments;
+﻿using MongoDB.Bson;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,21 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel
 
         void GenerateDummy()
         {
-            AppointmentHistoryList = new ObservableCollection<Appointment>()
+            AppointmentHistoryList = new ObservableCollection<Models.Appointments.Appointment>()
             {
-                 new Appointment{ DateBooked=DateTime.Now.ToString(), DoctorBooked=doctorSeen.LastName, TimeBooked="13h00", Venue="Grays hospital, 6 Calsi gardens, 11 Sunnyside Lane, Pinetown, 3610"}
+                 new Models.Appointments.Appointment
+                 { 
+                     DateBooked=DateTime.Now, 
+                     DoctorsId=ObjectId.Parse("5bc9baff1c9d4400001badec"), 
+                     TimeBooked=DateTime.Now, 
+                     Venue=new Models.Address
+                     { 
+                        AddressLineOne="6 Calsi gardens",
+                        AddressLineTwo="11 Sunnyside Lane",
+                        CityTown="Pinetown",
+                        PostalCode="3610"
+                     }
+                 }
             };
         }
         

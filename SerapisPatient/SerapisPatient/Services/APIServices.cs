@@ -5,6 +5,7 @@ using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.Models.Practices;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -15,8 +16,10 @@ namespace SerapisPatient.Services
 {
     public class APIServices
     {
-        private string APIURL = "http://serapismedicalapi.azurewebsites.net/api";
-       
+        //Azure one-private string APIURL = "http://serapismedicalapi.azurewebsites.net/api";
+
+        private string APIURL = "http://serapismedicalapi.herokuapp.com/api/{0}";
+
         HttpClient _httpClient = new HttpClient();
 
         public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
@@ -47,13 +50,19 @@ namespace SerapisPatient.Services
                 string api = $"{APIURL}Bookings";
                 var model = new Appointment
                 {
-                    appointmentId = ObjectId.GenerateNewId(),
-                    Patient = patient.Id.ToString(),
-                    DateandTime = bookedDate,
-                    Venue = medicalBuildingModel.Id,
-                    DoctorBooked = enquiredDoctor.Id,
+                    BookingId = ObjectId.GenerateNewId(),
+                    PatientId = patient.Id,
+                    DateBooked = bookedDate,
+                    Venue = new Address
+                    {
+                         AddressLineOne="",
+                         AddressLineTwo="",
+                         CityTown="",
+                         PostalCode=""
+                    },
+                    DoctorsId =ObjectId.Parse(enquiredDoctor.Id),
                     IsSerapisBooking = false,
-                    HasSeenGp = false
+                    HasSeenGP = false
                 };
                 var json = JsonConvert.SerializeObject(model);
 
@@ -64,10 +73,6 @@ namespace SerapisPatient.Services
 
                 return response.IsSuccessStatusCode;
             }
-
-           
-
-           
 
         }
 
@@ -110,16 +115,16 @@ namespace SerapisPatient.Services
 
         }
         
-        public async Task<List<MedicalBuildingModel>> GetAllMedicalBuildingsAsync()
+        public async Task<List<PracticeDto>> GetAllMedicalBuildingsAsync()
         {
 
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}/practice";
+                string api =string.Format(APIURL, "/Practices");
                 //Getting JSON data from the WebAPI
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
-                var result = JsonConvert.DeserializeObject<List<MedicalBuildingModel>>(content);
+                var result = JsonConvert.DeserializeObject<List<PracticeDto>>(content);
                 return result;
             }
         }

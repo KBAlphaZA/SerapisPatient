@@ -18,7 +18,13 @@ namespace SerapisPatient.ViewModels
     {
         public ObservableCollection<PracticeInfo> PracticeList { get; set; }
 
-        //public ICommand GoToDocList => new Command(NavigateToDoctorsList);
+        //The building info to pass on to the next page
+        MedicalBuildingModel newBuilding = new MedicalBuildingModel()
+        {
+             
+        };
+
+        public Command GoToDocList => new Command(()=>NavigateToDoctorsList(newBuilding));
 
         public PracticeSelectionViewModel()
         {

@@ -3,6 +3,7 @@ using SerapisPatient.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.TabbedPageViewModel
@@ -28,13 +29,20 @@ namespace SerapisPatient.ViewModels.TabbedPageViewModel
         private void NavigateToBookByDate()
         {
             //App.Current.MainPage.Navigation.PushModalAsync(new Specilization());
-           
-            App.Current.MainPage.Navigation.PushAsync(new Specilization());
+
+            //Pause to allow the animation to run
+             Task.Delay(4000);
+
+             App.Current.MainPage.Navigation.PushAsync(new Specilization());
         }
 
         private void NavigateToSerapisBooking()
         {
-            // App.Current.MainPage.Navigation.PushModalAsync(new Specilization());            
+            // App.Current.MainPage.Navigation.PushModalAsync(new Specilization());     
+
+            //Pause to allow the animation to run
+             Task.Delay(4000);
+
             App.Current.MainPage.Navigation.PushAsync(new Specilization(),true);
         }
 
