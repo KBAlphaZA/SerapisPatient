@@ -16,6 +16,7 @@ using SerapisPatient.Services;
 using Plugin.FacebookClient;
 using Plugin.FacebookClient.Abstractions;
 using Newtonsoft.Json.Linq;
+using SerapisPatient.Services.Data;
 
 namespace SerapisPatient.ViewModels
 {
@@ -63,6 +64,8 @@ namespace SerapisPatient.ViewModels
         public Command OnShareDataCommand { get; set; }
         public Command OnLoadDataCommand { get; set; }
         public Command OnLogoutCommand { get; set; }
+
+        public AuthenticationService authenticationService = new AuthenticationService();
         #endregion
         public LoginViewModel()
         {
@@ -238,8 +241,9 @@ namespace SerapisPatient.ViewModels
                 Email = data["email"].ToString()
             };
 
-
-
+            //login || Register the user
+            await authenticationService.FacebookLogin(Profile);
+            HandleAuth();
             // await LoadPosts();
         }
        
