@@ -47,27 +47,29 @@ namespace SerapisPatient.ViewModels
             try
             {
                 IsBusy = true;
-                var rootpage = App.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
-                if(rootpage != null)
-                {
-                    //App.CheckLogin = true;
-                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Registered"));
-                    App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
-
-                   // await Task.Delay(600);
-                    await App.Current.MainPage.Navigation.PopToRootAsync();
-                }
-                //App.Current.MainPage = null;
-                //App.Current.MainPage.Navigation.RemovePage
-                
-                //App.Current.MainPage = new MasterView();
+                bool isSuccess = await _APIServices.RegisterUser(Email, Password, ConfirmPassword);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
             finally
             {
+                var rootpage = App.Current.MainPage.Navigation.NavigationStack.FirstOrDefault();
+                if (rootpage != null)
+                {
+                    //App.CheckLogin = true;
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Registered"));
+                    App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
+
+                    // await Task.Delay(600);
+                    await App.Current.MainPage.Navigation.PopToRootAsync();
+                }
+                //App.Current.MainPage = null;
+                //App.Current.MainPage.Navigation.RemovePage
+
+                //App.Current.MainPage = new MasterView();
+
                 IsBusy = false;
             }
 

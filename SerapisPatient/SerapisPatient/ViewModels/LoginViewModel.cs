@@ -23,31 +23,10 @@ namespace SerapisPatient.ViewModels
     {
 
         #region Properties
-        public UserProfile User { get; set; } = new UserProfile();
-        public string Name
-        {
-            get => User.Name;
-            set => User.Name = value;
-        }
-
-        public string Email
-        {
-            get => User.Email;
-            set => User.Email = value;
-        }
-
-        public Uri Picture
-        {
-            get => User.Picture;
-            set => User.Picture = value;
-        }
 
         public string Token { get; set; }
         public bool IsLoggedIn { get; set; }
-        public ICommand LoginCommand { get; set; }
-        public ICommand LogoutCommand { get; set; }
-        //New Google Auth
-        private readonly IGoogleClientManager _googleClientManager;
+
         public ICommand RegisterOnClick { get; set; }
         public ICommand LoginOnClick { get; set; }
         public ICommand RestThePassword { get; set; }
@@ -59,6 +38,8 @@ namespace SerapisPatient.ViewModels
         public bool IsNotBusy { get { return !IsBusy; } }
         public FacebookProfile Profile { get; set; }
 
+        APIServices services = new APIServices();
+
         public Command OnLoginCommand { get; set; }
         public Command OnShareDataCommand { get; set; }
         public Command OnLoadDataCommand { get; set; }
@@ -69,121 +50,29 @@ namespace SerapisPatient.ViewModels
 
             //Facebook Login
             Profile = new FacebookProfile();
-
+            
             OnLoginCommand = new Command(async () => await FacebookLoginAsync());
             OnShareDataCommand = new Command(async () => await FacebookShareDataAsync());
             OnLoadDataCommand = new Command(async () => await FacebookLoadData());
             OnLogoutCommand = new Command(() =>
             {
-                if (CrossFacebookClient.Current.IsLoggedIn)
-                {
-                    CrossFacebookClient.Current.Logout();
-                    IsLoggedIn = false;
-                }
-            });
-            //GoogleLogin
+             
+                
+            }); 
 
-            LoginCommand = new Command(LoginAsync);
-            _googleClientManager = CrossGoogleClient.Current;
             //Custom Login
             LoginOnClick = new Command(LoginRequestAsync);
             RestThePassword = new Command(RestPassword);
             //RegisterOnClick = new Command(RegisterUser);
 
-            
-
             IsLoggedIn = false;
         }
-
-       
 
         #region Methods
-
-        //Plugin Google Code
-
-
-        public async void LoginAsync()
+        public void Logout()
         {
-            _googleClientManager.OnLogin += OnLoginCompleted;
-          
-            try
-            {
-                await _googleClientManager.LoginAsync();
-            }
-            catch (GoogleClientSignInNetworkErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInCanceledErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInInvalidAccountErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInInternalErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientNotInitializedErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientBaseException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
 
         }
-    
-
-        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
-        {
-            if (loginEventArgs.Data != null)
-            {
-                GoogleUser googleUser = loginEventArgs.Data;
-                User.Name = googleUser.Name;
-                User.Email = googleUser.Email;
-                User.Picture = googleUser.Picture;
-                var GivenName = googleUser.GivenName;
-                var FamilyName = googleUser.FamilyName;
-
-
-                //Log the current User email
-                Debug.WriteLine(User.Email);
-                IsLoggedIn = true;
-
-                var token = CrossGoogleClient.Current.ActiveToken;
-                Token = token;
-
-                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
-                App.Current.MainPage.Navigation.PopAsync();
-
-            }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
-            }
-
-            _googleClientManager.OnLogin -= OnLoginCompleted;
-
-        }
-        private void OnLogoutCompleted(object sender, EventArgs loginEventArgs)
-        {
-            IsLoggedIn = false;
-            User.Email = "Offline";
-            _googleClientManager.OnLogout -= OnLogoutCompleted;
-            //end of google code
-        }
-            public void Logout()
-        {
-            _googleClientManager.OnLogout += OnLogoutCompleted;
-            _googleClientManager.Logout();
-        }
-
-
-
 
         /// <summary>
         /// <c a="RegisterUser"/>
@@ -248,6 +137,7 @@ namespace SerapisPatient.ViewModels
 
              HandleAuth();
         }
+
         /// <summary>
         /// <c a="HandleAuth"/>
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
@@ -258,20 +148,22 @@ namespace SerapisPatient.ViewModels
             IsBusy = true;
             try
             {
-                
 
-                //App.CheckLogin = true;
-                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
-                await App.Current.MainPage.Navigation.PopAsync();
+                //bool suceess = await services.RegisterSocialUser();
 
             }
-            catch
+            catch(Exception ex)
             {
 
             }
             finally
             {
+
+                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First() );
+                await App.Current.MainPage.Navigation.PopAsync();
+
                 IsBusy = false;
+
             }
 
           

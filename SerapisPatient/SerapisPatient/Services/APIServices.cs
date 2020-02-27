@@ -61,14 +61,8 @@ namespace SerapisPatient.Services
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 var response = await _httpClient.PostAsync(api, content);
 
-
                 return response.IsSuccessStatusCode;
             }
-
-           
-
-           
-
         }
 
         public async Task<string> GetAccountDetails()
@@ -87,7 +81,45 @@ namespace SerapisPatient.Services
             return response.ToString();
         }
 
+        public async Task<bool> RegisterUser(string email, string password, string confirmPassword)
+        {
+            using (HttpClient _httpClient = new HttpClient())
+            {
+                string api = $"{APIURL}/Account";
+                var model = new PatientUser
+                {
+                    EmailAddress = email,
+                    Password = password,
+                    //Password = confirmPassword
+                };
+                var json = JsonConvert.SerializeObject(model);
 
+                HttpContent content = new StringContent(json);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                var response = await _httpClient.PostAsync(api, content);
+
+                return response.IsSuccessStatusCode;
+            }
+        }
+
+        public async Task<bool> LoginUser()
+        {
+            using (HttpClient _httpClient = new HttpClient())
+            {
+                string api = $"{APIURL}/Account";
+                var model = new PatientUser
+                {
+
+                };
+                var json = JsonConvert.SerializeObject(model);
+
+                HttpContent content = new StringContent(json);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                var response = await _httpClient.PostAsync(api, content);
+
+                return response.IsSuccessStatusCode;
+            }
+        }
         /// <summary>
         ///  <c a="GetDoctorsAsync"/>
         ///   Used for DoctorListView, so it

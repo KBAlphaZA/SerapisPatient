@@ -922,9 +922,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\PopDialogScooterIcon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AndroidServices\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\RefreshButtonIcon.png" />
   </ItemGroup>
