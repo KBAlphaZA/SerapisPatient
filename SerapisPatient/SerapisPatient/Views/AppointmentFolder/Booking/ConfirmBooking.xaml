@@ -15,10 +15,21 @@
             </Grid.RowDefinitions>
             <Image Source="GreysHospital.jpg"
                    Grid.Row="0"
-                   Aspect="AspectFit" HorizontalOptions="FillAndExpand"
-                   VerticalOptions="StartAndExpand"></Image>
-<!--I changed the top margin from 150 to 130 -->
-            <Frame CornerRadius="10" BackgroundColor="White" OutlineColor="Gray" Grid.RowSpan="2" Margin="20,130,20,20">
+                   Aspect="AspectFit" 
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="StartAndExpand"
+                   x:Name="backgroundImage"
+                   >
+                
+            </Image>
+            <!--I changed the top margin from 150 to 130 -->
+            <Frame CornerRadius="10" 
+                   BackgroundColor="White" 
+                   OutlineColor="Gray" 
+                   Grid.RowSpan="2"
+                   Margin="20,130,20,20"
+                   x:Name="summaryCard"
+                   >
                 <Grid RowSpacing="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

@@ -23,6 +23,7 @@ namespace SerapisPatient.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#607d8b"));
 
             base.OnCreate(bundle);
             //ZXing.Net.Mobile.Forms.Android.Platform.Init();

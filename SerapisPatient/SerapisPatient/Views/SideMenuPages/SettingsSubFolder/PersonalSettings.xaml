@@ -33,7 +33,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0" x:Name="GridRowZero">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -74,7 +74,7 @@
                         <!--UserName-->
                         <Grid Grid.Row="1" HorizontalOptions="Center">
                             <Label
-                            Text="Khanyisani Buthelezi"
+                            Text="{Binding FullName}"
                             Style="{StaticResource SettingLabel}"
                             />
                         </Grid>
@@ -138,7 +138,7 @@
                                 />
 
 
-                            <DatePicker Grid.Row="1" Date="1996/03/20">
+                            <DatePicker Grid.Row="1" Date="{Binding Birthdate}" DateSelected="DatePicker_DateSelected">
                             </DatePicker>
 
                         </Grid>
@@ -213,7 +213,7 @@
                                     Keyboard="Telephone" 
                                     Placeholder="{Binding AlternativePlaceholder}" 
                                     Style="{DynamicResource SettingEntry}"
-                                    Text="{Binding AlternativeNumber, Mode=TwoWay}"
+                                    Text="{Binding AlternativeNumber}"
                               />
 
                         </Grid>

@@ -65,10 +65,10 @@
         <!--Row 5,6 & 7-->
         <Image Grid.Row="6"  Grid.RowSpan="2" Grid.Column="0"  VerticalOptions="Center"  HeightRequest="45"  Source="MyGender.png" />
 
-        <Label Grid.Row="6" Grid.Column="1"  Text="170 cm" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="End"  TextColor="Black"/>
-        <Label Grid.Row="7" Grid.Column="1" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" Text="Height" TextColor="Gray"/>
+        <Label Grid.Row="6" Grid.Column="1"  Text="Male" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="End"  TextColor="Black"/>
+        <Label Grid.Row="7" Grid.Column="1" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" Text="Gender" TextColor="Gray"/>
 
-        <Image Grid.Row="6"  Grid.RowSpan="2" Grid.Column="2"  VerticalOptions="Center"  HeightRequest="45"  Source="MyBloodType.png" />
+        <Image Grid.Row="6"  Grid.RowSpan="2" Grid.Column="2"  VerticalOptions="Center"  HeightRequest="45"  Source="WeightIcon.png" />
 
         <Label Grid.Row="6" Grid.Column="3" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="End" Text="71 kgs" TextColor="Black"/>
         <Label Grid.Row="7" Grid.Column="3" FontSize="Small"  VerticalTextAlignment="Start" Text="Weight" TextColor="Gray"/>
@@ -80,7 +80,7 @@
         <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Margin="15,15,15,10" Text="Treatment Timeline :" TextColor="Black" FontAttributes="Bold" FontSize="Small"/>
 
         <!--Row 7-->
-        <Frame Grid.Row="10" BackgroundColor="Green" Grid.Column="0" Grid.ColumnSpan="5" Margin="15,15,15,10" />
+        <Frame Grid.Row="10"  Grid.Column="0" Grid.ColumnSpan="5" Margin="15,15,15,10" />
         <!--Row 8-->
 
     </Grid>

@@ -22,6 +22,16 @@ namespace SerapisPatient.Views
             viewModel = new SpecilizationViewModel();
             BindingContext = viewModel;
 		}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            specilalties.TranslationY = 500;
+
+            specilalties.TranslateTo(0, 0, 1150, Easing.SpringOut);
+        }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

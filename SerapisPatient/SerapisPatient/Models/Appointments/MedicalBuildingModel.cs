@@ -37,7 +37,7 @@ namespace SerapisPatient.Models.Appointments
         ////public Specilization FieldsSpecilized { get; set; }
         ////public BookedTimes BookedTimes { get; set; }
         ///[BsonElement("Appointments")]
-        public List<Appointment> Appointments { get; set; }
+        public List<Appointments.Appointment> Appointments { get; set; }
     }
     public partial class Location
     {        
@@ -66,21 +66,7 @@ namespace SerapisPatient.Models.Appointments
         //[BsonId]
         public ObjectId docid { get; set; }
     }
-    public partial class Appointment
-    {
-        // most attributes will take on the objectid formatted as a string
-        [BsonId]
-        public ObjectId appointmentId { get; set; }
-        public string Patient { get; set; }
-        public DateTime DateandTime { get; set; }
-        public string Venue { get; set; }
-        public string DoctorBooked { get; set; }
-        //public Doctor.Doctor DoctorBooked { get; set; }
-        public bool IsSerapisBooking { get; set; }
-        public bool HasSeenGp { get; set; }
-        public string DateBooked { get; set; }
-        public string TimeBooked { get; set; }
-    }
+    
     public partial class BookedTimes
     {
         public DateTime Time { get; set; }

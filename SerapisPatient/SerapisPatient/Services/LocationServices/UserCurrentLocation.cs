@@ -18,6 +18,8 @@ namespace SerapisPatient.Services.LocationServices
 
         private readonly double GpsAccurecy=10;
 
+        private Position position = null;
+
         public UserCurrentLocation()
         {
             
@@ -32,7 +34,6 @@ namespace SerapisPatient.Services.LocationServices
 
             Position userPostion = new Position();
 
-
             try
             {
 
@@ -43,6 +44,10 @@ namespace SerapisPatient.Services.LocationServices
                 else
                 {
                     userPostion = await locator.GetPositionAsync(TimeSpan.FromSeconds(2), null, false);
+
+                    UserLatitude = userPostion.Latitude;
+
+                    UserLongitude = userPostion.Longitude;
 
                     return userPostion;
                 }

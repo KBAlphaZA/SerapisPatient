@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popUpPage:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SerapisPatient.Views.NotificationViews.NotificationBoardExpanded"
+             xmlns:popUpPage="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             >
+    <popUpPage:PopupPage.Content>
+        <Grid Margin="0, 400, 0, 0">
+            <BoxView BackgroundColor="Green" CornerRadius="30, 30, 0, 0"/>
+        </Grid>
+    </popUpPage:PopupPage.Content>
+</popUpPage:PopupPage>

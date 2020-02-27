@@ -1,82 +1,209 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SerapisPatient.TemplateViews.PracticeViewCard">
-    <ContentView.Content>
-        <StackLayout>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="6*"/>
-                </Grid.RowDefinitions>
+             x:Class="SerapisPatient.TemplateViews.PracticeViewCard"
+             >
 
-                <Image Grid.Row="0" 
-                       Source="{Binding MedicalBuildingImage}"
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Image" x:Key="QuadIcons">
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="QuadLabels">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <Grid RowSpacing="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" 
+                       Source="{Binding PracticePicture}"
                        Aspect="AspectFill"
                        />
 
-                <Grid Grid.Row="1">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+            <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="9*"/>
+                    </Grid.RowDefinitions>
 
-                    <!--Practice name-->
-                    <Grid Grid.Row="0" BackgroundColor="Yellow">
+                    <Grid Grid.Row="0">
                         <Label Text="{Binding PracticeName}"
                                TextColor="Black" 
                                FontAttributes="Bold"
                                FontSize="25"
-                               />
-                    </Grid>
-
-                    <!--The distance-->
-                    <Grid Grid.Row="1" BackgroundColor="Green">
-                        <Grid ColumnSpacing="4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-
-                        <Image Grid.Column="0"
-                               Aspect="AspectFit"
-                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
                                HorizontalOptions="Center"
-                               Source="route.png"
-                               />
-
-                        <Label Grid.Column="1"
-                               VerticalOptions="Center"  
-                               TextColor="Black"  
                                VerticalTextAlignment="Center"
-                               HorizontalTextAlignment="Start"
-                               HorizontalOptions="Start"
-                               FontSize="Medium"
-                               Text="{Binding Distance,StringFormat=' {0} Kilometers away'}" 
+                               VerticalOptions="Center"
                                />
-
                     </Grid>
 
-                    <!--Full details-->
-                    <Grid Grid.Row="2">
-                        <Button 
-                            BackgroundColor="White" 
-                            HorizontalOptions="Center" 
-                            BorderColor="Pink" 
-                            Text="Full details" 
-                            TextColor="Pink"
-                            VerticalOptions="Center"
-                            BorderWidth="6"
-                            />
+                    <Grid Grid.Row="1">
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="6*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Practice Inforamtion Block-->
+                            <Grid Grid.Row="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="2"/>
+                                        <RowDefinition Height="5*"/>
+                                    </Grid.RowDefinitions>
+
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2"/>
+                                        <ColumnDefinition Width="5*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Quad one the distance-->
+                                    <Grid Grid.Column="0" Grid.Row="0" Margin="10">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" 
+                                                   Aspect="AspectFit" 
+                                                   Source="route.png"
+                                                   Style="{StaticResource QuadIcons}"
+                                                   />
+
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding Distance,StringFormat=' {0} Km'}" 
+                                                   Style="{StaticResource QuadLabels}"
+                                                   HorizontalOptions="Center"
+                                                   />
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <!--Quad two Operational times-->
+                                    <Grid Grid.Column="0" Grid.Row="2" Margin="10, 0, 0, 0">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" 
+                                                   Aspect="AspectFit" 
+                                                   Source="OperatingIcon.png"
+                                                   Style="{StaticResource QuadIcons}"
+                                                   
+                                                   />
+
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding ContactNumber}" 
+                                                   Style="{StaticResource QuadLabels}"
+                                                   />
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <!--Quad three Number of people-->
+                                    <Grid Grid.Column="2" Grid.Row="0" Margin="10, 0, 0, 0">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="6*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" 
+                                                   Aspect="AspectFit" 
+                                                   Source="QueIcon.png"
+                                                   Style="{StaticResource QuadIcons}"
+                                                   />
+
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding NumberOfPatientsAtPractice}" 
+                                                   Style="{StaticResource QuadLabels}"
+                                                   />
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <!--Quad four-->
+                                    <Grid Grid.Column="2" Grid.Row="2" Margin="10, 0, 0, 0">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="8*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" 
+                                                   Aspect="AspectFit" 
+                                                   Source="ContactUsIcon.png"
+                                                   Style="{StaticResource QuadIcons}"
+                                                   />
+
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding ContactNumber}" 
+                                                   Style="{StaticResource QuadLabels}"
+                                                   HorizontalTextAlignment="Start"
+                                                   />
+
+                                        </Grid>
+                                    </Grid>
+                                    
+                                    <!--Horizontal Line-->
+                                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                                        <BoxView BackgroundColor="Black"/>
+                                    </Grid>
+
+                                    <!--Vertical Line-->
+                                    <Grid Grid.Column="1" Grid.RowSpan="3">
+                                        <BoxView BackgroundColor="Black"/>
+                                    </Grid>
+
+                                </Grid>
+                            </Grid>
+
+                            <!--Continue Button-->
+                            <Grid Grid.Row="1" BackgroundColor="DodgerBlue">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Label Text="Continue" 
+                                       FontSize="25"
+                                       VerticalTextAlignment="Center"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White"
+                                       FontAttributes="Bold"
+                                       Margin="0, 10"
+                               />
+                            </Grid>
+                            
+                        </Grid>
                     </Grid>
                     
                 </Grid>
-                
             </Grid>
-        </StackLayout>
+            
+        </Grid>
     </ContentView.Content>
 </ContentView>

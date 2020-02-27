@@ -4,118 +4,123 @@
              x:Class="SerapisPatient.TabbedPages.DeliveryPage">
 
     <ContentPage.Resources>
-        
+        <Style TargetType="Image" x:Key="ImageSpect">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Frame" x:Key="CustomButton">
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+            <Setter Property="BorderColor" Value="Black"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource  SeconderyColour}"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="CustomeButtonLabel" >
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid>
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="1"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
+
             
- 
-            <!-- The Prescription List-->
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="6*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-
-        
-                <Label 
-                        Text="Doctor prescription" 
-                        HorizontalOptions="Center"
-                        TextColor="Black"
-                        FontSize="Large"
-                        Grid.Row="0"    
-                    >
+            <!--Doctors prescription-->
+            <Grid Grid.Row="0" VerticalOptions="End" Margin="15" x:Name="doctorPrescriptionButton">
+                <Frame Style="{StaticResource CustomButton}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="6*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
 
 
-                    <Label.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="Android,WinPhone" Value="5,10,5,2"/>
-                            <On Platform="iOS" Value="8,13,8,5"/>
-                        </OnPlatform>
-                    </Label.Margin>
+                        <Grid Grid.Row="0">
+                            <Label Text="Doctor prescription" FontAttributes="Bold" Style="{StaticResource CustomeButtonLabel}"/>
+                        </Grid>
 
-                </Label>
+                        <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center">
+                            <Image Style="{StaticResource ImageSpect}" Source="DoctorPrescriptionIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
 
-                <Image 
-                    Grid.Row="1"
-                    Source="DoctorPrescriptionIcon.png"
-                    Aspect="AspectFit"
-                    >
+                        <Grid Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Style="{StaticResource CustomeButtonLabel}" Text="Show prescription"/>
+                        </Grid>
 
-                    <Image.GestureRecognizers>
+                    </Grid>
+
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DoctorPrescription}"/>
-                    </Image.GestureRecognizers>
-                    
-                </Image>
+                    </Frame.GestureRecognizers>
 
-                <Label 
-                    Grid.Row="2"
-                    Text="Show prescription"
-                    HorizontalOptions="Center"
-                    FontSize="Medium"
-                    />
-
+                </Frame>
             </Grid>
+
             
-            
-            <!--Line-->
-            <Grid Grid.Row="1">
-                <BoxView 
-                    Color="Black" 
-                    HorizontalOptions="FillAndExpand"
-                    />
-            </Grid>
-            
-            
-            <!--Chat Bot-->
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="6*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
+            <!--Chat bot-->
+            <Grid Grid.Row="1" VerticalOptions="Center" Margin="15" x:Name="selfPrescribeButton">
+                <Frame Style="{StaticResource CustomButton}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="6*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
 
+                        <Grid Grid.Row="0">
+                            <Label Text="Self prescription" Style="{StaticResource CustomeButtonLabel}" FontAttributes="Bold"/>
+                        </Grid>
+                        
+                        <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center">
+                            <Image Style="{StaticResource ImageSpect}" Source="SelfPrescriptionIcon.png">
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.WidthRequest>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>100</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>150</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.HeightRequest>
+                            </Image>
+                        </Grid>
 
-                <Label  Grid.Row="0"
-                        Text="Self prescription" 
-                        HorizontalOptions="Center"
-                        TextColor="Black"
-                        FontSize="Large"
-                        >
-                    <Label.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="Android,WinPhone" Value="5,10,5,2"/>
-                            <On Platform="iOS" Value="8,13,8,5"/>
-                        </OnPlatform>
-                    </Label.Margin>
-                </Label>
+                        <Grid Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Style="{StaticResource CustomeButtonLabel}" Text="Self prescribe"/>
+                        </Grid>
 
+                    </Grid>
 
-                <Image 
-                    Grid.Row="1"
-                    Source="SelfPrescriptionIcon.png"
-                    Aspect="AspectFit"
-                    >
-
-                    <Image.GestureRecognizers>
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChatBotInitilization}"/>
-                    </Image.GestureRecognizers>
-                    
-                </Image>
+                    </Frame.GestureRecognizers>
 
-                <Label 
-                    Grid.Row="2"
-                    Text="Self prescribe"
-                    HorizontalOptions="Center"
-                    FontSize="Medium"
-                    />
+                </Frame>
             </Grid>
             
         </Grid>

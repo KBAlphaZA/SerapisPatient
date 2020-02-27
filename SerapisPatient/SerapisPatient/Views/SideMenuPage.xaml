@@ -24,8 +24,8 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="8*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -74,233 +74,19 @@
 
             </Grid>
 
-            <Grid Grid.Row="1">
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image Source="SettingsIcon.png">
-                                <Image.WidthRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.WidthRequest>
-                                <Image.HeightRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.HeightRequest>
-                            </Image>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Label Text="Settings" Style="{StaticResource MenuLabels}"/>
-                        </Grid>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateSettings}"/>
-                        </Grid.GestureRecognizers>
-                        
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image Source="PaymentsIcon.png">
-                                <Image.WidthRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.WidthRequest>
-                                <Image.HeightRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.HeightRequest>
-                            </Image>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Label Text="Payment" Style="{StaticResource MenuLabels}"/>
-                        </Grid>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigatePayment}"/>
-                        </Grid.GestureRecognizers>
-
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image Source="ContactUsIcon.png">
-                                <Image.WidthRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.WidthRequest>
-                                <Image.HeightRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.HeightRequest>
-                            </Image>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Label Text="Contact us" Style="{StaticResource MenuLabels}"/>
-                        </Grid>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateContact}"/>
-                        </Grid.GestureRecognizers>
-
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="3">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image Source="AppointmentHistoryIcon.png">
-                                <Image.WidthRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.WidthRequest>
-                                <Image.HeightRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.HeightRequest>
-                            </Image>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Label Text="Appointment history" Style="{StaticResource MenuLabels}"/>
-                        </Grid>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateAppointment}"/>
-                        </Grid.GestureRecognizers>
-
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="4">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image Source="MedicationHistoryIcon.png">
-                                <Image.WidthRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.WidthRequest>
-                                <Image.HeightRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.HeightRequest>
-                            </Image>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Label Text="Medication history" Style="{StaticResource MenuLabels}"/>
-                        </Grid>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateMedication}"/>
-                        </Grid.GestureRecognizers>
-                        
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image Source="LogOutIcon.png">
-                                <Image.WidthRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.WidthRequest>
-                                <Image.HeightRequest>
-                                    <OnIdiom x:TypeArguments="x:Double">
-                                        <OnIdiom.Phone>40</OnIdiom.Phone>
-                                        <OnIdiom.Tablet>52</OnIdiom.Tablet>
-                                    </OnIdiom>
-                                </Image.HeightRequest>
-                            </Image>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Label Text="Log out" Style="{StaticResource MenuLabels}"/>
-                        </Grid>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
-                        </Grid.GestureRecognizers>
-                        
-                    </Grid>
-                </Grid>
-
-                <Grid.Margin>
-                    <OnIdiom x:TypeArguments="Thickness">
-                        <OnIdiom.Phone>10,5</OnIdiom.Phone>
-                    </OnIdiom>
-                </Grid.Margin>
-                
+            <Grid Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="End">
+                <TableView Intent="Menu" VerticalOptions="End">
+                    <TableRoot>
+                        <TableSection>
+                            <ImageCell ImageSource="AppointmentHistoryIcon.png" Text="Appointment history" TextColor="Black" Command="{Binding NavigateAppointment}"/>
+                            <ImageCell ImageSource="MedicationHistoryIcon.png" Text="Medication history" TextColor="Black" Command="{Binding NavigateMedication}"/>
+                            <ImageCell ImageSource="PaymentsIcon.png" Text="Payment" TextColor="Black" Command="{Binding NavigatePayment}"/>
+                            <ImageCell ImageSource="ContactUsIcon.png" Text="Contact us" TextColor="Black" Command="{Binding NavigateContact}"/>
+                            <ImageCell ImageSource="SettingsIcon.png" Text="Settings" TextColor="Black" Command="{Binding NavigateSettings}"/>
+                            <ImageCell ImageSource="LogOutIcon.png" Text="Log out" TextColor="Black" Command="{Binding LogoutCommand}"/>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
             </Grid>
 
             <Grid Grid.Row="2">

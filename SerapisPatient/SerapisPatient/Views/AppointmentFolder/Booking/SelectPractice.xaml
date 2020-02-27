@@ -13,36 +13,28 @@
         <!--Resource xaml code-->
     </ContentPage.Resources>
 
-    <ContentPage.Content>
-        
-        
-        <Grid RowSpacing="0">
+    <!--This is for future version for more details about that practice-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="" Command="{Binding .}"/>
+    </ContentPage.ToolbarItems>
 
-            <!-- code specific margins fore diffrent devices-->
+    <ContentPage.Content>
+        <Grid RowSpacing="0" x:Name="practiceViewCard">
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" VerticalOptions="StartAndExpand" Margin="5">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
-                    </Grid.RowDefinitions>
-
-                    <!--The icon and the specilization name-->
-                    <Grid Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Fill">
-                        <!--Code specific margin code for diffrent platforms-->
-
-                        <StackLayout Orientation="Horizontal">
-                            <Image  
+            <Grid Grid.Row="0">
+                <StackLayout Orientation="Horizontal">
+                    <Image  
                             HorizontalOptions="Fill" 
                             VerticalOptions="Fill"  
                             Source="{Binding Icon}"
                             />
 
-                            <Label  
+                    <Label  
                             Text="{Binding Title}" 
                             TextColor="Black" 
                             FontSize="30" 
@@ -51,44 +43,41 @@
                             VerticalTextAlignment="Center"
                             HorizontalOptions="StartAndExpand"
                             />
-                        </StackLayout>
-                        
-                    </Grid>
-
-                </Grid>
+                </StackLayout>
             </Grid>
 
-            <Grid Grid.Row="1" VerticalOptions="Fill" HorizontalOptions="Fill">
-
-                <controlcarouselview:CarouselViewControl 
+            <Grid Grid.Row="1">
+                <StackLayout>
+                    <controlcarouselview:CarouselViewControl 
                     Orientation="Horizontal" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     ItemsSource="{Binding PracticesList}"
-                    IndicatorsShape="Square"
+                    IndicatorsShape="Circle"
                     ShowIndicators="True"
-                    IndicatorsTintColor="Blue"
+                    IndicatorsTintColor="White"
                     InterPageSpacing="4"
+                     
                     >
 
-                    <controlcarouselview:CarouselViewControl.ItemTemplate>
-                        <DataTemplate>
-                            <templateViewcard:PracticeViewCard/>
-                        </DataTemplate>
-                    </controlcarouselview:CarouselViewControl.ItemTemplate>
+                        <controlcarouselview:CarouselViewControl.ItemTemplate>
+                            <DataTemplate>
+                                <templateViewcard:PracticeViewCard/>
+                            </DataTemplate>
+                        </controlcarouselview:CarouselViewControl.ItemTemplate>
 
-                    <controlcarouselview:CarouselViewControl.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding .}"/>
-                    </controlcarouselview:CarouselViewControl.GestureRecognizers>
+                        <controlcarouselview:CarouselViewControl.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding selectedItem}"/>
+                        </controlcarouselview:CarouselViewControl.GestureRecognizers>
 
-                </controlcarouselview:CarouselViewControl>
+                    </controlcarouselview:CarouselViewControl>
 
+                </StackLayout>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding selectedItem}"/>
+                </Grid.GestureRecognizers>
             </Grid>
-
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding selectedItem}"/>
-            </Grid.GestureRecognizers>
-
+            
         </Grid>
     </ContentPage.Content>
     

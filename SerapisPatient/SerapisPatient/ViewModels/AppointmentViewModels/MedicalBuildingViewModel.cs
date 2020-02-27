@@ -1,20 +1,15 @@
 ﻿
 using CarouselView.FormsPlugin.Abstractions;
-using MongoDB.Driver.Linq;
-using SerapisPatient.behavious;
+using MongoDB.Bson;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Patient;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.Services;
-using SerapisPatient.Services.Cloud;
-using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -29,11 +24,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Properties
         private readonly APIServices _apiServices = new APIServices();
         //MockData List
-        public ObservableCollection<MedicalBuildingModel> _Practices { get; set; }//MockData
+        
         public MedicalBuildingModel _MedicalBuildingData;
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public Command NavigateToHomePageCommand { get; set; }
         public ICommand ItemSelected { get; set; }
+
         private List<MedicalBuildingModel> _practices;
 
         public MedicalBuildingModel SelectedItem
@@ -42,16 +38,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             set { SetValue(value); }
         }
 
-        public List<MedicalBuildingModel> Practices
-        {
-            get { return _practices; }
-            set
-            {
-                _practices = value;
-                OnPropertyChanged();
-            }
-        }
-
+     
         private string title;
         public string Title 
         {
@@ -119,11 +106,9 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             }
         }
 
-        //public ObservableCollection<MedicalBuildingModel> PracticesList;
+        private ObservableCollection<PracticeDto> practiceList;
 
-        private ObservableCollection<MedicalBuildingModel> practiceList;
-
-        public ObservableCollection<MedicalBuildingModel> PracticesList
+        public ObservableCollection<PracticeDto> PracticesList
         {
             get
             {
@@ -134,7 +119,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 practiceList = value;
             }
         }
-
 
         private void MedicalBuildingViewInit(SpecilizationModel _specilizationData)
         {
@@ -164,20 +148,44 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 HandleNavigation(_MedicalBuildingData);
             });
 
-            PracticesList = new ObservableCollection<MedicalBuildingModel>()
+            PracticesList = new ObservableCollection<PracticeDto>()
             {
-                new MedicalBuildingModel{Distance=7.8, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=5},
-                new MedicalBuildingModel{Distance=7.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Cromptom Hospital", PatientsCurrentlyAtPractice=3},
-                new MedicalBuildingModel{Distance=6.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "GrooteSchuurHospital",PatientsCurrentlyAtPractice=12},
-                new MedicalBuildingModel{Distance=12.5,MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Pinetown Clinic", PatientsCurrentlyAtPractice=20},
-                new MedicalBuildingModel{Distance=8.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Westville Hospital", PatientsCurrentlyAtPractice=8},
-                new MedicalBuildingModel{Distance=5.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Medicross: Pinetown", PatientsCurrentlyAtPractice=11},
-                new MedicalBuildingModel{Distance=2.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=15},
+               new PracticeDto
+                 {
+                     Distance=7.8,
+                     ContactNumber="031 701 456 43",
+                     PracticeID=ObjectId.Parse("5bc9bd861c9d4400001badf1"),
+                     NumberOfPatientsAtPractice=5,
+                     PracticeName="Grey's Hospital",
+                     PracticePicture="MedicrossPinetown.jpg",
+                     OperatingTimes="08h00-17h00"
+                 },
+                 new PracticeDto
+                 {
+                     Distance=7,
+                     ContactNumber="031 701 456 43",
+                     PracticeID=ObjectId.Parse("5bc9bde81c9d4400001badf2"),
+                     NumberOfPatientsAtPractice=10,
+                     PracticeName="Crompton Hospital",
+                     PracticePicture="MedicrossPinetown.jpg",
+                     OperatingTimes="08h00-17h00"
+                 },
+                 new PracticeDto
+                 {
+                     Distance=6,
+                     ContactNumber="031 701 456 43",
+                     PracticeID=ObjectId.Parse("5bc9bd741c9d4400001badf0"),
+                     NumberOfPatientsAtPractice=10,
+                     PracticeName="Groote Schuur Hospital",
+                     PracticePicture="MedicrossPinetown.jpg",
+                     OperatingTimes="08h00-17h00"
+                 }
             };
 
             MedicalBuildingViewInit(_specilizationData);
         }
 
+        #region Bonga
         //BONG'S Constructor//
 
         //public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
@@ -191,17 +199,18 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
 
         //   // GenerateMedicalBuildingModel();
-            
+
         //    ItemSelected = new Command<MedicalBuildingModel>(args =>
         //    {
         //        _MedicalBuildingData = args;
         //        HandleNavigation(_MedicalBuildingData);
         //    });
         //}
+        #endregion
 
         public MedicalBuildingViewModel()
         {
-
+            
         }
 
         public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
@@ -209,10 +218,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
         }
 
-       public async Task GetAllPracticesAsync()
+       public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
        {
-           // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+            // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+            PracticesList = new ObservableCollection<PracticeDto>();
 
+            var Practices=await _apiServices.GetAllMedicalBuildingsAsync();
+
+            foreach (var _practice in Practices)
+            {
+                PracticesList.Add(_practice);
+            }
+
+            return PracticesList;
        }
 
 
@@ -221,22 +239,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             SelectedItem = state as MedicalBuildingModel;
         }
 
-        //DummyData
-        private void GenerateMedicalBuildingModel()
-        {
-            _Practices = new ObservableCollection<MedicalBuildingModel>
-            {
-                new MedicalBuildingModel{Distance=7.8, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=5},
-                new MedicalBuildingModel{Distance=7.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "CromptomHospital", PatientsCurrentlyAtPractice=3},
-                new MedicalBuildingModel{Distance=6.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "GrooteSchuurHospital",PatientsCurrentlyAtPractice=12},
-                new MedicalBuildingModel{Distance=12.5,MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "PinetownClinic", PatientsCurrentlyAtPractice=20},
-                new MedicalBuildingModel{Distance=8.0, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "WestvilleHospital", PatientsCurrentlyAtPractice=8},
-                new MedicalBuildingModel{Distance=5.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Medicross:Pinetown", PatientsCurrentlyAtPractice=11},
-                new MedicalBuildingModel{Distance=2.5, MedicalBuildingImage ="MedicrossPinetown.jpg",PracticeName = "Grey's Hospital", PatientsCurrentlyAtPractice=15},
-            };
-
-
-        }
+        #region Bonga
         //public async Task<List<MedicalBuildingModel>> GetMedicalBuildingsBySpecializationAsync()
         //{
         //    //if (IsBusy)
@@ -266,8 +269,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         //    //filter function, this will filter by Medical building and specialization
         //    return null;
         //}
-
-
-
+        #endregion
     }
 }

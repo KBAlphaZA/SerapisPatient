@@ -57,16 +57,17 @@
 
                 <Grid.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android, WinPhone, Windows" Value="0,8,0,0"/>
+                        <On Platform="Android, WinPhone, Windows" Value="0,40,0,0"/>
                         <On Platform="iOS" Value="0,12,0,0"/>
                     </OnPlatform>
                 </Grid.Margin>
                 
                <!--The Logo here 150x150-->
                 <Image Source="logo_transparent.png"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"
+                       Margin="5"
+                       HorizontalOptions="FillAndExpand"
                        HeightRequest="200"
+                       Aspect="AspectFill"
                        />
             </Grid>
             <!--#endregion-->
