@@ -1,5 +1,6 @@
 ﻿using SerapisPatient.ViewModels;
 using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +24,7 @@ namespace SerapisPatient.Views.MainViews
 
         protected override void OnAppearing()
         {
+           
             //base.OnAppearing();
             //CheckUp.OnExpandTapped += ExpandPopup;
 

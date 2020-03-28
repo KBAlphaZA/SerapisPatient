@@ -39,13 +39,13 @@ namespace SerapisPatient.ViewModels
         public bool IsNotBusy { get { return !IsBusy; } }
         public FacebookProfile Profile { get; set; }
 
-        APIServices services = new APIServices();
+        
 
         public Command OnLoginCommand { get; set; }
         public Command OnShareDataCommand { get; set; }
         public Command OnLoadDataCommand { get; set; }
         public Command OnLogoutCommand { get; set; }
-
+        APIServices services = new APIServices();
         public AuthenticationService authenticationService = new AuthenticationService();
         #endregion
         public LoginViewModel()
@@ -55,16 +55,15 @@ namespace SerapisPatient.ViewModels
             Profile = new FacebookProfile();
             
             OnLoginCommand = new Command(async () => await FacebookLoginAsync());
-            OnShareDataCommand = new Command(async () => await FacebookShareDataAsync());
             OnLoadDataCommand = new Command(async () => await FacebookLoadData());
             OnLogoutCommand = new Command(() =>
             {
-             
+                // Add logout method
                 
             }); 
 
             //Custom Login
-            LoginOnClick = new Command(LoginRequestAsync);
+            //LoginOnClick = new Command(FacebookLoginAsync);
             RestThePassword = new Command(RestPassword);
             //RegisterOnClick = new Command(RegisterUser);
 
@@ -79,7 +78,7 @@ namespace SerapisPatient.ViewModels
 
         /// <summary>
         /// <c a="RegisterUser"/>
-        /// Custom Registeration
+        /// Custom Registration
         /// </summary>
         private void RegisterUser()
         {
@@ -107,12 +106,6 @@ namespace SerapisPatient.ViewModels
 
         }
 
-        async Task FacebookShareDataAsync()
-        {
-            FacebookShareLinkContent linkContent = new FacebookShareLinkContent("Awesome team of developers, making the world a better place one project or plugin at the time!",
-                                                                                new Uri("http://www.github.com/crossgeeks"));
-            var ret = await CrossFacebookClient.Current.ShareAsync(linkContent);
-        }
 
         public async Task FacebookLoadData()
         {
@@ -125,35 +118,37 @@ namespace SerapisPatient.ViewModels
             var data = JObject.Parse(jsonData.Data);
             Profile = new FacebookProfile()
             {
+                ID = data["id"].ToString(),
                 FullName = data["name"].ToString(),
                 Picture = new UriImageSource { Uri = new Uri($"{data["picture"]["data"]["url"]}") },
                 Email = data["email"].ToString()
             };
 
             //login || Register the user
-            await authenticationService.FacebookLogin(Profile);
-            HandleAuth();
-            // await LoadPosts();
+            //var model = await authenticationService.FacebookLogin(Profile);
+            await HandleAuth(Profile);
+
         }
        
-        private void LoginRequestAsync()
-        {
+        //private void LoginRequestAsync(FacebookProfile profile)
+        //{
 
-             HandleAuth();
-        }
+        //    HandleAuth(profile);
+        
+        //}
 
         /// <summary>
         /// <c a="HandleAuth"/>
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
         /// 
         /// </summary>
-        private async Task HandleAuth()
+        private async Task HandleAuth(FacebookProfile profile)
         {
             IsBusy = true;
             try
             {
 
-                //bool suceess = await services.RegisterSocialUser();
+                PatientUser suceess = await authenticationService.FacebookLogin(profile);
 
             }
             catch(Exception ex)
@@ -176,13 +171,14 @@ namespace SerapisPatient.ViewModels
         private void RestPassword()
         {
             //for now move on to the main page
-            App.Current.MainPage.Navigation.PushModalAsync(new MasterDetailPage1());
+            //App.Current.MainPage.Navigation.PushModalAsync(new MasterDetailPage1());
         }
 
         /// <summary>
         ///  <c a="LoginAsync"/>
         /// Below is the Authentication Code using Plugin.google
         /// </summary>
+        
         #endregion
     }
 }

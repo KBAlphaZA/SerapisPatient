@@ -216,13 +216,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             Monthkeys.Add(3, Models.Months.March);
             Monthkeys.Add(4, Models.Months.April);
             Monthkeys.Add(5, Models.Months.May);
-            Monthkeys.Add(6, Models.Months.January);
-            Monthkeys.Add(7, Models.Months.January);
-            Monthkeys.Add(8, Models.Months.January);
-            Monthkeys.Add(9, Models.Months.January);
-            Monthkeys.Add(10, Models.Months.January);
-            Monthkeys.Add(11, Models.Months.January);
-            Monthkeys.Add(12, Models.Months.January);
+            Monthkeys.Add(6, Models.Months.June);
+            Monthkeys.Add(7, Models.Months.July);
+            Monthkeys.Add(8, Models.Months.August);
+            Monthkeys.Add(9, Models.Months.September);
+            Monthkeys.Add(10, Models.Months.October);
+            Monthkeys.Add(11, Models.Months.November);
+            Monthkeys.Add(12, Models.Months.December);
 
         }
         public void GetMonthNumbers()

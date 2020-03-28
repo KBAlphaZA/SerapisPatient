@@ -47,7 +47,7 @@ namespace SerapisPatient.ViewModels
             try
             {
                 IsBusy = true;
-                bool isSuccess = await _APIServices.RegisterUser(Email, Password, ConfirmPassword);
+                //bool isSuccess = await _APIServices.RegisterUser(Email, Password, ConfirmPassword);
             }
             catch (Exception e)
             {

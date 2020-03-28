@@ -43,7 +43,7 @@ namespace SerapisPatient.Services
 
             return response.IsSuccessStatusCode;// this should return a bool
         }
-        public async Task<bool> CreateAppointment(PatientUser patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel)
+        public async Task<bool> CreateAppointment( PatientUser patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {
