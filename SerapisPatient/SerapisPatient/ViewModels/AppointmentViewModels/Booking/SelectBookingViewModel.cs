@@ -244,46 +244,46 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         }
 
         //API Call for DoctorView
-        public List<Doctor> GetDoctors()
+        public async Task<List<Doctor>> GetDoctors()
         {
             //The follwing will be used in production code
-            //DoctorAvaliable = await _apiServices.GetDoctorsAsync();
+            DoctorAvaliable = await _apiServices.GetDoctorsAsync();
 
 
             //This is for testing purposes
-            DoctorAvaliable = new List<Doctor>() 
-            { 
-                 new Doctor()
-                 { 
-                     FirstName="Khanyisani", 
-                     Id="1234", 
-                     LastName="Buthelezi", 
-                     ProfileImageUrl="userprofilepicture.png",
-                     University="University of KwaZulu-Natal",
-                     practices=new List<object>()
-                     {
-                         "", 
-                         "", 
-                         ""
-                     },
-                     Qualifications=new List<Qualification>()
-                     {
-                          new Qualification()
-                          {
-                             Abbr="MBch",
-                             Degree="Bachalors",
-                             Graduated=2012,
-                             Specilization="General practioner",
-                             Specilizationabbr="GP",
-                             University="University of Kwazulu-Natal"
-                          }
-                     },
-                     Time="09h00",
-                     YearsOfExp="7"
-                 },
-                 new Doctor(){ FirstName="Bonga", Id="1234", LastName="Ngcobo", ProfileImageUrl="userprofilepicture.png"},
-                 new Doctor(){ FirstName="William", Id="1234", LastName="Carter", ProfileImageUrl="userprofilepicture.png" }
-            };
+            //DoctorAvaliable = new List<Doctor>() 
+            //{ 
+            //     new Doctor()
+            //     { 
+            //         FirstName="Khanyisani", 
+            //         Id="1234", 
+            //         LastName="Buthelezi", 
+            //         ProfileImageUrl="userprofilepicture.png",
+            //         University="University of KwaZulu-Natal",
+            //         practices=new List<object>()
+            //         {
+            //             "", 
+            //             "", 
+            //             ""
+            //         },
+            //         Qualifications=new List<Qualification>()
+            //         {
+            //              new Qualification()
+            //              {
+            //                 Abbr="MBch",
+            //                 Degree="Bachalors",
+            //                 Graduated=2012,
+            //                 Specilization="General practioner",
+            //                 Specilizationabbr="GP",
+            //                 University="University of Kwazulu-Natal"
+            //              }
+            //         },
+            //         Time="09h00",
+            //         YearsOfExp="7"
+            //     },
+            //     new Doctor(){ FirstName="Bonga", Id="1234", LastName="Ngcobo", ProfileImageUrl="userprofilepicture.png"},
+            //     new Doctor(){ FirstName="William", Id="1234", LastName="Carter", ProfileImageUrl="userprofilepicture.png" }
+            //};
 
             return DoctorAvaliable;
 
