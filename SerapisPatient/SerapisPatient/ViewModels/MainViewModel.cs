@@ -54,7 +54,7 @@ namespace SerapisPatient.ViewModels
 
         public MainViewModel()
         {
-            
+
             GenerateNotificationList();
             NavigateToProfilePageCommand = new Command(ProfilePage);
             NavigateToAppointmentPageCommand = new Command(AppointmentPage);
@@ -62,6 +62,9 @@ namespace SerapisPatient.ViewModels
             NavigateToCameraPageCommand = new Command(CameraPage);
             OpenNotificationCard = new Command(MockMethod);
             Title = _title;
+
+            
+
         }
 
         private async void MockMethod()

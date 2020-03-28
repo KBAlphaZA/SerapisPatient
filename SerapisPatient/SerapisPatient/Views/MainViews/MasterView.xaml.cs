@@ -1,6 +1,8 @@
-﻿using SerapisPatient.Views.CustomViews;
+﻿using SerapisPatient.ViewModels;
+using SerapisPatient.Views.CustomViews;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,8 @@ namespace SerapisPatient.Views.MainViews
 		{
 			InitializeComponent ();
             //Detail = new CustomNavigationView(new MainView());
+            
+
             Detail = new NavigationPage(new MainView());
             NavigationPage.SetHasNavigationBar(this, false);
 

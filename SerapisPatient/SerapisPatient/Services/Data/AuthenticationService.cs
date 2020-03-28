@@ -24,9 +24,12 @@ namespace SerapisPatient.Services.Data
             {
                 var model = new PatientUser
                 {
+                    SocialId = profile.ID,
                     FirstName = Names[0],
-                    LastName = Names[Names.Length - 1],
-                    EmailAddress = profile.Email
+                    Surname = Names[Names.Length - 1],
+                    EmailAddress = profile.Email,
+                    
+                    
                 };
                 var json = JsonConvert.SerializeObject(model);
                 HttpContent content = new StringContent(json);
