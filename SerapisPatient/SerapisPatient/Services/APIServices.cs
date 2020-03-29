@@ -16,9 +16,9 @@ namespace SerapisPatient.Services
 {
     public class APIServices
     {
-        //Azure one-private string APIURL = "http://serapismedicalapi.azurewebsites.net/api";
+       
 
-        private string APIURL = "http://serapismedicalapi.herokuapp.com/api/{0}";
+        private string APIURL = "http://serapismedicalapi.herokuapp.com/api";
 
         HttpClient _httpClient = new HttpClient();
 
