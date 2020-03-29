@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using SerapisPatient.Models;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace SerapisPatient.Services.Data
 {
@@ -26,7 +27,7 @@ namespace SerapisPatient.Services.Data
                 {
                     SocialId = profile.ID,
                     FirstName = Names[0],
-                    Surname = Names[Names.Length - 1],
+                    LastName = Names[Names.Length - 1],
                     EmailAddress = profile.Email,
                     
                     
@@ -35,9 +36,13 @@ namespace SerapisPatient.Services.Data
                 HttpContent content = new StringContent(json);
 
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                
+                //Account?SocialID&Firstname&LastName&emailaddress
+                var response = await _httpClient
+                    .PostAsync($"{APIURL}Account?SocialID={model.SocialId}&FirstName={model.FirstName}&LastName={model.LastName}&emailaddress={model.EmailAddress}"
+                    , content);
 
-                var response = await _httpClient.PostAsync($"{APIURL}Account", content); //add your requesturi as a string
-                // this should return a bool && this process needs to be re-evualted
+                Debug.WriteLine($"{APIURL}Account?SocialID={model.SocialId}&FirstName={model.FirstName}&LastName={model.LastName}&emailaddress={model.EmailAddress}");
 
                 if (response.IsSuccessStatusCode)
                 {

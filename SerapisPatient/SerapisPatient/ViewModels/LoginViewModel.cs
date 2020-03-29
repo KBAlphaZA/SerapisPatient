@@ -148,7 +148,7 @@ namespace SerapisPatient.ViewModels
             try
             {
 
-                PatientUser suceess = await authenticationService.FacebookLogin(profile);
+                PatientUser user = await authenticationService.FacebookLogin(profile);
 
             }
             catch(Exception ex)

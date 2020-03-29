@@ -41,8 +41,8 @@ namespace SerapisPatient.Models
         [BsonElement("profilePicture")]
         public string ProfilePicture { get; set; }
 
-        [BsonElement("surname")]
-        public string Surname { get; set; }
+        [BsonElement("lastname")]
+        public string LastName { get; set; }
 
         [BsonElement("age")]
         public Int32 Age { get; set; }
