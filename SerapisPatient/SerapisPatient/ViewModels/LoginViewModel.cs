@@ -63,8 +63,8 @@ namespace SerapisPatient.ViewModels
             }); 
 
             //Custom Login
-            //LoginOnClick = new Command(FacebookLoginAsync);
-            RestThePassword = new Command(RestPassword);
+            LoginOnClick = new Command(TestLogin);
+            //RestThePassword = new Command(RestPassword);
             //RegisterOnClick = new Command(RegisterUser);
 
             IsLoggedIn = false;
@@ -130,12 +130,11 @@ namespace SerapisPatient.ViewModels
 
         }
        
-        //private void LoginRequestAsync(FacebookProfile profile)
-        //{
+        private void TestLogin()
+        {
 
-        //    HandleAuth(profile);
-        
-        //}
+            RestPassword();
+        }
 
         /// <summary>
         /// <c a="HandleAuth"/>
@@ -168,10 +167,11 @@ namespace SerapisPatient.ViewModels
           
         }
 
-        private void RestPassword()
+        public async Task RestPassword()
         {
-            //for now move on to the main page
-            //App.Current.MainPage.Navigation.PushModalAsync(new MasterDetailPage1());
+
+            App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
+            await App.Current.MainPage.Navigation.PopAsync();
         }
 
         /// <summary>
