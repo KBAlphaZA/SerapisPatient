@@ -1,13 +1,16 @@
 ﻿
 using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
+using SerapisPatient.Helpers;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.Services;
+using SerapisPatient.Services.LocationServices;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -142,6 +145,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
         {
 
+            InitalizeList(PatientCoordinates.Latitude, PatientCoordinates.Longitude, Convert.ToDouble(Settings.MaximumDistance));
+
             selectedItem = new Command<MedicalBuildingModel>(args => 
             {
                 _MedicalBuildingData = args;
@@ -183,6 +188,11 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             };
 
             MedicalBuildingViewInit(_specilizationData);
+        }
+
+        private async void InitalizeList(double lat, double lon, double radius)
+        {
+            await _apiServices.GetAllMedicalBuildingsAsync(lat, lon, radius);
         }
 
         #region Bonga
