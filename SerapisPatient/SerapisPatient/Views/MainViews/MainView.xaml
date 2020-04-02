@@ -27,12 +27,12 @@
 
                 <Grid RowSpacing="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid VerticalOptions="Center" Grid.Row="0">
-                        <Label Text="Hi Khanyisani" 
+                        <Label Text="Hi Bonga" 
                                TextColor="Black" 
                                FontAttributes="Bold" 
                                FontSize="20"
@@ -43,12 +43,14 @@
 
                     </Grid>
 
-                    <Grid VerticalOptions="Center" Grid.Row="1">
+                    <Grid VerticalOptions="Center" Grid.Row="1" >
                         <Label Text="Lets see how can we help you"  
                                TextColor="Black" 
                                FontAttributes="Bold" 
                                FontSize="20"
                                x:Name="message"
+                               VerticalOptions="Start" 
+                               VerticalTextAlignment="Start"
                                />
                     </Grid>
 
@@ -138,21 +140,21 @@
                     </Grid>
 
                 </Grid>
-            </Grid>
+            </Grid>                                                                                                                                                                                                                                
 
             <!--ROW THREE-->
             <Grid Grid.Row="2">
                 <Grid RowSpacing="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1.5*"/>
+                        <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="6*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="1" Margin="10, 20, 0, 10">
+                    <Grid Grid.Row="0" Margin="10, 5, 0,0">
                         <Label Text="Notice Board:" 
                                FontSize="25"  
-                               VerticalOptions="End" 
+                               VerticalOptions="Start" 
                                TextColor="Black"
                                FontAttributes="Bold"
                                x:Name="noticeBoardLabel"

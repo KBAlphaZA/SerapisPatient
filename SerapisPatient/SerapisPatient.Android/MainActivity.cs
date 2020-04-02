@@ -29,8 +29,7 @@ namespace SerapisPatient.Droid
             //ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Rg.Plugins.Popup.Popup.Init(this, bundle);
 
-            //Google PLugin
-            GoogleClientManager.Initialize(this, null, "146806431671-0i7ssql1g80d6o0ejiaks2vre0ig63nr.apps.googleusercontent.com ");
+            //Facebook Plugin
             FacebookClientManager.Initialize(this);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);

@@ -16,9 +16,9 @@ namespace SerapisPatient.Services
 {
     public class APIServices
     {
-        //Azure one-private string APIURL = "http://serapismedicalapi.azurewebsites.net/api";
+       
 
-        private string APIURL = "http://serapismedicalapi.herokuapp.com/api/{0}";
+        private string APIURL = "http://serapismedicalapi.herokuapp.com/api";
 
         HttpClient _httpClient = new HttpClient();
 
@@ -43,7 +43,7 @@ namespace SerapisPatient.Services
 
             return response.IsSuccessStatusCode;// this should return a bool
         }
-        public async Task<bool> CreateAppointment(PatientUser patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel)
+        public async Task<bool> CreateAppointment( PatientUser patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {

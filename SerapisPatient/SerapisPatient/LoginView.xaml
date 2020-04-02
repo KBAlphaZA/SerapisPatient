@@ -97,13 +97,13 @@
 
                 <Entry 
                     HorizontalOptions="Fill" 
-                    PlaceholderColor="White"
+                    PlaceholderColor="LightGray"
                     VerticalOptions="End"
                     TextColor="White"
-                    Placeholder="E-Mail"
+                    Placeholder="   Email"
                     Style="{StaticResource LoginEntryLabels}"
                     Text="{Binding Email, Mode=TwoWay}"
-                    Margin="15,0,15,0"
+                    Margin="45,0,25,0"
                     />
             </Grid>
             <!--#endregion-->
@@ -119,15 +119,15 @@
                 </Grid.Margin>
 
                 <Entry 
-                    Placeholder="PASSWORD" 
-                    PlaceholderColor="White"
+                    Placeholder="   Password" 
+                    PlaceholderColor="LightGray"
                     TextColor="White"
                     VerticalOptions="End" 
                     HorizontalOptions="Fill"
                     IsPassword="True"
                     Style="{StaticResource LoginEntryLabels}"
                     Text="{Binding Password, Mode=TwoWay}"
-                    Margin="15,0,15,0"
+                    Margin="45,0,25,0"
                     />
             </Grid>
             <!--#endregion-->
@@ -149,11 +149,13 @@
                 </Grid.Margin>
 
                 <Button Text="Login" 
-                        FontSize="20"
+                        FontSize="16"
                         CornerRadius="20" 
                         TextColor="White"
                         BackgroundColor="#a5b6c0"
+                        HeightRequest="80"
                         Command="{Binding LoginOnClick}"
+                        VerticalOptions="CenterAndExpand"
                         />
             </Grid>
             <!--#endregion-->
@@ -169,11 +171,13 @@
 
                 <Button Text="Sign Up" 
                         CornerRadius="20" 
-                        FontSize="20"
+                        FontSize="16"
                         TextColor="White"
                         BorderColor="White"
                         BackgroundColor="#a5b6c0"
+                        HeightRequest="80"
                         Command="{Binding RegisterOnClick}"
+                        VerticalOptions="CenterAndExpand"
                         />
             </Grid>
 
