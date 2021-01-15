@@ -1,42 +1,41 @@
 {
   "project_info": {
-    "project_number": "146806431671",
-    "firebase_url": "https://serapispatient-224914.firebaseio.com",
-    "project_id": "serapispatient-224914",
-    "storage_bucket": "serapispatient-224914.appspot.com"
+    "project_number": "300760212928",
+    "project_id": "serapismedical-a4b58",
+    "storage_bucket": "serapismedical-a4b58.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:146806431671:android:64f0fa02fb4f45bd",
+        "mobilesdk_app_id": "1:300760212928:android:3d218831f941a413511425",
         "android_client_info": {
-          "package_name": "com.companyname.serapismedical"
+          "package_name": "com.companyname.SerapisPatient"
         }
       },
       "oauth_client": [
         {
-          "client_id": "146806431671-20bqt7ac3r07ihhevcqaaf3sh61f1cbu.apps.googleusercontent.com",
+          "client_id": "300760212928-7e7ie840rsr2g5u7sqnc1gro2uinv4jc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.companyname.serapismedical",
-            "certificate_hash": "2cbd0c07bee8625f975877c1a42324e4744a9d8e"
+            "package_name": "com.companyname.SerapisPatient",
+            "certificate_hash": "ac852763f628943a054dc4fb1b3fd922df5342b9"
           }
         },
         {
-          "client_id": "146806431671-0i7ssql1g80d6o0ejiaks2vre0ig63nr.apps.googleusercontent.com",
+          "client_id": "300760212928-ojpche47jgo1gt3u9ck8epmm58t9q54r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZusF2htFvdKJzLafTbqGF-A1j2zdxLmc"
+          "current_key": "AIzaSyBp99TRQIo4m_8z3WIkVgZxmQb2_SVNfbw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "146806431671-0i7ssql1g80d6o0ejiaks2vre0ig63nr.apps.googleusercontent.com",
+              "client_id": "300760212928-ojpche47jgo1gt3u9ck8epmm58t9q54r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

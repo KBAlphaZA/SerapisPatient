@@ -17,6 +17,7 @@ namespace SerapisPatient
 			InitializeComponent();
             viewModel = new LoginViewModel();
             BindingContext = viewModel;
+			
 		}
 	}
 }
