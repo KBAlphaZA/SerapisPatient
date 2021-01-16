@@ -14,7 +14,6 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using SerapisPatient.Services;
 using Plugin.FacebookClient;
-using Plugin.FacebookClient;
 using Newtonsoft.Json.Linq;
 using SerapisPatient.Services.Data;
 
@@ -134,7 +133,7 @@ namespace SerapisPatient.ViewModels
 
             //login || Register the user
             //var model = await authenticationService.FacebookLogin(Profile);
-            await HandleAuth(Profile);
+            await HandleAuth();
 
         }
 
@@ -179,6 +178,12 @@ namespace SerapisPatient.ViewModels
             if (loginEventArgs.Data != null)
             {
                 GoogleUser googleUser = loginEventArgs.Data;
+                var _ = CrossGoogleClient.Current.ActiveToken;
+                string token = "";
+                var patientuser = authenticationService.GoogleLogin(googleUser,token);
+
+
+
                 var Name = googleUser.Name;
                 var Email = googleUser.Email;
                 var Picture = googleUser.Picture;
@@ -190,7 +195,6 @@ namespace SerapisPatient.ViewModels
                 Debug.WriteLine(Email);
                 IsLoggedIn = true;
 
-                var token = CrossGoogleClient.Current.ActiveToken;
                 Token = token;
             }
             else
@@ -198,6 +202,7 @@ namespace SerapisPatient.ViewModels
                 App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
             }
 
+            HandleAuth();
             _googleClientManager.OnLogin -= OnLoginCompleted;
 
         }
@@ -212,13 +217,13 @@ namespace SerapisPatient.ViewModels
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
         /// 
         /// </summary>
-        private async Task HandleAuth(FacebookProfile profile)
+        private async Task HandleAuth()
         {
             IsBusy = true;
             try
             {
 
-                PatientUser user = await authenticationService.FacebookLogin(profile);
+               // PatientUser user = await authenticationService.FacebookLogin(profile);
 
             }
             catch(Exception ex)

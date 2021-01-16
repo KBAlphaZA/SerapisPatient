@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SerapisPatient.Models.Patient
+namespace SerapisPatient.Models
 {
     public class NextOfKin
     {

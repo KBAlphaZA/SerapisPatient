@@ -22,28 +22,28 @@ namespace SerapisPatient.Services
 
         HttpClient _httpClient = new HttpClient();
 
-        public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
-        {
-            var client = new HttpClient();
-            var model = new RegisterPatient
-            {
-                Email = email,
-                Password = password,
-                ConfirmPassword = confirmPassword
-            };
-            var json = JsonConvert.SerializeObject(model);
+        //public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
+        //{
+        //    var client = new HttpClient();
+        //    var model = new RegisterPatient
+        //    {
+        //        Email = email,
+        //        Password = password,
+        //        ConfirmPassword = confirmPassword
+        //    };
+        //    var json = JsonConvert.SerializeObject(model);
 
-            HttpContent content = new StringContent(json);
+        //    HttpContent content = new StringContent(json);
 
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        //    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-            var response = await client.PostAsync("", content); //add your requesturi as a string
-            _httpClient.Dispose();
-            client.Dispose();
+        //    var response = await client.PostAsync("", content); //add your requesturi as a string
+        //    _httpClient.Dispose();
+        //    client.Dispose();
 
-            return response.IsSuccessStatusCode;// this should return a bool
-        }
-        public async Task<bool> CreateAppointment( PatientUser patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel )
+        //    return response.IsSuccessStatusCode;// this should return a bool
+        //}
+        public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {
@@ -51,7 +51,7 @@ namespace SerapisPatient.Services
                 var model = new Appointment
                 {
                     BookingId = ObjectId.GenerateNewId(),
-                    PatientId = patient.Id,
+                    PatientId = patient.id,
                     DateBooked = bookedDate,
                     Venue = new Address
                     {
@@ -78,7 +78,7 @@ namespace SerapisPatient.Services
 
         public async Task<string> GetAccountDetails()
         {
-            var model = new PatientUser
+            var model = new Patient
             {
 
             };
