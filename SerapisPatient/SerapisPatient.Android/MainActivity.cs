@@ -8,10 +8,10 @@ using Android.Widget;
 using Android.OS;
 using Plugin.CurrentActivity;
 using Plugin.GoogleClient;
-using CarouselView.FormsPlugin.Android;
 using Xamarin.Forms.PancakeView.Droid;
 using Plugin.FacebookClient;
 using Android.Content;
+using CarouselView.FormsPlugin.Droid;
 
 namespace SerapisPatient.Droid
 {
@@ -32,6 +32,8 @@ namespace SerapisPatient.Droid
             //Facebook Plugin
             FacebookClientManager.Initialize(this);
 
+            GoogleClientManager.Initialize(this);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
            
 
@@ -48,16 +50,18 @@ namespace SerapisPatient.Droid
 
             LoadApplication(new App());
         }
-        //protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
-        //{
-        //    base.OnActivityResult(requestCode, resultCode, data);
-        //    GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
-        //}
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
+        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
         {
-            base.OnActivityResult(requestCode, resultCode, intent);
-            FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
+            base.OnActivityResult(requestCode, resultCode, data);
+            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
         }
+
+        //protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
+        //{
+         //   base.OnActivityResult(requestCode, resultCode, intent);
+         //   FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
+         //   GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
+        //}
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             //Qr Code Scanner

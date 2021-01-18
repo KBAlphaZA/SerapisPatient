@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SerapisPatient.Models.Patient
+namespace SerapisPatient.Models
 {
     public class PatientContact
     {
-        public string Cellphone { get; set; }
+        public string CellphoneNumber { get; set; }
+
+        public string Email { get; set; }
+
         public string Telephone { get; set; }
-        public string Secondphone { get; set; }
     }
 }

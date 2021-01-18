@@ -14,14 +14,14 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 {
     public class PersonalSettingsViewModel:BaseViewModel
     {
-        public ObservableCollection<NextOfKin> NextOfKins { get; set; }
+        public ObservableCollection<object> NextOfKins { get; set; }
 
-        NextOfKin kinForm = new NextOfKin()
-        {
-             ContactNumber="",
-             FullName="",
-             RelationshipToPatient=""
-        };
+        //NextOfKin kinForm = new NextOfKin()
+        //{
+        //     ContactNumber="",
+        //     FullName="",
+        //     RelationshipToPatient=""
+        //};
 
         public PersonalSettingsViewModel()
         {
@@ -260,15 +260,15 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
    
         private void GenerateDummyList()
         {
-            NextOfKins = new ObservableCollection<NextOfKin>()
-            {
-                new NextOfKin
-                {
-                     ContactNumber="0787224416",
-                     FullName="Zothile Dlamini",
-                     RelationshipToPatient="Girlfriend"
-                }
-            };
+            //NextOfKins = new ObservableCollection<object>()
+            //{
+            //    new NextOfKin
+            //    {
+            //         ContactNumber="0787224416",
+            //         FullName="Zothile Dlamini",
+            //         RelationshipToPatient="Girlfriend"
+            //    }
+            //};
         }
 
         private void RemoveContact()
@@ -280,7 +280,7 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
         {
             //generate the template
 
-            NextOfKins.Add(kinForm);
+            //NextOfKins.Add(kinForm);
         }
 
         private void SavePersonalSettings()

@@ -15,6 +15,7 @@ using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using Plugin.Connectivity;
 using SerapisPatient.Services;
+using SerapisPatient.Models.Patient;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -23,7 +24,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
         public Doctor SelectedDoctor { get; set; }
-        public PatientUser patient { get; set; } 
+        public Patient patient { get; set; } 
         public MedicalBuildingModel SelectedMedicalBuilding { get; set; }
         public DateTime FullDateAndMonth { get; set; }
 

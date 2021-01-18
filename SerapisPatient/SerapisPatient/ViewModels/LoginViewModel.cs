@@ -14,7 +14,6 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using SerapisPatient.Services;
 using Plugin.FacebookClient;
-using Plugin.FacebookClient.Abstractions;
 using Newtonsoft.Json.Linq;
 using SerapisPatient.Services.Data;
 
@@ -27,6 +26,11 @@ namespace SerapisPatient.ViewModels
 
         public string Token { get; set; }
         public bool IsLoggedIn { get; set; }
+
+        //GOOGLE
+        public ICommand LoginCommand { get; set; }
+        public ICommand LogoutCommand { get; set; }
+        private readonly IGoogleClientManager _googleClientManager;
 
         public ICommand RegisterOnClick { get; set; }
         public ICommand LoginOnClick { get; set; }
@@ -60,8 +64,11 @@ namespace SerapisPatient.ViewModels
             {
                 // Add logout method
                 
-            }); 
+            });
 
+            //GOOGLE
+            LoginCommand = new Command(LoginAsync);
+            _googleClientManager = CrossGoogleClient.Current;
             //Custom Login
             LoginOnClick = new Command(TestLogin);
             //RestThePassword = new Command(RestPassword);
@@ -126,10 +133,79 @@ namespace SerapisPatient.ViewModels
 
             //login || Register the user
             //var model = await authenticationService.FacebookLogin(Profile);
-            await HandleAuth(Profile);
+            await HandleAuth();
 
         }
-       
+
+
+        // GOOGLE
+        public async void LoginAsync()
+        {
+            _googleClientManager.OnLogin += OnLoginCompleted;
+            try
+            {
+                await _googleClientManager.LoginAsync();
+            }
+            catch (GoogleClientSignInNetworkErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInCanceledErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInInvalidAccountErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInInternalErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientNotInitializedErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientBaseException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+
+        }
+
+        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
+        {
+            if (loginEventArgs.Data != null)
+            {
+                GoogleUser googleUser = loginEventArgs.Data;
+                var _ = CrossGoogleClient.Current.ActiveToken;
+                string token = "";
+                var patientuser = authenticationService.GoogleLogin(googleUser,token);
+
+
+
+                var Name = googleUser.Name;
+                var Email = googleUser.Email;
+                var Picture = googleUser.Picture;
+                var GivenName = googleUser.GivenName;
+                var FamilyName = googleUser.FamilyName;
+
+
+                // Log the current User email
+                Debug.WriteLine(Email);
+                IsLoggedIn = true;
+
+                Token = token;
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+            }
+
+            HandleAuth();
+            _googleClientManager.OnLogin -= OnLoginCompleted;
+
+        }
         private void TestLogin()
         {
 
@@ -141,13 +217,13 @@ namespace SerapisPatient.ViewModels
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
         /// 
         /// </summary>
-        private async Task HandleAuth(FacebookProfile profile)
+        private async Task HandleAuth()
         {
             IsBusy = true;
             try
             {
 
-                PatientUser user = await authenticationService.FacebookLogin(profile);
+               // PatientUser user = await authenticationService.FacebookLogin(profile);
 
             }
             catch(Exception ex)
