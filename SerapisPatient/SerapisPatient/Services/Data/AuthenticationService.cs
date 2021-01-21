@@ -13,7 +13,9 @@ namespace SerapisPatient.Services.Data
 {
     public class AuthenticationService
     {
-        private string APIURL = "http://serapismedicalapi.herokuapp.com/api/";
+        private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
+        //serapismedicalapi.azurewebsites.net
+        //http://serapismedicalapi.herokuapp.com/api/
 
 
 
@@ -21,25 +23,33 @@ namespace SerapisPatient.Services.Data
         /// This handles Google login and registration
         /// </summary>
         /// <returns></returns>
-        public Task<bool> GoogleLogin(GoogleUser googleUser,string token )
+        public Task<bool> GoogleLogin(GoogleUser googleUser,string token)
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                var model = new Patient
-                {
-                    PatientFirstName = googleUser.Name,
-                    PatientLastName = googleUser.FamilyName, 
-                    PatientContactDetails = { Email = googleUser.Email }, 
-                    //WE NEED TO DO SOMETHING ABOUT THE TOKEN
-                    Token = token
-                };
+                Patient _patient = new Patient();
+                PatientContact contact = new PatientContact();
 
-                var json = JsonConvert.SerializeObject(model);
+                _patient.PatientFirstName = googleUser.Name;
+                _patient.PatientLastName = googleUser.FamilyName;
+                contact.Email = googleUser.Email;
+                _patient.Token = googleUser.Id.ToString();
+                //var model = new Patient
+                //{
+                //    PatientFirstName = googleUser.Name,
+                //    PatientLastName = googleUser.FamilyName, 
+                //    PatientContactDetails = { Email = googleUser.Email }, 
+                //    //WE NEED TO DO SOMETHING ABOUT THE TOKEN
+                //    //token = googleUser.Id.ToString(),
+                //    //Token = googleUser.Id.ToString()
+                //};
+
+                var json = JsonConvert.SerializeObject(_patient);
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
                 var response = _httpClient
-                       .PostAsync("/", content);
+                       .PostAsync("Account", content);
             }
             
             return null;
