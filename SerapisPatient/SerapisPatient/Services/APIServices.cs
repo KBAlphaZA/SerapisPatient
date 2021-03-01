@@ -18,7 +18,8 @@ namespace SerapisPatient.Services
     {
        
 
-        private string APIURL = "http://serapismedicalapi.azurewebsites.net/api";
+        //private string APIURL = "http://serapismedicalapi.azurewebsites.net/api"; <- AZURE
+        private string APIURL = "https://serapismedicalapi.herokuapp.com/api"; 
 
         HttpClient _httpClient = new HttpClient();
 
@@ -120,7 +121,7 @@ namespace SerapisPatient.Services
 
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api =string.Format(APIURL, "/Practices");
+                string api =string.Format(APIURL+"/Practice");
                 //Getting JSON data from the WebAPI
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line

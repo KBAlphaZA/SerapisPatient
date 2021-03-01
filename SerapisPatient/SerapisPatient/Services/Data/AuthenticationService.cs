@@ -27,24 +27,23 @@ namespace SerapisPatient.Services.Data
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                Patient _patient = new Patient();
-                PatientContact contact = new PatientContact();
+                //Patient _patient = new Patient();
+                //PatientContact contact = new PatientContact();
 
-                _patient.PatientFirstName = googleUser.Name;
-                _patient.PatientLastName = googleUser.FamilyName;
-                contact.Email = googleUser.Email;
-                _patient.Token = googleUser.Id.ToString();
-                //var model = new Patient
-                //{
-                //    PatientFirstName = googleUser.Name,
-                //    PatientLastName = googleUser.FamilyName, 
-                //    PatientContactDetails = { Email = googleUser.Email }, 
-                //    //WE NEED TO DO SOMETHING ABOUT THE TOKEN
-                //    //token = googleUser.Id.ToString(),
-                //    //Token = googleUser.Id.ToString()
-                //};
+                //_patient.PatientFirstName = googleUser.Name;
+                //_patient.PatientLastName = googleUser.FamilyName;
+                //contact.Email = googleUser.Email;
+                //_patient.Token = googleUser.Id.ToString();
+                var model = new Patient
+                {
+                    PatientFirstName = googleUser.Name,
+                    PatientLastName = googleUser.FamilyName, 
+                    PatientContactDetails = new PatientContact { Email = googleUser.Email }, 
+                    //WE NEED TO DO SOMETHING ABOUT THE TOKEN
+                    //token = googleUser.Id.ToString()
+                };
 
-                var json = JsonConvert.SerializeObject(_patient);
+                var json = JsonConvert.SerializeObject(model);
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 

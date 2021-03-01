@@ -148,41 +148,11 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 HandleNavigation(_MedicalBuildingData);
             });
 
-            PracticesList = new ObservableCollection<PracticeDto>()
-            {
-               new PracticeDto
-                 {
-                     Distance=7.8,
-                     ContactNumber="031 701 456 43",
-                     PracticeID=ObjectId.Parse("5bc9bd861c9d4400001badf1"),
-                     NumberOfPatientsAtPractice=5,
-                     PracticeName="Grey's Hospital",
-                     PracticePicture="MedicrossPinetown.jpg",
-                     OperatingTimes="08h00-17h00"
-                 },
-                 new PracticeDto
-                 {
-                     Distance=7,
-                     ContactNumber="031 701 456 43",
-                     PracticeID=ObjectId.Parse("5bc9bde81c9d4400001badf2"),
-                     NumberOfPatientsAtPractice=10,
-                     PracticeName="Crompton Hospital",
-                     PracticePicture="MedicrossPinetown.jpg",
-                     OperatingTimes="08h00-17h00"
-                 },
-                 new PracticeDto
-                 {
-                     Distance=6,
-                     ContactNumber="031 701 456 43",
-                     PracticeID=ObjectId.Parse("5bc9bd741c9d4400001badf0"),
-                     NumberOfPatientsAtPractice=10,
-                     PracticeName="Groote Schuur Hospital",
-                     PracticePicture="MedicrossPinetown.jpg",
-                     OperatingTimes="08h00-17h00"
-                 }
-            };
+            LoadRealData();
 
             MedicalBuildingViewInit(_specilizationData);
+
+            //LoadDummyData();
         }
 
         #region Bonga
@@ -212,21 +182,72 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
             
         }
+        public void LoadDummyData()
+        {
 
+            PracticesList = new ObservableCollection<PracticeDto>()
+            {
+               new PracticeDto
+                 {
+                     DistanceFromPractice=7.8,
+                     ContactPractice = new PracticeContact
+                     {
+                         PracticeTelephoneNumber = "031 701 456 43"
+                     },
+                     //Id=ObjectId.Parse("5bc9bd861c9d4400001badf1"),
+                     NumOfPatientsInPractice=5,
+                     PracticeName="Grey's Hospital",
+                     PracticePicture="MedicrossPinetown.jpg",
+                     OperatingTime="08h00-17h00"
+                 },
+                 new PracticeDto
+                 {
+                     DistanceFromPractice=7,
+                     ContactPractice = new PracticeContact
+                     {
+                         PracticeTelephoneNumber = "031 701 456 43"
+                     },
+                     //Id=ObjectId.Parse("5bc9bde81c9d4400001badf2"),
+                     NumOfPatientsInPractice=10,
+                     PracticeName="Crompton Hospital",
+                     PracticePicture="MedicrossPinetown.jpg",
+                     OperatingTime="08h00-17h00"
+                 },
+                 new PracticeDto
+                 {
+                     DistanceFromPractice=6,
+
+                     ContactPractice = new PracticeContact
+                     {
+                         PracticeTelephoneNumber = "031 701 456 43"
+                     },
+                     //Id=ObjectId.Parse("5bc9bd741c9d4400001badf0"),
+                     NumOfPatientsInPractice=10,
+                     PracticeName="Groote Schuur Hospital",
+                     PracticePicture="MedicrossPinetown.jpg",
+                     OperatingTime="08h00-17h00"
+                 }
+            };
+        }
         public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
         {
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
         }
 
+        public async void LoadRealData()
+        {
+            await GetAllPracticesAsync();
+        }
        public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
        {
             // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
             PracticesList = new ObservableCollection<PracticeDto>();
 
-            var Practices=await _apiServices.GetAllMedicalBuildingsAsync();
+            var Practices =await _apiServices.GetAllMedicalBuildingsAsync();
 
             foreach (var _practice in Practices)
             {
+
                 PracticesList.Add(_practice);
             }
 
@@ -238,37 +259,5 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
             SelectedItem = state as MedicalBuildingModel;
         }
-
-        #region Bonga
-        //public async Task<List<MedicalBuildingModel>> GetMedicalBuildingsBySpecializationAsync()
-        //{
-        //    //if (IsBusy)
-        //     //   return;
-        //    IsBusy = true;
-        //    try
-        //    {
-        //        //var filter = Builders<MedicalBuildingModel>
-        //         //.Filter
-        //         //
-        //         //.Eq(medicalbuilding, FieldsSpecilized);
-        //        //adds filter to the query
-        //        var result = await _mongodb.MedicalBuildingCollection
-        //            .AsQueryable().Where(t => t.PracticeName.Equals("Grey's Hospital") )
-        //            .ToListAsync();
-
-        //        return result;
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        IsBusy = false;
-        //    }
-        //    //filter function, this will filter by Medical building and specialization
-        //    return null;
-        //}
-        #endregion
     }
 }

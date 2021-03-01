@@ -20,7 +20,7 @@ namespace SerapisPatient
 	public partial class App : Application
 	{
         //public static PublicClientApplication AuthenticationClient { get; set; }
-        public static string User = "Ceba";
+        public static string User = "Ceba";  //<-EXAMPLE
         //public PatientUser patient { get; set; }
         public static bool CheckLogin { get; set; }
         #region Login services
@@ -33,7 +33,7 @@ namespace SerapisPatient
         public App ()
 		{
 			InitializeComponent();
-           
+            //MainPage = new NavigationPage(new CheckIn());
             Init();
 
         }
