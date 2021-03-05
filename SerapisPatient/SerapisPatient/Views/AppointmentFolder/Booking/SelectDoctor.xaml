@@ -23,7 +23,7 @@
         <ListView x:Name="DoctorList"
                   SeparatorVisibility="None" 
                   HasUnevenRows="True"
-                  ItemsSource="{Binding Doctors}"
+                  ItemsSource="{Binding DoctorAvaliable}"
                   CachingStrategy="RecycleElement"
                   HeightRequest="16"
                   Grid.Row="1">

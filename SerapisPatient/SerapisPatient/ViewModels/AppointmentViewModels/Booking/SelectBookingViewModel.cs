@@ -249,42 +249,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //The follwing will be used in production code
             DoctorAvaliable = await _apiServices.GetDoctorsAsync();
 
-
-            //This is for testing purposes
-            //DoctorAvaliable = new List<Doctor>() 
-            //{ 
-            //     new Doctor()
-            //     { 
-            //         FirstName="Khanyisani", 
-            //         Id="1234", 
-            //         LastName="Buthelezi", 
-            //         ProfileImageUrl="userprofilepicture.png",
-            //         University="University of KwaZulu-Natal",
-            //         practices=new List<object>()
-            //         {
-            //             "", 
-            //             "", 
-            //             ""
-            //         },
-            //         Qualifications=new List<Qualification>()
-            //         {
-            //              new Qualification()
-            //              {
-            //                 Abbr="MBch",
-            //                 Degree="Bachalors",
-            //                 Graduated=2012,
-            //                 Specilization="General practioner",
-            //                 Specilizationabbr="GP",
-            //                 University="University of Kwazulu-Natal"
-            //              }
-            //         },
-            //         Time="09h00",
-            //         YearsOfExp="7"
-            //     },
-            //     new Doctor(){ FirstName="Bonga", Id="1234", LastName="Ngcobo", ProfileImageUrl="userprofilepicture.png"},
-            //     new Doctor(){ FirstName="William", Id="1234", LastName="Carter", ProfileImageUrl="userprofilepicture.png" }
-            //};
-
             return DoctorAvaliable;
 
         }
@@ -310,12 +274,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                     FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
 
                     //force this task on the UI thread so changes can be made on the listview
-                    Device.BeginInvokeOnMainThread(() =>
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
                         //Dummy Data
                         //GenerateDoctorList();
 
-                        GetDoctors();
+                        await GetDoctors();
                         //Task.WaitAll(GetDoctors());
 
                         //Task.Delay(200);
@@ -356,10 +320,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         {
             Doctors = new ObservableCollection<Doctor>
                   {
-                    new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png", FirstName="Bonga", Id=" ", practices=new List<object>(){" ", " " }, Qualifications=new List<Qualification>(){ new Qualification { Abbr=" ", Degree=" ", Graduated=12, Specilization="Gp", Specilizationabbr="GP", University="UKZN"}},  Time="9:00", YearsOfExp="20"},
-                    new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png", FirstName="Zama", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="20"},
-                    new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png", FirstName="John", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification {} },  Time="9:00", YearsOfExp="30"},
-                    new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png", FirstName="Andiswa", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="13"}
+                    //new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png", FirstName="Bonga", Id=" ", practices=new List<object>(){" ", " " }, Qualifications=new List<Qualification>(){ new Qualification { Abbr=" ", Degree=" ", Graduated=12, Specilization="Gp", Specilizationabbr="GP", University="UKZN"}},  Time="9:00", YearsOfExp="20"},
+                    //new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png", FirstName="Zama", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="20"},
+                    //new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png", FirstName="John", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification {} },  Time="9:00", YearsOfExp="30"},
+                    //new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png", FirstName="Andiswa", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="13"}
                     //new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
                     //new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
                     //new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},

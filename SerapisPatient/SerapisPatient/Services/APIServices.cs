@@ -21,7 +21,6 @@ namespace SerapisPatient.Services
         //private string APIURL = "http://serapismedicalapi.azurewebsites.net/api"; <- AZURE
         private string APIURL = "https://serapismedicalapi.herokuapp.com/api"; 
 
-        HttpClient _httpClient = new HttpClient();
 
         //public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
         //{
@@ -52,15 +51,8 @@ namespace SerapisPatient.Services
                 var model = new Appointment
                 {
                     BookingId = ObjectId.GenerateNewId(),
-                    PatientId = patient.id,
-                    DateBooked = bookedDate,
-                    Venue = new Address
-                    {
-                         AddressLineOne="",
-                         AddressLineTwo="",
-                         CityTown="",
-                         PostalCode=""
-                    },
+                    //PatientId = patient.id,
+                    //DateBooked = bookedDate,
                     DoctorsId =ObjectId.Parse(enquiredDoctor.Id),
                     IsSerapisBooking = false,
                     HasSeenGP = false
@@ -75,22 +67,6 @@ namespace SerapisPatient.Services
                 return response.IsSuccessStatusCode;
             }
 
-        }
-
-        public async Task<string> GetAccountDetails()
-        {
-            var model = new Patient
-            {
-
-            };
-            var json = JsonConvert.SerializeObject(model);
-
-            HttpContent content = new StringContent(json);
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var response = await _httpClient.GetAsync(APIURL + " ");
-            _httpClient.Dispose();
-
-            return response.ToString();
         }
 
 
@@ -129,6 +105,7 @@ namespace SerapisPatient.Services
                 return result;
             }
         }
+
 
     }
 }
