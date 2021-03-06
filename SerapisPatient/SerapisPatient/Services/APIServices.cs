@@ -47,13 +47,14 @@ namespace SerapisPatient.Services
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}Bookings";
+                //Booking/?id=5bc8e04a1c9d44000088ad93
+                string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
                 var model = new Appointment
                 {
                     BookingId = ObjectId.GenerateNewId(),
-                    //PatientId = patient.id,
-                    //DateBooked = bookedDate,
-                    DoctorsId =ObjectId.Parse(enquiredDoctor.Id),
+                    PatientID = patient.id.ToString(),
+                    DateAndTimeOfAppointment = bookedDate,
+                    DoctorsId =enquiredDoctor.Id,
                     IsSerapisBooking = false,
                     HasSeenGP = false
                 };

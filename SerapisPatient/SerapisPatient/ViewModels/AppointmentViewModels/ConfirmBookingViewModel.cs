@@ -123,7 +123,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                    //var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
+                    var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
                 }
                 else
                 {

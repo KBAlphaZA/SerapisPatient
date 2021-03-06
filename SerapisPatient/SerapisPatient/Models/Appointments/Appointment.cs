@@ -11,6 +11,8 @@ namespace SerapisPatient.Models.Appointments
 
         public int LineNumber { get; set; }
 
+        public string PatientID { get; set; }
+
         public DateTime DateAndTimeOfAppointment { get; set; }
 
         public bool HasSeenGP { get; set; }
@@ -23,7 +25,7 @@ namespace SerapisPatient.Models.Appointments
 
         public bool HasBeenToThisPractice { get; set; }
 
-        public ObjectId DoctorsId { get; set; }
+        public string DoctorsId { get; set; }
 
         //    [BsonElement("venue")]
         //    public Address Venue { get; set; }

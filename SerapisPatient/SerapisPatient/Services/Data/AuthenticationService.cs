@@ -23,17 +23,10 @@ namespace SerapisPatient.Services.Data
         /// This handles Google login and registration
         /// </summary>
         /// <returns></returns>
-        public Task<bool> GoogleLogin(GoogleUser googleUser,string token)
+        public string GoogleLogin(GoogleUser googleUser,string token)
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                //Patient _patient = new Patient();
-                //PatientContact contact = new PatientContact();
-
-                //_patient.PatientFirstName = googleUser.Name;
-                //_patient.PatientLastName = googleUser.FamilyName;
-                //contact.Email = googleUser.Email;
-                //_patient.Token = googleUser.Id.ToString();
                 var model = new Patient
                 {
                     PatientFirstName = googleUser.Name,
@@ -47,11 +40,10 @@ namespace SerapisPatient.Services.Data
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-                var response = _httpClient
-                       .PostAsync("Account", content);
+                 //var response = _httpClient
+                   //    .PostAsync(APIURL+"Account", content);
             }
-            
-            return null;
+            return "true";
         }
 
         /// <summary>
