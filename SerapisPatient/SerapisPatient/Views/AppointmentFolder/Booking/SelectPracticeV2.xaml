@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectPracticeV2"
+             xmlns:templateViewcard="clr-namespace:SerapisPatient.TemplateViews">
+    <ContentPage.Content>
+
+        <Grid RowSpacing="0" x:Name="practiceViewCard">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackLayout Orientation="Horizontal">
+                    <Image  
+                            HorizontalOptions="Fill" 
+                            VerticalOptions="Fill"  
+                            Source="{Binding Icon}"
+                            />
+
+                    <Label  
+                            Text="{Binding Title}" 
+                            TextColor="Black" 
+                            FontSize="30" 
+                            FontAttributes="Bold" 
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="StartAndExpand"
+                            />
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+                <CarouselView ItemsSource="{Binding PracticesList}"
+                               PeekAreaInsets="20" IndicatorView="indicatorView" Loop="False" x:Name="practicedata"  >
+
+                    <CarouselView.ItemTemplate >
+                        
+                        <DataTemplate>
+                            <Frame BorderColor="LightGray" CornerRadius="10" HasShadow="True">
+                                <StackLayout>
+                                    <templateViewcard:PracticeViewCard/>
+                                    <Button BackgroundColor="{StaticResource ButtonColour}" Text="Continue" />
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView x:Name="indicatorView"
+                   IndicatorColor="LightGray"
+                   SelectedIndicatorColor="DarkGray"
+                   VerticalOptions="End" />
+            </Grid> 
+            
+
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

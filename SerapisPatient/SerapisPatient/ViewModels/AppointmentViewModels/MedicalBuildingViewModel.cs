@@ -8,6 +8,7 @@ using SerapisPatient.Models.Practices;
 using SerapisPatient.Services;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -53,6 +54,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 RaisePropertyChanged(nameof(Title));
             }
         }
+        private string practicename;
+        public string PracticeName
+        {
+            get
+            {
+                return practicename;
+            }
+            set
+            {
+                practicename = value;
+                RaisePropertyChanged(nameof(PracticeName));
+            }
+        }
 
         private string icon;
         public string Icon
@@ -87,7 +101,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
 
         #region Khanyisani carousel code
-
+        public ICommand SelectedPractice { get; set; }
         public Command selectedItem {get; set; }
 
         private int myPostion;
@@ -132,7 +146,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
             myCarsoul.ItemsSource = PracticesList;
             myCarsoul.Position = 0;
-            
+            //SelectedPractice = new Command(async () => HandleNavigation());
         }
 
         #endregion
@@ -149,34 +163,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             });
 
             LoadRealData();
-
+            
             MedicalBuildingViewInit(_specilizationData);
-
+            PracticeName = "Default Value";
             //LoadDummyData();
         }
 
-        #region Bonga
-        //BONG'S Constructor//
-
-        //public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
-        //{
-        //    GenerateMedicalBuildingModel();
-        //    //GetAllPracticesAsync().Start();
-        //    //Bindings
-        //    Title = _specilizationData.Title;
-        //    Icon = _specilizationData.Icon;
-        //    Description = _specilizationData.Description;
-
-
-        //   // GenerateMedicalBuildingModel();
-
-        //    ItemSelected = new Command<MedicalBuildingModel>(args =>
-        //    {
-        //        _MedicalBuildingData = args;
-        //        HandleNavigation(_MedicalBuildingData);
-        //    });
-        //}
-        #endregion
 
         public MedicalBuildingViewModel()
         {
@@ -240,19 +232,28 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
        public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
        {
-            // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
-            PracticesList = new ObservableCollection<PracticeDto>();
-
-            var Practices =await _apiServices.GetAllMedicalBuildingsAsync();
-
-            foreach (var _practice in Practices)
+            try
             {
+                IsBusy = true;
+                PracticesList = new ObservableCollection<PracticeDto>();
 
-                PracticesList.Add(_practice);
+                var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+
+                foreach (var _practice in Practices)
+                {
+
+                    PracticesList.Add(_practice);
+                }
+                
             }
-
+            catch(Exception ex)
+            {
+                
+            }
+            IsBusy = false;
             return PracticesList;
-       }
+        }
+           
 
 
         public void ItemSelected_ExecuteCommand(object state)

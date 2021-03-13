@@ -25,7 +25,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         private readonly APIServices _apiServices = new APIServices();
         public Doctor enquiredDoctor;
         public string FullDateAndMonth = " ";
-        public MedicalBuildingModel _medicalBuildingData;
+
+        public MedicalBuildingModel _medicalBuildingData = new MedicalBuildingModel();
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
@@ -311,7 +312,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
 
             //Temp code for demo purposes
-            _medicalBuildingData = new MedicalBuildingModel() { PracticeName = "Grays hospital" };
+            
 
             await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
         });
