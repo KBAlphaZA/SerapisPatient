@@ -1,6 +1,7 @@
 ﻿using SerapisPatient.behavious;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
@@ -15,11 +16,12 @@ using Xamarin.Forms.BehaviorsPack;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 {
+        //DEPRICIATED. TO BE DELETED
     public class SelectDoctorViewModel : BaseViewModel
     {
         #region Properties
         public Doctor enquiredDoctor;
-        public MedicalBuildingModel _medicalBuildingData;
+        public PracticeDto _medicalBuildingData;
         public ObservableCollection<Doctor> Doctors { get; set; }
         string FullDateAndMonth;
         public ICommand NavigateToConfrimation { get; set; }
@@ -39,32 +41,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         //Important
         public SelectDoctorViewModel(MedicalBuildingModel _MedicalBuildingData)
         {
-            GenerateDoctorList();
+            //GenerateDoctorList();
             // NavigateToConfrimation = new Command(async () => await GoToConfirmation());
         }
 
-        private void GenerateDoctorList()
-        {
-            Doctors = new ObservableCollection<Doctor>
-                  {
-                    new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png" },
-                    new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Ronaldo ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Buthelezi ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Moodley", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Matsoso ", University="MBchB(UP)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-                    
-            };
-        }
+       
 
-        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth )
+        private async Task GoToConfirmation(Doctor enquiredDoctor, PracticeDto _medicalBuildingData, string FullDateAndMonth )
         {
             //This sends the message of itemSelected       
             await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);

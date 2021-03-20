@@ -8,13 +8,14 @@ namespace SerapisPatient.TemplateViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PracticeViewCard : ContentView
     {
-        TemplateViewModel viewModel;
-
+        //TemplateViewModel viewModel;
+        MedicalBuildingViewModel viewModel;
         public PracticeViewCard()
         {
             InitializeComponent();
-            viewModel = new TemplateViewModel();
+            viewModel = new MedicalBuildingViewModel();
             BindingContext = viewModel;
         }
+        
     }
 }

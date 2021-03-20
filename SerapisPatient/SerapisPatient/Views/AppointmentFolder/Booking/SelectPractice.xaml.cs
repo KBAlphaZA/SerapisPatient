@@ -1,5 +1,6 @@
 ﻿using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.Services.DependencyServices;
 using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
@@ -27,7 +28,7 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 
         private void TLScrollView_ItemSelected(object sender, ItemTappedEventArgs e)
         {
-            MedicalBuildingModel _medicalBuildingModelData = e.Item as MedicalBuildingModel;
+            PracticeDto _medicalBuildingModelData = e.Item as PracticeDto;
             Navigation.PushAsync(new SelectBooking( _medicalBuildingModelData));
         }
 

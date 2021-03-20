@@ -4,6 +4,7 @@ using SerapisPatient.behavious;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.PopUpMessages;
 using SerapisPatient.Services;
 using SerapisPatient.ViewModels.Base;
@@ -11,6 +12,7 @@ using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -25,12 +27,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         private readonly APIServices _apiServices = new APIServices();
         public Doctor enquiredDoctor;
         public string FullDateAndMonth = " ";
-        public MedicalBuildingModel _medicalBuildingData;
+
+        public PracticeDto _medicalBuildingData = new PracticeDto();
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
         private List<Doctor> _doctors;
-        private List<Doctor> convert_doctors;
 
         public List<Doctor> DoctorAvaliable
         {
@@ -129,7 +131,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
 
         #endregion
-        public SelectBookingViewModel(MedicalBuildingModel _medicalBuildingData1)
+        public SelectBookingViewModel(PracticeDto _medicalBuildingData1)
         {
             _medicalBuildingData = _medicalBuildingData1;
             //GenerateDoctorList();
@@ -138,10 +140,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //Animation
             ShowUI = true;
             Showlistview = false;
-            //DateSelected = SelectedItem.MonthValue.ToString();
             Months = GetMonths();
             GenerateDaysOfTheMonth();
-            
 
         }
 
@@ -249,42 +249,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //The follwing will be used in production code
             DoctorAvaliable = await _apiServices.GetDoctorsAsync();
 
-
-            //This is for testing purposes
-            //DoctorAvaliable = new List<Doctor>() 
-            //{ 
-            //     new Doctor()
-            //     { 
-            //         FirstName="Khanyisani", 
-            //         Id="1234", 
-            //         LastName="Buthelezi", 
-            //         ProfileImageUrl="userprofilepicture.png",
-            //         University="University of KwaZulu-Natal",
-            //         practices=new List<object>()
-            //         {
-            //             "", 
-            //             "", 
-            //             ""
-            //         },
-            //         Qualifications=new List<Qualification>()
-            //         {
-            //              new Qualification()
-            //              {
-            //                 Abbr="MBch",
-            //                 Degree="Bachalors",
-            //                 Graduated=2012,
-            //                 Specilization="General practioner",
-            //                 Specilizationabbr="GP",
-            //                 University="University of Kwazulu-Natal"
-            //              }
-            //         },
-            //         Time="09h00",
-            //         YearsOfExp="7"
-            //     },
-            //     new Doctor(){ FirstName="Bonga", Id="1234", LastName="Ngcobo", ProfileImageUrl="userprofilepicture.png"},
-            //     new Doctor(){ FirstName="William", Id="1234", LastName="Carter", ProfileImageUrl="userprofilepicture.png" }
-            //};
-
             return DoctorAvaliable;
 
         }
@@ -310,23 +274,17 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                     FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
 
                     //force this task on the UI thread so changes can be made on the listview
-                    Device.BeginInvokeOnMainThread(() =>
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
-                        //Dummy Data
-                        //GenerateDoctorList();
 
-                        GetDoctors();
-                        //Task.WaitAll(GetDoctors());
+                        await GetDoctors();
 
-                        //Task.Delay(200);
                     });
-
                 }
                 else
                 {
                     await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
                 }
-
             }
             catch (Exception e)
             {
@@ -344,10 +302,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         {
             NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectDoctor });
             enquiredDoctor = selectDoctor;
-            // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
-
-            //Temp code for demo purposes
-            _medicalBuildingData = new MedicalBuildingModel() { PracticeName = "Grays hospital" };
+            
 
             await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
         });
@@ -356,10 +311,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         {
             Doctors = new ObservableCollection<Doctor>
                   {
-                    new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png", FirstName="Bonga", Id=" ", practices=new List<object>(){" ", " " }, Qualifications=new List<Qualification>(){ new Qualification { Abbr=" ", Degree=" ", Graduated=12, Specilization="Gp", Specilizationabbr="GP", University="UKZN"}},  Time="9:00", YearsOfExp="20"},
-                    new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png", FirstName="Zama", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="20"},
-                    new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png", FirstName="John", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification {} },  Time="9:00", YearsOfExp="30"},
-                    new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png", FirstName="Andiswa", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="13"}
+                    //new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png", FirstName="Bonga", Id=" ", practices=new List<object>(){" ", " " }, Qualifications=new List<Qualification>(){ new Qualification { Abbr=" ", Degree=" ", Graduated=12, Specilization="Gp", Specilizationabbr="GP", University="UKZN"}},  Time="9:00", YearsOfExp="20"},
+                    //new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png", FirstName="Zama", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="20"},
+                    //new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png", FirstName="John", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification {} },  Time="9:00", YearsOfExp="30"},
+                    //new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png", FirstName="Andiswa", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="13"}
                     //new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
                     //new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
                     //new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
@@ -375,7 +330,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             return Doctors;
         }
         //Navigation
-        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
+        private async Task GoToConfirmation(Doctor enquiredDoctor, PracticeDto _medicalBuildingData, string FullDateAndMonth)
         {
             await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);
         }

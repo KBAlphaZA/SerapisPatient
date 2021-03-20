@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>SerapisMedical Inc.</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +18,6 @@
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="6.0.0" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="2.5.4" />
-    <PackageReference Include="Forms.Controls.FlexButton" Version="0.9.1" />
-    <PackageReference Include="LiteDB" Version="4.1.4" />
     <PackageReference Include="MongoDB.Bson" Version="2.7.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
@@ -22,6 +25,8 @@
     <PackageReference Include="Plugin.FacebookClient" Version="2.2.1" />
     <PackageReference Include="Plugin.GoogleClient" Version="1.1.1" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Refit" Version="4.1.0" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
@@ -43,6 +48,9 @@
     <Compile Update="PopUpMessages\TimePickerPopUp.xaml.cs">
       <DependentUpon>TimePickerPopUp.xaml</DependentUpon>
     </Compile>
+    <Compile Update="TabbedPages\CheckIn.xaml.cs">
+      <DependentUpon>CheckIn.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AppointmentFolder\Booking\SelectBooking.xaml.cs">
       <DependentUpon>SelectBooking.xaml</DependentUpon>
     </Compile>
@@ -59,6 +67,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Cells\ChatBotUIX\OutgoingViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\CheckIn\TimeCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\CheckIn\YouTimeCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="PopUpMessages\AlertPopup.xaml">
@@ -116,6 +130,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AppointmentFolder\Booking\SelectPractice.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AppointmentFolder\Booking\SelectPracticeV2.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AppointmentFolder\CalemderView.xaml">

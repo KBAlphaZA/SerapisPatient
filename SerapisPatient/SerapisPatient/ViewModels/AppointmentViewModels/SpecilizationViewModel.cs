@@ -46,7 +46,7 @@ namespace SerapisPatient.ViewModels
         {
             //DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
 
-           await App.Current.MainPage.Navigation.PushAsync(new SelectPractice(_specilizationData),true);
+           await App.Current.MainPage.Navigation.PushAsync(new SelectPracticeV2(_specilizationData),true);
         }
         
         //List

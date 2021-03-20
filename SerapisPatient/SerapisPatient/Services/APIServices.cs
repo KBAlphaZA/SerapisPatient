@@ -8,6 +8,7 @@ using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,9 @@ namespace SerapisPatient.Services
     {
        
 
-        private string APIURL = "http://serapismedicalapi.azurewebsites.net/api";
+        //private string APIURL = "http://serapismedicalapi.azurewebsites.net/api"; <- AZURE
+        private string APIURL = "https://serapismedicalapi.herokuapp.com/api"; 
 
-        HttpClient _httpClient = new HttpClient();
 
         //public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
         //{
@@ -43,24 +44,18 @@ namespace SerapisPatient.Services
 
         //    return response.IsSuccessStatusCode;// this should return a bool
         //}
-        public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel )
+        public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, PracticeDto medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}Bookings";
+                //Booking/?id=5bc8e04a1c9d44000088ad93
+                string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
                 var model = new Appointment
                 {
                     BookingId = ObjectId.GenerateNewId(),
-                    PatientId = patient.id,
-                    DateBooked = bookedDate,
-                    Venue = new Address
-                    {
-                         AddressLineOne="",
-                         AddressLineTwo="",
-                         CityTown="",
-                         PostalCode=""
-                    },
-                    DoctorsId =ObjectId.Parse(enquiredDoctor.Id),
+                    PatientID = patient.id.ToString(),
+                    DateAndTimeOfAppointment = bookedDate,
+                    DoctorsId =enquiredDoctor.Id,
                     IsSerapisBooking = false,
                     HasSeenGP = false
                 };
@@ -74,22 +69,6 @@ namespace SerapisPatient.Services
                 return response.IsSuccessStatusCode;
             }
 
-        }
-
-        public async Task<string> GetAccountDetails()
-        {
-            var model = new Patient
-            {
-
-            };
-            var json = JsonConvert.SerializeObject(model);
-
-            HttpContent content = new StringContent(json);
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var response = await _httpClient.GetAsync(APIURL + " ");
-            _httpClient.Dispose();
-
-            return response.ToString();
         }
 
 
@@ -115,19 +94,20 @@ namespace SerapisPatient.Services
 
         }
         
-        public async Task<List<PracticeDto>> GetAllMedicalBuildingsAsync()
+        public async Task<ObservableCollection<PracticeDto>> GetAllMedicalBuildingsAsync()
         {
 
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api =string.Format(APIURL, "/Practices");
+                string api =string.Format(APIURL+"/Practice");
                 //Getting JSON data from the WebAPI
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
-                var result = JsonConvert.DeserializeObject<List<PracticeDto>>(content);
+                var result = JsonConvert.DeserializeObject<ObservableCollection<PracticeDto>>(content);
                 return result;
             }
         }
+
 
         public async Task<List<PracticeDto>> GetAllMedicalBuildingsAsync(double lat, double lon, double radius)
         {
@@ -142,6 +122,7 @@ namespace SerapisPatient.Services
                 return result;
             }
         }
+
 
     }
 }

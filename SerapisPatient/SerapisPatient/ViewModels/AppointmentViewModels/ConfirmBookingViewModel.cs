@@ -16,6 +16,7 @@ using SerapisPatient.Models.Appointments;
 using Plugin.Connectivity;
 using SerapisPatient.Services;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.Models.Practices;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -25,7 +26,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         public Command NavigateToHomePageCommand { get; set; }
         public Doctor SelectedDoctor { get; set; }
         public Patient patient { get; set; } 
-        public MedicalBuildingModel SelectedMedicalBuilding { get; set; }
+        public PracticeDto SelectedMedicalBuilding { get; set; }
         public DateTime FullDateAndMonth { get; set; }
 
         public bool BookingSuccess = false;
@@ -66,7 +67,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
         #endregion
 
-        public ConfirmBookingViewModel(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel, string _FullDateAndMonth)
+        public ConfirmBookingViewModel(Doctor enquiredDoctor, PracticeDto _medicalBuildingModel, string _FullDateAndMonth)
         {
             // 1) Xamlbindings. 
             // 2) One method to handle all bindings & keep things neat
@@ -77,7 +78,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         #region Navigation Tasks
 
-        private void XamlBindings(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingModel, string _FullDateAndMonth)
+        private void XamlBindings(Doctor enquiredDoctor, PracticeDto _medicalBuildingModel, string _FullDateAndMonth)
         {
             SelectedDoctor = enquiredDoctor;
             SelectedMedicalBuilding = _medicalBuildingModel;
@@ -123,7 +124,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                    //var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
+                    var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
                 }
                 else
                 {

@@ -16,9 +16,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.Behaviors>
-        <select:NotificationBehavior NotificationRequest="{Binding NavigatePracticePageRequest}" />
-    </ContentPage.Behaviors>
+
     <ContentPage.Content>
         <ListView
             ItemsSource="{Binding ListSpecilizations}"

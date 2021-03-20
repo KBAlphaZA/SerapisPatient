@@ -13,7 +13,9 @@ namespace SerapisPatient.Services.Data
 {
     public class AuthenticationService
     {
-        private string APIURL = "http://serapismedicalapi.herokuapp.com/api/";
+        private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
+        //serapismedicalapi.azurewebsites.net
+        //http://serapismedicalapi.herokuapp.com/api/
 
 
 
@@ -21,7 +23,7 @@ namespace SerapisPatient.Services.Data
         /// This handles Google login and registration
         /// </summary>
         /// <returns></returns>
-        public Task<bool> GoogleLogin(GoogleUser googleUser,string token )
+        public string GoogleLogin(GoogleUser googleUser,string token)
         {
             using(HttpClient _httpClient = new HttpClient())
             {
@@ -29,20 +31,19 @@ namespace SerapisPatient.Services.Data
                 {
                     PatientFirstName = googleUser.Name,
                     PatientLastName = googleUser.FamilyName, 
-                    PatientContactDetails = { Email = googleUser.Email }, 
+                    PatientContactDetails = new PatientContact { Email = googleUser.Email }, 
                     //WE NEED TO DO SOMETHING ABOUT THE TOKEN
-                    Token = token
+                    //token = googleUser.Id.ToString()
                 };
 
                 var json = JsonConvert.SerializeObject(model);
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-                var response = _httpClient
-                       .PostAsync("/", content);
+                 //var response = _httpClient
+                   //    .PostAsync(APIURL+"Account", content);
             }
-            
-            return null;
+            return "true";
         }
 
         /// <summary>

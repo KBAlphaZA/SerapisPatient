@@ -1,7 +1,11 @@
 ﻿
 using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
+
+using SerapisPatient.behavious;
+
 using SerapisPatient.Helpers;
+
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Patient;
@@ -13,6 +17,7 @@ using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -33,15 +38,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         public Command NavigateToHomePageCommand { get; set; }
         public ICommand ItemSelected { get; set; }
 
-        private List<MedicalBuildingModel> _practices;
-
+        //private ObservableCollection<MedicalBuildingModel> _practices;
         public MedicalBuildingModel SelectedItem
         {
             get { return GetValue<MedicalBuildingModel>(); }
             set { SetValue(value); }
         }
 
-     
         private string title;
         public string Title 
         {
@@ -54,6 +57,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 title = value;
 
                 RaisePropertyChanged(nameof(Title));
+            }
+        }
+        private string practicename;
+        public string PracticeName
+        {
+            get
+            {
+                return practicename;
+            }
+            set
+            {
+                practicename = value;
+                RaisePropertyChanged(nameof(PracticeName));
             }
         }
 
@@ -90,9 +106,9 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
 
         #region Khanyisani carousel code
-
+        public ICommand SelectedPractice { get; set; }
         public Command selectedItem {get; set; }
-
+        PracticeDto cache = null;
         private int myPostion;
 
         public int MyPostion
@@ -120,22 +136,23 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             set
             {
                 practiceList = value;
+                OnPropertyChanged();
             }
         }
-
         private void MedicalBuildingViewInit(SpecilizationModel _specilizationData)
         {
-            var myCarsoul = new CarouselViewControl();
-
+            //var myCarsoul = new CarouselViewControl();
+            LoadRealData();
             Title = _specilizationData.Title;
 
             Icon = _specilizationData.Icon;
 
             Description = _specilizationData.Description;
+            //myCarsoul.ItemsSource = PracticesList;
+            //myCarsoul.Position = 0;
 
-            myCarsoul.ItemsSource = PracticesList;
-            myCarsoul.Position = 0;
-            
+            //V2 COMMAND
+            SelectedPractice = new Command(() => HandleNavigationv2());
         }
 
         #endregion
@@ -143,6 +160,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #endregion
 
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
+        {
+
+
+
+            MedicalBuildingViewInit(_specilizationData);
+        }
+
+
+        public MedicalBuildingViewModel()
+        {
+            
+        }
+       /* public void LoadDummyData()
         {
 
             InitalizeList(PatientCoordinates.Latitude, PatientCoordinates.Longitude, Convert.ToDouble(Settings.MaximumDistance));
@@ -153,40 +183,58 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 HandleNavigation(_MedicalBuildingData);
             });
 
+
             PracticesList = new ObservableCollection<PracticeDto>()
             {
                new PracticeDto
                  {
-                     Distance=7.8,
-                     ContactNumber="031 701 456 43",
-                     PracticeID=ObjectId.Parse("5bc9bd861c9d4400001badf1"),
-                     NumberOfPatientsAtPractice=5,
+                     DistanceFromPractice=7.8,
+                     ContactPractice = new PracticeContact
+                     {
+                         PracticeTelephoneNumber = "031 701 456 43"
+                     },
+                     //Id=ObjectId.Parse("5bc9bd861c9d4400001badf1"),
+                     NumOfPatientsInPractice=5,
                      PracticeName="Grey's Hospital",
                      PracticePicture="MedicrossPinetown.jpg",
-                     OperatingTimes="08h00-17h00"
+                     OperatingTime="08h00-17h00"
                  },
                  new PracticeDto
                  {
-                     Distance=7,
-                     ContactNumber="031 701 456 43",
-                     PracticeID=ObjectId.Parse("5bc9bde81c9d4400001badf2"),
-                     NumberOfPatientsAtPractice=10,
+                     DistanceFromPractice=7,
+                     ContactPractice = new PracticeContact
+                     {
+                         PracticeTelephoneNumber = "031 701 456 43"
+                     },
+                     //Id=ObjectId.Parse("5bc9bde81c9d4400001badf2"),
+                     NumOfPatientsInPractice=10,
                      PracticeName="Crompton Hospital",
                      PracticePicture="MedicrossPinetown.jpg",
-                     OperatingTimes="08h00-17h00"
+                     OperatingTime="08h00-17h00"
                  },
                  new PracticeDto
                  {
-                     Distance=6,
-                     ContactNumber="031 701 456 43",
-                     PracticeID=ObjectId.Parse("5bc9bd741c9d4400001badf0"),
-                     NumberOfPatientsAtPractice=10,
+                     DistanceFromPractice=6,
+
+                     ContactPractice = new PracticeContact
+                     {
+                         PracticeTelephoneNumber = "031 701 456 43"
+                     },
+                     //Id=ObjectId.Parse("5bc9bd741c9d4400001badf0"),
+                     NumOfPatientsInPractice=10,
                      PracticeName="Groote Schuur Hospital",
                      PracticePicture="MedicrossPinetown.jpg",
-                     OperatingTimes="08h00-17h00"
+                     OperatingTime="08h00-17h00"
                  }
             };
+        }*/
+        public void HandleNavigationv2()
+        {
+            
+            MessagingCenter.Subscribe<SelectPracticeV2, PracticeDto>(this, "TEST2", (obj, arg) =>
+            {
 
+                 cache = arg;
             MedicalBuildingViewInit(_specilizationData);
         }
 
@@ -208,77 +256,66 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         //    Description = _specilizationData.Description;
 
 
-        //   // GenerateMedicalBuildingModel();
 
-        //    ItemSelected = new Command<MedicalBuildingModel>(args =>
-        //    {
-        //        _MedicalBuildingData = args;
-        //        HandleNavigation(_MedicalBuildingData);
-        //    });
-        //}
-        #endregion
+            });
+            if(cache == null)
+            {
+                cache = (PracticeDto) PracticesList.GetItem(0);
+            }
+            Debug.WriteLine("CACHE => "+cache.ToJson());
+           long totalMemory = GC.GetTotalMemory(false);
+            Debug.WriteLine("GC MEMORY => " + totalMemory);
 
-        public MedicalBuildingViewModel()
-        {
-            
+            App.Current.MainPage.Navigation.PushAsync(new SelectBooking(cache), true);
+
         }
-
-        public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
+        public void HandleNavigation(PracticeDto _MedicalBuildingData)
         {
+
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
+        
         }
 
+        public async void LoadRealData()
+        {
+            await GetAllPracticesAsync();
+        }
        public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
        {
-            // Practices = await _apiServices.GetAllMedicalBuildingsAsync();
-            PracticesList = new ObservableCollection<PracticeDto>();
-
-            var Practices=await _apiServices.GetAllMedicalBuildingsAsync();
-
-            foreach (var _practice in Practices)
+            try
             {
-                PracticesList.Add(_practice);
+                IsBusy = true;
+                //PracticesList = new ObservableCollection<PracticeDto>();
+
+                    //var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+                    PracticesList = await _apiServices.GetAllMedicalBuildingsAsync();
+
+                    /*foreach (var _practice in Practices)
+                    {
+                        PracticeDto s = new PracticeDto
+                        {
+                            Id = _practice.Id,
+                            PracticePicture = "MedicrossPinetown.jpg",
+                            PracticeName = _practice.PracticeName,
+                            NumOfPatientsInPractice = _practice.NumOfPatientsInPractice,
+                            DistanceFromPractice = _practice.DistanceFromPractice,
+                            OperatingTime = "08h00-17h00"
+                        };
+                        PracticesList.Add(s);
+                    }*/
+               
             }
-
-            return PracticesList;
-       }
-
+            catch(Exception ex)
+            {
+                
+            }
+            IsBusy = false;
+            return PracticesList; 
+        }
 
         public void ItemSelected_ExecuteCommand(object state)
         {
             SelectedItem = state as MedicalBuildingModel;
         }
-
-        #region Bonga
-        //public async Task<List<MedicalBuildingModel>> GetMedicalBuildingsBySpecializationAsync()
-        //{
-        //    //if (IsBusy)
-        //     //   return;
-        //    IsBusy = true;
-        //    try
-        //    {
-        //        //var filter = Builders<MedicalBuildingModel>
-        //         //.Filter
-        //         //
-        //         //.Eq(medicalbuilding, FieldsSpecilized);
-        //        //adds filter to the query
-        //        var result = await _mongodb.MedicalBuildingCollection
-        //            .AsQueryable().Where(t => t.PracticeName.Equals("Grey's Hospital") )
-        //            .ToListAsync();
-
-        //        return result;
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        IsBusy = false;
-        //    }
-        //    //filter function, this will filter by Medical building and specialization
-        //    return null;
-        //}
-        #endregion
     }
 }

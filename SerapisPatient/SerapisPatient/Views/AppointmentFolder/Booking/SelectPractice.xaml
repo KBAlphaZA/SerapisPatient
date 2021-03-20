@@ -47,8 +47,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <StackLayout>
-                    <controlcarouselview:CarouselViewControl 
+                <controlcarouselview:CarouselViewControl 
                     Orientation="Horizontal" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
@@ -72,10 +71,6 @@
 
                     </controlcarouselview:CarouselViewControl>
 
-                </StackLayout>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding selectedItem}"/>
-                </Grid.GestureRecognizers>
             </Grid>
             
         </Grid>
