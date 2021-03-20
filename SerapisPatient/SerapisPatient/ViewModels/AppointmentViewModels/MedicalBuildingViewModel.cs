@@ -1,12 +1,17 @@
 ﻿
 using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
+
 using SerapisPatient.behavious;
+
+using SerapisPatient.Helpers;
+
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.Services;
+using SerapisPatient.Services.LocationServices;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
@@ -158,6 +163,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
 
 
+
             MedicalBuildingViewInit(_specilizationData);
         }
 
@@ -168,6 +174,15 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         }
        /* public void LoadDummyData()
         {
+
+            InitalizeList(PatientCoordinates.Latitude, PatientCoordinates.Longitude, Convert.ToDouble(Settings.MaximumDistance));
+
+            selectedItem = new Command<MedicalBuildingModel>(args => 
+            {
+                _MedicalBuildingData = args;
+                HandleNavigation(_MedicalBuildingData);
+            });
+
 
             PracticesList = new ObservableCollection<PracticeDto>()
             {
@@ -220,6 +235,27 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             {
 
                  cache = arg;
+            MedicalBuildingViewInit(_specilizationData);
+        }
+
+        private async void InitalizeList(double lat, double lon, double radius)
+        {
+            await _apiServices.GetAllMedicalBuildingsAsync(lat, lon, radius);
+        }
+
+        #region Bonga
+        //BONG'S Constructor//
+
+        //public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
+        //{
+        //    GenerateMedicalBuildingModel();
+        //    //GetAllPracticesAsync().Start();
+        //    //Bindings
+        //    Title = _specilizationData.Title;
+        //    Icon = _specilizationData.Icon;
+        //    Description = _specilizationData.Description;
+
+
 
             });
             if(cache == null)

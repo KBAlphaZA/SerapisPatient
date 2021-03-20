@@ -1,5 +1,6 @@
 ﻿using Rg.Plugins.Popup.Services;
 using SerapisPatient.Models;
+using SerapisPatient.Services;
 using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.ViewModels.Base;
@@ -110,8 +111,8 @@ namespace SerapisPatient.ViewModels
                 //Get the users location before moving on to the next page
                 usersLocation = new UserCurrentLocation();
 
-
                 await usersLocation.GetCurrentLocationAsync();
+
                 #endregion
             }
             catch (Exception ex)

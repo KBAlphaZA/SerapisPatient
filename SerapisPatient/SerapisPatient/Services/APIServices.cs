@@ -109,5 +109,20 @@ namespace SerapisPatient.Services
         }
 
 
+        public async Task<List<PracticeDto>> GetAllMedicalBuildingsAsync(double lat, double lon, double radius)
+        {
+            using(HttpClient httpClient=new HttpClient())
+            {
+                string api = string.Format(APIURL, "/Practices/{0}/{1}/{2}", lat, lon, radius);
+
+                var content = await _httpClient.GetStringAsync(api);
+
+                var result = JsonConvert.DeserializeObject<List<PracticeDto>>(content);
+
+                return result;
+            }
+        }
+
+
     }
 }

@@ -58,6 +58,10 @@ namespace SerapisPatient.Services.LocationServices
 
             }
 
+            //Set the gps coordinates globally for use in other places
+            PatientCoordinates.Latitude = userPostion.Latitude;
+            PatientCoordinates.Longitude = userPostion.Longitude;
+
             return userPostion;
         }
 

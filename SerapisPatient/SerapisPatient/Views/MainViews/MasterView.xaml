@@ -9,7 +9,7 @@
                  
              MasterBehavior="Popover">
 
-    <MasterDetailPage.Master>
+    <MasterDetailPage.Master >
         <pages:SideMenuPage x:Name="MasterPage" Title="Menu"/>
     </MasterDetailPage.Master>
 
