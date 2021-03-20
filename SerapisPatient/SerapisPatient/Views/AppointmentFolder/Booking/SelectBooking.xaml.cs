@@ -1,5 +1,6 @@
 ﻿using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	{
         SelectBookingViewModel viewModel;
         public string DateSelected;
-		public SelectBooking(MedicalBuildingModel _MedicalBuildingData)
+		public SelectBooking(PracticeDto _MedicalBuildingData)
 		{
 			InitializeComponent ();
 

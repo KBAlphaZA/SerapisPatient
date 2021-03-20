@@ -4,6 +4,7 @@ using SerapisPatient.behavious;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.PopUpMessages;
 using SerapisPatient.Services;
 using SerapisPatient.ViewModels.Base;
@@ -11,6 +12,7 @@ using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,12 +28,11 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public Doctor enquiredDoctor;
         public string FullDateAndMonth = " ";
 
-        public MedicalBuildingModel _medicalBuildingData = new MedicalBuildingModel();
+        public PracticeDto _medicalBuildingData = new PracticeDto();
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
         private List<Doctor> _doctors;
-        private List<Doctor> convert_doctors;
 
         public List<Doctor> DoctorAvaliable
         {
@@ -130,7 +131,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
 
         #endregion
-        public SelectBookingViewModel(MedicalBuildingModel _medicalBuildingData1)
+        public SelectBookingViewModel(PracticeDto _medicalBuildingData1)
         {
             _medicalBuildingData = _medicalBuildingData1;
             //GenerateDoctorList();
@@ -139,10 +140,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //Animation
             ShowUI = true;
             Showlistview = false;
-            //DateSelected = SelectedItem.MonthValue.ToString();
             Months = GetMonths();
             GenerateDaysOfTheMonth();
-            
 
         }
 
@@ -277,21 +276,15 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                     //force this task on the UI thread so changes can be made on the listview
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        //Dummy Data
-                        //GenerateDoctorList();
 
                         await GetDoctors();
-                        //Task.WaitAll(GetDoctors());
 
-                        //Task.Delay(200);
                     });
-
                 }
                 else
                 {
                     await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
                 }
-
             }
             catch (Exception e)
             {
@@ -309,9 +302,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         {
             NavigateNextPageRequest.Raise(new SelectedItemEvent { SelectedDoctor = selectDoctor });
             enquiredDoctor = selectDoctor;
-            // MessagingCenter.Send(this, MessagingKeys.Medicalbuilding, doctorname);
-
-            //Temp code for demo purposes
             
 
             await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
@@ -340,7 +330,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             return Doctors;
         }
         //Navigation
-        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
+        private async Task GoToConfirmation(Doctor enquiredDoctor, PracticeDto _medicalBuildingData, string FullDateAndMonth)
         {
             await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);
         }

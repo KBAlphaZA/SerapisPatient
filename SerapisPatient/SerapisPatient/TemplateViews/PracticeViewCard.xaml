@@ -23,7 +23,7 @@
     </ContentView.Resources>
     
     <ContentView.Content>
-        <Grid RowSpacing="2">
+        <Grid RowSpacing="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="6*"/>
@@ -182,10 +182,8 @@
 
                         </Grid>
                     </Grid>
-                    
                 </Grid>
             </Grid>
-            
         </Grid>
     </ContentView.Content>
 </ContentView>

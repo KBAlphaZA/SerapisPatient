@@ -1,6 +1,7 @@
 ﻿
 using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
+using SerapisPatient.behavious;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Patient;
@@ -11,6 +12,7 @@ using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -31,15 +33,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         public Command NavigateToHomePageCommand { get; set; }
         public ICommand ItemSelected { get; set; }
 
-        private List<MedicalBuildingModel> _practices;
-
+        //private ObservableCollection<MedicalBuildingModel> _practices;
         public MedicalBuildingModel SelectedItem
         {
             get { return GetValue<MedicalBuildingModel>(); }
             set { SetValue(value); }
         }
 
-     
         private string title;
         public string Title 
         {
@@ -103,7 +103,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Khanyisani carousel code
         public ICommand SelectedPractice { get; set; }
         public Command selectedItem {get; set; }
-
+        PracticeDto cache = null;
         private int myPostion;
 
         public int MyPostion
@@ -131,22 +131,23 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             set
             {
                 practiceList = value;
+                OnPropertyChanged();
             }
         }
-
         private void MedicalBuildingViewInit(SpecilizationModel _specilizationData)
         {
-            var myCarsoul = new CarouselViewControl();
-
+            //var myCarsoul = new CarouselViewControl();
+            LoadRealData();
             Title = _specilizationData.Title;
 
             Icon = _specilizationData.Icon;
 
             Description = _specilizationData.Description;
+            //myCarsoul.ItemsSource = PracticesList;
+            //myCarsoul.Position = 0;
 
-            myCarsoul.ItemsSource = PracticesList;
-            myCarsoul.Position = 0;
-            //SelectedPractice = new Command(async () => HandleNavigation());
+            //V2 COMMAND
+            SelectedPractice = new Command(() => HandleNavigationv2());
         }
 
         #endregion
@@ -156,17 +157,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
         {
 
-            selectedItem = new Command<MedicalBuildingModel>(args => 
-            {
-                _MedicalBuildingData = args;
-                HandleNavigation(_MedicalBuildingData);
-            });
 
-            LoadRealData();
-            
             MedicalBuildingViewInit(_specilizationData);
-            PracticeName = "Default Value";
-            //LoadDummyData();
         }
 
 
@@ -174,7 +166,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
             
         }
-        public void LoadDummyData()
+       /* public void LoadDummyData()
         {
 
             PracticesList = new ObservableCollection<PracticeDto>()
@@ -220,10 +212,32 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                      OperatingTime="08h00-17h00"
                  }
             };
-        }
-        public void HandleNavigation(MedicalBuildingModel _MedicalBuildingData)
+        }*/
+        public void HandleNavigationv2()
         {
+            
+            MessagingCenter.Subscribe<SelectPracticeV2, PracticeDto>(this, "TEST2", (obj, arg) =>
+            {
+
+                 cache = arg;
+
+            });
+            if(cache == null)
+            {
+                cache = (PracticeDto) PracticesList.GetItem(0);
+            }
+            Debug.WriteLine("CACHE => "+cache.ToJson());
+           long totalMemory = GC.GetTotalMemory(false);
+            Debug.WriteLine("GC MEMORY => " + totalMemory);
+
+            App.Current.MainPage.Navigation.PushAsync(new SelectBooking(cache), true);
+
+        }
+        public void HandleNavigation(PracticeDto _MedicalBuildingData)
+        {
+
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
+        
         }
 
         public async void LoadRealData()
@@ -235,26 +249,33 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             try
             {
                 IsBusy = true;
-                PracticesList = new ObservableCollection<PracticeDto>();
+                //PracticesList = new ObservableCollection<PracticeDto>();
 
-                var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+                    //var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+                    PracticesList = await _apiServices.GetAllMedicalBuildingsAsync();
 
-                foreach (var _practice in Practices)
-                {
-
-                    PracticesList.Add(_practice);
-                }
-                
+                    /*foreach (var _practice in Practices)
+                    {
+                        PracticeDto s = new PracticeDto
+                        {
+                            Id = _practice.Id,
+                            PracticePicture = "MedicrossPinetown.jpg",
+                            PracticeName = _practice.PracticeName,
+                            NumOfPatientsInPractice = _practice.NumOfPatientsInPractice,
+                            DistanceFromPractice = _practice.DistanceFromPractice,
+                            OperatingTime = "08h00-17h00"
+                        };
+                        PracticesList.Add(s);
+                    }*/
+               
             }
             catch(Exception ex)
             {
                 
             }
             IsBusy = false;
-            return PracticesList;
+            return PracticesList; 
         }
-           
-
 
         public void ItemSelected_ExecuteCommand(object state)
         {

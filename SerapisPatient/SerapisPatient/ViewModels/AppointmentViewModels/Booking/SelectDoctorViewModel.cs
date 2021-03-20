@@ -1,6 +1,7 @@
 ﻿using SerapisPatient.behavious;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
@@ -15,11 +16,12 @@ using Xamarin.Forms.BehaviorsPack;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 {
+        //DEPRICIATED. TO BE DELETED
     public class SelectDoctorViewModel : BaseViewModel
     {
         #region Properties
         public Doctor enquiredDoctor;
-        public MedicalBuildingModel _medicalBuildingData;
+        public PracticeDto _medicalBuildingData;
         public ObservableCollection<Doctor> Doctors { get; set; }
         string FullDateAndMonth;
         public ICommand NavigateToConfrimation { get; set; }
@@ -45,7 +47,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
 
        
 
-        private async Task GoToConfirmation(Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth )
+        private async Task GoToConfirmation(Doctor enquiredDoctor, PracticeDto _medicalBuildingData, string FullDateAndMonth )
         {
             //This sends the message of itemSelected       
             await App.Current.MainPage.Navigation.PushAsync(new ConfirmBooking(enquiredDoctor, _medicalBuildingData, FullDateAndMonth), true);

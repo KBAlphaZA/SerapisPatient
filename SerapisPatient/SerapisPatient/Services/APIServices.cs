@@ -8,6 +8,7 @@ using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace SerapisPatient.Services
 
         //    return response.IsSuccessStatusCode;// this should return a bool
         //}
-        public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, MedicalBuildingModel medicalBuildingModel )
+        public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, PracticeDto medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {
@@ -93,7 +94,7 @@ namespace SerapisPatient.Services
 
         }
         
-        public async Task<List<PracticeDto>> GetAllMedicalBuildingsAsync()
+        public async Task<ObservableCollection<PracticeDto>> GetAllMedicalBuildingsAsync()
         {
 
             using(HttpClient _httpClient = new HttpClient())
@@ -102,7 +103,7 @@ namespace SerapisPatient.Services
                 //Getting JSON data from the WebAPI
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
-                var result = JsonConvert.DeserializeObject<List<PracticeDto>>(content);
+                var result = JsonConvert.DeserializeObject<ObservableCollection<PracticeDto>>(content);
                 return result;
             }
         }

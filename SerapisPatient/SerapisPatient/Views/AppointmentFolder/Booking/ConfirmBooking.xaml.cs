@@ -1,6 +1,7 @@
 ﻿using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models.Practices;
 using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
 using System;
@@ -19,7 +20,7 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	{
         ConfirmBookingViewModel viewModel;
 
-        public ConfirmBooking (Doctor enquiredDoctor, MedicalBuildingModel _medicalBuildingData, string FullDateAndMonth)
+        public ConfirmBooking (Doctor enquiredDoctor, PracticeDto _medicalBuildingData, string FullDateAndMonth)
 		{
 			InitializeComponent ();
             viewModel = new ConfirmBookingViewModel(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);

@@ -89,9 +89,6 @@ namespace SerapisPatient.ViewModels
 
         private async void ProfilePage()
         {
-            
-            //var Profile_navigation = new NavigationPage(new MainView());
-            //await App.Current.MainPage.Navigation.PushAsync(Profile_navigation);
             await App.Current.MainPage.Navigation.PushAsync(new ProfilePage());
         }
 
@@ -102,7 +99,6 @@ namespace SerapisPatient.ViewModels
         /// </summary>
         private async void AppointmentPage()
         {
-            //var Appointment_navigation = new  NavigationPage( new AppointmentPage());
 
             //Busy status
             IsBusy = true;

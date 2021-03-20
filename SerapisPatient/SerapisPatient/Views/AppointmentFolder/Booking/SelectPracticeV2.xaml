@@ -2,25 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.AppointmentFolder.Booking.SelectPracticeV2"
+             xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              xmlns:templateViewcard="clr-namespace:SerapisPatient.TemplateViews">
-    <ContentPage.Content>
 
-        <Grid RowSpacing="0" x:Name="practiceViewCard">
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="0.5*"/>
-            </Grid.RowDefinitions>
+    <ContentPage.Behaviors>
+        <select:NotificationBehavior NotificationRequest="{Binding NavigateNextPageRequest}" />
+    </ContentPage.Behaviors>
+    <Grid RowSpacing="0" x:Name="practiceViewCard">
 
-            <Grid Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
                 <StackLayout Orientation="Horizontal">
                     <Image  
                             HorizontalOptions="Fill" 
                             VerticalOptions="Fill"  
                             Source="{Binding Icon}"
                             />
-
                     <Label  
                             Text="{Binding Title}" 
                             TextColor="Black" 
@@ -31,33 +34,39 @@
                             HorizontalOptions="StartAndExpand"
                             />
                 </StackLayout>
+
             </Grid>
-            <Grid Grid.Row="1">
-                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
-                <CarouselView ItemsSource="{Binding PracticesList}"
-                               PeekAreaInsets="20" IndicatorView="indicatorView" Loop="False" x:Name="practicedata"  >
-
-                    <CarouselView.ItemTemplate >
-                        
-                        <DataTemplate>
-                            <Frame BorderColor="LightGray" CornerRadius="10" HasShadow="True">
-                                <StackLayout>
-                                    <templateViewcard:PracticeViewCard/>
-                                    <Button BackgroundColor="{StaticResource ButtonColour}" Text="Continue" />
-                                </StackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                <IndicatorView x:Name="indicatorView"
-                   IndicatorColor="LightGray"
-                   SelectedIndicatorColor="DarkGray"
-                   VerticalOptions="End" />
-            </Grid> 
+        <Grid Grid.Row="1" >
             
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="{StaticResource ButtonColour}"/>
 
+            <CarouselView ItemsSource="{Binding PracticesList}"
+                               PeekAreaInsets="20" IndicatorView="indicatorView" 
+                               Loop="False" x:Name="practicedata" 
+                               CurrentItem="{Binding CurrentPractice}"
+                               CurrentItemChanged="practicedata_CurrentItemChanged">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate >
+                        <Frame BorderColor="LightGray" CornerRadius="10" HasShadow="True">
+                            <templateViewcard:PracticeViewCard/>
+                        </Frame>
+                    </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                    
+            </CarouselView>
+                
+                <IndicatorView x:Name="indicatorView"
+                   IndicatorColor="LightGray" SelectedIndicatorColor="DarkGray"
+                   VerticalOptions="End" />
 
         </Grid>
-
-    </ContentPage.Content>
+        <Grid Grid.Row="2">
+            <Button BackgroundColor="{StaticResource ButtonColour}" HeightRequest="20" 
+                    TextColor="White" CornerRadius="15" 
+                    Text="Continue"  Command="{Binding SelectedPractice}"
+                    Margin="50,10,50,0"/>
+        </Grid>
+        
+    </Grid>
+    
 </ContentPage>
