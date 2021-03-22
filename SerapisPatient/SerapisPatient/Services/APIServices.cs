@@ -22,28 +22,41 @@ namespace SerapisPatient.Services
         //private string APIURL = "http://serapismedicalapi.azurewebsites.net/api"; <- AZURE
         private string APIURL = "https://serapismedicalapi.herokuapp.com/api"; 
 
+        //GET
+        public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
+        {
+            string appendedURlString = "/patient/{0}/{1}";
+            appendedURlString = string.Format(APIURL,appendedURlString);
 
-        //public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
-        //{
-        //    var client = new HttpClient();
-        //    var model = new RegisterPatient
-        //    {
-        //        Email = email,
-        //        Password = password,
-        //        ConfirmPassword = confirmPassword
-        //    };
-        //    var json = JsonConvert.SerializeObject(model);
+            using (HttpClient _httpClient = new HttpClient())
+            {
 
-        //    HttpContent content = new StringContent(json);
+                
 
-        //    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
+                _httpClient.Dispose();
+                
 
-        //    var response = await client.PostAsync("", content); //add your requesturi as a string
-        //    _httpClient.Dispose();
-        //    client.Dispose();
+                return response.IsSuccessStatusCode;// this should return a bool
+            }
+               
+        }
+        public async Task<bool> LoginAsync(string email, string password)
+        {
+            string appendedURlString = "/patient/{0}/{1}";
+            appendedURlString = string.Format(APIURL, appendedURlString);
 
-        //    return response.IsSuccessStatusCode;// this should return a bool
-        //}
+            using (HttpClient _httpClient = new HttpClient())
+            {
+
+                var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
+                _httpClient.Dispose();
+
+
+                return response.IsSuccessStatusCode;// this should return a bool
+            }
+
+        }
         public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, PracticeDto medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
@@ -111,7 +124,7 @@ namespace SerapisPatient.Services
 
         public async Task<List<PracticeDto>> GetAllMedicalBuildingsAsync(double lat, double lon, double radius)
         {
-            using(HttpClient httpClient=new HttpClient())
+            using(HttpClient _httpClient =new HttpClient())
             {
                 string api = string.Format(APIURL, "/Practices/{0}/{1}/{2}", lat, lon, radius);
 
