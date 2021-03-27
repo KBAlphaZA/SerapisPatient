@@ -9,6 +9,7 @@ using SerapisPatient.Models.Practices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,38 +42,29 @@ namespace SerapisPatient.Services
             }
                
         }
-        public async Task<bool> LoginAsync(string email, string password)
-        {
-            string appendedURlString = "/patient/{0}/{1}";
-            appendedURlString = string.Format(APIURL, appendedURlString);
-
-            using (HttpClient _httpClient = new HttpClient())
-            {
-
-                var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
-                _httpClient.Dispose();
-
-
-                return response.IsSuccessStatusCode;// this should return a bool
-            }
-
-        }
+        
         public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, PracticeDto medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {
                 //Booking/?id=5bc8e04a1c9d44000088ad93
-                string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
-                var model = new Appointment
+                //string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
+                string api = $"{APIURL}/Bookings?id=5bc8e04a1c9d44000088ad93";
+                Appointment appointment = new Appointment();
+                appointment.BookingId = ObjectId.GenerateNewId();
+                //appointment.PatientID = patient.id.ToString();
+                appointment.DoctorsId = enquiredDoctor.Id;
+                appointment.IsSerapisBooking = false;
+                appointment.HasSeenGP = false;
+                /*var model = new Appointment
                 {
                     BookingId = ObjectId.GenerateNewId(),
                     PatientID = patient.id.ToString(),
-                    DateAndTimeOfAppointment = bookedDate,
                     DoctorsId =enquiredDoctor.Id,
                     IsSerapisBooking = false,
                     HasSeenGP = false
-                };
-                var json = JsonConvert.SerializeObject(model);
+                };*/
+                var json = JsonConvert.SerializeObject(appointment);
 
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -136,6 +128,33 @@ namespace SerapisPatient.Services
             }
         }
 
+        public async Task<Patient> EditPatient()
+        {
+            Patient patient = new Patient();
 
+            using (HttpClient _httpClient = new HttpClient())
+            {
+
+               /* var model = new Patient
+                {
+                    SocialID = googleUser.Id,
+                    PatientFirstName = googleUser.Name,
+                    PatientLastName = googleUser.FamilyName,
+                    PatientContactDetails = new PatientContact { Email = googleUser.Email },
+                    //WE NEED TO DO SOMETHING ABOUT THE TOKEN
+                    //token = googleUser.Id.ToString()
+                };*/
+
+                //var response = await _httpClient.GetAsync(APIURL + "Account");
+                APIURL = APIURL + "Account?socialid="+"&" + "firstname=" +"lastname=";
+
+                var content = await _httpClient.GetStringAsync(APIURL);
+                //We deserialize the JSON data from this line
+                var result = JsonConvert.DeserializeObject<Patient>(content);
+                Debug.WriteLine("RESPONSE =>" + result);
+                return result as Patient;
+            }
+
+        }
     }
 }

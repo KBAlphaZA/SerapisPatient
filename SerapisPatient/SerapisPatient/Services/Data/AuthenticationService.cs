@@ -8,42 +8,35 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Plugin.GoogleClient.Shared;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.Helpers;
 
 namespace SerapisPatient.Services.Data
 {
     public class AuthenticationService
     {
-        private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
+        //private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
         //serapismedicalapi.azurewebsites.net
-        //http://serapismedicalapi.herokuapp.com/api/
-
-
+        private string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
 
         /// <summary>
         /// This handles Google login and registration
         /// </summary>
         /// <returns></returns>
-        public string GoogleLogin(GoogleUser googleUser,string token)
+        public async Task<Patient> GoogleLogin(GoogleUser googleUser,string token)
         {
-            using(HttpClient _httpClient = new HttpClient())
+            
+            using (HttpClient _httpClient = new HttpClient())
             {
-                var model = new Patient
-                {
-                    PatientFirstName = googleUser.Name,
-                    PatientLastName = googleUser.FamilyName, 
-                    PatientContactDetails = new PatientContact { Email = googleUser.Email }, 
-                    //WE NEED TO DO SOMETHING ABOUT THE TOKEN
-                    //token = googleUser.Id.ToString()
-                };
 
-                var json = JsonConvert.SerializeObject(model);
-                HttpContent content = new StringContent(json);
-                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+googleUser.Name+"lastname="+googleUser.FamilyName;
 
-                 //var response = _httpClient
-                   //    .PostAsync(APIURL+"Account", content);
+                var content = await _httpClient.GetStringAsync(APIURL);
+                //We deserialize the JSON data from this line
+                var result = JsonConvert.DeserializeObject<Patient>(content);
+                Debug.WriteLine("RESPONSE =>" + result);
+                return result;
             }
-            return "true";
+            
         }
 
         /// <summary>
@@ -93,5 +86,40 @@ namespace SerapisPatient.Services.Data
                 } 
             }
         }
-    }
+        public async Task<object> LoginAsync(string email, string password)
+        {
+            string appendedURlString = "/patient/{0}/{1}";
+            appendedURlString = string.Format(APIURL, appendedURlString);
+
+            using (HttpClient _httpClient = new HttpClient())
+            {
+
+                var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
+                if(!response.IsSuccessStatusCode)
+                {
+                    //Do map error to UI and return object.
+                    return "no good";
+                }
+
+                Debug.WriteLine(@"\tTodoItem successfully deleted.");
+
+
+                return response;// this should return a bool
+            }
+
+        }
+        public void method()
+        {
+
+            /*var response = await _httpClient.GetAsync("http://chucknorris.com/api/dropkick");
+            response.EnsureSuccessStatusCode();
+
+            using (var stream = await response.Content.ReadAsStreamAsync())
+            using (var reader = new StreamReader(stream))
+            using (var json = new JsonTextReader(reader))
+            {
+                return _serializer.Deserializer<YourClass>(json);*/
+            }
+        }
 }
+

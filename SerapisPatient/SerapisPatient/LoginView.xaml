@@ -52,7 +52,15 @@
                                BackgroundGradientAngle="45"
                                HorizontalOptions="FillAndExpand" 
                                />
-            <!--#region The Logo goes here-->
+
+            <Grid Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <ActivityIndicator Color="Black"  IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}" HeightRequest="50"  />
+                
+            </Grid>
+            
+                <!--#region The Logo goes here-->
             <Grid Grid.Row="0" Grid.ColumnSpan="2">
 
                 <Grid.Margin>

@@ -1,20 +1,17 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using SerapisPatient.Models.Doctor;
 using SerapisPatient.Enum;
 using SerapisPatient.Models.MedicalDetails;
 using SerapisPatient.Models.Appointments;
-using SerapisPatient.Models;
+using Realms;
 
 namespace SerapisPatient.Models.Patient
 {
-    public class Patient
+    public class Patient : RealmObject
     {
-        public ObjectId id { get; set; }
+        [PrimaryKey]
+        public string id { get; set; }
         public string SocialID { get; set; }
         
         public string PatientFirstName { get; set; }
@@ -28,26 +25,31 @@ namespace SerapisPatient.Models.Patient
         public string PatientBloodType { get; set; }
         
         public int PatientAge { get; set; }
-        public bool HasBloodPressure { get; set; }
-        public bool IsDepenedent { get; set; }
-        public List<ChronicDisease> ListOfChronicDisease { get; set; }
-        public List<Medication> ListOfMedication { get; set; }
-       
-        public List<Allergies> ListOfAllergies { get; set; }
         
+        [Ignored]
+        public bool HasBloodPressure { get; set; }
+        [Ignored]
+        public bool IsDepenedent { get; set; }
+        [Ignored]
+        public List<ChronicDisease> ListOfChronicDisease { get; set; }
+        [Ignored]
+        public List<Medication> ListOfMedication { get; set; }
+        [Ignored]
+        public List<Allergies> ListOfAllergies { get; set; }
+        [Ignored]
         public List<MedicalFile> MedicalRecords { get; set; }
         
         private string patientProfilePicture;
 
-        
-        
+
+        [Ignored]
         public List<BookedAppointment> PastBookedAppointments { get; set; }
         public string PatientProfilePicture { get; set; }
-        
+        [Ignored]
         public Genders Gender { get; set; }
-        
+        [Ignored]
         public DateTime BirthDate { get; set; }
-        
+        [Ignored]
         public PatientContact PatientContactDetails { get; set; }
         
         public bool IsGoogle { get; set; }

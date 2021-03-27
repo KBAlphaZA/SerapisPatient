@@ -7,7 +7,7 @@ namespace SerapisPatient.Models
 {
     public class Medication
     {
-        public ObjectId DrugCode { get; set; }
+        public string DrugCode { get; set; }
 
         public string Dosage { get; set; }
         public string MedicationName { get; set; }

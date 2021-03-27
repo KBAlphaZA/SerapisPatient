@@ -4,7 +4,8 @@ using System.Text;
 using SerapisPatient.Models.Patient;
 namespace SerapisPatient.Models
 {
-    public class DependentPatient : SerapisPatient.Models.Patient.Patient
+    //public class DependentPatient : SerapisPatient.Models.Patient.Patient
+    public class DependentPatient 
     {
         public string Parent { get; set; }
     }

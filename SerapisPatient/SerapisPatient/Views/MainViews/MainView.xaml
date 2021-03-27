@@ -6,7 +6,7 @@
              xmlns:triggers="clr-namespace:SerapisPatient.Controls.Triggers"
              xmlns:behaviors="clr-namespace:SerapisPatient.behavious"   
              xmlns:views="clr-namespace:SerapisPatient.PopUpMessages"
-             Title="{Binding Title}"
+             Title="Serapis Patient"
              >
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
@@ -32,7 +32,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid VerticalOptions="Center" Grid.Row="0">
-                        <Label Text="Hi Bonga" 
+                        <Label Text="{Binding FirstName}"
                                TextColor="Black" 
                                FontAttributes="Bold" 
                                FontSize="20"

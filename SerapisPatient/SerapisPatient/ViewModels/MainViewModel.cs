@@ -1,5 +1,8 @@
-﻿using Rg.Plugins.Popup.Services;
+﻿using MongoDB.Bson;
+using Realms;
+using Rg.Plugins.Popup.Services;
 using SerapisPatient.Models;
+using SerapisPatient.Models.Patient;
 using SerapisPatient.Services;
 using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
@@ -8,6 +11,7 @@ using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -22,9 +26,16 @@ namespace SerapisPatient.ViewModels
 
         //public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
 
+        private string firstname;
+
+        public string FirstName
+        {
+            get { return firstname; }
+            set { firstname = value; }
+        }
 
         private NotificationBoardExpanded CardExpanded;
-
+        public ICommand RunInit { get; set; }
         public Command NavigateToProfilePageCommand { get; set; }
         public Command NavigateToAppointmentPageCommand { get; set; }
         public Command NavigateToDeliveryPageCommand { get; set; }
@@ -48,13 +59,15 @@ namespace SerapisPatient.ViewModels
                 MedicationDelvery(SelectedCard);
             }
         }
-
+        public Realm _realm;
         #endregion
 
         NotificationModel mockUp = new NotificationModel() {Title= "MEDICATION DELIVERY" };
 
         public MainViewModel()
         {
+            _realm = Realm.GetInstance();
+            Init();
 
             GenerateNotificationList();
             NavigateToProfilePageCommand = new Command(ProfilePage);
@@ -77,6 +90,16 @@ namespace SerapisPatient.ViewModels
         }
 
         #region Methods
+        private void Init()
+        {
+
+            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            Debug.WriteLine("DB USER =>" + dbuser.ToJson());
+            FirstName = "Hi " + dbuser.PatientFirstName;
+            Debug.WriteLine("FirstName USER =>" + FirstName);
+            
+        }
+
         //ListView
         private void GenerateNotificationList()
         {
