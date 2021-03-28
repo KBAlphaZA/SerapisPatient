@@ -1,20 +1,43 @@
-﻿using SerapisPatient.Models;
+﻿using MongoDB.Bson;
+using Realms;
+using SerapisPatient.Models;
+using SerapisPatient.Models.Patient;
+using SerapisPatient.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.TabbedViewModel
 {
-    public class ProfilePageViewModel
+    public class ProfilePageViewModel : BaseViewModel
     {
         public ObservableCollection<ProfileModel> PatientCondtions{ get; set; }
-        public Command LoadMoreIcons { get; set; } 
+        public Command LoadMoreIcons { get; set; }
+        public Realm _realm;
+
+        private string firstname;
+        public string FirstName
+        {
+            get { return firstname; }
+            set { firstname = value; }
+        }
         public ProfilePageViewModel()
         {
-            GenerateList();
+            _realm = Realm.GetInstance();
+            ProfilePageViewModelInit();
+            
             LoadMoreIcons = new Command(LoadMore);
+        }
+        public void ProfilePageViewModelInit()
+        {
+            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            Debug.WriteLine("DB USER =>" + dbuser.ToJson());
+            FirstName = dbuser.PatientFirstName;
+            GenerateList();
         }
 
         private void GenerateList()

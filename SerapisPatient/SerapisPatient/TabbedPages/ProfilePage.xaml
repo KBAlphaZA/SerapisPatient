@@ -43,17 +43,24 @@
         <!--Profile Image top right-->
         <!--<Circle:CircleImage  Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"  HorizontalOptions="Center" Source="userplaceholder.png" HeightRequest="80"  /> -->
         <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"  HorizontalOptions="Center" Source="user1.png" HeightRequest="80" />
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="End" HorizontalTextAlignment="Start" FontAttributes="Bold" FontSize="Large" Margin="15,10,0,5"  TextColor="Black" Text="Khanyisani Buthelezi" />
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="End" 
+               HorizontalTextAlignment="Start" FontAttributes="Bold" FontSize="Large" Margin="15,10,0,5"  
+               TextColor="Black" Text="{Binding FirstName}" />
 
         <!--Row 1 -->
-        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" Margin="15,0,0,0" TextColor="DarkGray" FontSize="Large" Text="Main Memeber" />
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalTextAlignment="Start" 
+               HorizontalTextAlignment="Start" Margin="15,0,0,0" TextColor="DarkGray" FontSize="Large" 
+               Text="Main Memeber" />
         <!--Row 2-->
 
         <!--Row 3-->
-        <Image Grid.Row="3" Grid.RowSpan="2"  Grid.Column="0" VerticalOptions="Center" HeightRequest="45" Source="MyAge.png" />
+        <Image Grid.Row="3" Grid.RowSpan="2"  Grid.Column="0" VerticalOptions="Center"
+               HeightRequest="45" Source="MyAge.png" />
 
-        <Label Grid.Row="3" Grid.Column="1" Text="25" FontAttributes="Bold" FontSize="Small" VerticalTextAlignment="End" TextColor="Black"/>
-        <Label Grid.Row="4" Grid.Column="1"   Text="Age" FontSize="Small" VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="Gray"/>
+        <Label Grid.Row="3" Grid.Column="1" Text="25" FontAttributes="Bold" 
+               FontSize="Small" VerticalTextAlignment="End" TextColor="Black"/>
+        <Label Grid.Row="4" Grid.Column="1"   Text="Age" FontSize="Small" 
+               VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="Gray"/>
 
 
         <Image Grid.Row="3"  Grid.RowSpan="2" Grid.Column="2"  VerticalOptions="Center"  HeightRequest="45"  Source="MyBloodType.png" />

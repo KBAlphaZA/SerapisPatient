@@ -222,13 +222,6 @@ namespace SerapisPatient.ViewModels
                 var _ = CrossGoogleClient.Current.ActiveToken;
                 string token = "";
 
-                var Name = googleUser.Name;
-                var Email = googleUser.Email;
-                var Picture = googleUser.Picture;
-                var GivenName = googleUser.GivenName;
-                var FamilyName = googleUser.FamilyName;
-
-
                 // Log the current User email
                 Debug.WriteLine("GOOGLE USER=> "+googleUser.ToJson());
                 IsLoggedIn = true;
@@ -263,6 +256,7 @@ namespace SerapisPatient.ViewModels
             {
                 _realm.Add(new Patient
                 {
+                    id = _patient.Id,
                     PatientFirstName = _patient.Name,
                     PatientLastName = _patient.FamilyName,
                     PatientProfilePicture = _patient.Picture.ToString(),
@@ -284,6 +278,7 @@ namespace SerapisPatient.ViewModels
 
                 _patient = await authenticationService.GoogleLogin(googleUser, "TOKEN");
                 //DoDBTransaction(_patient);
+                googleUser.Id = _patient.id;
                 DoGoogleDBTransaction(googleUser);
             }
             catch(Exception ex)
@@ -297,13 +292,10 @@ namespace SerapisPatient.ViewModels
                 App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First() );
                 await App.Current.MainPage.Navigation.PopAsync();
             }
-
-          
         }
 
         public async void LocalAuth()
         {
-            
 
             try
             {

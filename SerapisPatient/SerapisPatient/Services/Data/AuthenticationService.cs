@@ -9,6 +9,7 @@ using System.Diagnostics;
 using Plugin.GoogleClient.Shared;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Helpers;
+using SerapisPatient.Utils;
 
 namespace SerapisPatient.Services.Data
 {
@@ -17,7 +18,7 @@ namespace SerapisPatient.Services.Data
         //private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
         //serapismedicalapi.azurewebsites.net
         private string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
-
+        StringUtil util = new StringUtil();
         /// <summary>
         /// This handles Google login and registration
         /// </summary>
@@ -27,8 +28,8 @@ namespace SerapisPatient.Services.Data
             
             using (HttpClient _httpClient = new HttpClient())
             {
-
-                APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+googleUser.Name+"lastname="+googleUser.FamilyName;
+                string FirstName = util.ExtractFirstNameFromFullName(googleUser.Name);
+                APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+ FirstName + "lastname="+googleUser.FamilyName;
 
                 var content = await _httpClient.GetStringAsync(APIURL);
                 //We deserialize the JSON data from this line
@@ -46,13 +47,14 @@ namespace SerapisPatient.Services.Data
         public async Task<Patient> FacebookLogin(FacebookProfile profile)
         {
             string[] Names = profile.FullName.Split(' ');
+            string Firstname = util.ExtractFirstNameFromFullName(profile.FullName);
             //if user has more than one name we need to decide if we should remove his other names or load all of them
             using (HttpClient _httpClient = new HttpClient())
             {
                 var model = new Patient
                 {
                     SocialID = profile.ID,
-                    PatientFirstName = Names[0],
+                    PatientFirstName = Firstname,
                     PatientLastName = Names[Names.Length - 1],
                     PatientContactDetails = 
                     {
