@@ -26,6 +26,15 @@ namespace SerapisPatient.ViewModels
 
         //public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
 
+
+        private Uri profilePicture;
+
+        public Uri ProfilePicture
+        {
+            get { return profilePicture; }
+            set { profilePicture = value; }
+        }
+
         private string firstname;
 
         public string FirstName
@@ -96,6 +105,12 @@ namespace SerapisPatient.ViewModels
             var dbuser = _realm.All<Patient>().FirstOrDefault();
             Debug.WriteLine("DB USER =>" + dbuser.ToJson());
             FirstName = "Hi " + dbuser.PatientFirstName;
+
+            ProfilePicture = new Uri(dbuser.PatientProfilePicture);
+            if (String.IsNullOrEmpty(dbuser.PatientProfilePicture))
+                ProfilePicture = new Uri("user1"); 
+
+            //Debug.WriteLine(FirstName == null ? " " : dbuser.PatientFirstName);
             Debug.WriteLine("FirstName USER =>" + FirstName);
             
         }

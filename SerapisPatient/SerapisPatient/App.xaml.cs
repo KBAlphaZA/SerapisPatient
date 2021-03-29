@@ -1,4 +1,7 @@
+using MongoDB.Bson;
+using Realms;
 using SerapisPatient.Models;
+using SerapisPatient.Models.Patient;
 using SerapisPatient.Services;
 using SerapisPatient.Services.Authentication;
 
@@ -10,6 +13,8 @@ using SerapisPatient.Views.AppointmentFolder.Booking;
 using SerapisPatient.Views.CustomViews;
 using SerapisPatient.Views.MainViews;
 using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,10 +24,10 @@ namespace SerapisPatient
 {
 	public partial class App : Application
 	{
-        //public static PublicClientApplication AuthenticationClient { get; set; }
-        public static string User = "Ceba";  //<-EXAMPLE
-        //public PatientUser patient { get; set; }
+
         public static bool CheckLogin { get; set; }
+        public Realm _realm;
+        public static string User = "Ceba";  //<-EXAMPLE
         #region Login services
         GoogleAuthentication googleToken = new GoogleAuthentication();
         FacebookAuthentication facebookToken = new FacebookAuthentication();
@@ -33,6 +38,7 @@ namespace SerapisPatient
         public App ()
 		{
 			InitializeComponent();
+            _realm = Realm.GetInstance();
             //MainPage = new NavigationPage(new CheckIn());
             Init();
 
@@ -45,18 +51,30 @@ namespace SerapisPatient
             //check if the user still has a token for login
 
             CheckLogin = false;
-
-            if (!CheckLogin == true)
+            try
             {
-                MainPage = new NavigationPage(new LoginView());
-               
+                var dbuser = _realm.All<Patient>().FirstOrDefault();
+                Debug.WriteLine("IS There a USER =>" + dbuser.ToJson());
+
+                //if (!CheckLogin == true)
+                if (dbuser == null)
+                {
+                    MainPage = new NavigationPage(new LoginView());
+
+                }
+                else
+                {
+
+                    MainPage = new NavigationPage(new MasterView());
+
+                }
             }
-            else
-            {   
-               
-                MainPage = new NavigationPage(new MasterView());
-                
+            catch (Exception)
+            {
+
+                throw;
             }
+            
 
         }
 
