@@ -7,7 +7,7 @@ namespace SerapisPatient.Models.Appointments
 {
     public class Appointment
     {
-        public ObjectId BookingId { get; set; }
+        public string BookingId { get; set; }
 
         public int LineNumber { get; set; }
 
@@ -29,6 +29,6 @@ namespace SerapisPatient.Models.Appointments
 
         //    [BsonElement("venue")]
         //    public Address Venue { get; set; }
-        public ObjectId PracticeID { get; set; }
+        public string PracticeID { get; set; }
     }
 }

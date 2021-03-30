@@ -36,40 +36,39 @@ namespace SerapisPatient.Services
 
                 var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
                 _httpClient.Dispose();
-                
 
+                Debug.WriteLine(" Booking Creation Response =>[" + response.ToJson() + "]");
                 return response.IsSuccessStatusCode;// this should return a bool
             }
                
         }
         
-        public async Task<bool> CreateAppointment( Patient patient, DateTime bookedDate , Doctor enquiredDoctor, PracticeDto medicalBuildingModel )
+        public async Task<bool> CreateAppointment(string currentUser,DateTime bookedDate , Doctor enquiredDoctor, PracticeDto medicalBuildingModel )
         {
             using(HttpClient _httpClient = new HttpClient())
             {
                 //Booking/?id=5bc8e04a1c9d44000088ad93
+                // /Booking?id=5bc8e04a1c9d44000088ad93
                 //string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
-                string api = $"{APIURL}/Bookings?id=5bc8e04a1c9d44000088ad93";
+                string api = $"{APIURL}/Booking?id=5bc8e04a1c9d44000088ad93";
                 Appointment appointment = new Appointment();
-                appointment.BookingId = ObjectId.GenerateNewId();
-                //appointment.PatientID = patient.id.ToString();
+                appointment.BookingId = ObjectId.GenerateNewId().ToString();
+                appointment.LineNumber = 0;
+                appointment.PatientID = currentUser;
+                appointment.DateAndTimeOfAppointment = DateTime.Now;
                 appointment.DoctorsId = enquiredDoctor.Id;
                 appointment.IsSerapisBooking = false;
                 appointment.HasSeenGP = false;
-                /*var model = new Appointment
-                {
-                    BookingId = ObjectId.GenerateNewId(),
-                    PatientID = patient.id.ToString(),
-                    DoctorsId =enquiredDoctor.Id,
-                    IsSerapisBooking = false,
-                    HasSeenGP = false
-                };*/
+                appointment.Duration = "30";
+                appointment.HasBeenToThisPractice = false;
+                appointment.PracticeID = medicalBuildingModel.Id.ToString();
+
                 var json = JsonConvert.SerializeObject(appointment);
 
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                var response = await _httpClient.PostAsync(api, content);
-
+                var response = await _httpClient.PutAsync(api, content);
+                Debug.WriteLine(" Booking Creation Response =>[" + response + "]");
 
                 return response.IsSuccessStatusCode;
             }
@@ -92,8 +91,10 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<List<Doctor>>(content);
-
+                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
+                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
                 return result;
+                
             }
             
 
@@ -109,6 +110,7 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<ObservableCollection<PracticeDto>>(content);
+                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
                 return result;
             }
         }
@@ -123,7 +125,7 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
 
                 var result = JsonConvert.DeserializeObject<List<PracticeDto>>(content);
-
+                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
                 return result;
             }
         }

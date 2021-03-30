@@ -17,6 +17,8 @@ using Plugin.Connectivity;
 using SerapisPatient.Services;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
+using System.Linq;
+using System.Diagnostics;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -25,7 +27,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         #region Global Declarations
         public Command NavigateToHomePageCommand { get; set; }
         public Doctor SelectedDoctor { get; set; }
-        public Patient patient { get; set; } 
         public PracticeDto SelectedMedicalBuilding { get; set; }
         public DateTime FullDateAndMonth { get; set; }
 
@@ -80,11 +81,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         private void XamlBindings(Doctor enquiredDoctor, PracticeDto _medicalBuildingModel, string _FullDateAndMonth)
         {
+
             SelectedDoctor = enquiredDoctor;
             SelectedMedicalBuilding = _medicalBuildingModel;
 
             PracticeName = _medicalBuildingModel.PracticeName;
             LastName = enquiredDoctor.LastName;
+            Debug.WriteLine(" Doctor Recieved => [" + enquiredDoctor.ToString()+ "]"+ "MedicalBuildingModel Recieved" + "[" + _medicalBuildingModel + "]"+ "FullDateAndMonth Recieved" + "[" +_FullDateAndMonth+ "]");
             ConvertTimeDate(_FullDateAndMonth);
         }
         private void ConvertTimeDate(string _FullDateAndMonth)
@@ -121,10 +124,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             IsBusy = true;
             try
             {
-                
+                var dbuser = _realm.All<Patient>().FirstOrDefault();
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                    var isSuccess = await services.CreateAppointment(patient,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
+                    var isSuccess = await services.CreateAppointment(dbuser.id,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
                 }
                 else
                 {
