@@ -47,10 +47,8 @@ namespace SerapisPatient.Services
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                //Booking/?id=5bc8e04a1c9d44000088ad93
-                // /Booking?id=5bc8e04a1c9d44000088ad93
-                //string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
-                string api = $"{APIURL}/Booking?id=5bc8e04a1c9d44000088ad93";
+                string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
+                //string api = $"{APIURL}/Booking?id=5bc8e04a1c9d44000088ad93";
                 Appointment appointment = new Appointment();
                 appointment.BookingId = ObjectId.GenerateNewId().ToString();
                 appointment.LineNumber = 0;
