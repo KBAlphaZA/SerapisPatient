@@ -1,4 +1,5 @@
 ﻿
+using Realms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +17,11 @@ namespace SerapisPatient.ViewModels.Base
     {
         private const string EXECUTECOMMAND_SUFFIX = "_ExecuteCommand";
         private const string CANEXECUTECOMMAND_SUFFIX = "_CanExecuteCommand";
-
+        public Realm _realm;
 
         public BaseViewModel()
         {
+            _realm = Realm.GetInstance();
             this.commands =
                  this.GetType().GetTypeInfo().DeclaredMethods
                  .Where(dm => dm.Name.EndsWith(EXECUTECOMMAND_SUFFIX))

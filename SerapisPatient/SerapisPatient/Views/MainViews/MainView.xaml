@@ -38,9 +38,6 @@
                                FontSize="20"
                                x:Name="userName"
                                />
-
-
-
                     </Grid>
 
                     <Grid VerticalOptions="Center" Grid.Row="1" >

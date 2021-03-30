@@ -60,7 +60,6 @@ namespace SerapisPatient.ViewModels
         public bool IsNotBusy { get { return !IsBusy; } }
         public FacebookProfile Profile { get; set; }
         public Patient _patient { get; set; }
-        public Realm _realm;
         GoogleUser googleUser;
 
         public Command OnLoginCommand { get; set; }
@@ -79,7 +78,6 @@ namespace SerapisPatient.ViewModels
 
         public void LoginViewModelInit()
         {
-            _realm = Realm.GetInstance();
             //Facebook Login
             Profile = new FacebookProfile();
 

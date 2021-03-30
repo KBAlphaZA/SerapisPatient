@@ -68,14 +68,14 @@ namespace SerapisPatient.ViewModels
                 MedicationDelvery(SelectedCard);
             }
         }
-        public Realm _realm;
+        
         #endregion
 
         NotificationModel mockUp = new NotificationModel() {Title= "MEDICATION DELIVERY" };
 
         public MainViewModel()
         {
-            _realm = Realm.GetInstance();
+            
             Init();
 
             GenerateNotificationList();
