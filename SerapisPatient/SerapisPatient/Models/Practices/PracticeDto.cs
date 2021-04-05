@@ -16,7 +16,7 @@ namespace SerapisPatient.Models.Practices
 
         public string PracticePicture { get; set; }
         public Location GPSCoordinates { get; set; }
-
+            
         public Address PracticeAddress { get; set; }
 
         //public ObjectId PracticeID { get; set; }

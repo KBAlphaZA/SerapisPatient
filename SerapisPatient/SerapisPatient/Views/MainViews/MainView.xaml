@@ -9,7 +9,7 @@
              Title="Serapis Patient"
              >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="user1" Command="{Binding NavigateToProfilePageCommand }"/>
+        <ToolbarItem Icon="{Binding ProfilePicture}" Command="{Binding NavigateToProfilePageCommand }"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -115,11 +115,11 @@
                     <Grid Grid.Row="2" x:Name="scanButton">
                         <BoxView x:Name="appointmentframe2" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SeconderyColour}">
                             <BoxView.Behaviors>
-                                <control:ViewTappedButtonBehavior Command="{Binding NavigateToCameraPageCommand}" AnimationType="Scale" />
+                                <control:ViewTappedButtonBehavior Command="{Binding NavigateToCheckInPageCommand}" AnimationType="Scale" />
                             </BoxView.Behaviors>
                         </BoxView>
 
-                        <Label Text="Scan Delivery Code" 
+                        <Label Text="Appointment Check-In" 
                                VerticalOptions="Center" 
                                HorizontalOptions="Center" 
                                FontSize="20"

@@ -5,7 +5,7 @@
     <ContentView.Content>
         <Grid BackgroundColor="{StaticResource CellBackgroundColor}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="AUTO" />
+                <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="AUTO" />
             </Grid.ColumnDefinitions>
@@ -20,9 +20,9 @@
 
 
             <StackLayout Grid.Column="1" VerticalOptions="Center">
-                <Label Style="{StaticResource NameLabelStyle}" Text="{Binding UserName}" />
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Image Source="map_pin.png" />
+                <Label Style="{StaticResource NameLabelStyle}" Text="{Binding FirstName}" />
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <Image Source="deliverytruck.png" WidthRequest="40" />
                     <Label Style="{StaticResource LocationLabelStyle}" Text="{Binding Location}" />
                 </StackLayout>
             </StackLayout>

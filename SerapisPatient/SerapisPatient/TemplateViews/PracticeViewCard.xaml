@@ -115,7 +115,7 @@
                                                    />
 
                                             <Label Grid.Column="1" 
-                                                   Text="{Binding ContactNumber}" 
+                                                   Text="{Binding Id}" 
                                                    Style="{StaticResource QuadLabels}"
                                                    />
 

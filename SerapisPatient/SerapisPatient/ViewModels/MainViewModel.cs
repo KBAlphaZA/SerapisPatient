@@ -49,6 +49,7 @@ namespace SerapisPatient.ViewModels
         public Command NavigateToAppointmentPageCommand { get; set; }
         public Command NavigateToDeliveryPageCommand { get; set; }
         public Command NavigateToCameraPageCommand { get; set; }
+        public Command NavigateToCheckInPageCommand { get; set; }
 
         public Command OpenNotificationCard { get; set; }
 
@@ -82,7 +83,8 @@ namespace SerapisPatient.ViewModels
             NavigateToProfilePageCommand = new Command(ProfilePage);
             NavigateToAppointmentPageCommand = new Command(AppointmentPage);
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
-            NavigateToCameraPageCommand = new Command(CameraPage);
+            NavigateToCameraPageCommand = new Command(CameraPage); //Decommisioned until feature is avaliable
+            NavigateToCheckInPageCommand = new Command(CheckIn);
             OpenNotificationCard = new Command(MockMethod);
             Title = _title;
 
@@ -107,8 +109,8 @@ namespace SerapisPatient.ViewModels
             FirstName = "Hi " + dbuser.PatientFirstName;
 
             ProfilePicture = new Uri(dbuser.PatientProfilePicture);
-            if (String.IsNullOrEmpty(dbuser.PatientProfilePicture))
-                ProfilePicture = new Uri("user1"); 
+            //if (String.IsNullOrEmpty(dbuser.PatientProfilePicture))
+            //    ProfilePicture = new Uri("user1"); 
 
             //Debug.WriteLine(FirstName == null ? " " : dbuser.PatientFirstName);
             Debug.WriteLine("FirstName USER =>" + FirstName);
@@ -171,6 +173,10 @@ namespace SerapisPatient.ViewModels
         {
            
             await App.Current.MainPage.Navigation.PushAsync(new DeliveryPage());
+        }private async void CheckIn()
+        {
+           
+            await App.Current.MainPage.Navigation.PushAsync(new CheckIn());
         }
         private async void CameraPage()
         {

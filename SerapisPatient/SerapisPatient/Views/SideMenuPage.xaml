@@ -58,7 +58,7 @@
 
                     <Grid Grid.Row="1">
                         <Label 
-                            Text="{Binding UserName}" 
+                            Text="{Binding FirstName}" 
                             Style="{StaticResource UserNameLabel}"
                             HorizontalOptions="Center"
                             />

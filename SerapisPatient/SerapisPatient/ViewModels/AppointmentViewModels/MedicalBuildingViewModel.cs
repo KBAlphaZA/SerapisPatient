@@ -161,9 +161,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public MedicalBuildingViewModel(SpecilizationModel _specilizationData)
         {
-
-
-
             MedicalBuildingViewInit(_specilizationData);
         }
 
@@ -249,53 +246,35 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(cache as PracticeDto), true);
 
         }
-public void HandleNavigation(PracticeDto _MedicalBuildingData)
-{
-
-    App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
-
-}
-
-public async void LoadRealData()
-{
-    await GetAllPracticesAsync();
-}
-public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
-{
-    try
-    {
-        IsBusy = true;
-        //PracticesList = new ObservableCollection<PracticeDto>();
-
-        //var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
-        PracticesList = await _apiServices.GetAllMedicalBuildingsAsync();
-
-        /*foreach (var _practice in Practices)
+        public void HandleNavigation(PracticeDto _MedicalBuildingData)
         {
-            PracticeDto s = new PracticeDto
+
+            App.Current.MainPage.Navigation.PushAsync(new SelectBooking(_MedicalBuildingData), true);
+
+        }
+
+        public async void LoadRealData()
+        {
+            await GetAllPracticesAsync();
+        }
+        public async Task<ObservableCollection<PracticeDto>> GetAllPracticesAsync()
+        {
+            try
             {
-                Id = _practice.Id,
-                PracticePicture = "MedicrossPinetown.jpg",
-                PracticeName = _practice.PracticeName,
-                NumOfPatientsInPractice = _practice.NumOfPatientsInPractice,
-                DistanceFromPractice = _practice.DistanceFromPractice,
-                OperatingTime = "08h00-17h00"
-            };
-            PracticesList.Add(s);
-        }*/
+                    IsBusy = true;
+                    //PracticesList = new ObservableCollection<PracticeDto>();
 
-    }
-    catch (Exception ex)
-    {
+                    //var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
+                    PracticesList = await _apiServices.GetAllMedicalBuildingsAsync();
 
-    }
-    IsBusy = false;
-    return PracticesList;
-}
+            }
+            catch (Exception ex)
+            {
 
-public void ItemSelected_ExecuteCommand(object state)
-{
-    SelectedItem = state as MedicalBuildingModel;
-}
+            }
+            IsBusy = false;
+            return PracticesList;
+        }
+
     }
 }

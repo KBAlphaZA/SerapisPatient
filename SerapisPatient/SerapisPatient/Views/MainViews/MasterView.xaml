@@ -19,11 +19,6 @@
                 <pages1:MainView  Title="Serapis Patient" />
             </x:Arguments>
         </NavigationPage>
-        <!--<custom:CustomNavigationView>
-            <x:Arguments>
-                <pages1:MainView  Title="Serapis Patient" />
-            </x:Arguments>
-        </custom:CustomNavigationView>-->
     </MasterDetailPage.Detail>
 
 </MasterDetailPage>

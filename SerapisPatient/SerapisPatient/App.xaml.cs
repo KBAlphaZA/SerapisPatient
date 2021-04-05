@@ -59,7 +59,7 @@ namespace SerapisPatient
                 //if (!CheckLogin == true)
                 if (dbuser == null)
                 {
-                    MainPage = new NavigationPage(new LoginView());
+                        MainPage = new NavigationPage(new LoginView());
 
                 }
                 else

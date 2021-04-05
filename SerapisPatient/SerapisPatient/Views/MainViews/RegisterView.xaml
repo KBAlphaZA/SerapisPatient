@@ -84,7 +84,7 @@
                 <Entry 
                     HorizontalOptions="Fill" 
                     VerticalOptions="End" 
-                    Placeholder="USERNAME"
+                    Placeholder="   USERNAME"
                     Style="{StaticResource LoginEntryLabels}"
                     Text="{Binding Email, Mode=TwoWay}"
                     />

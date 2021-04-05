@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SerapisPatient.Models.CheckIn;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
@@ -13,11 +14,11 @@ namespace SerapisPatient.Controls.CheckIn
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             // have a look at the item and return the right type of cell
-            //if (((TimeInfo)item).TimeInfoType == TimeInfoType.Person)
-            //    return PersonTemplate;
-            //else
-            //    return YouTemplate;
-            return null;
+           // if (((TimeInfo)item).TimeInfoType == TimeInfoType.Person)
+                return PersonTemplate;
+            /*else
+                return YouTemplate;
+            return YouTemplate;*/
 
         }
     }

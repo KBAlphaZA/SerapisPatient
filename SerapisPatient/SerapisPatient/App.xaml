@@ -21,13 +21,13 @@
             <Color x:Key="SeconderyColour">#607d8b</Color>
             
             <!--The light Green-->
-            <Color x:Key="PrimaryColour">#92da69</Color>
+            <Color x:Key="PrimaryColour">#355159</Color>
 
             <!--The s-dark of 607d86-->
             <Color x:Key="ButtonColour">#355159</Color>
 
             <!--The light green palete-->
-            <Color x:Key="StatusBar">#60a83a</Color>
+            <Color x:Key="StatusBar">#355159</Color>
             
             <!--  Customized font  -->
             <OnPlatform x:Key="RegularFontFamily" x:TypeArguments="x:String">
@@ -67,12 +67,12 @@
             
             
             <!--MY CHANGES BONGA-->
-            <Color x:Key="DropDownColor2">#36476a</Color>
-        <Color x:Key="DropDownColor1">#41557e</Color>
-        <Color x:Key="NavigationBarColor">#f5775b</Color>
-        <Color x:Key="PageBackgroundColor">#3b4d72</Color>
-        <Color x:Key="CellBackgroundColor">#405175</Color>
-        <Color x:Key="MainTextColor">#FFFFFF</Color>
+            <Color x:Key="DropDownColor2">#355159</Color>
+            <Color x:Key="DropDownColor1">#355159</Color>
+            <Color x:Key="NavigationBarColor">#355159</Color>
+            <Color x:Key="PageBackgroundColor">#355159</Color>
+            <Color x:Key="CellBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="MainTextColor">Black</Color>
         <Color x:Key="YouTextColor">#B9B7C3</Color>
         <Color x:Key="LocationTextColor">#818BA1</Color>
 
@@ -88,14 +88,14 @@
 
         <Style x:Key="YouNameLabelStyle" TargetType="Label">
             
-            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="TextColor" Value="{StaticResource YouTextColor}" />
         </Style>
 
         <Style x:Key="TimeLabelStyle" TargetType="Label">
             
-            <Setter Property="FontSize" Value="40" />
-            <Setter Property="TextColor" Value="{StaticResource MainTextColor}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextColor" Value="Black" />
         </Style>
 
         <Style x:Key="YouTimeLabelStyle" TargetType="Label">
@@ -106,20 +106,20 @@
 
         <Style x:Key="LocationLabelStyle" TargetType="Label">
             
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="TextColor" Value="{StaticResource LocationTextColor}" />
         </Style>
 
         <Style x:Key="AmPmLabelStyle" TargetType="Label">
             
             <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextColor" Value="{StaticResource MainTextColor}" />
+                <Setter Property="TextColor" Value="Black   " />
         </Style>
 
         <Style x:Key="YouAmPmLabelStyle" TargetType="Label">
             
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="TextColor" Value="{StaticResource YouTextColor}" />
+                <Setter Property="TextColor" Value="Black" />
         </Style>
 
         <Style x:Key="PopupLabelStyle" TargetType="Label">

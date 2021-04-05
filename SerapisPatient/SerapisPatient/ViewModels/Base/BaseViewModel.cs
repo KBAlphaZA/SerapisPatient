@@ -1,8 +1,11 @@
 ﻿
+using MongoDB.Bson;
 using Realms;
+using SerapisPatient.Models.Patient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -17,8 +20,10 @@ namespace SerapisPatient.ViewModels.Base
     {
         private const string EXECUTECOMMAND_SUFFIX = "_ExecuteCommand";
         private const string CANEXECUTECOMMAND_SUFFIX = "_CanExecuteCommand";
-        public Realm _realm;
 
+
+        public Realm _realm;
+            
         public BaseViewModel()
         {
             _realm = Realm.GetInstance();
@@ -26,6 +31,16 @@ namespace SerapisPatient.ViewModels.Base
                  this.GetType().GetTypeInfo().DeclaredMethods
                  .Where(dm => dm.Name.EndsWith(EXECUTECOMMAND_SUFFIX))
                  .ToDictionary(k => GetCommandName(k), v => GetCommand(v));
+
+            
+            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            if(dbuser !=null)
+            {
+                Debug.WriteLine("DB USER =>" + dbuser.ToJson());
+                FirstName = "Hi " + dbuser.PatientFirstName;
+                ProfilePicture = new Uri(dbuser.PatientProfilePicture);
+            }
+           
         }
 
         #region Propertychanged events
@@ -132,6 +147,21 @@ namespace SerapisPatient.ViewModels.Base
 
         #endregion
 
+        private Uri profilePicture;
+
+        public Uri ProfilePicture
+        {
+            get { return profilePicture; }
+            set { profilePicture = value; }
+        }
+
+        private string firstname;
+        public string FirstName
+        {
+            get { return firstname; }
+            set { firstname = value; }
+        }
+
         private bool isBusy;
         public bool IsBusy
         {
@@ -163,6 +193,8 @@ namespace SerapisPatient.ViewModels.Base
         }
 
         private string title;
+        
+
         public string Title
         {
             get

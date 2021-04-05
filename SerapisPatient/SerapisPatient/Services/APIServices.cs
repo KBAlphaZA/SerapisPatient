@@ -47,7 +47,7 @@ namespace SerapisPatient.Services
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}/Bookings?id={medicalBuildingModel.Id}";
+                string api = $"{APIURL}/Booking?id={medicalBuildingModel.Id}";
                 //string api = $"{APIURL}/Booking?id=5bc8e04a1c9d44000088ad93";
                 Appointment appointment = new Appointment();
                 appointment.BookingId = ObjectId.GenerateNewId().ToString();
@@ -68,6 +68,7 @@ namespace SerapisPatient.Services
                 var response = await _httpClient.PutAsync(api, content);
                 Debug.WriteLine(" Booking Creation Response =>[" + response + "]");
 
+                Debug.WriteLine("Returned Status Code => "+"[" + response.StatusCode + "]");
                 return response.IsSuccessStatusCode;
             }
 
@@ -89,7 +90,6 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<List<Doctor>>(content);
-                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
                 Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
                 return result;
                 

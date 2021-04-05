@@ -30,7 +30,7 @@
         <Grid
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            BackgroundColor="{StaticResource PageBackgroundColor}">
+            >
 
             <ScrollView>
                 <StackLayout
@@ -91,7 +91,7 @@
                         <Label
                             HorizontalOptions="Center"
                             Style="{StaticResource PopupLabelStyle}"
-                            Text="Delete"
+                            Text="Check Into Appointment"
                             VerticalOptions="Center" />
                     </StackLayout>
                 </Grid>
@@ -102,10 +102,12 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     AnchorY="0"
-                    BackgroundColor="{StaticResource DropDownColor2}"
+                    BackgroundColor="{StaticResource ButtonColour}"
                     ColumnSpacing="10"
                     HeightRequest="60">
-
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CloseGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
                     <StackLayout
                         HorizontalOptions="Center"
                         Orientation="Horizontal"
@@ -118,9 +120,10 @@
                             Grid.Column="1"
                             HorizontalOptions="Start"
                             Style="{StaticResource PopupLabelStyle}"
-                            Text="Edit"
+                            Text="Close"
                             VerticalOptions="Center" />
                     </StackLayout>
+                    
                 </Grid>
 
 
@@ -155,7 +158,7 @@
                 <Grid
                     x:Name="ConfirmMessage"
                     Grid.ColumnSpan="2"
-                    BackgroundColor="{StaticResource CellBackgroundColor}"
+                    BackgroundColor="{StaticResource PrimaryColour}"
                     HeightRequest="80"
                     IsVisible="true">
                     <Label

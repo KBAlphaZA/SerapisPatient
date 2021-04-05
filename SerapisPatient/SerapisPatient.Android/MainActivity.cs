@@ -15,6 +15,7 @@ using CarouselView.FormsPlugin.Droid;
 
 namespace SerapisPatient.Droid
 {
+
     [Activity(Label = "SerapisPatient", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
