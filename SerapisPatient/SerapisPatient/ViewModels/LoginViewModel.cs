@@ -174,7 +174,7 @@ namespace SerapisPatient.ViewModels
             //await HandleAuth();
 
         }
-
+            
 
         // GOOGLE
         public async void LoginAsync()
@@ -239,13 +239,7 @@ namespace SerapisPatient.ViewModels
         {
             _realm.Write(() =>
             {
-                _realm.Add(new Patient
-                {
-                    PatientFirstName = _patient.PatientFirstName,
-                    PatientLastName = _patient.PatientLastName,
-                    PatientProfilePicture = _patient.PatientProfilePicture,
-                    IsGoogle = true
-                });
+                    _realm.Add<Patient>(_patient);
             });
         }
         private void DoGoogleDBTransaction(GoogleUser _patient)
@@ -254,12 +248,11 @@ namespace SerapisPatient.ViewModels
             {
                 _realm.Add(new Patient
                 {
-                    id = _patient.Id,
                     PatientFirstName = _patient.Name,
                     PatientLastName = _patient.FamilyName,
                     PatientProfilePicture = _patient.Picture.ToString(),
                     IsGoogle = true
-                });
+                }); ;
             });
         }
 
@@ -273,11 +266,12 @@ namespace SerapisPatient.ViewModels
             IsBusy = true;
             try
             {
+                    _patient = await authenticationService.GoogleLogin(googleUser, "TOKEN");
+                    _patient.SocialID = googleUser.Id;
+                    _patient.PatientProfilePicture = googleUser.Picture.ToString();
 
-                _patient = await authenticationService.GoogleLogin(googleUser, "TOKEN");
-                //DoDBTransaction(_patient);
-                googleUser.Id = _patient.id;
-                DoGoogleDBTransaction(googleUser);
+                //DoGoogleDBTransaction(googleUser);
+                DoDBTransaction(_patient);
             }
             catch(Exception ex)
             {
@@ -299,22 +293,10 @@ namespace SerapisPatient.ViewModels
             {
                 
                 //object user = await authenticationService.LoginAsync(Email, Password);
-                Patient user = null;
-                if(user != null)
-                {
+
                    
                     App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
                     await App.Current.MainPage.Navigation.PopAsync();
-                }
-                //dBService.SaveDocument(user);
-                /*_realm.Write(() =>
-                {
-                    _realm.Add(new Patient
-                    {
-                        id = ObjectId.GenerateNewId(),
-                        PatientFirstName = "Bonga"
-                    });
-                });*/
 
             }
             catch (Exception ex)

@@ -18,6 +18,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveUserDetailsCommand }"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
             <ListView HasUnevenRows="True" 
                       VerticalOptions="Fill" 

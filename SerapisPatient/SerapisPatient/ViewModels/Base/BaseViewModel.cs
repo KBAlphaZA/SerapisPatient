@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using Realms;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,33 +22,36 @@ namespace SerapisPatient.ViewModels.Base
         private const string EXECUTECOMMAND_SUFFIX = "_ExecuteCommand";
         private const string CANEXECUTECOMMAND_SUFFIX = "_CanExecuteCommand";
 
-
         public Realm _realm;
-            
+        private int counter;
         public BaseViewModel()
         {
+            Debug.WriteLine("COUNTER IS :"+counter);
             _realm = Realm.GetInstance();
             this.commands =
                  this.GetType().GetTypeInfo().DeclaredMethods
                  .Where(dm => dm.Name.EndsWith(EXECUTECOMMAND_SUFFIX))
                  .ToDictionary(k => GetCommandName(k), v => GetCommand(v));
-
-            
-            var dbuser = _realm.All<Patient>().FirstOrDefault();
-            if(dbuser !=null)
-            {
-                Debug.WriteLine("DB USER =>" + dbuser.ToJson());
-                FirstName = "Hi " + dbuser.PatientFirstName;
-                ProfilePicture = new Uri(dbuser.PatientProfilePicture);
-            }
-           
+        
+                m();
         }
 
         #region Propertychanged events
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
+        private void m()
+        {
+            
+            var LocalUser = _realm.All<Patient>().FirstOrDefault();
+            if (LocalUser != null)
+            {
+                Debug.WriteLine("DB USER =>" + LocalUser.ToJson());
+                FirstName = "Hi " + LocalUser.PatientFirstName; 
+                ProfilePicture = new Uri(LocalUser.PatientProfilePicture);
+            }
+            counter++;
+        }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

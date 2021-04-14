@@ -14,22 +14,32 @@
                 Margin="20"
                 HeightRequest="30"
                 HorizontalOptions="Center"
-                Source="sun.png"
+                Source="no.png"
                 VerticalOptions="Center"
                 WidthRequest="30" />
 
-
             <StackLayout Grid.Column="1" VerticalOptions="Center">
-                <Label Style="{StaticResource NameLabelStyle}" Text="{Binding FirstName}" />
-                <StackLayout Orientation="Horizontal" Spacing="5">
-                    <Image Source="deliverytruck.png" WidthRequest="40" />
-                    <Label Style="{StaticResource LocationLabelStyle}" Text="{Binding Location}" />
-                </StackLayout>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="8*" />
+                    </Grid.ColumnDefinitions>
+
+                    
+                    <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource LocationLabelStyle}" Text="{Binding Location}" />
+                    <Image Grid.Column="0"  Grid.Row="0" Grid.RowSpan="2" Source="deliverytruck.png" WidthRequest="40" />
+                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource NameLabelStyle}" Text="{Binding UserName}" />
+                </Grid>
             </StackLayout>
 
             <StackLayout
                 Grid.Column="2"
-                Margin="0,0,20,0"
+                Margin="0,0,10,0"
                 Orientation="Horizontal">
                 <Label
                     Style="{StaticResource TimeLabelStyle}"
@@ -46,7 +56,7 @@
             <BoxView
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                BackgroundColor="{StaticResource PageBackgroundColor}"
+                BackgroundColor="{StaticResource CellBackgroundColor}"
                 HeightRequest="1"
                 VerticalOptions="End" />
 

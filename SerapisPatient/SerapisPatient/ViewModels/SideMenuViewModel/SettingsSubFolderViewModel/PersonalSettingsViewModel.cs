@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using SerapisPatient.Helpers;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Utils;
@@ -7,25 +8,21 @@ using SerapisPatient.Views.SideMenuPages.SettingsSubFolder;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 {
-    public class PersonalSettingsViewModel:BaseViewModel
+    public class PersonalSettingsViewModel : BaseViewModel
     {
         public ObservableCollection<object> NextOfKins { get; set; }
 
-        //NextOfKin kinForm = new NextOfKin()
-        //{
-        //     ContactNumber="",
-        //     FullName="",
-        //     RelationshipToPatient=""
-        //};
 
         public PersonalSettingsViewModel()
         {
-
+            Init();
             GenerateDummyList();
 
             AddNextOfKin = new Command(AddToList);
@@ -39,6 +36,7 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
                 {
                     return true;
                 });
+            
         }
 
         #region Properties
@@ -173,6 +171,13 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             }
         }
 
+        private string genderPlaceholder;
+        public string GenderPlaceholder
+        {
+            get { return genderPlaceholder; }
+            set { genderPlaceholder = value; }
+        }
+
         public string FullName 
         {
             get 
@@ -257,8 +262,19 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
         #endregion
 
         #region Methods
-   
-        private void GenerateDummyList()
+        private void Init()
+        {
+
+            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            //FullName = dbuser.PatientFirstName;
+            FirstName = dbuser.PatientFirstName;
+            Surname = dbuser.PatientLastName;
+            EmailPlaceholder = dbuser.PatientContactDetails.Email;
+            GenderPlaceholder = dbuser.Gender.ToString();
+
+
+        }
+            private void GenerateDummyList()
         {
             //NextOfKins = new ObservableCollection<object>()
             //{

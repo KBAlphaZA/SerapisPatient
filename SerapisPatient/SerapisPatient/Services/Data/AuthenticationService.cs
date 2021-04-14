@@ -10,6 +10,7 @@ using Plugin.GoogleClient.Shared;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Helpers;
 using SerapisPatient.Utils;
+using System.ComponentModel;
 
 namespace SerapisPatient.Services.Data
 {
@@ -29,12 +30,19 @@ namespace SerapisPatient.Services.Data
             using (HttpClient _httpClient = new HttpClient())
             {
                 string FirstName = util.ExtractFirstNameFromFullName(googleUser.Name);
-                APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+ FirstName + "lastname="+googleUser.FamilyName;
+
+                APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+ FirstName+"&"+"lastname="+googleUser.FamilyName;
 
                 var content = await _httpClient.GetStringAsync(APIURL);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<Patient>(content);
-                Debug.WriteLine("RESPONSE =>" + result);
+                foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(result))
+                {
+                    string name = descriptor.Name;
+                    object value = descriptor.GetValue(result);
+                    Debug.WriteLine("RESPONSE =>" + "{0}={1}", name, value);
+                }
+                
                 return result;
             }
             

@@ -261,18 +261,19 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
             try
             {
-                    IsBusy = true;
-                    //PracticesList = new ObservableCollection<PracticeDto>();
-
-                    //var Practices = await _apiServices.GetAllMedicalBuildingsAsync();
-                    PracticesList = await _apiServices.GetAllMedicalBuildingsAsync();
+                ShowUI = false;
+                IsBusy = true;
+                //PracticesList = new ObservableCollection<PracticeDto>();
+    
+                PracticesList = await _apiServices.GetAllMedicalBuildingsAsync();
 
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
             IsBusy = false;
+            ShowUI = true;
             return PracticesList;
         }
 

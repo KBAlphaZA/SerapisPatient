@@ -20,10 +20,17 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
         public Realm _realm;
 
         private string firstname;
+        
         public string FirstName
         {
             get { return firstname; }
             set { firstname = value; }
+        }
+        private int myage;
+        public int MyAge
+        {
+            get { return myage; }
+            set { myage = value; }
         }
         public ProfilePageViewModel()
         {
@@ -37,6 +44,7 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
             var dbuser = _realm.All<Patient>().FirstOrDefault();
             Debug.WriteLine("DB USER =>" + dbuser.ToJson());
             FirstName = dbuser.PatientFirstName;
+            MyAge = dbuser.PatientAge;
             GenerateList();
         }
 

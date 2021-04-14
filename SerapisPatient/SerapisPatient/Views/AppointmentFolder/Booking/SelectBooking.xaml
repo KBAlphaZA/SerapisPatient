@@ -34,7 +34,7 @@
         
         <!--Row 1-->
         <Label Text="Date Selection:" FontSize="Large" TextColor="Black" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
-        <Label Text="{Binding DateSelected,StringFormat='{0} th'}" Grid.Row="1" Grid.Column="2"  FontSize="Large" TextColor="Black"/>
+        <Label Text="{Binding DateSelected}" Grid.Row="1" Grid.Column="2"  FontSize="Large" TextColor="Black"/>
         
         <!--Row 2-->
         <!-- Date picker based on the month selected-->

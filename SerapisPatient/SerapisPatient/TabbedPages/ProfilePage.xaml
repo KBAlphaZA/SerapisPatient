@@ -57,7 +57,7 @@
         <Image Grid.Row="3" Grid.RowSpan="2"  Grid.Column="0" VerticalOptions="Center"
                HeightRequest="45" Source="MyAge.png" />
 
-        <Label Grid.Row="3" Grid.Column="1" Text="25" FontAttributes="Bold" 
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding MyAge}" FontAttributes="Bold" 
                FontSize="Small" VerticalTextAlignment="End" TextColor="Black"/>
         <Label Grid.Row="4" Grid.Column="1"   Text="Age" FontSize="Small" 
                VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="Gray"/>

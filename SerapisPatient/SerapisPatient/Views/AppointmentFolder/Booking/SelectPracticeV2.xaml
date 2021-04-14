@@ -29,9 +29,9 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="7.5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="7.5*"/><!--Actual Card-->
+            <RowDefinition Height="1*"/> <!--Button-->
+            <RowDefinition Height="0.5*"/> <!--Space Under-->
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
@@ -41,8 +41,8 @@
                             VerticalOptions="Fill"  
                             Source="{Binding Icon}"
                             />
-                    <Label  
-                            Text="{Binding Title}" 
+                    <Label 
+                            Text="{Binding Title}"
                             TextColor="Black" 
                             FontSize="30" 
                             FontAttributes="Bold" 
@@ -68,33 +68,35 @@
                         
                         <Frame BorderColor="LightGray" CornerRadius="10" HasShadow="True">
                             <Grid RowSpacing="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="4*"/>
+                                <Grid.RowDefinitions> <!--INSIDE CARD -->
+                                    <RowDefinition Height="4*"/> <!--Image of Practice-->
                                     <RowDefinition Height="6*"/>
                                 </Grid.RowDefinitions>
 
-                                <Image Grid.Row="0" 
-                       Source="{Binding PracticePicture}"
-                       Aspect="AspectFill"
-                       />
+                                <Image Grid.Row="0"
+                                       Source="hosiptal.png"
+                                       Aspect="AspectFill" />
+                                    <!--<Source="{Binding PracticePicture}"-->
+                                    
+                                     
 
                                 <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
                                     <Grid RowSpacing="0">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="1*"/>
-                                            <RowDefinition Height="9*"/>
+                                            <RowDefinition Height="2*"/> <!--Practice Name -->
+                                            <RowDefinition Height="8*"/>
                                         </Grid.RowDefinitions>
 
                                         <Grid Grid.Row="0">
-                                            <Label Text="{Binding PracticeName}"
-                               TextColor="Black" 
-                               FontAttributes="Bold"
-                               FontSize="25"
-                               HorizontalTextAlignment="Center"
-                               HorizontalOptions="Center"
-                               VerticalTextAlignment="Center"
-                               VerticalOptions="Center"
-                               />
+                                            <Label Text="{Binding PracticeName}" 
+                                                 TextColor="Black" Margin="0,0,0,10"
+                                                 FontAttributes="Bold"
+                                                 FontSize="25"
+                                                 HorizontalTextAlignment="Center"
+                                                 HorizontalOptions="Center"
+                                                 VerticalTextAlignment="Center"
+                                                 VerticalOptions="Center"/>
+                                                                            
                                         </Grid>
 
                                         <Grid Grid.Row="1">
@@ -128,17 +130,13 @@
                                                                     <ColumnDefinition Width="8*"/>
                                                                 </Grid.ColumnDefinitions>
 
-                                                                <Image Grid.Column="0" 
-                                                   Aspect="AspectFit" 
-                                                   Source="route.png"
-                                                   Style="{StaticResource QuadIcons}"
-                                                   />
+                                                                <Image Grid.Column="0" Aspect="AspectFit" 
+                                                                        Source="route.png" Style="{StaticResource QuadIcons}"
+                                                                        />
 
-                                                                <Label Grid.Column="1" 
-                                                   Text="{Binding DistanceFromPractice ,StringFormat=' {0} Km'}" 
-                                                   Style="{StaticResource QuadLabels}"
-                                                   HorizontalOptions="Center"
-                                                   />
+                                                                <Label Grid.Column="1" Text="{Binding DistanceFromPractice ,StringFormat=' {0} Km'}" 
+                                                                    Style="{StaticResource QuadLabels}" HorizontalOptions="Center"
+                                                                    />
 
                                                             </Grid>
                                                         </Grid>
@@ -151,18 +149,13 @@
                                                                     <ColumnDefinition Width="8*"/>
                                                                 </Grid.ColumnDefinitions>
 
-                                                                <Image Grid.Column="0" 
-                                                   Aspect="AspectFit" 
-                                                   Source="OperatingIcon.png"
-                                                   Style="{StaticResource QuadIcons}"
-                                                   
-                                                   />
+                                                                <Image Grid.Column="0" Aspect="AspectFit" 
+                                                                        Source="OperatingIcon.png" Style="{StaticResource QuadIcons}"
+                                                                />
 
-                                                                <Label Grid.Column="1" 
-                                                   Text="{Binding OperatingTime}" 
-                                                   Style="{StaticResource QuadLabels}"
-                                                   />
-
+                                                                <Label Grid.Column="1" Text="{Binding OperatingTime}" 
+                                                                        Style="{StaticResource QuadLabels}"
+                                                                        />
                                                             </Grid>
                                                         </Grid>
 
@@ -174,16 +167,11 @@
                                                                     <ColumnDefinition Width="6*"/>
                                                                 </Grid.ColumnDefinitions>
 
-                                                                <Image Grid.Column="0" 
-                                                   Aspect="AspectFit" 
-                                                   Source="QueIcon.png"
-                                                   Style="{StaticResource QuadIcons}"
-                                                   />
+                                                                <Image Grid.Column="0" Aspect="AspectFit" 
+                                                                       Source="QueIcon.png" Style="{StaticResource QuadIcons}" />
 
-                                                                <Label Grid.Column="1" 
-                                                   Text="{Binding NumOfPatientsInPractice}"
-                                                   Style="{StaticResource QuadLabels}"
-                                                   />
+                                                                <Label Grid.Column="1" Text="{Binding NumOfPatientsInPractice}"
+                                                                        Style="{StaticResource QuadLabels}" />
 
                                                             </Grid>
                                                         </Grid>
@@ -196,17 +184,11 @@
                                                                     <ColumnDefinition Width="8*"/>
                                                                 </Grid.ColumnDefinitions>
 
-                                                                <Image Grid.Column="0" 
-                                                   Aspect="AspectFit" 
-                                                   Source="ContactUsIcon.png"
-                                                   Style="{StaticResource QuadIcons}"
-                                                   />
+                                                                <Image Grid.Column="0"  Aspect="AspectFit" 
+                                                                       Source="ContactUsIcon.png" Style="{StaticResource QuadIcons}" />
 
-                                                                <Label Grid.Column="1" 
-                                                   Text="{Binding ContactNumber}" 
-                                                   Style="{StaticResource QuadLabels}"
-                                                   HorizontalTextAlignment="Start"
-                                                   />
+                                                                <Label Grid.Column="1" Text="{Binding ContactNumber}" 
+                                                                       Style="{StaticResource QuadLabels}" HorizontalTextAlignment="Start" />
 
                                                             </Grid>
                                                         </Grid>
@@ -244,7 +226,7 @@
             <Button BackgroundColor="{StaticResource ButtonColour}" HeightRequest="20" 
                     TextColor="White" CornerRadius="15" 
                     Text="Continue"  Command="{Binding SelectedPractice}"
-                    Margin="50,10,50,0"/>
+                    Margin="50,10,50,0" IsVisible="{Binding ShowUI}"/>
         </Grid>
         
     </Grid>

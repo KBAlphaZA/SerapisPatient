@@ -74,7 +74,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     AnchorY="0"
-                    BackgroundColor="{StaticResource DropDownColor1}"
+                    BackgroundColor="White"
                     HeightRequest="80">
 
                     <Grid.GestureRecognizers>
@@ -102,7 +102,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     AnchorY="0"
-                    BackgroundColor="{StaticResource ButtonColour}"
+                    BackgroundColor="White"
                     ColumnSpacing="10"
                     HeightRequest="60">
                     <Grid.GestureRecognizers>
@@ -134,7 +134,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     AnchorY="0"
-                    BackgroundColor="{StaticResource DropDownColor2}"
+                    BackgroundColor="White"
                     HeightRequest="80">
                     <Label
                         HorizontalOptions="Center"
@@ -158,7 +158,7 @@
                 <Grid
                     x:Name="ConfirmMessage"
                     Grid.ColumnSpan="2"
-                    BackgroundColor="{StaticResource PrimaryColour}"
+                    BackgroundColor="White"
                     HeightRequest="80"
                     IsVisible="true">
                     <Label
@@ -173,7 +173,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     AnchorY="0"
-                    BackgroundColor="{StaticResource DropDownColor1}"
+                    BackgroundColor="White"
                     HeightRequest="60"
                     IsVisible="True">
                     <StackLayout
@@ -188,7 +188,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource PopupLabelStyle}"
                             Text="Yes"
-                            TextColor="White"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                     </StackLayout>
                     <Grid.GestureRecognizers>
@@ -202,7 +202,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     AnchorY="0"
-                    BackgroundColor="{StaticResource DropDownColor2}"
+                    BackgroundColor="White"
                     HeightRequest="60">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="NoButtonGestureRecognizer_Tapped" />
@@ -219,7 +219,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource PopupLabelStyle}"
                             Text="No"
-                            TextColor="White"
+                            TextColor="Black"
                             VerticalOptions="Center" />
                     </StackLayout>
                 </Grid>

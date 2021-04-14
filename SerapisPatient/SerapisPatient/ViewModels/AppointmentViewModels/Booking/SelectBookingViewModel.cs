@@ -149,6 +149,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         //This list is for the picker
         public List<Month> GetMonths()
         {
+            int monthnumber = DateTime.Now.Month;
             var months = new List<Month>
             {
                 new Month(){key=1, Value = Models.Months.January },
@@ -164,53 +165,30 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                           new Month(){key=11, Value = Models.Months.November },
                            new Month(){key=12, Value = Models.Months.December },
             };
-            return months;
+
+            //Lets cap the date when they can book to 3 months in advance
+            var updatedlist = months.GetRange(monthnumber, 3);
+
+            return updatedlist;
 
         }
 
         //mockdata for the number of days in the current month
         public void GenerateDaysOfTheMonth()
         {
-            Days = new ObservableCollection<SelectedMonths>
+            Days = new ObservableCollection<SelectedMonths>();
+            int maxdays = 30;
+            for(int day = (int)DateTime.Now.Day; day< maxdays; day++)
             {
-                new SelectedMonths{MonthValue=1},
-                new SelectedMonths{MonthValue=2},
-                new SelectedMonths{MonthValue=3},
-                new SelectedMonths{MonthValue=4},
-                new SelectedMonths{MonthValue=5},
-                new SelectedMonths{MonthValue=6},
-                new SelectedMonths{MonthValue=7},
-                new SelectedMonths{MonthValue=8},
-                new SelectedMonths{MonthValue=9},
-                new SelectedMonths{MonthValue=10},
-                new SelectedMonths{MonthValue=11},
-                new SelectedMonths{MonthValue=12},
-                new SelectedMonths{MonthValue=13},
-                new SelectedMonths{MonthValue=14},
-                new SelectedMonths{MonthValue=15},
-                new SelectedMonths{MonthValue=16},
-                new SelectedMonths{MonthValue=17},
-                new SelectedMonths{MonthValue=18},
-                new SelectedMonths{MonthValue=19},
-                new SelectedMonths{MonthValue=20},
-                new SelectedMonths{MonthValue=21},
-                new SelectedMonths{MonthValue=22},
-                new SelectedMonths{MonthValue=23},
-                new SelectedMonths{MonthValue=24},
-                new SelectedMonths{MonthValue=25},
-                new SelectedMonths{MonthValue=26},
-                new SelectedMonths{MonthValue=27},
-                new SelectedMonths{MonthValue=28},
-                new SelectedMonths{MonthValue=29},
-                new SelectedMonths{MonthValue=30},
+                Days.Add(new SelectedMonths { MonthValue = day});
+            }
 
-
-            };
         }
 
         //yhis is the same as having the list
         public void GetMonthDict()
         {
+
             Monthkeys.Add(1, Models.Months.January);
             Monthkeys.Add(2, Models.Months.February);
             Monthkeys.Add(3, Models.Months.March);
@@ -246,7 +224,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         //API Call for DoctorView
         public async Task<List<Doctor>> GetDoctors()
         {
-            //The follwing will be used in production code
+           
             DoctorAvaliable = await _apiServices.GetDoctorsAsync();
 
             return DoctorAvaliable;
@@ -268,8 +246,35 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                 {
                     //Date Value eg.7th
                     //should add the month value also to one string
+
                     DateSelected = SelectedDay.MonthValue.ToString();
-                    //should add the month value also to one string
+                    if(DateSelected == "1" || DateSelected == "21" || DateSelected == "31")
+                    {
+                        DateSelected += "st"; 
+                    }
+                    else if(DateSelected == "2" || DateSelected == "22")
+                    {
+                        DateSelected += "nd";
+                    }
+                    else if(DateSelected == "3" || DateSelected == "23")
+                    {
+                        DateSelected += "rd";
+                    }
+                    else
+                    {
+                        DateSelected += "th";
+                    }
+
+                    if(MonthsSelectedIndex == null)
+                    {
+                        //THROW A POP ERRO AND INFORM USER TO SELECT A MONTH FIRST
+                    }
+                    else
+                    {
+                        MonthText = MonthsSelectedIndex.Value.ToString();
+                        FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
+
+                    }
                     MonthText = MonthsSelectedIndex.Value.ToString();
                     FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
 

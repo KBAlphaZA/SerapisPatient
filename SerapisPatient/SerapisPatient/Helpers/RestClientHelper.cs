@@ -22,9 +22,6 @@ namespace SerapisPatient.Helpers
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
                 var response = client.PostAsync(_url, content); //add your requesturi as a string
-                _httpClient.Dispose();
-
-                client.Dispose();
             }
 
 
