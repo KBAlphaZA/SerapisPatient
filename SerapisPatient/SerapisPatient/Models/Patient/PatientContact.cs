@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Realms;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SerapisPatient.Models
 {
-    public class PatientContact
+    public class PatientContact : RealmObject
     {
         public string CellphoneNumber { get; set; }
 

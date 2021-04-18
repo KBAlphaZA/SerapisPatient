@@ -18,6 +18,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -82,10 +85,14 @@ namespace SerapisPatient
 
 		protected override void OnStart ()
 		{
-        //retreive yor gpslocation
+            //retreive yor gpslocation
+            /*AppCenter.Start("android=b70fd8b0-fec0-484f-bc58-266a1f1bcc3a;" +
+                  "uwp={Your UWP App secret here};" +
+                  "ios={Your iOS App secret here}",
+                  typeof(Analytics), typeof(Crashes));  
 
-            //base.OnResume();
-		}
+            base.OnResume();*/
+        }
 
 		protected override void OnSleep ()
 		{

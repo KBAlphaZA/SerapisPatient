@@ -275,8 +275,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                         FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
 
                     }
-                    MonthText = MonthsSelectedIndex.Value.ToString();
-                    FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
 
                     //force this task on the UI thread so changes can be made on the listview
                     Device.BeginInvokeOnMainThread(async () =>

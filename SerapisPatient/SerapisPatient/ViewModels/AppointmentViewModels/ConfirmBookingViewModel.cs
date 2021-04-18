@@ -93,7 +93,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         private void ConvertTimeDate(string _FullDateAndMonth)
         {
             //converts to DateTime format for Storage purposes
-            FullDateAndMonth = DateTime.Parse(_FullDateAndMonth);
+            //FullDateAndMonth = DateTime.Parse(_FullDateAndMonth);
         }
 
         private async void ConfirmBooking() //this method can pass through an object -Bonga

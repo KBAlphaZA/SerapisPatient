@@ -1,11 +1,12 @@
 ﻿using MongoDB.Bson;
+using Realms;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SerapisPatient.Models
 {
-    public class MedicalFile
+    public class MedicalFile : RealmObject
     {
         public ObjectId Id { get; set; }
         public string File { get; set; }

@@ -39,7 +39,7 @@ namespace SerapisPatient.Droid
            
 
             //Carousel view package inint
-            CarouselViewRenderer.Init();
+            //CarouselViewRenderer.Init();
 
             //Pancakeview package(gradients)
             PancakeViewRenderer.Init();
