@@ -37,14 +37,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
         public Command NavigateToHomePageCommand { get; set; }
         public ICommand ItemSelected { get; set; }
-
-        //private ObservableCollection<MedicalBuildingModel> _practices;
-        public MedicalBuildingModel SelectedItem
-        {
-            get { return GetValue<MedicalBuildingModel>(); }
-            set { SetValue(value); }
-        }
-
         private string title;
         public string Title
         {
@@ -169,62 +161,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
 
         }
-        /* public void LoadDummyData()
-         {
-
-             InitalizeList(PatientCoordinates.Latitude, PatientCoordinates.Longitude, Convert.ToDouble(Settings.MaximumDistance));
-
-             selectedItem = new Command<MedicalBuildingModel>(args => 
-             {
-                 _MedicalBuildingData = args;
-                 HandleNavigation(_MedicalBuildingData);
-             });
-
-
-             PracticesList = new ObservableCollection<PracticeDto>()
-             {
-                new PracticeDto
-                  {
-                      DistanceFromPractice=7.8,
-                      ContactPractice = new PracticeContact
-                      {
-                          PracticeTelephoneNumber = "031 701 456 43"
-                      },
-                      //Id=ObjectId.Parse("5bc9bd861c9d4400001badf1"),
-                      NumOfPatientsInPractice=5,
-                      PracticeName="Grey's Hospital",
-                      PracticePicture="MedicrossPinetown.jpg",
-                      OperatingTime="08h00-17h00"
-                  },
-                  new PracticeDto
-                  {
-                      DistanceFromPractice=7,
-                      ContactPractice = new PracticeContact
-                      {
-                          PracticeTelephoneNumber = "031 701 456 43"
-                      },
-                      //Id=ObjectId.Parse("5bc9bde81c9d4400001badf2"),
-                      NumOfPatientsInPractice=10,
-                      PracticeName="Crompton Hospital",
-                      PracticePicture="MedicrossPinetown.jpg",
-                      OperatingTime="08h00-17h00"
-                  },
-                  new PracticeDto
-                  {
-                      DistanceFromPractice=6,
-
-                      ContactPractice = new PracticeContact
-                      {
-                          PracticeTelephoneNumber = "031 701 456 43"
-                      },
-                      //Id=ObjectId.Parse("5bc9bd741c9d4400001badf0"),
-                      NumOfPatientsInPractice=10,
-                      PracticeName="Groote Schuur Hospital",
-                      PracticePicture="MedicrossPinetown.jpg",
-                      OperatingTime="08h00-17h00"
-                  }
-             };
-         }*/
+        
         public void HandleNavigationv2()
         {
 

@@ -7,6 +7,7 @@ using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.PopUpMessages;
 using SerapisPatient.Services;
+using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
@@ -28,7 +29,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public Doctor enquiredDoctor;
         public string FullDateAndMonth = " ";
 
-        public PracticeDto _medicalBuildingData = new PracticeDto();
+        public PracticeDto _medicalBuildingData = new PracticeDto() {};
         public List<Month> Months { get; set; }
         public Dictionary<int, string> Monthkeys = new Dictionary<int, string>();
         public Dictionary<string, int> NumofDays = new Dictionary<string, int>();
@@ -140,86 +141,15 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             //Animation
             ShowUI = true;
             Showlistview = false;
-            Months = GetMonths();
-            GenerateDaysOfTheMonth();
+            NumofDays = CalenderUtil.GetMonthNumbers();
+
+            Months = CalenderUtil.GetMonths();
+
+            Days = CalenderUtil.GenerateDaysOfTheMonth();
 
         }
 
         #region Lists
-        //This list is for the picker
-        public List<Month> GetMonths()
-        {
-            int monthnumber = DateTime.Now.Month;
-            var months = new List<Month>
-            {
-                new Month(){key=1, Value = Models.Months.January },
-                 new Month(){key=2, Value = Models.Months.February },
-                  new Month(){key=3, Value = Models.Months.March},
-                   new Month(){key=4, Value = Models.Months.April },
-                    new Month(){key=5, Value = Models.Months.May },
-                     new Month(){key=6, Value = Models.Months.June },
-                      new Month(){key=7, Value = Models.Months.July },
-                       new Month(){key=8, Value = Models.Months.August },
-                        new Month(){key=9, Value = Models.Months.September },
-                         new Month(){key=10, Value = Models.Months.October},
-                          new Month(){key=11, Value = Models.Months.November },
-                           new Month(){key=12, Value = Models.Months.December },
-            };
-
-            //Lets cap the date when they can book to 3 months in advance
-            var updatedlist = months.GetRange(monthnumber, 3);
-
-            return updatedlist;
-
-        }
-
-        //mockdata for the number of days in the current month
-        public void GenerateDaysOfTheMonth()
-        {
-            Days = new ObservableCollection<SelectedMonths>();
-            int maxdays = 30;
-            for(int day = (int)DateTime.Now.Day; day< maxdays; day++)
-            {
-                Days.Add(new SelectedMonths { MonthValue = day});
-            }
-
-        }
-
-        //yhis is the same as having the list
-        public void GetMonthDict()
-        {
-
-            Monthkeys.Add(1, Models.Months.January);
-            Monthkeys.Add(2, Models.Months.February);
-            Monthkeys.Add(3, Models.Months.March);
-            Monthkeys.Add(4, Models.Months.April);
-            Monthkeys.Add(5, Models.Months.May);
-            Monthkeys.Add(6, Models.Months.June);
-            Monthkeys.Add(7, Models.Months.July);
-            Monthkeys.Add(8, Models.Months.August);
-            Monthkeys.Add(9, Models.Months.September);
-            Monthkeys.Add(10, Models.Months.October);
-            Monthkeys.Add(11, Models.Months.November);
-            Monthkeys.Add(12, Models.Months.December);
-
-        }
-        public void GetMonthNumbers()
-        {
-
-            //Dictionary<string, int> NumofDays
-            NumofDays.Add(Models.Months.January, DateTime.DaysInMonth(DateTime.Now.Year, 1)); //grab key value 
-            NumofDays.Add(Models.Months.February, DateTime.DaysInMonth(DateTime.Now.Year, 2));
-            NumofDays.Add(Models.Months.March, DateTime.DaysInMonth(DateTime.Now.Year, 3));
-            NumofDays.Add(Models.Months.April, DateTime.DaysInMonth(DateTime.Now.Year, 4));
-            NumofDays.Add(Models.Months.May, DateTime.DaysInMonth(DateTime.Now.Year, 5));
-            NumofDays.Add(Models.Months.June, DateTime.DaysInMonth(DateTime.Now.Year, 6));
-            NumofDays.Add(Models.Months.July, DateTime.DaysInMonth(DateTime.Now.Year, 7));
-            NumofDays.Add(Models.Months.August, DateTime.DaysInMonth(DateTime.Now.Year, 8));
-            NumofDays.Add(Models.Months.September, DateTime.DaysInMonth(DateTime.Now.Year, 9));
-            NumofDays.Add(Models.Months.October, DateTime.DaysInMonth(DateTime.Now.Year, 10));
-            NumofDays.Add(Models.Months.November, DateTime.DaysInMonth(DateTime.Now.Year, 11));
-            NumofDays.Add(Models.Months.December, DateTime.DaysInMonth(DateTime.Now.Year, 12));
-        }
 
         //API Call for DoctorView
         public async Task<List<Doctor>> GetDoctors()
@@ -246,42 +176,24 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
                 {
                     //Date Value eg.7th
                     //should add the month value also to one string
-
+                    
                     DateSelected = SelectedDay.MonthValue.ToString();
-                    if(DateSelected == "1" || DateSelected == "21" || DateSelected == "31")
-                    {
-                        DateSelected += "st"; 
-                    }
-                    else if(DateSelected == "2" || DateSelected == "22")
-                    {
-                        DateSelected += "nd";
-                    }
-                    else if(DateSelected == "3" || DateSelected == "23")
-                    {
-                        DateSelected += "rd";
-                    }
-                    else
-                    {
-                        DateSelected += "th";
-                    }
+
+                    DateSelected = StringUtil.DeterimineCorrectSuffixForDate(DateSelected);
 
                     if(MonthsSelectedIndex == null)
                     {
                         //THROW A POP ERRO AND INFORM USER TO SELECT A MONTH FIRST
+                        await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
                     }
-                    else
-                    {
-                        MonthText = MonthsSelectedIndex.Value.ToString();
-                        FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
+                    MonthText = MonthsSelectedIndex?.Value.ToString();
+                    FullDateAndMonth = DateSelected + "/" + MonthText + "/" + DateTime.Now.Year.ToString();
 
-                    }
 
                     //force this task on the UI thread so changes can be made on the listview
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-
                         await GetDoctors();
-
                     });
                 }
                 else
@@ -291,7 +203,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine("Error ", e);
             }
             finally
             {
@@ -310,28 +222,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             await GoToConfirmation(enquiredDoctor, _medicalBuildingData, FullDateAndMonth);
         });
 
-        private ObservableCollection<Doctor> GenerateDoctorList()
-        {
-            Doctors = new ObservableCollection<Doctor>
-                  {
-                    //new Doctor{ LastName = "Zulu ", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png", FirstName="Bonga", Id=" ", practices=new List<object>(){" ", " " }, Qualifications=new List<Qualification>(){ new Qualification { Abbr=" ", Degree=" ", Graduated=12, Specilization="Gp", Specilizationabbr="GP", University="UKZN"}},  Time="9:00", YearsOfExp="20"},
-                    //new Doctor{ LastName = "Duma ", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png", FirstName="Zama", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="20"},
-                    //new Doctor{ LastName = "Moody ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png", FirstName="John", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification {} },  Time="9:00", YearsOfExp="30"},
-                    //new Doctor{ LastName = "McGhee ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png", FirstName="Andiswa", Id="", practices=new List<object>(){ }, Qualifications=new List<Qualification>(){ new Qualification { } },  Time="9:00", YearsOfExp="13"}
-                    //new Doctor{ LastName = "Naidoo", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Ngwenya ", University="MBchB(UFS)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Miller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Ronaldo ", University="MBchB(Wits)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Buthelezi ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Moodley", University="MBchB(Ukzn)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Matsoso ", University="MBchB(UP)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Ngcobo ", University="MBchB(Stellenbosch)",ProfileImageUrl="userplaceholder.png"},
-                    //new Doctor{ LastName = "Muller", University="MBchB(UWC),FC Orth(SA),Mmed Ortho(Natal)",ProfileImageUrl="userplaceholder.png"},
-
-            };
-
-            return Doctors;
-        }
+       
         //Navigation
         private async Task GoToConfirmation(Doctor enquiredDoctor, PracticeDto _medicalBuildingData, string FullDateAndMonth)
         {
