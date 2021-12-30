@@ -12,11 +12,8 @@
 
   <ItemGroup>
     <Compile Remove="Models\TemplateModels\**" />
-    <Compile Remove="Services\RideShare\**" />
     <EmbeddedResource Remove="Models\TemplateModels\**" />
-    <EmbeddedResource Remove="Services\RideShare\**" />
     <None Remove="Models\TemplateModels\**" />
-    <None Remove="Services\RideShare\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,14 +33,13 @@
     <PackageReference Include="Refit" Version="4.1.0" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
-    <PackageReference Include="System.Text.Json" Version="6.0.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
     <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="2.0.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.0.21" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
@@ -234,8 +230,9 @@
     <EmbeddedResource Update="Views\SideMenuPages\SettingsSubFolder\PersonalSettings.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SymptomsChecker\SymptomsChecker.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\RideShare\" />
   </ItemGroup>
 </Project>

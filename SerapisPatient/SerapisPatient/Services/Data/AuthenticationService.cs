@@ -19,6 +19,7 @@ namespace SerapisPatient.Services.Data
         //private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
         //serapismedicalapi.azurewebsites.net
         private string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
+        StringUtil util = new StringUtil();
         /// <summary>
         /// This handles Google login and registration
         /// </summary>
@@ -28,7 +29,7 @@ namespace SerapisPatient.Services.Data
             
             using (HttpClient _httpClient = new HttpClient())
             {
-                string FirstName = StringUtil.ExtractFirstNameFromFullName(googleUser.Name);
+                string FirstName = util.ExtractFirstNameFromFullName(googleUser.Name);
 
                 APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+ FirstName+"&"+"lastname="+googleUser.FamilyName;
 
@@ -54,7 +55,7 @@ namespace SerapisPatient.Services.Data
         public async Task<Patient> FacebookLogin(FacebookProfile profile)
         {
             string[] Names = profile.FullName.Split(' ');
-            string Firstname = StringUtil.ExtractFirstNameFromFullName(profile.FullName);
+            string Firstname = util.ExtractFirstNameFromFullName(profile.FullName);
             //if user has more than one name we need to decide if we should remove his other names or load all of them
             using (HttpClient _httpClient = new HttpClient())
             {

@@ -22,6 +22,7 @@ namespace SerapisPatient.ViewModels
         public List<SpecilizationModel> ListSpecilizations { get; set; }
         public List<SpecilizationModel> TempList { get; set; }
         public NotificationRequest NavigateNextPageRequest { get; } = new NotificationRequest();
+        public SpecilizationModel sub = new SpecilizationModel();
         #endregion
 
         public SpecilizationViewModel()
@@ -127,7 +128,7 @@ namespace SerapisPatient.ViewModels
                         
                         //Usecase: string 1 = dentist & string 2 = diet 
                             if (item.Title[j] != arrayOfQueryString[i])
-                        {
+                            {
                               ListSpecilizations.Remove(item);
                             }
                          }

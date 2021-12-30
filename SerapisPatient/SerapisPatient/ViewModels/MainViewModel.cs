@@ -6,9 +6,7 @@ using SerapisPatient.Models.Patient;
 using SerapisPatient.Services;
 using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
-using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
-using SerapisPatient.Views;
 using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.ObjectModel;
@@ -78,10 +76,10 @@ namespace SerapisPatient.ViewModels
 
         public MainViewModel()
         {
-            base.getLocalUser();
+            
+            Init();
 
-            OptionsLoader.LoadOptions();
-            Notifications = OptionsLoader.Notifications;
+            GenerateNotificationList();
             NavigateToProfilePageCommand = new Command(ProfilePage);
             NavigateToAppointmentPageCommand = new Command(AppointmentPage);
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
@@ -89,7 +87,7 @@ namespace SerapisPatient.ViewModels
             NavigateToCheckInPageCommand = new Command(CheckIn);
             OpenNotificationCard = new Command(MockMethod);
             Title = _title;
-            
+
             
 
         }
@@ -103,8 +101,32 @@ namespace SerapisPatient.ViewModels
         }
 
         #region Methods
+        private void Init()
+        {
 
-        
+            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            Debug.WriteLine("DB USER =>" + dbuser.ToJson());
+            FirstName = "Hi " + dbuser.PatientFirstName;
+
+            ProfilePicture = new Uri(dbuser.PatientProfilePicture);
+            //if (String.IsNullOrEmpty(dbuser.PatientProfilePicture))
+            //    ProfilePicture = new Uri("user1"); 
+
+            //Debug.WriteLine(FirstName == null ? " " : dbuser.PatientFirstName);
+            Debug.WriteLine("FirstName USER =>" + FirstName);
+            
+        }
+
+        //ListView
+        private void GenerateNotificationList()
+        {
+            Notifications = new ObservableCollection<NotificationModel>
+                  {
+                    new NotificationModel{ Title = "FOLLOW UP", Body ="You have a follow up with Dr. Duma ", Type="FollowUp" },
+                     new NotificationModel{ Title = "MEDICATION DELIVERY", Body ="Your ordered medication should be with you in a few hours ", Type="Delivery" },
+                      new NotificationModel{ Title = "DELVIERED", Body =" View your reciept below" },
+                  };
+        }
 
         private async void ProfilePage()
         {
@@ -150,8 +172,7 @@ namespace SerapisPatient.ViewModels
         private async void DeliveryPage()
         {
            
-            //await App.Current.MainPage.Navigation.PushAsync(new DeliveryPage());
-            await App.Current.MainPage.Navigation.PushAsync(new SymptomsChecker());
+            await App.Current.MainPage.Navigation.PushAsync(new DeliveryPage());
         }private async void CheckIn()
         {
            

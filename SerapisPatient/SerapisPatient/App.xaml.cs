@@ -57,7 +57,7 @@ namespace SerapisPatient
             {
                 //Checks if there is logged in user, if true then take them straight to the main page
                 var dbuser = _realm.All<Patient>().FirstOrDefault();
-                Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
+                Debug.WriteLine("IS There a USER =>" + dbuser.ToJson());
 
                 //if (!CheckLogin == true)
                 if (dbuser == null)
