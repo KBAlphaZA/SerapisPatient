@@ -252,7 +252,7 @@ namespace SerapisPatient.ViewModels
                     PatientLastName = _patient.FamilyName,
                     PatientProfilePicture = _patient.Picture.ToString(),
                     IsGoogle = true
-                }); ;
+                });
             });
         }
 

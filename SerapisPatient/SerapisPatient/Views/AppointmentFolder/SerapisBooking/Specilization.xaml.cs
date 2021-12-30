@@ -35,7 +35,6 @@ namespace SerapisPatient.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-           // DependencyService.Get<ILoadingPageService>().ShowLoadingPage(); 
         }
     }
 }

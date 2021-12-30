@@ -71,7 +71,7 @@
                             </BoxView.Behaviors>
                         </BoxView>
 
-                        <Label Text="Make An Appointment" 
+                        <Label Text="Make Appointment(Coming Soon)" 
                                VerticalOptions="Center" 
                                HorizontalOptions="Center" 
                                FontSize="20"
@@ -95,7 +95,7 @@
                             </BoxView.Behaviors>
                         </BoxView>
 
-                        <Label Text="Order Your Medication" 
+                        <Label Text="Check Your Symptoms" 
                                VerticalOptions="Center" 
                                HorizontalOptions="Center" 
                                FontSize="20"

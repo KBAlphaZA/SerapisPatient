@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SerapisPatient.Utils
+namespace SerapisPatient.Helpers
 {
-    public class Diagnotics
+    class MenuLoader
     {
-
     }
 }
