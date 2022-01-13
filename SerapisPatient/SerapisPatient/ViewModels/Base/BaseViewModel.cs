@@ -40,8 +40,9 @@ namespace SerapisPatient.ViewModels.Base
             if (LocalUser != null)
             {
                 Debug.WriteLine("DB user =>" + LocalUser.ToJson());
-                FirstName = "Hi " + LocalUser.PatientFirstName; 
-                ProfilePicture = new Uri(LocalUser.PatientProfilePicture ) ?? new Uri("user1");
+                FirstName = "Hi " + LocalUser.PatientFirstName;
+                //ProfilePicture = (LocalUser.PatientProfilePicture == null) ? new Uri("user1") : new Uri(LocalUser.PatientProfilePicture);
+                    //new Uri(LocalUser.PatientProfilePicture ) ?? new Uri("user1");
             }
         }
 

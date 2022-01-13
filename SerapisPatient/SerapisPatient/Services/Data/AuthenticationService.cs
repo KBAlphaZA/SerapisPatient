@@ -11,6 +11,8 @@ using SerapisPatient.Models.Patient;
 using SerapisPatient.Helpers;
 using SerapisPatient.Utils;
 using System.ComponentModel;
+using MongoDB.Bson;
+using SerapisPatient.Enum;
 
 namespace SerapisPatient.Services.Data
 {
@@ -23,14 +25,14 @@ namespace SerapisPatient.Services.Data
         /// This handles Google login and registration
         /// </summary>
         /// <returns></returns>
-        public async Task<Patient> GoogleLogin(GoogleUser googleUser,string token)
+        public async Task<Patient> GoogleLogin(GoogleUser googleUser, string token)
         {
-            
+
             using (HttpClient _httpClient = new HttpClient())
             {
                 string FirstName = StringUtil.ExtractFirstNameFromFullName(googleUser.Name);
 
-                APIURL = APIURL+"Account?socialid="+googleUser.Id+"&"+"firstname="+ FirstName+"&"+"lastname="+googleUser.FamilyName;
+                APIURL = APIURL + "Account?socialid=" + googleUser.Id + "&" + "firstname=" + FirstName + "&" + "lastname=" + googleUser.FamilyName;
 
                 var content = await _httpClient.GetStringAsync(APIURL);
                 //We deserialize the JSON data from this line
@@ -41,10 +43,10 @@ namespace SerapisPatient.Services.Data
                     object value = descriptor.GetValue(result);
                     Debug.WriteLine("RESPONSE =>" + "{0}={1}", name, value);
                 }
-                
+
                 return result;
             }
-            
+
         }
 
         /// <summary>
@@ -63,20 +65,20 @@ namespace SerapisPatient.Services.Data
                     SocialID = profile.ID,
                     PatientFirstName = Firstname,
                     PatientLastName = Names[Names.Length - 1],
-                    PatientContactDetails = 
+                    PatientContactDetails =
                     {
                         Email = profile.Email,
                         CellphoneNumber = "+27"
                     }
-                    
-                    
-                    
+
+
+
                 };
                 var json = JsonConvert.SerializeObject(model);
                 HttpContent content = new StringContent(json);
 
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                
+
                 //URL: Account?SocialID&Firstname&LastName&emailaddress
                 var response = await _httpClient
                     .PostAsync($"{APIURL}Account?SocialID={model.SocialID}&FirstName={model.PatientFirstName}&LastName={model.PatientLastName}&emailaddress={model.PatientContactDetails.Email}"
@@ -92,7 +94,7 @@ namespace SerapisPatient.Services.Data
                 {
                     //should return some kind of message telling us we couldnt login/create the user
                     return null;
-                } 
+                }
             }
         }
         public async Task<object> LoginAsync(string email, string password)
@@ -104,7 +106,7 @@ namespace SerapisPatient.Services.Data
             {
 
                 var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
-                if(!response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
                 {
                     //Do map error to UI and return object.
                     return "no good";
@@ -117,18 +119,20 @@ namespace SerapisPatient.Services.Data
             }
 
         }
-        public void method()
+        public Patient DummyPatient()
         {
+            Patient patient = new Patient();
+            patient.id = ObjectId.GenerateNewId().ToString();
+            patient.PatientFirstName = "Kayla";
+            patient.PatientLastName = "Mkhize";
+            patient.PatientAge = 26;
+            patient.PatientBloodType = Enum.BloodType.O_NEGATIVE.ToString();
+            patient.PatientProfilePicture = "user1";
 
-            /*var response = await _httpClient.GetAsync("http://chucknorris.com/api/dropkick");
-            response.EnsureSuccessStatusCode();
 
-            using (var stream = await response.Content.ReadAsStreamAsync())
-            using (var reader = new StreamReader(stream))
-            using (var json = new JsonTextReader(reader))
-            {
-                return _serializer.Deserializer<YourClass>(json);*/
-            }
+            return patient;
+
         }
+    }
 }
 

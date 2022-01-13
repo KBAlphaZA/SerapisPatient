@@ -135,7 +135,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
         public SelectBookingViewModel(PracticeDto _medicalBuildingData1)
         {
             _medicalBuildingData = _medicalBuildingData1;
-            //GenerateDoctorList();
             
             IsBusy = false;
             //Animation

@@ -6,6 +6,7 @@ using SerapisPatient.Services.SymptomChecker;
 using SerapisPatient.ViewModels.Base;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.BehaviorsPack;
@@ -108,11 +109,15 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
 
             foreach (var symptom in ListOfSymptoms)
             {
-                if (symptom.Name.ToLower().Contains(queryText.ToLower()))
+                templist = ListOfSymptoms
+                                .Where(x => x.Name.ToLower().Contains(queryText.ToLower()))
+                                .ToList();
+
+                /*if (symptom.Name.ToLower().Contains(queryText.ToLower()))
                 {
                     Debug.WriteLine("This text [" + symptom.Name + "] contains [" + queryText+"]");
                     templist.Add(symptom);
-                }
+                }*/
             }
 
             //ListOfSymptoms.Clear();

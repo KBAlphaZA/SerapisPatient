@@ -21,6 +21,7 @@ using Xamarin.Forms.Xaml;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using SerapisPatient.Services.Data;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -28,6 +29,7 @@ namespace SerapisPatient
 	public partial class App : Application
 	{
 
+        public bool MockData = true;
         public static bool CheckLogin { get; set; }
         public Realm _realm;
         public static string User = "Ceba";  //<-EXAMPLE
@@ -35,6 +37,7 @@ namespace SerapisPatient
         GoogleAuthentication googleToken = new GoogleAuthentication();
         FacebookAuthentication facebookToken = new FacebookAuthentication();
         MicrosoftAuthentication microsoftToken = new MicrosoftAuthentication();
+        AuthenticationService mockdata = new AuthenticationService();
         private SpecilizationModel _specilizationData;
         #endregion
 
@@ -56,7 +59,8 @@ namespace SerapisPatient
             try
             {
                 //Checks if there is logged in user, if true then take them straight to the main page
-                var dbuser = _realm.All<Patient>().FirstOrDefault();
+                var dbuser = MockData ? mockdata.DummyPatient() : _realm.All<Patient>().FirstOrDefault();
+
                 Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
 
                 //if (!CheckLogin == true)
@@ -65,6 +69,15 @@ namespace SerapisPatient
                         MainPage = new NavigationPage(new LoginView());
 
                 }
+                else if (MockData)
+                {
+                        _realm.Write(() =>
+                        {
+                            _realm.Add<Patient>(dbuser);
+                        });
+
+                    MainPage = new NavigationPage(new MasterView());
+                }
                 else
                 {
 
@@ -72,10 +85,10 @@ namespace SerapisPatient
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Debug.WriteLine("ERROR: " + ex);
+                throw ex;
             }
             
 
@@ -85,7 +98,8 @@ namespace SerapisPatient
 
 		protected override void OnStart ()
 		{
-            //retreive yor gpslocation
+            //TODO:  retreive yor gpslocation
+
             /*AppCenter.Start("android=b70fd8b0-fec0-484f-bc58-266a1f1bcc3a;" +
                   "uwp={Your UWP App secret here};" +
                   "ios={Your iOS App secret here}",

@@ -6,7 +6,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Plugin.CurrentActivity;
 using Plugin.GoogleClient;
 using Xamarin.Forms.PancakeView.Droid;
 using Plugin.FacebookClient;
@@ -36,16 +35,13 @@ namespace SerapisPatient.Droid
             GoogleClientManager.Initialize(this);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-           
-
-            //Carousel view package inint
-            //CarouselViewRenderer.Init();
 
             //Pancakeview package(gradients)
             PancakeViewRenderer.Init();
 
             //Location Services permission Android
-            CrossCurrentActivity.Current.Init(this, bundle);
+            //Cros.Current.Init(this, bundle);
+            Xamarin.Essentials.Platform.Init(this, bundle);
 
             Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
 
