@@ -185,6 +185,7 @@
                         BackgroundColor="#a5b6c0"
                         HeightRequest="80"
                         Command="{Binding RegisterOnClick}"
+                        CommandParameter=""
                         VerticalOptions="CenterAndExpand"
                         />
             </Grid>

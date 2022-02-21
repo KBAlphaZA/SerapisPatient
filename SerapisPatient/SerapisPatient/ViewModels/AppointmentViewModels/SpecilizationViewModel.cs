@@ -15,7 +15,7 @@ namespace SerapisPatient.ViewModels
     public class SpecilizationViewModel : BaseViewModel
     {
      
-        private char[] searchString=new char[30];
+        private char[] searchString = new char[30];
 
         #region Properties
         public SpecilizationModel _specilizationData;
@@ -43,7 +43,6 @@ namespace SerapisPatient.ViewModels
         });
         private async void SelectTheSpeclizationAsync(SpecilizationModel _specilizationData)
         {
-            //DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
 
            await App.Current.MainPage.Navigation.PushAsync(new SelectPracticeV2(_specilizationData),true);
         }

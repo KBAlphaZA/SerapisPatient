@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.SymptomsChecker"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:select="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack">
     
     <ContentPage.Resources>
@@ -28,7 +29,8 @@
 
             <!--This handles the selecteditem property-->
             <ListView.Behaviors>
-                <!--<select:SelectedItemBehavior Command="{Binding SpecilizationSelectCommand}" /> -->
+                <select:SelectedItemBehavior Command="{Binding SymptomSelectCommand}" />
+
             </ListView.Behaviors>
 
 
@@ -49,14 +51,15 @@
                                />
                 </Frame>
             </ListView.Header>
-
+            
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <ViewCell>
                         <Grid IsVisible="{Binding ShowUI}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
@@ -71,6 +74,12 @@
                                     Style="{StaticResource LabelStyle}"
                                     />
                             </Grid>
+                            <Grid Grid.Column="2">
+                                <CheckBox 
+                                    IsChecked="{Binding IsSymptomChecked}" 
+                                    HorizontalOptions="EndAndExpand"/>
+                            </Grid>
+                            
 
                         </Grid>
                     </ViewCell>

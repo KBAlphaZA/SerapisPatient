@@ -20,7 +20,8 @@ namespace SerapisPatient.Controls
 
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ViewTappedButtonBehavior), null, defaultBindingMode: BindingMode.TwoWay);
-
+        
+        
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
@@ -28,11 +29,11 @@ namespace SerapisPatient.Controls
         }
 
         public static readonly BindableProperty CommandParameterProperty =
-            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(ViewTappedButtonBehavior), null);
+            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(ViewTappedButtonBehavior), BindingMode.OneWay);
 
         public object CommandParameter
         {
-            get { return (object)GetValue(CommandParameterProperty); }
+            get { return GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
         }
 
@@ -86,7 +87,7 @@ namespace SerapisPatient.Controls
 
             var view = (View)sender;
 
-            Device.BeginInvokeOnMainThread(async () =>
+            async void Action()
             {
                 try
                 {
@@ -137,11 +138,14 @@ namespace SerapisPatient.Controls
                             Command.Execute(CommandParameter);
                         }
                     }
+
                     System.Diagnostics.Debug.WriteLine(CommandParameter);
 
                     _isAnimating = false;
                 }
-            });
+            }
+
+            Device.BeginInvokeOnMainThread(Action);
         }
 
         void OnBindingContextChanged(object sender, EventArgs e)

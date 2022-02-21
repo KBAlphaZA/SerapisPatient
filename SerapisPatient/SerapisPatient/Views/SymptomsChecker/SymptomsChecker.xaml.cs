@@ -17,7 +17,8 @@ namespace SerapisPatient.Views
         public SymptomsChecker()
         {
             InitializeComponent();
-           
+
+            SymptomsCheckerViewModel viewModel;
             viewModel = new SymptomsCheckerViewModel();
             BindingContext = viewModel;
         }

@@ -34,11 +34,8 @@ namespace SerapisPatient
         public Realm _realm;
         public static string User = "Ceba";  //<-EXAMPLE
         #region Login services
-        GoogleAuthentication googleToken = new GoogleAuthentication();
-        FacebookAuthentication facebookToken = new FacebookAuthentication();
-        MicrosoftAuthentication microsoftToken = new MicrosoftAuthentication();
+
         AuthenticationService mockdata = new AuthenticationService();
-        private SpecilizationModel _specilizationData;
         #endregion
 
         public App ()
@@ -69,6 +66,7 @@ namespace SerapisPatient
                         MainPage = new NavigationPage(new LoginView());
 
                 }
+#if DEBUG
                 else if (MockData)
                 {
                         _realm.Write(() =>
@@ -78,6 +76,7 @@ namespace SerapisPatient
 
                     MainPage = new NavigationPage(new MasterView());
                 }
+#endif
                 else
                 {
 
@@ -110,8 +109,8 @@ namespace SerapisPatient
 
 		protected override void OnSleep ()
 		{
-			// Handle when your app sleeps
-		}
+            // Handle when your app sleeps
+        }
 
 		protected override void OnResume ()
 		{

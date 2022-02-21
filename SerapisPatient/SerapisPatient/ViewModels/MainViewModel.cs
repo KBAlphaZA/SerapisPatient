@@ -49,7 +49,7 @@ namespace SerapisPatient.ViewModels
         public ICommand RunInit { get; set; }
         public Command NavigateToProfilePageCommand { get; set; }
         public Command NavigateToAppointmentPageCommand { get; set; }
-        public Command NavigateToDeliveryPageCommand { get; set; }
+        public Command NavigateToDeliveryPageCommand { get; }
         public Command NavigateToCameraPageCommand { get; set; }
         public Command NavigateToCheckInPageCommand { get; set; }
 
@@ -151,7 +151,8 @@ namespace SerapisPatient.ViewModels
         {
            
             //await App.Current.MainPage.Navigation.PushAsync(new DeliveryPage());
-            await App.Current.MainPage.Navigation.PushAsync(new SymptomsChecker());
+            //await App.Current.MainPage.Navigation.PushAsync(new SymptomsChecker());
+            await App.Current.MainPage.Navigation.PushAsync(new Page1());
         }private async void CheckIn()
         {
            

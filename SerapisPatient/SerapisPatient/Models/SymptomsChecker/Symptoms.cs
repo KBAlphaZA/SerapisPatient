@@ -14,5 +14,7 @@ namespace SerapisPatient.Models.SymptomsChecker
         public string Icon { get; private set; } = FieldsOfExpertise.audiologyIcon;
 
         public string Name { get; set; }
+
+        public bool IsChecked { get; set; } = false;
     }
 }

@@ -40,7 +40,7 @@ namespace SerapisPatient.Services
 
         public void OnConnectivityChanged(bool connection)
         {
-            if (connection!=false)
+            if (connection)
             {
                 ConnectivityChanged(this, new ConnectivityChangedEventArgs());
             }

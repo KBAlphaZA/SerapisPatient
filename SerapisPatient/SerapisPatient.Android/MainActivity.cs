@@ -35,6 +35,8 @@ namespace SerapisPatient.Droid
             GoogleClientManager.Initialize(this);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            //global::Xamarin.Forms.FormsMaterial.Init(this,bundle);
+
 
             //Pancakeview package(gradients)
             PancakeViewRenderer.Init();
@@ -44,7 +46,7 @@ namespace SerapisPatient.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
 
             Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
-
+            
             LoadApplication(new App());
         }
         protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
