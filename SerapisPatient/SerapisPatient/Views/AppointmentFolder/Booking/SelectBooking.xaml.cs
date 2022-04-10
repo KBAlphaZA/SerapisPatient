@@ -16,7 +16,6 @@ namespace SerapisPatient.Views.AppointmentFolder.Booking
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SelectBooking : ContentPage
 	{
-        SelectBookingViewModel viewModel;
         public string DateSelected;
 		public SelectBooking(PracticeDto _MedicalBuildingData)
 		{

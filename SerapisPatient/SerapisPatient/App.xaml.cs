@@ -22,6 +22,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using SerapisPatient.Services.Data;
+using System.Collections.Generic;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -36,10 +37,12 @@ namespace SerapisPatient
         #region Login services
 
         AuthenticationService mockdata = new AuthenticationService();
+        public static SessionContext SessionCache = new SessionContext();
         #endregion
 
         public App ()
 		{
+            SessionCache.CacheData = new Dictionary<string, object>();
 			InitializeComponent();
             _realm = Realm.GetInstance();
             //MainPage = new NavigationPage(new CheckIn());

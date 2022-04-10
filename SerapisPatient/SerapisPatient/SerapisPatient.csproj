@@ -238,7 +238,7 @@
     <EmbeddedResource Update="Views\SideMenuPages\SettingsSubFolder\PersonalSettings.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SymptomsChecker\SymptomsChecker.xaml">
+    <EmbeddedResource Update="Views\SymptomsChecker\SymptomsCheckerView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

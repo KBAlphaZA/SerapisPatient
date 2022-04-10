@@ -14,7 +14,7 @@
             <Setter Property="VerticalOptions" Value="Fill"/>
             <Setter Property="BorderColor" Value="Black"/>
             <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource  SeconderyColour}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource  SecondaryColour}"/>
         </Style>
 
         <Style TargetType="Label" x:Key="CustomeButtonLabel" >

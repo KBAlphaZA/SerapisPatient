@@ -1,7 +1,5 @@
 ﻿using MongoDB.Bson;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models.Patient;
@@ -11,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SerapisPatient.Services

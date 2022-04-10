@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.Views.MainTabPage"
             xmlns:pages="clr-namespace:SerapisPatient.TabbedPages"
-            BarBackgroundColor="{StaticResource SeconderyColour}"
+            BarBackgroundColor="{StaticResource SecondaryColour}"
             Title="Serapis patient"
             >
   <!--Pages can be added as references or inline-->

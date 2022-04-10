@@ -49,7 +49,7 @@
             <control:HorizontalListView.ItemTemplate>
                 <DataTemplate>
                     <ContentView Padding="5">
-                        <Frame CornerRadius="23" OutlineColor="Gray" HasShadow="True" BackgroundColor="{StaticResource SeconderyColour}" Padding="8">
+                        <Frame CornerRadius="23" OutlineColor="Gray" HasShadow="True" BackgroundColor="{StaticResource SecondaryColour}" Padding="8">
                             <Label Text="{Binding MonthValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
                         </Frame>
                     </ContentView>
@@ -139,7 +139,7 @@
                                            VerticalOptions="CenterAndExpand" TextColor="Black"/>
                                     <Label Grid.Row="1" Grid.Column="3" 
                                            Text="University Of Kwa-Zulu Natal" FontSize="14" 
-                                           VerticalOptions="CenterAndExpand" TextColor="{StaticResource SeconderyColour}"/>
+                                           VerticalOptions="CenterAndExpand" TextColor="{StaticResource SecondaryColour}"/>
                                     <Image Grid.Row="0" Grid.Column="3" 
                                            Grid.RowSpan="2"  HeightRequest="40" 
                                            VerticalOptions="CenterAndExpand" HorizontalOptions="End" 

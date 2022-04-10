@@ -5,51 +5,73 @@
              x:Class="SerapisPatient.Views.Page1"
              xmlns:control="clr-namespace:SerapisPatient.Controls"
              x:Name="page1"
-             xmlns:viewmodels="clr-namespace:SerapisPatient.ViewModels.SymptomsCheckerViewModel;assembly=SerapisPatient">
+             Title="{Binding Title}"
+             xmlns:viewmodels="clr-namespace:SerapisPatient.ViewModels.SymptomsCheckerViewModel;assembly=SerapisPatient"
+             xmlns:model="clr-namespace:SerapisPatient.Models.SymptomsChecker.Diagnosis">
     
     <Grid Padding="12">
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.2" />
+            <RowDefinition Height="0.4*" />
             <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.75*" />
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="1.5*" />
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="0.6*" /><!-- CourselView-->
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="*" /><!-- ListView of proposed diagnosis-->
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Padding="20,10" BackgroundColor="Blue"
                                        FontSize="Small" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" TextColor="White" />
+        <!-- SEARCH AREA-->
         <Frame Grid.Row="1" BorderColor="Black"
                BackgroundColor="White"
-               HeightRequest="35"
+               HeightRequest="30"
                WidthRequest="200"
                CornerRadius="12"
-               Margin="15,8">
+               Margin="10,8">
             <SearchBar Grid.Row="1" x:Name="searchBar" CancelButtonColor="Red"
-                       Placeholder="Search Your Symptoms" PlaceholderColor="Gray"
+                       Placeholder="heartburn, cough, etc.." PlaceholderColor="Gray"
                        HorizontalTextAlignment="Center"
                        SearchCommand="{Binding PerformSearch}"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                        IsVisible="true" VerticalOptions="EndAndExpand" />
         </Frame>
+        <!-- HORIZONTAL LIST VIEW -->
         <CollectionView Grid.Row="2" EmptyView="Please Select a Symptom"
-                        ItemsSource="{Binding ListOfSelectedSymptoms }" ItemsLayout="HorizontalList" HeightRequest="20"  >
+                        ItemsSource="{Binding ListOfSelectedSymptoms }"
+                        HeightRequest="40"  
+                        VerticalOptions="CenterAndExpand"  >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="15" />
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="5,4" Padding="0"
-                           CornerRadius="{OnPlatform Android='20', iOS='20'}"
-                           HasShadow="False" HorizontalOptions="FillAndExpand"
+                           CornerRadius="{OnPlatform Android='10', iOS='10'}"
+                           HasShadow="False" HorizontalOptions="Fill"
                            IsClippedToBounds="True" Opacity="0.7"
-                           VerticalOptions="Center" Visual="Material" HeightRequest="20">
-                        <Label Padding="20,10" BackgroundColor="Blue"
-                               FontSize="Small" VerticalOptions="FillAndExpand"
-                               HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
-                               Text="{Binding Name}" TextColor="White" />
+                           VerticalOptions="Center" Visual="Material" HeightRequest="10">
+                        <Grid BackgroundColor="{StaticResource SecondaryColour}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" HeightRequest="15" Source="delete.png" 
+                                   HorizontalOptions="End" Margin="0,0,0,0" />
+                            
+                            <Label Grid.Column="1" Padding="20,10" 
+                                   FontSize="Small" VerticalOptions="Fill"
+                                   HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                                   Text="{Binding Name}" TextColor="White"  />
+                        </Grid>
+                        
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        
+        <!-- PICK A SYMPTOM VIEW -->
         
         <CarouselView Grid.Row="3" ItemsSource="{Binding GroupedListOfSymptoms}" IsScrollAnimated="True"
                       IndicatorView="indicatorView">
@@ -67,7 +89,7 @@
                                    IsClippedToBounds="True" Opacity="0.7"
                                    VerticalOptions="FillAndExpand" Visual="Material"
                                    x:Name="Frame1">
-                                <Label Padding="20,10" BackgroundColor="Blue"
+                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
                                        FontSize="Small" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
                                        Text="{Binding Item1}" TextColor="White" 
@@ -83,7 +105,7 @@
                                    IsClippedToBounds="True" Opacity="0.7"
                                    VerticalOptions="FillAndExpand" Visual="Material"
                                    x:Name="Frame2">
-                                <Label Padding="20,10" BackgroundColor="Blue"
+                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
                                        FontSize="Small" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
                                        Text="{Binding Item2}" TextColor="White"
@@ -99,7 +121,7 @@
                                    IsClippedToBounds="True" Opacity="0.7"
                                    VerticalOptions="FillAndExpand" Visual="Material"
                                    x:Name="Frame3">
-                                <Label Padding="20,10" BackgroundColor="Blue"
+                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
                                        FontSize="Small" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
                                        Text="{Binding Item3}" TextColor="White" 
@@ -115,7 +137,7 @@
                                    IsClippedToBounds="True" Opacity="0.7"
                                    VerticalOptions="FillAndExpand" Visual="Material"
                                    x:Name="Frame4">
-                                <Label Padding="20,10" BackgroundColor="Blue"
+                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
                                        FontSize="Small" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
                                        Text="{Binding Item4}" TextColor="White"
@@ -131,7 +153,7 @@
                                    IsClippedToBounds="True" Opacity="0.7"
                                    VerticalOptions="FillAndExpand" Visual="Material"
                                    x:Name="Frame5">
-                                <Label Padding="20,10" BackgroundColor="Blue"
+                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
                                        FontSize="Small" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
                                        Text="{Binding Item5}" TextColor="White" 
@@ -146,14 +168,77 @@
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
+        
+        
         <IndicatorView Grid.Row="3" x:Name="indicatorView"
                        IndicatorColor="LightGray"
                        SelectedIndicatorColor="DarkGray"
                        VerticalOptions="End" />
+        
         <Label Text="Possible Conditions" Grid.Row="4"
                TextColor="{StaticResource PrimaryColour}" HorizontalOptions="StartAndExpand"
                FontAttributes="Bold" VerticalOptions="Center"
                FontSize="Small" />
-        <CollectionView Grid.Row="5" EmptyView="No items to display" />
+        
+        <!-- LIST OF POSSIBLE SYMPTOMS  -->
+        <CollectionView Grid.Row="5" EmptyView="No items to display"
+                        ItemsSource="{ Binding ListOfProposedSymptoms }" HeightRequest="20" 
+                        BackgroundColor="White" Margin="0,-20" >
+            
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.ItemTemplate >
+                <DataTemplate  >
+                    <Frame Margin="5,4" Padding="20"
+                           CornerRadius="{OnPlatform Android='20', iOS='20'}"
+                           HorizontalOptions="FillAndExpand" BackgroundColor="White"
+                           IsClippedToBounds="True" Opacity="0.7"
+                           VerticalOptions="CenterAndExpand" BorderColor="Black" 
+                           HeightRequest="120">
+                        
+                        <Frame.GestureRecognizers > 
+                            <TapGestureRecognizer Command="{Binding BindingContext.NavigateToNextPageCommand, Source={x:Reference page1}  }" />
+                        </Frame.GestureRecognizers>
+                        
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="6*"/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>                            
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                                   Padding="10,2" BackgroundColor="White"
+                                   FontSize="Small" VerticalOptions="FillAndExpand"
+                                   VerticalTextAlignment="Start" FontAttributes="Bold"
+                                   Text="{Binding ProfName}" TextColor="Black"
+                                   x:DataType="model:Issue" />
+                            <ProgressBar Grid.Row="0" Grid.Column="0"
+                                         Margin="10,2"
+                                         ProgressColor="Green" VerticalOptions="End"  
+                                         Progress="{Binding ProgressBarValue}" x:DataType="viewmodels:SymptomsCheckerViewModel" />
+                           
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Padding="10,10" 
+                                       FontSize="Small" VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                                       Text="{Binding IcdName}" TextColor="Black" x:DataType="model:Issue" />
+
+                            <Label Grid.Column="1" Grid.Row="2"
+                                   Text="read more" HorizontalOptions="End" 
+                                   TextDecorations="Underline" TextColor="{StaticResource SecondaryColour}"
+                                   VerticalTextAlignment="End" VerticalOptions="End" 
+                                   BackgroundColor="Yellow" >
+                            </Label>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>

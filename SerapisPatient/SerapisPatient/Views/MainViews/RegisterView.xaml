@@ -65,7 +65,7 @@
                     FontSize="20" 
                     HorizontalOptions="Start" 
                     VerticalOptions="Center"
-                    TextColor="{StaticResource SeconderyColour}"
+                    TextColor="{StaticResource SecondaryColour}"
                     FontAttributes="Bold"
                     />
             </Grid>

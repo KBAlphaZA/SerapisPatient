@@ -69,7 +69,7 @@
                     <BoxView Grid.Row="10" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="Silver"/>
 
                     <Grid Grid.Row="11">
-                        <Button Grid.Row="1" Command="{Binding NavigateToHomePageCommand}" Text="Place Booking" BackgroundColor="{StaticResource SeconderyColour}" BorderRadius="7" TextColor="White"/>
+                        <Button Grid.Row="1" Command="{Binding NavigateToHomePageCommand}" Text="Place Booking" BackgroundColor="{StaticResource SecondaryColour}" BorderRadius="7" TextColor="White"/>
                     </Grid>
 
                 </Grid>

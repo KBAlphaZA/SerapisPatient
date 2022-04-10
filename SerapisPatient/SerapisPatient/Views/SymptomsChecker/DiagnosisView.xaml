@@ -2,12 +2,83 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SerapisPatient.Views.SymptomsChecker.DiagnosisView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="SerapisPatient.Views.SymptomsChecker.DiagnosisView" Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.4*" />
+            </Grid.RowDefinitions>
+
+
+        <Label Text="Consultation" Grid.Row="0"
+               TextColor="{StaticResource PrimaryColour}" HorizontalOptions="StartAndExpand"
+               FontAttributes="Bold" VerticalOptions="Center"
+               FontSize="Large" Padding="10,0" />
+            
+        <CarouselView Grid.Row="1" >
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="False" BorderColor="DimGray"  Padding="8" CornerRadius="10">
+
+                            <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
+                                       FontSize="Small" VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                                       Text="Hello World" TextColor="White" 
+                                       x:Name="Label1">
+                               
+                            </Label>
+                        </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+            </CarouselView>
+            
+            <Label Text="Book A Doctor" Grid.Row="2" 
+                   TextColor="{StaticResource PrimaryColour}" HorizontalOptions="StartAndExpand"
+                   FontAttributes="Bold" VerticalOptions="Center"
+                   FontSize="Medium" Padding="10,0"/>
+            
+            <CollectionView Grid.Row="3" EmptyView="No items to display"
+                            ItemsSource="{ Binding ListOfSpecialisations }"
+                            VerticalOptions="Center"
+                            
+                            >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"  />
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                    <Frame Margin="5,4" Padding="20"
+                           CornerRadius="{OnPlatform Android='20', iOS='20'}"
+                           HorizontalOptions="FillAndExpand" BackgroundColor="White"
+                           IsClippedToBounds="True" Opacity="0.7"
+                           VerticalOptions="CenterAndExpand" BorderColor="Black" HeightRequest="60" >
+                        <Grid>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                   Source="GpIcon.png" Aspect="AspectFit"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" 
+                                   HorizontalOptions="Start" VerticalOptions="CenterAndExpand" TextColor="Black" />
+                            
+                            <Label Grid.Row="1" Grid.Column="1" Text="A doctor who specialises primarily in the treatment of skin, hair nails"
+                                   HorizontalOptions="Start" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                            
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </Grid>
 </ContentPage>

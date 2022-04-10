@@ -65,7 +65,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" x:Name="appointmentButton">
-                        <BoxView x:Name="appointmentframe" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SeconderyColour}">
+                        <BoxView x:Name="appointmentframe" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SecondaryColour}">
                             <BoxView.Behaviors>
                                 <control:ViewTappedButtonBehavior Command="{Binding NavigateToAppointmentPageCommand}" AnimationType="Scale" />
                             </BoxView.Behaviors>
@@ -89,7 +89,7 @@
                     </Grid>
 
                     <Grid Grid.Row="1" x:Name="medicationButton">
-                        <BoxView x:Name="appointmentframe1" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SeconderyColour}">
+                        <BoxView x:Name="appointmentframe1" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SecondaryColour}">
                             <BoxView.Behaviors>
                                 <control:ViewTappedButtonBehavior Command="{Binding NavigateToDeliveryPageCommand}" AnimationType="Scale" />
                             </BoxView.Behaviors>
@@ -113,7 +113,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2" x:Name="scanButton">
-                        <BoxView x:Name="appointmentframe2" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SeconderyColour}">
+                        <BoxView x:Name="appointmentframe2" Margin="10, 15, 0, 10" CornerRadius="60, 0, 60, 0" BackgroundColor="{StaticResource SecondaryColour}">
                             <BoxView.Behaviors>
                                 <control:ViewTappedButtonBehavior Command="{Binding NavigateToCheckInPageCommand}" AnimationType="Scale" />
                             </BoxView.Behaviors>

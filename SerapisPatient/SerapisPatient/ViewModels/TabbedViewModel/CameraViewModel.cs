@@ -32,6 +32,7 @@ namespace SerapisPatient.ViewModels
             }
             catch(Exception ex)
             {
+                throw new Exception("Something something {0}",ex);
                 //give an error for not scanning the code
             }
             finally

@@ -83,7 +83,7 @@ namespace SerapisPatient.Views.MainViews
             DisplayAlert("Worked", "Finally", "Cancel");
         }
 
-        private async void PageFader_Tapped(object sender, EventArgs e)
+        private void PageFader_Tapped(object sender, EventArgs e)
         {
             //CheckUp.TranslateTo(0, Height, AnimationSpeed, Easing.SinInOut);
             ////You can repeat all the Translations here

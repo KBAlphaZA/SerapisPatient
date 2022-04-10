@@ -55,8 +55,8 @@
                                         Minimum="0"  
                                         Grid.Row="1"
                                         MaximumTrackColor="White"
-                                        MinimumTrackColor="{StaticResource SeconderyColour}"
-                                        ThumbColor="{StaticResource SeconderyColour}"
+                                        MinimumTrackColor="{StaticResource SecondaryColour}"
+                                        ThumbColor="{StaticResource SecondaryColour}"
                                         VerticalOptions="Start"
                                         />
                             </Grid>

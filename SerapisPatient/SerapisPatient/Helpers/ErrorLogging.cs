@@ -10,7 +10,7 @@ namespace SerapisPatient.Helpers
         private static string APIAddress = "https://www.addressofApi/";
 
         //This method sends the error msg to the backend
-        public async static void WriteErrorMsg(DateTime timeAndDateOfLogEntry, object errorMsg, object patientId)
+        public static void WriteErrorMsg(DateTime timeAndDateOfLogEntry, object errorMsg, object patientId)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace SerapisPatient.Helpers
             }
             catch(Exception Ex)
             {
-
+                throw Ex;
             }
         }
 

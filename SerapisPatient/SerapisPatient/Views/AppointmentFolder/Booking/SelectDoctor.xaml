@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--Row 0-->
-        <Button HeightRequest="50" Grid.Row="0" Text="Select A Date" TextColor="White" BackgroundColor="{StaticResource SeconderyColour}" />
+        <Button HeightRequest="50" Grid.Row="0" Text="Select A Date" TextColor="White" BackgroundColor="{StaticResource SecondaryColour}" />
 
         <!--Row 1-->
         <ListView x:Name="DoctorList"

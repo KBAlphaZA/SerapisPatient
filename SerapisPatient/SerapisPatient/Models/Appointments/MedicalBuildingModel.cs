@@ -1,4 +1,4 @@
-﻿using SerapisPatient.Views;
+﻿using SerapisPatient;
 using SerapisPatient.Models.Doctor;
 using System;
 using System.Collections.Generic;

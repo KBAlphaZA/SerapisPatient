@@ -96,7 +96,7 @@ namespace SerapisPatient.ViewModels.PopUpViewModel
             });
         }
 
-        private async void SendOrderToServer()
+        private void SendOrderToServer()
         {
             //our api url
             const string url = "https://something.net";

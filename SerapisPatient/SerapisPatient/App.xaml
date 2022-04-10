@@ -18,7 +18,7 @@
             <!--Lightgray-->
             
             <!--Main app color + navbar color-->
-            <Color x:Key="SeconderyColour">#607d8b</Color>
+            <Color x:Key="SecondaryColour">#607d8b</Color>
             
             <!--The light Green-->
             <Color x:Key="PrimaryColour">#355159</Color>
@@ -47,7 +47,7 @@
 
             <!--Navigation bar colour-->
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource SeconderyColour}"/>
+                <Setter Property="BarBackgroundColor" Value="{StaticResource SecondaryColour}"/>
                 <Setter Property="BarTextColor" Value="White"/>
             </Style>
 
