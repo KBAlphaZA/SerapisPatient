@@ -64,7 +64,7 @@ namespace SerapisPatient.Services.Authentication
         public AuthenticationService authenticationService = new AuthenticationService();
         #endregion
 
-       
+       [Obsolete("Bonga: This was used for The Google.Plugin, which we wont be using anymore")]
         public async void LoginAsync()
         {
             _googleClientManager.OnLogin += OnLoginCompleted;
@@ -98,6 +98,7 @@ namespace SerapisPatient.Services.Authentication
             }
 
         }
+        [Obsolete("Bonga: This was used for The Google.Plugin, which we wont be using anymore")]
         private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
         {
 
@@ -122,6 +123,8 @@ namespace SerapisPatient.Services.Authentication
             _googleClientManager.OnLogin -= OnLoginCompleted;
             HandleAuth(googleUser);
         }
+        
+        [Obsolete("Bonga: This was used for The Google.Plugin, which we wont be using anymore")]
         private void DoDBTransaction(Patient _patient)
         {
             _realm.Write(() =>
@@ -129,6 +132,8 @@ namespace SerapisPatient.Services.Authentication
                 _realm.Add<Patient>(_patient);
             });
         }
+        
+        [Obsolete("Bonga: This was used for The Google.Plugin, which we wont be using anymore")]
         private void DoGoogleDBTransaction(GoogleUser _patient)
         {
             /*Realm.Write(() =>
@@ -142,12 +147,13 @@ namespace SerapisPatient.Services.Authentication
                 });
             });*/
         }
-
+        
         /// <summary>
         /// <c a="HandleAuth"/>
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
         /// 
         /// </summary>
+        [Obsolete("Bonga: This was used for The Google.Plugin, which we wont be using anymore")]
         private async Task HandleAuth(GoogleUser googleUser)
         {
             IsBusy = true;
@@ -173,6 +179,7 @@ namespace SerapisPatient.Services.Authentication
             }
         }
 
+        [Obsolete("Bonga: This was used for The Google.Plugin, which we wont be using anymore")]
         public async void LocalAuth()
         {
 
@@ -197,34 +204,7 @@ namespace SerapisPatient.Services.Authentication
             }
 
         }
-
-
-        #region Facebook Auth
-        public async Task FacebookLoadData()
-        {
-
-            var jsonData = await CrossFacebookClient.Current.RequestUserDataAsync
-            (
-                  new string[] { "id", "name", "email", "picture", "cover", "friends" }, new string[] { }
-            );
-
-            var data = JObject.Parse(jsonData.Data);
-            Profile = new FacebookProfile()
-            {
-                ID = data["id"].ToString(),
-                FullName = data["name"].ToString(),
-                Picture = new UriImageSource { Uri = new Uri($"{data["picture"]["data"]["url"]}") },
-                Email = data["email"].ToString()
-            };
-
-            //login || Register the user
-            //var model = await authenticationService.FacebookLogin(Profile);
-            //await HandleAuth();
-
-        }
-        #endregion
-
-
+        
 
     }
 }

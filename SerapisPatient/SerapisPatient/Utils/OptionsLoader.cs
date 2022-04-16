@@ -1,12 +1,9 @@
 ﻿using SerapisPatient.Models;
-using SerapisPatient.Services.LocationServices;
-using SerapisPatient.TabbedPages;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
+using SerapisPatient.Views.MainViews;
+using Xamarin.Forms;
 
 namespace SerapisPatient.Utils
 {
@@ -29,6 +26,36 @@ namespace SerapisPatient.Utils
                   };
 
             Debug.WriteLine("Notification list count "+ Notifications.Count);
+        }
+
+        public  static List<PatientActions> GetPatientActions()
+        {
+            //var x = db.LoadDBOptionsForVersion(version, connstring,
+            //);
+            // Need to implement Firebase Remote Config | A/B testing
+            return new List<PatientActions>()
+            {
+                new PatientActions()
+                {
+                    ID = 1,
+                    Icon = "timeline.png",
+                    Title = "Save To Profile",
+                    Description = "Save these symptoms to your Diagnosis timeline ",
+                    NavigationDeepLink = Application.Current.MainPage.Navigation.PushAsync(new MainView()),
+                    IsEnabled = true,
+                    LowestVersionEnabled = "0.1"
+                },
+                new PatientActions()
+                {
+                    ID = 2,
+                    Icon = "recomed.jpeg",
+                    Title = "Book an appointment with RecoMed",
+                    Description = "go visit the doctor once your booking is accepted",
+                    NavigationDeepLink = Application.Current.MainPage.Navigation.PushAsync(new MainView()),
+                    IsEnabled = true,
+                    LowestVersionEnabled = "0.1"
+                }
+            };
         }
        
     }

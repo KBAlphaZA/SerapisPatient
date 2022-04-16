@@ -30,14 +30,15 @@ namespace SerapisPatient.Droid
             Rg.Plugins.Popup.Popup.Init(this, bundle);
 
             //Facebook Plugin
-            FacebookClientManager.Initialize(this);
+            //FacebookClientManager.Initialize(this);
 
-            GoogleClientManager.Initialize(this);
+            //GoogleClientManager.Initialize(this);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             //global::Xamarin.Forms.FormsMaterial.Init(this,bundle);
 
-
+            
+            
             //Pancakeview package(gradients)
             PancakeViewRenderer.Init();
 
@@ -45,15 +46,20 @@ namespace SerapisPatient.Droid
             //Cros.Current.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
 
+            
+
+            // Initialize Firebase
+            Firebase.FirebaseApp.InitializeApp(Application.ApplicationContext);
+            // Initialize Xamarin.Auth Presenters
             Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
             
             LoadApplication(new App());
         }
-        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
+        /*protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
             GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
-        }
+        }*/
 
         //protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         //{
@@ -61,6 +67,7 @@ namespace SerapisPatient.Droid
          //   FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
          //   GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
         //}
+        
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             //Qr Code Scanner
@@ -69,18 +76,6 @@ namespace SerapisPatient.Droid
             //Gps locator
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        //Basketcart code
-        public override bool OnPrepareOptionsMenu(IMenu menu)
-        {
-            //BadgeDrawable.SetBadgeCount(this, menu.GetItem(0), 3);
-            return base.OnPrepareOptionsMenu(menu);
-        }
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-
-            return base.OnCreateOptionsMenu(menu);
         }
 
     }

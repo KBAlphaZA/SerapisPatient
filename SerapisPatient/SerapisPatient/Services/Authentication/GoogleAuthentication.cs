@@ -7,6 +7,8 @@ using Xamarin.Forms;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using SerapisPatient.Helpers;
+using SerapisPatient.Services.Authentication;
 
 namespace SerapisPatient.Services
 {
@@ -19,8 +21,9 @@ namespace SerapisPatient.Services
         /// Create a new app and get new creadentials: 
         /// https://console.developers.google.com/apis/
         /// </summary>
-        //public static readonly string ClientId = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
-        //public static readonly string ClientSecret = "bx0l0C9lhcuF8cF8gfW9h8A7 ";
+        public static readonly string ClientId = "146806431671-20bqt7ac3r07ihhevcqaaf3sh61f1cbu.apps.googleusercontent.com";
+        public static readonly string OldClientId = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
+        public static readonly string ClientSecret = "bx0l0C9lhcuF8cF8gfW9h8A7 ";
         public static readonly string RedirectUri = "https://www.youtube.com";
 
 
@@ -39,7 +42,7 @@ namespace SerapisPatient.Services
         {
 
             const string clientIdConstant = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
-            const string redirectUriConstant = "https://www.youtube.com";
+            string redirectUriConstant = "com.googleusercontent.apps."+clientIdConstant+":/oauth2redirect" ;
 
             string clientId = null;
             string redirectUri = null;
@@ -67,10 +70,11 @@ namespace SerapisPatient.Services
             OAuth2Authenticator authenticator = new OAuth2Authenticator
                 (
                      clientIdConstant,
-                     null,
-                     "profile",
+                     string.Empty,
+                     /*"profile"*/
+                     ConstantValues.GoogleScope,
                      new Uri("https://accounts.google.com/o/oauth2/auth"),
-                     new Uri(RedirectUri),
+                     new Uri(redirectUriConstant),
                      new Uri("https://www.googleapis.com/oauth2/v4/token"),
                      null,
                      true
@@ -86,7 +90,7 @@ namespace SerapisPatient.Services
 
         }
 
-        async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        public async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
             var authenticator = sender as OAuth2Authenticator;
             if(authenticator != null)
@@ -110,7 +114,22 @@ namespace SerapisPatient.Services
                     string userJson = await response.GetResponseTextAsync();
                     user = JsonConvert.DeserializeObject<User>(userJson);
                 }
+                // New block of code for Firebase
+                
+                try
+                {
+                    var google_provider_authCredential = Plugin.FirebaseAuth.CrossFirebaseAuth.Current.GoogleAuthProvider.GetCredential(e.Account.Properties["id_token"], e.Account.Properties["access_token"]);
+                    var result = await Plugin.FirebaseAuth.CrossFirebaseAuth.Current.Instance.SignInWithCredentialAsync(google_provider_authCredential);
 
+                    Debug.WriteLine(result);
+                }
+                catch (Plugin.FirebaseAuth.FirebaseAuthException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    
+                }
+                
+                
                 if (account != null)
                 {
                     store.Delete(account, serviceId: "655782672996-f7n91tloeocgksh8dogfuijhpfcre2m1.apps.googleusercontent.com");
@@ -129,7 +148,7 @@ namespace SerapisPatient.Services
             throw new NotImplementedException();
         }
 
-        void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
+        public void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
         {
             var authenticator = sender as OAuth2Authenticator;
             if (authenticator != null)

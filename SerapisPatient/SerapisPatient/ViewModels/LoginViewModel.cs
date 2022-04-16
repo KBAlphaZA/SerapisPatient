@@ -20,11 +20,14 @@ using SerapisPatient.Models.Patient;
 using Realms;
 using SerapisPatient.Services.DB;
 using MongoDB.Bson;
+using SerapisPatient.Services.Authentication;
 
 namespace SerapisPatient.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly IAuthenticate _authenticate;
+        GoogleAuthentication googleAuthentication = new GoogleAuthentication();
 
         #region Properties
 
@@ -71,7 +74,6 @@ namespace SerapisPatient.ViewModels
         public LoginViewModel()
         {
             LoginViewModelInit();
-            _googleClientManager = CrossGoogleClient.Current;
 
 
         }
@@ -81,13 +83,13 @@ namespace SerapisPatient.ViewModels
             //Facebook Login
             Profile = new FacebookProfile();
 
-            _realm.Write(() =>
-            {
+            //_realm.Write(() =>
+            //{
                 // Remove the instance from the realm.
-                _realm.RemoveAll();
+                //_realm.RemoveAll();
                 // Discard the reference.
-            });
-            OnLoginCommand = new Command(async () => await FacebookLoginAsync());
+            //});
+            OnLoginCommand = new Command( () =>  me());
             OnLoadDataCommand = new Command(async () => await FacebookLoadData());
             OnLogoutCommand = new Command(() =>
             {
@@ -129,6 +131,15 @@ namespace SerapisPatient.ViewModels
             Debug.WriteLine("DB USER =>" + dbuser.ToJson());
 
         }
+
+
+        public void me()
+        {
+            
+            googleAuthentication.OnLoginClicked();
+        }
+        
+        [Obsolete]
         public async Task FacebookLoginAsync()
         {
             FacebookResponse<bool> response = await CrossFacebookClient.Current.LoginAsync(permisions);

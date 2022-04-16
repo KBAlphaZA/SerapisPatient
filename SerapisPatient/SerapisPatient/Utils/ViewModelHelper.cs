@@ -17,7 +17,6 @@ namespace SerapisPatient.Utils
             // Want to group Symptoms by 5 and make it its own list
             SymptomsListData groupedList = new SymptomsListData();
             ViewSymptoms viewSymptoms = new ViewSymptoms();
-            var dictionary = new Dictionary<string, List<Symptoms>>();
             int k = 1;
             int j = 1;
             int counter = 0;
@@ -47,14 +46,12 @@ namespace SerapisPatient.Utils
             if (percentage > 0.75)
             {
                 return Color.Red;
-            }else if (0.75 > percentage && percentage > 0.35)
+            }
+            if (0.75 > percentage && percentage > 0.35)
             {
                 return Color.Orange;
             }
-            else
-            {
-                return Color.Green;
-            }
+            return Color.Green;
         }
 
         public static Dictionary<String, object> HandleCachingListObject<T>(Dictionary<String, object> CacheData,string Cachekey ,T data)
@@ -80,7 +77,7 @@ namespace SerapisPatient.Utils
             object obj = new object();
             if (CacheData.ContainsKey(Cachekey))
             {
-                obj =CacheData[Cachekey];
+                obj = CacheData[Cachekey];
                 Debug.WriteLine("Adding new item [" + data.ToJson() + "]" + " to the cache list");
                 CacheData["selectedSymptoms"] = obj;
                 return CacheData;

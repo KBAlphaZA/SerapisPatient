@@ -46,5 +46,13 @@ namespace SerapisPatient.Utils
             return DateSelected;
         }
 
+        public static string GenerateSessionID(string ip, DateTime dateTime)
+        {
+            //IP-sessioncode-randomcode-timestamp
+            //41.13.198.185-00-2345assd-1650096005
+
+            return "";
+        }
+
     }
 }

@@ -30,7 +30,7 @@ namespace SerapisPatient
 	public partial class App : Application
 	{
 
-        public bool MockData = true;
+        public bool MockData = false;
         public static bool CheckLogin { get; set; }
         public Realm _realm;
         public static string User = "Ceba";  //<-EXAMPLE
@@ -56,12 +56,15 @@ namespace SerapisPatient
         {
             //check if the user still has a token for login
 
+            Patient dbuser;
+            //dbuser = MockData ? mockdata.DummyPatient() :
+            //dbuser = _realm.All<Patient>().FirstOrDefault();
+            dbuser =null;
             try
             {
                 //Checks if there is logged in user, if true then take them straight to the main page
-                var dbuser = MockData ? mockdata.DummyPatient() : _realm.All<Patient>().FirstOrDefault();
 
-                Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
+                //Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
 
                 //if (!CheckLogin == true)
                 if (dbuser == null)
@@ -69,7 +72,7 @@ namespace SerapisPatient
                         MainPage = new NavigationPage(new LoginView());
 
                 }
-#if DEBUG
+
                 else if (MockData)
                 {
                         _realm.Write(() =>
@@ -79,7 +82,6 @@ namespace SerapisPatient
 
                     MainPage = new NavigationPage(new MasterView());
                 }
-#endif
                 else
                 {
 
@@ -92,8 +94,6 @@ namespace SerapisPatient
                 Debug.WriteLine("ERROR: " + ex);
                 throw ex;
             }
-            
-
         }
 
        

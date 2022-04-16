@@ -44,14 +44,14 @@
             </Grid.ColumnDefinitions>
 
             <!--Background Color-->
-            <paint:PancakeView Grid.Row="0" Grid.RowSpan="9" 
+            <!--<paint:PancakeView Grid.Row="0" Grid.RowSpan="9" 
                                Grid.Column="0" Grid.ColumnSpan="2"
                                BackgroundGradientStartColor="#BBD2C5"
                                BackgroundColor="#536976"
                                BackgroundGradientEndColor="#292E49"
                                BackgroundGradientAngle="45"
                                HorizontalOptions="FillAndExpand" 
-                               />
+                               />-->
 
             <Grid Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
 

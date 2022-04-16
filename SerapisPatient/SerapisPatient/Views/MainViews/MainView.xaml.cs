@@ -24,7 +24,8 @@ namespace SerapisPatient.Views.MainViews
 
         protected override void OnAppearing()
         {
-           
+            
+            //viewModel.OnAppearing(noticeBoardList,userName,message,noticeBoardLabel, appointmentButton,medicationButton, scanButton);
             //base.OnAppearing();
             //CheckUp.OnExpandTapped += ExpandPopup;
 

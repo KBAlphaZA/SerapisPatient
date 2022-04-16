@@ -1,4 +1,8 @@
-﻿namespace SerapisPatient.Utils
+﻿using System;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+
+namespace SerapisPatient.Utils
 {
     public static class NumberUtil
     {
@@ -24,6 +28,16 @@
             }
 
             return 0f;
+        }
+        
+
+        public static string GenerateRandomCode(int length)
+        {
+            var sufficientBufferSizeInBytes = (length * 6 + 7) / 8;
+            var buffer = new byte[sufficientBufferSizeInBytes];
+            RandomNumberGenerator.Create().GetBytes(buffer);
+            var result = Convert.ToBase64String(buffer).Substring(0, length);
+            return Regex.Replace(result, "[^A-Za-z0-9]", "");
         }
     }
 }

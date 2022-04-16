@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using SerapisPatient.ViewModels.SymptomsCheckerViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SerapisPatient.Views.SymptomsChecker
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Skip)]
     public partial class SymptomsActionPopUp : ContentView
     {
+        SymptomsActionPopUpViewModel viewModel;
         public delegate void ClickExpandDelegate();
+        public delegate void PageFaderDelegate();
 
         public ClickExpandDelegate OnExpandTapped { get; set; }
+        public PageFaderDelegate CloseExpandedView { get; set; }
         
         public SymptomsActionPopUp()
         {
             InitializeComponent();
+            
+            viewModel = new SymptomsActionPopUpViewModel();
+            BindingContext = viewModel;
         }
         
         public double FirstSectionHeight => FirstSection.Height;
@@ -26,6 +28,7 @@ namespace SerapisPatient.Views.SymptomsChecker
         private void FirstSection_Tapped(object sender, EventArgs e)
         {
             OnExpandTapped?.Invoke();
+            CloseExpandedView?.Invoke();
         }
     }
 }

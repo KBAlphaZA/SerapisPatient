@@ -15,8 +15,6 @@
             <Color x:Key="HeaderTextColor">#555555</Color>
             <!--Davy grey-->
             <Color x:Key="BodyTextColor">#bababa</Color>
-            <!--Lightgray-->
-            
             <!--Main app color + navbar color-->
             <Color x:Key="SecondaryColour">#607d8b</Color>
             

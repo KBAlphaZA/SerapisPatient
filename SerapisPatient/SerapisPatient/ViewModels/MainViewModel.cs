@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SerapisPatient.Controls;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
@@ -78,8 +79,9 @@ namespace SerapisPatient.ViewModels
 
         public MainViewModel()
         {
-            base.getLocalUser();
-
+            var user = getLocalUser();
+            FirstName = "Hi "+user.PatientFirstName;
+            //ProfilePicture = new Uri("user1");
             OptionsLoader.LoadOptions();
             Notifications = OptionsLoader.Notifications;
             NavigateToProfilePageCommand = new Command(ProfilePage);
@@ -166,20 +168,61 @@ namespace SerapisPatient.ViewModels
 
         private async void MedicationDelvery(NotificationModel _SelectedCard) 
         {
-            if(bool.Equals(_SelectedCard.Title," "))
+            if(Equals(_SelectedCard.Title," "))
             {
                 //await App.Current.MainPage.Navigation.PushAsync(new  );
             }
-            else if(bool.Equals(_SelectedCard.Title, " "))
+            else if(Equals(_SelectedCard.Title, " "))
             {
                 //await App.Current.MainPage.Navigation.PushAsync(new );
             }
-            else if(bool.Equals(_SelectedCard.Title, "MEDICATION DELIVERY"))
+            else if(Equals(_SelectedCard.Title, "MEDICATION DELIVERY"))
             {
                 await App.Current.MainPage.Navigation.PushAsync(new MedicationNotificatonView());
             }
             
         }
         #endregion
+
+        public void OnAppearing( HorizontalListView noticeBoardList, Label userName,
+                                    Label message,Label noticeBoardLabel,
+                                    Grid appointmentButton, Grid medicationButton,
+                                    Grid scanButton)
+        {
+            const uint AnimationSpeed = 300;
+
+            const uint shorterAnimationDuration=1800;
+
+            const uint longerAnimationDuration = 2000;
+            
+            noticeBoardList.TranslationX = 2000;
+
+            userName.Opacity = 0;
+
+            message.Opacity = 0;
+
+            noticeBoardLabel.Opacity = 0;
+
+            appointmentButton.TranslationX = 2000;
+
+            medicationButton.TranslationX = 2000;
+
+            scanButton.TranslationX = 2000;
+
+            userName.FadeTo(1, shorterAnimationDuration, Easing.Linear);
+            
+            message.FadeTo(1, longerAnimationDuration, Easing.Linear);
+            
+            noticeBoardLabel.FadeTo(1, shorterAnimationDuration, Easing.Linear);
+
+            appointmentButton.TranslateTo(0, 0, 1000, Easing.SinInOut);
+
+            medicationButton.TranslateTo(0, 0,1200, Easing.SinInOut);
+
+            scanButton.TranslateTo(0, 0, 1400, Easing.SinInOut);
+
+            noticeBoardList.TranslateTo(0, 0, (longerAnimationDuration+300), Easing.SpringOut);
+
+        }
     }
 }

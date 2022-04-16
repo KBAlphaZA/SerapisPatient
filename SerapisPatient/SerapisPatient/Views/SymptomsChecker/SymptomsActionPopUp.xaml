@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.SymptomsChecker.SymptomsActionPopUp">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <BoxView Grid.Row="0" Grid.RowSpan="5"
+                 x:Name="FirstSection"
+                 HeightRequest="650" CornerRadius="20,20,0,0">
+            
+        </BoxView>
+
+        <Grid Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Image Source="sick.png" HorizontalOptions="End"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.Column="0"
+                   Grid.Row="0" Grid.RowSpan="4"
+                   WidthRequest="50" Margin="10,10" />
+
+
+            <Label Grid.Column="1" Grid.Row="1"
+                   Text="CONSULTATION WITH" TextColor="Black"
+                   FontSize="Small" Margin="10,5" />
+
+            <Label Grid.Column="1" Grid.Row="2" FontAttributes="Bold"
+                   Text="General Practitioner " TextColor="Black"
+                   FontSize="Large" Margin="10,0" />
+
+            <Image Source="close.png" HorizontalOptions="End"
+                   Grid.Column="3" Grid.Row="0"
+                   WidthRequest="20" Margin="0,10,10,0" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="FirstSection_Tapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+
+        <!-- List View -->
+
+        <CollectionView Grid.Row="1" EmptyView="Sorry Something went wrong"
+                        ItemsSource="{Binding AvailableActions}" VerticalOptions="Center" >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
+                    <Frame Margin="5,4" Padding="20"
+                           CornerRadius="{OnPlatform Android='20', iOS='20'}"
+                           IsClippedToBounds="True"
+                           VerticalOptions="CenterAndExpand" BorderColor="Black"
+                           HeightRequest="50"
+                           >
+                        
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding Icon}" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" 
+                                   Margin="0,0,10,0" 
+                                   Grid.Column="0" />
+                            
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   TextColor="Black" FontAttributes="Bold" />
+                            
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Description}" VerticalOptions="End"
+                                   TextColor="Black"
+                                   />
+                        </Grid>
+                    </Frame>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentView>

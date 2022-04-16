@@ -15,6 +15,7 @@ using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
+using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.SymptomsChecker.Diagnosis;
 using SerapisPatient.PopUpMessages;
 using SerapisPatient.Utils;
@@ -121,8 +122,9 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
 
         public SymptomsCheckerViewModel()
         {
-           // _context = base._sessionContext;
-                //base.SessionCache;
+            if (ListOfSelectedSymptoms is null || ListOfProposedSymptoms is null)
+                App.SessionCache.CacheData.Remove(CacheKeys.SelectedSymptomsData.ToString());
+            
             ShowUI = false;
             ListOfSelectedSymptoms = new ObservableCollection<Symptoms>();
             ListOfProposedSymptoms = new ObservableCollection<Issue>();
@@ -163,7 +165,7 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
             Debug.WriteLine("progressBarValue: {0} progressBarColor: {1}", progressBarValue, progressBarColor);
             //await progressBar.ProgressTo(0.75, 500, Easing.Linear);
         }
-
+        
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             Device.BeginInvokeOnMainThread(() =>

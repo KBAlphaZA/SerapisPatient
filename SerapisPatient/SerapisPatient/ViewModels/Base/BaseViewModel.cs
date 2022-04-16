@@ -33,7 +33,7 @@ namespace SerapisPatient.ViewModels.Base
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void getLocalUser()
+        public Patient getLocalUser()
         {
             
             var LocalUser = _realm.All<Patient>().FirstOrDefault();
@@ -43,7 +43,10 @@ namespace SerapisPatient.ViewModels.Base
                 FirstName = "Hi " + LocalUser.PatientFirstName;
                 //ProfilePicture = (LocalUser.PatientProfilePicture == null) ? new Uri("user1") : new Uri(LocalUser.PatientProfilePicture);
                     //new Uri(LocalUser.PatientProfilePicture ) ?? new Uri("user1");
+                return LocalUser;
             }
+
+            return new Patient();
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
