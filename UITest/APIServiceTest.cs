@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Plugin.GoogleClient.Shared;
 using SerapisPatient.Services.Data;
 using System.Diagnostics;
 using System.Reflection;
@@ -32,30 +31,10 @@ namespace UITest
             var output = ViewModelHelper.HandleCachingListObject(CacheData,CacheKeys.SelectedSymptomsData.ToString(),item);
             Debug.WriteLine(output);
         }
-
-        [Test]
-        public async Task GoogleLoginTestAsync()
-        {
-            //ARANGE
-            AuthenticationService _authenticationService = new AuthenticationService(); 
-            GoogleUser googleUser = new GoogleUser();
-            googleUser.Id = "1292910";
-            googleUser.Name = "Bonga";
-            googleUser.FamilyName = "Ngcobo";
-
-            //ACT
-            
-            var result = await _authenticationService.GoogleLogin(googleUser, "");
-
-            //ASSERT
-            Assert.AreEqual(result, result);
-
-        }
         [Test]
         public async Task SymptomsTestAsync()
         {
-            //ARANGE
-            AuthenticationService _authenticationService = new AuthenticationService();
+           /* //ARANGE
             GoogleUser googleUser = new GoogleUser();
             googleUser.Id = "1292910";
             googleUser.Name = "Bonga";
@@ -63,12 +42,13 @@ namespace UITest
 
             //ACT
 
-            var result = await _authenticationService.GoogleLogin(googleUser, "");
+            var result = ;//await AuthenticationService.GoogleLogin(googleUser, "");
 
             //ASSERT
             Assert.AreEqual(result, result);
-
+*/
         }
+
         [Test]
         public async Task SearchTest()
         {

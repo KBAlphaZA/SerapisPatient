@@ -10,7 +10,7 @@ using System.Diagnostics;
 using SerapisPatient.Helpers;
 using SerapisPatient.Services.Authentication;
 
-namespace SerapisPatient.Services
+namespace SerapisPatient.Services.Authentication
 {
     public class GoogleAuthentication
     {
@@ -21,8 +21,8 @@ namespace SerapisPatient.Services
         /// Create a new app and get new creadentials: 
         /// https://console.developers.google.com/apis/
         /// </summary>
-        public static readonly string ClientId = "146806431671-20bqt7ac3r07ihhevcqaaf3sh61f1cbu.apps.googleusercontent.com";
-        public static readonly string OldClientId = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
+        public static readonly string ClientId = "660976645428-r9kcb5cera105cfd60k8cmvuk15fbdlk.apps.googleusercontent.com";
+        ///public static readonly string OldClientId = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
         public static readonly string ClientSecret = "bx0l0C9lhcuF8cF8gfW9h8A7 ";
         public static readonly string RedirectUri = "https://www.youtube.com";
 
@@ -34,14 +34,14 @@ namespace SerapisPatient.Services
         public GoogleAuthentication()
         {
             store = AccountStore.Create();
-            account = store.FindAccountsForService(serviceId: "655782672996 - f7n91tloeocgksh8dogfuijhpfcre2m1.apps.googleusercontent.com").FirstOrDefault();
+            account = store.FindAccountsForService(serviceId: "660976645428-r9kcb5cera105cfd60k8cmvuk15fbdlk.apps.googleusercontent.com").FirstOrDefault();
             
         }
 
         public void OnLoginClicked()
         {
 
-            const string clientIdConstant = "359654294538-7351kkc5l40mh3r6jncfcb0li2uetndu.apps.googleusercontent.com";
+            const string clientIdConstant = "660976645428-r9kcb5cera105cfd60k8cmvuk15fbdlk.apps.googleusercontent.com";
             string redirectUriConstant = "com.googleusercontent.apps."+clientIdConstant+":/oauth2redirect" ;
 
             string clientId = null;
@@ -74,7 +74,7 @@ namespace SerapisPatient.Services
                      /*"profile"*/
                      ConstantValues.GoogleScope,
                      new Uri("https://accounts.google.com/o/oauth2/auth"),
-                     new Uri(redirectUriConstant),
+                     new Uri(ConstantValues.GoogleAndroidRedirectUri),
                      new Uri("https://www.googleapis.com/oauth2/v4/token"),
                      null,
                      true
@@ -160,7 +160,7 @@ namespace SerapisPatient.Services
             Debug.WriteLine("Authentication error: " + e.Message);
         }
 
-        private class AuthenticationState
+        public class AuthenticationState
         {
             public static OAuth2Authenticator Authenticator { get; internal set; }
         }

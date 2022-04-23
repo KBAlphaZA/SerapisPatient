@@ -8,7 +8,6 @@
             <forms:AnimationView
                     x:Name="BarScanIcon"
                     Grid.Row="0"
-                    Loop="True"
                     AutoPlay="True"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"

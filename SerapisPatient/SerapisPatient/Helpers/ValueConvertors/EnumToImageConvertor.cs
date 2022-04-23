@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using Xamarin.Forms;
 
-namespace SerapisPatient.Utils.ValueConvertors
+namespace SerapisPatient.Helpers.ValueConvertors
 {
     public class EnumToImageConvertor : IValueConverter
     {

@@ -57,9 +57,6 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
                 if (!App.SessionCache.CacheData.ContainsKey(CacheKeys.SelectedSymptomsData.ToString()))
                     return collection;
 
-                //var list = (List<DiagnosisResponse>) App.SessionCache.CacheData[CacheKeys.SelectedSymptomsData.ToString()];
-                //var list = (List<DiagnosisResponse>)cachelist;
-
                 foreach (var item in DiagnosisResponseList )
                 {
                     collection.AddRange(item.Specialisation);

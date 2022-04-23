@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.TemplateViews.OtpView"
+             xmlns:animation="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             Padding="20"
+              xmlns:effects="clr-namespace:SerapisPatient.Helpers.Effects"
+             Title="OTP" BackgroundColor="White">
+    
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <animation:AnimationView
+            BackgroundColor="White" Grid.Row="0"
+            Animation="Doctorlistanimation.json"
+            AnimationSource="AssetOrBundle"
+            RepeatCount="5" Speed="0.4"
+            RepeatMode="Restart"
+            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+            IsVisible="{Binding ShowUI}"
+        />
+        <Label Grid.Row="1" Text="Verification code"
+               VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"
+               FontAttributes="Bold" FontSize="Large" TextColor="Black" />
+
+        <Label Grid.Row="1" Text="We have sent the code verification to Your Mobile Number" HorizontalTextAlignment="Center"
+               VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                FontSize="Medium" />
+
+        <Frame VerticalOptions="Center" HeightRequest="70" Grid.Row="2" Style="{StaticResource Base_FrameEntry}" Padding="20,0,20,0" >
+
+            <Entry Text="{Binding OTP}"
+                   VerticalOptions="CenterAndExpand" Keyboard="Numeric">
+                
+                <Entry.Effects>
+                    <effects:PlainEntry/>
+                </Entry.Effects>
+            </Entry>
+
+        </Frame>
+        
+        
+        <Button  Grid.Row="3" CornerRadius="20"
+                 Text="Submit" TextColor="White" Command="{Binding SubmitCommand}" BackgroundColor="{StaticResource SecondaryColour}"/>
+    </Grid>
+    
+</ContentPage>

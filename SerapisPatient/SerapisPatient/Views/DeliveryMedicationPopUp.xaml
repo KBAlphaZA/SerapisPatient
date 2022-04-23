@@ -56,7 +56,6 @@
             
                 <animation:AnimationView 
                             Animation="ScanComplete.json"
-                            Loop="false"
                             AutoPlay="True"        
                             Grid.Row="1" 
                             VerticalOptions="FillAndExpand" 

@@ -33,7 +33,6 @@
             <animation:AnimationView 
                 Animation="NetworkError.json"
                 AutoPlay="True"
-                Loop="True"
                 Speed="0.4"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"

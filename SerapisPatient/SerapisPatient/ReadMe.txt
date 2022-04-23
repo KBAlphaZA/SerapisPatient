@@ -3,6 +3,9 @@ Last updated: 16/03/2019
 App version: v0.5(pre-Alpha)
 -Auth0: dev-9gmocm7w.eu.auth0.com
 
+SHA PROCEDURE:
+ keytool -list -v -keystore C:\Users\username\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
+
 
 DATA DRIVEN APP.(So always think how will the data flow)
 

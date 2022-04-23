@@ -21,7 +21,7 @@ namespace SerapisPatient.Utils
          }
 
         /// <summary>
-        /// For Some 3rd party API's we get the first name as a full name or multiple names, so we extract only the first name
+        /// 
         /// </summary>
         /// <param name="DateSelected"></param>
         /// <returns>String: Only the First Name</returns>
@@ -52,6 +52,21 @@ namespace SerapisPatient.Utils
             //41.13.198.185-00-2345assd-1650096005
 
             return "";
+        }
+
+        //32401 - > 0032401
+        public static string PrefixPadding(string numberToPad,int limit)
+        {
+            string paddednumber = "";
+            int count = numberToPad.Length;
+
+            while (count <= limit )
+            {
+                paddednumber += "0";
+                count++;
+            }
+
+            return (paddednumber+numberToPad).Trim();
         }
 
     }

@@ -2,6 +2,8 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SerapisPatient.App"
+             xmlns:styles="clr-namespace:SerapisPatient.Helpers.Styles"
+             xmlns:converters="clr-namespace:SerapisPatient.Helpers.ValueConvertors"
              >
     
         
@@ -9,6 +11,10 @@
     <Application.Resources>
         
         <ResourceDictionary>
+           
+            <ResourceDictionary.MergedDictionaries>
+                <styles:Theme></styles:Theme>
+            </ResourceDictionary.MergedDictionaries>
             <!--  colors  -->
             <Color x:Key="AccentColor">#FF910A</Color>
             <Color x:Key="PageFadeColor">#AA000000</Color>
@@ -138,7 +144,7 @@
             <Setter Property="RowSpacing" Value="0" />
             <Setter Property="ColumnSpacing" Value="0" />
         </Style>
-            
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
         </ResourceDictionary>
 	</Application.Resources>
 </Application>

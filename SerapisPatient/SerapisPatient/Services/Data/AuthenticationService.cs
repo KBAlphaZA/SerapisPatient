@@ -6,98 +6,24 @@ using System.Text;
 using SerapisPatient.Models;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using Plugin.GoogleClient.Shared;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Helpers;
 using SerapisPatient.Utils;
 using System.ComponentModel;
 using MongoDB.Bson;
 using SerapisPatient.Enum;
+using SerapisPatient.Models.Patient.Supabase;
 
 namespace SerapisPatient.Services.Data
 {
-    public class AuthenticationService
+    public static class  AuthenticationService
     {
         //private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
         //serapismedicalapi.azurewebsites.net
-        private string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
-        /// <summary>
-        /// This handles Google login and registration
-        /// </summary>
-        /// <returns></returns>
-        public async Task<Patient> GoogleLogin(GoogleUser googleUser, string token)
-        {
-
-            using (HttpClient _httpClient = new HttpClient())
-            {
-                string FirstName = StringUtil.ExtractFirstNameFromFullName(googleUser.Name);
-
-                APIURL = APIURL + "Account?socialid=" + googleUser.Id + "&" + "firstname=" + FirstName + "&" + "lastname=" + googleUser.FamilyName;
-
-                var content = await _httpClient.GetStringAsync(APIURL);
-                //We deserialize the JSON data from this line
-                var result = JsonConvert.DeserializeObject<Patient>(content);
-                foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(result))
-                {
-                    string name = descriptor.Name;
-                    object value = descriptor.GetValue(result);
-                    Debug.WriteLine("RESPONSE =>" + "{0}={1}", name, value);
-                }
-
-                return result;
-            }
-
-        }
-
-        /// <summary>
-        /// This handles Facebook login and registration
-        /// </summary>
-        /// <returns>PatientUser Data</returns>
-        public async Task<Patient> FacebookLogin(FacebookProfile profile)
-        {
-            string[] Names = profile.FullName.Split(' ');
-            string Firstname = StringUtil.ExtractFirstNameFromFullName(profile.FullName);
-            //if user has more than one name we need to decide if we should remove his other names or load all of them
-            using (HttpClient _httpClient = new HttpClient())
-            {
-                var model = new Patient
-                {
-                    SocialID = profile.ID,
-                    PatientFirstName = Firstname,
-                    PatientLastName = Names[Names.Length - 1],
-                    PatientContactDetails =
-                    {
-                        Email = profile.Email,
-                        CellphoneNumber = "+27"
-                    }
+        private static string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
 
 
-
-                };
-                var json = JsonConvert.SerializeObject(model);
-                HttpContent content = new StringContent(json);
-
-                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-                //URL: Account?SocialID&Firstname&LastName&emailaddress
-                var response = await _httpClient
-                    .PostAsync($"{APIURL}Account?SocialID={model.SocialID}&FirstName={model.PatientFirstName}&LastName={model.PatientLastName}&emailaddress={model.PatientContactDetails.Email}"
-                    , content);
-
-                // Debug.WriteLine($"{APIURL}Account?SocialID={model.SocialID}&FirstName={model.PatientFirstName}&LastName={model.PatientLastName}&emailaddress={model.Email}");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return model;
-                }
-                else
-                {
-                    //should return some kind of message telling us we couldnt login/create the user
-                    return null;
-                }
-            }
-        }
-        public async Task<object> LoginAsync(string email, string password)
+        public static async Task<object> LoginAsync(string email, string password)
         {
             string appendedURlString = "/patient/{0}/{1}";
             appendedURlString = string.Format(APIURL, appendedURlString);
@@ -119,7 +45,7 @@ namespace SerapisPatient.Services.Data
             }
 
         }
-        public Patient DummyPatient()
+        public static Patient DummyPatient()
         {
             Patient patient = new Patient();
             patient.id = ObjectId.GenerateNewId().ToString();
@@ -132,6 +58,54 @@ namespace SerapisPatient.Services.Data
 
             return patient;
 
+        }
+
+
+        ///
+        public static async Task<BaseResponse<Patient>> RegisterUserViaSupabaseAsync(Patient patient)
+        {
+            string endpoint = ConstantValues.SerapisMedical_Heroku_BaseEndpoint+ConstantValues.SerapisMedical_Register_User_Via_Cell_And_Password;
+
+            using (HttpClient _httpClient = new HttpClient())
+            {      
+
+                    var json = JsonConvert.SerializeObject(patient);
+                    HttpContent content = new StringContent(json);
+
+                    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+                    var response = await _httpClient
+                        .PostAsync(endpoint, content);
+
+                 var stringResponse = await response.Content.ReadAsStringAsync();
+
+                var baseResponse = JsonConvert.DeserializeObject<BaseResponse<Patient>>(stringResponse);
+                return baseResponse;
+
+            }
+        }
+        public static async Task<BaseResponse<PatientAuthResponse>> LoginUserViaSupabaseAsync(SupabaseAuth patient)
+        {
+            string endpoint = ConstantValues.SerapisMedical_Heroku_BaseEndpoint + ConstantValues.SerapisMedical_Login_User_Via_Cell_And_Password;
+
+            using (HttpClient _httpClient = new HttpClient())
+            {
+
+                var json = JsonConvert.SerializeObject(patient);
+                HttpContent content = new StringContent(json);
+
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+                var response = await _httpClient
+                    .PostAsync(endpoint, content);
+
+                var stringResponse = await response.Content.ReadAsStringAsync();
+
+                var baseResponse = JsonConvert.DeserializeObject<BaseResponse<PatientAuthResponse>>(stringResponse);
+
+                return baseResponse;
+
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿
 using MongoDB.Bson;
 using Realms;
+using SerapisPatient.Enum;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.Models.Patient.Supabase;
 using SerapisPatient.Utils;
 using System;
 using System.Collections.Generic;
@@ -45,8 +47,9 @@ namespace SerapisPatient.ViewModels.Base
                     //new Uri(LocalUser.PatientProfilePicture ) ?? new Uri("user1");
                 return LocalUser;
             }
-
-            return new Patient();
+            var sessionUser = App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] as PatientAuthResponse;
+            var patient = sessionUser.PatientData;
+            return new Patient() { PatientFirstName = $"Hi {patient.PatientFirstName}" };
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

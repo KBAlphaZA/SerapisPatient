@@ -39,5 +39,17 @@ namespace SerapisPatient.Utils
             var result = Convert.ToBase64String(buffer).Substring(0, length);
             return Regex.Replace(result, "[^A-Za-z0-9]", "");
         }
+
+        // 0817004798 ; 0 ; 27 -> 27817004798
+        public static string ReplaceFirst(string text, string search, string replace)
+        {
+            int pos = text.IndexOf(search);
+            if (pos < 0)
+            {
+                return text;
+            }
+            string result = text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+            return result;
+        }
     }
 }

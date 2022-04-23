@@ -1,244 +1,114 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SerapisPatient.Views.MainViews.RegisterView">
+             x:Class="SerapisPatient.Views.MainViews.RegisterView" Padding="15"
+             xmlns:local="clr-namespace:SerapisPatient.Helpers.Validations"
+             xmlns:effects="clr-namespace:SerapisPatient.Helpers.Effects"
+             BackgroundColor="White"
+             >
+    <ScrollView>
+    <Grid RowSpacing="5" >
+        <Grid.RowDefinitions >
+            <RowDefinition Height="100" />
+            <RowDefinition Height="31"/>
+            <RowDefinition Height="51" />
+            <RowDefinition Height="31" />
+            <RowDefinition Height="51" />
+            <RowDefinition Height="31" />
+            <RowDefinition Height="51" />
+            <RowDefinition Height="31" />
+            <RowDefinition Height="51" />
+            <RowDefinition Height="31" />
+            <RowDefinition Height="51" />
+            <RowDefinition Height="61" />
+            <RowDefinition Height="31" />
 
-    <ContentPage.Resources>
-        <Style TargetType="Entry" x:Key="LoginEntryLabels">
-            <Setter Property="FontAttributes" Value="{StaticResource UbuntuRegular}"/>
-            <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="PlaceholderColor" Value="Gray"/>
-        </Style>
-    </ContentPage.Resources>
-
-
-    <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <!--Row 0-->
-                <RowDefinition Height="2*"/>
-                <!--Row 1-->
-                <RowDefinition Height="1.5*"/>
-                <!--Row 2-->
-                <RowDefinition Height="2*"/>
-                <!--Row 3-->
-                <RowDefinition Height="2*"/>
-                <!--Row 4-->
-                <RowDefinition Height="1*"/>
-                <!--Row 5-->
-                <RowDefinition Height="2*"/>
-                <!--row 6-->
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-                
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="5*"/>
-            </Grid.ColumnDefinitions>
-
-            <!--#region The Logo goes here-->
-            <Grid Grid.Row="0">
-
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android, WinPhone, Windows" Value="0,8,0,0"/>
-                        <On Platform="iOS" Value="0,12,0,0"/>
-                    </OnPlatform>
-                </Grid.Margin>
-
-                <!--The Logo here 150x150-->
-            </Grid>
-            <!--#endregion-->
+        </Grid.RowDefinitions>
 
 
-            <!--#region The Username/Email Entry-->
-            <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android, WinPhone, Windows" Value="12,0,0,0"/>
-                        <On Platform="iOS" Value="14,0,0,0"/>
-                    </OnPlatform>
-                </Grid.Margin>
-                <Label 
-                    Text="Sign in" 
-                    FontSize="20" 
-                    HorizontalOptions="Start" 
-                    VerticalOptions="Center"
-                    TextColor="{StaticResource SecondaryColour}"
-                    FontAttributes="Bold"
-                    />
-            </Grid>
-            <!--#endregion-->
 
-            <!--#region the Password Entry field-->
-            <Grid Grid.Row="2" Grid.ColumnSpan="2" >
+        <Image Grid.Row="0" VerticalOptions="Start" Source="SerapisMedical.png" />
 
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android, WinPhone, Windows" Value="12,0,0,0"/>
-                        <On Platform="iOS" Value="14,0,0,0"/>
-                    </OnPlatform>
-                </Grid.Margin>
-
-                <Entry 
-                    HorizontalOptions="Fill" 
-                    VerticalOptions="End" 
-                    Placeholder="   USERNAME"
-                    Style="{StaticResource LoginEntryLabels}"
-                    Text="{Binding Email, Mode=TwoWay}"
-                    />
-            </Grid>
-            <!--#endregion-->
-
-            <!--#region The small gap-->
-            <Grid Grid.Row="3" Grid.ColumnSpan="2" >
-
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android, WinPhone, Windows" Value="10,0,0,0"/>
-                        <On Platform="iOS" Value="14,0,0,0"/>
-                    </OnPlatform>
-                </Grid.Margin>
-
-                <Entry 
-                    Placeholder="PASSWORD" 
-                    VerticalOptions="End" 
-                    HorizontalOptions="Fill"
-                    IsPassword="True"
-                    Style="{StaticResource LoginEntryLabels}"
-                    Text="{Binding Password, Mode=TwoWay}"
-                    />
-            </Grid>
-            <!--#endregion-->
-
-            <!--#region the Login button-->
-            <Grid Grid.Row="4" Grid.ColumnSpan="2" >
-                <!--Empy space-->
-            </Grid>
-            <!--#endregion-->
-
-            <!--#region Login button-->
             
-            <!--#endregion-->
-            <!--SignIn Button-->
-            <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" >
+        
+            <Label Grid.Row="1" x:Name="first_name" Text="First Name" FontAttributes="Bold"  VerticalTextAlignment="Center"
+                Style="{StaticResource Body1_MulishSemiBold}"></Label>
+        <Frame Grid.Row="2"
+                Style="{StaticResource Base_FrameEntry}">
+            <Entry Text="{Binding FirstNameForm}" Style="{StaticResource Base_Entry}">
 
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android, WinPhone, Windows" Value="12,0,12,0"/>
-                        <On Platform="iOS" Value="15,0,15,0"/>
-                    </OnPlatform>
-                </Grid.Margin>
+            </Entry>
+        </Frame>
 
-                <Button Text="Register" 
-                        CornerRadius="20" 
-                        TextColor="White"
-                        BackgroundColor="{StaticResource ButtonColour}"
-                        Command="{Binding RegisterOnClick}"
-                        />
-            </Grid>
+            <Label Grid.Row="3" Text="Last Name" FontAttributes="Bold"  VerticalTextAlignment="Center"
+                Style="{StaticResource Body1_MulishSemiBold}"></Label>
+        <Frame Grid.Row="4"
+                Style="{StaticResource Base_FrameEntry}">
+                <Entry Text="{Binding LastNameForm}" Style="{StaticResource Base_Entry}">
 
+            </Entry>
+        </Frame>
 
-            <!--#region sign in lable:with other services-->
-            <Grid Grid.Row="6" Grid.ColumnSpan="2">
-                <Label Text="Or sign in with:" 
-                       HorizontalOptions="Center" 
-                       VerticalOptions="Center"
-                       FontSize="Medium"
-                       />
-            </Grid>
-            <!--#endregion-->
+            <Label Grid.Row="5" Text="Cellphone Number" FontAttributes="Bold"  VerticalTextAlignment="Center"
+                Style="{StaticResource Body1_MulishSemiBold}"></Label>
+        <Frame Grid.Row="6"
+                Style="{StaticResource Base_FrameEntry}">
+                <Entry Text="{Binding CellphoneNumberForm}"
+                
+                 Style="{StaticResource Base_Entry}">
 
-            <!--#region The Services avaliable-->
-            <Grid Grid.Row="7" Grid.ColumnSpan="2" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
+            </Entry>
+        </Frame>
 
-                    <!--Google-->
-                    <Grid Grid.Column="0" Grid.ColumnSpan="2">
-                        <Image Source="GoogleSignIn.png">
-                            <Image.WidthRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <On Platform="Android, UWP" Value="45"/>
-                                    <On Platform="iOS" Value="45"/>
-                                </OnPlatform>
-                            </Image.WidthRequest>
-                            <Image.HeightRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <On Platform="Android, UWP" Value="45"/>
-                                    <On Platform="iOS" Value="45"/>
-                                </OnPlatform>
-                            </Image.HeightRequest>
-                        </Image>
+            <Label Grid.Row="7" Text="Email Address" FontAttributes="Bold"  VerticalTextAlignment="Center"
+                Style="{StaticResource Body1_MulishSemiBold}"></Label>
+        <Frame Grid.Row="8" Style="{StaticResource Base_FrameEntry}">
+                <Entry Style="{StaticResource Base_Entry}" Text="{Binding .}">
+                    <Entry.Effects>
+                        <effects:PlainEntry/>
+                    </Entry.Effects>
+                </Entry>
+        </Frame>
 
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding .}"/>
-                        </Grid.GestureRecognizers>
+            <Label Grid.Row="9" Text="Pin" FontAttributes="Bold" Style="{StaticResource Body1_MulishSemiBold}"  VerticalTextAlignment="Center"  ></Label>
 
-                    </Grid>
+            <Frame Grid.Row="10" VerticalOptions="Center"
+                Style="{StaticResource Base_FrameEntry}">
 
-                    <!--facebook-->
-                    <Grid Grid.Column="1" Grid.ColumnSpan="2">
-                        <Image Source="FacebookSignIn.png">
-                            <Image.WidthRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <On Platform="Android, UWP" Value="45"/>
-                                    <On Platform="iOS" Value="45"/>
-                                </OnPlatform>
-                            </Image.WidthRequest>
-                            <Image.HeightRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <On Platform="Android, UWP" Value="45"/>
-                                    <On Platform="iOS" Value="45"/>
-                                </OnPlatform>
-                            </Image.HeightRequest>
-                        </Image>
+                <Entry 
+                    IsPassword="True"
+                 Style="{StaticResource Base_Entry}"
+                Keyboard="Numeric" Text="{Binding PinForm}">
+                    <Entry.Behaviors>
+                        <local:NumericValidationBehavior />
+                    </Entry.Behaviors>
+                    <Entry.Effects>
+                        <effects:PlainEntry/>
+                    </Entry.Effects>
 
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding .}"/>
-                        </Grid.GestureRecognizers>
+                </Entry>
 
+            </Frame>
 
-                    </Grid>
+            <Button Margin="0,0,0,0" Grid.Row="11"  Text="LOGIN"
+                Command="{Binding RegisterCommand}"
+                 Style="{StaticResource Base_Button}" BackgroundColor="{StaticResource SecondaryColour}">
 
-                    <!--Microsoft-->
-                    <Grid Grid.Column="2" Grid.ColumnSpan="2">
-                        <Image Source="MicrosoftSignIn.png">
-                            <Image.WidthRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <On Platform="Android, UWP" Value="45"/>
-                                    <On Platform="iOS" Value="45"/>
-                                </OnPlatform>
-                            </Image.WidthRequest>
-                            <Image.HeightRequest>
-                                <OnPlatform x:TypeArguments="x:Double">
-                                    <On Platform="Android, UWP" Value="45"/>
-                                    <On Platform="iOS" Value="45"/>
-                                </OnPlatform>
-                            </Image.HeightRequest>
-                        </Image>
+        </Button>
 
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding .}"/>
-                        </Grid.GestureRecognizers>
-
-                    </Grid>
-
-                </Grid>
-            </Grid>
-            <!--#endregion-->
-
-            <!--#region The Other Labels for forgot passwords-->
-           
-            <!--#endregion-->
-
-        </Grid>
-    </ContentPage.Content>
-
+            <Label Grid.Row="12" TextDecorations="Underline" FontAttributes="Bold"  VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center" Style="{StaticResource Body1_MulishSemiBold}"  >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                            Text="Already have an account? "
+                            Style="{StaticResource Body1_MulishRegular}"></Span>
+                    <Span
+                            Text=" Login"
+                           TextDecorations="Underline"></Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </Grid>
+    </ScrollView>
 </ContentPage>

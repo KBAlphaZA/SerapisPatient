@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="SerapisPatient.Views.LoginViewV2" Padding="15" BackgroundColor="White">
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="100" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" VerticalOptions="Start" Source="SerapisMedical.png" />
+
+        <Label Grid.Row="1" Text="Cellphone Number" FontAttributes="Bold"
+                Style="{StaticResource Body1_MulishSemiBold}"></Label>
+        <Frame Grid.Row="2"
+                x:Name="EmailFrame"
+                Style="{StaticResource Base_FrameEntry}">
+            <Entry
+               Text="{Binding CellphoneNumberForm}"
+                 Style="{StaticResource Base_Entry}">
+                
+            </Entry>
+        </Frame>
+
+        <Label Grid.Row="3" Text="Pin" FontAttributes="Bold"></Label>
+        <Frame Grid.Row="4"
+                x:Name="PasswordFrame"
+                Style="{StaticResource Base_FrameEntry}">
+            <Entry 
+                Text="{Binding PinForm}"
+                 Style="{StaticResource Base_Entry}">
+
+            </Entry>
+        </Frame>
+
+        <Label Grid.Row="5" Text="Forgot password?" TextDecorations="Underline" FontAttributes="Bold" Style="{StaticResource Body1_MulishSemiBold}"  />
+
+        <Button Grid.Row="6"  Text="LOGIN" Command="{Binding LoginOnClick}"
+                 Style="{StaticResource Base_Button}" BackgroundColor="{StaticResource SecondaryColour}">
+
+        </Button>
+
+        <Label Grid.Row="7" TextDecorations="Underline" FontAttributes="Bold" 
+               HorizontalTextAlignment="Center" Style="{StaticResource Body1_MulishSemiBold}"  >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                            Text="Don't have an account? "
+                            Style="{StaticResource Body1_MulishRegular}"></Span>
+                    <Span
+                            Text="Sign Up"
+                            Style="{StaticResource Base_Link}"></Span>
+                </FormattedString>
+            </Label.FormattedText>
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToRegisterViewCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+    </Grid>
+</ContentPage>

@@ -6,7 +6,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Plugin.GoogleClient;
 using Xamarin.Forms.PancakeView.Droid;
 using Plugin.FacebookClient;
 using Android.Content;
@@ -48,8 +47,6 @@ namespace SerapisPatient.Droid
 
             
 
-            // Initialize Firebase
-            Firebase.FirebaseApp.InitializeApp(Application.ApplicationContext);
             // Initialize Xamarin.Auth Presenters
             Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
             

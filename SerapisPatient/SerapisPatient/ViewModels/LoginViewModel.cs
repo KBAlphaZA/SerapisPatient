@@ -1,26 +1,27 @@
-﻿using Plugin.GoogleClient;
-using Plugin.GoogleClient.Shared;
-using SerapisPatient.Models;
+﻿using SerapisPatient.Models;
 using SerapisPatient.ViewModels.Base;
-using SerapisPatient.Views;
 using SerapisPatient.Views.MainViews;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using SerapisPatient.Services;
-using Plugin.FacebookClient;
-using Newtonsoft.Json.Linq;
-using SerapisPatient.Services.Data;
 using SerapisPatient.Models.Patient;
 using Realms;
-using SerapisPatient.Services.DB;
 using MongoDB.Bson;
 using SerapisPatient.Services.Authentication;
+using SerapisPatient.Helpers.Validations;
+using SerapisPatient.Helpers.Validations.Rules;
+using SerapisPatient.TemplateViews;
+using Xamarin.CommunityToolkit.Extensions;
+using SerapisPatient.Services.Data;
+using SerapisPatient.Utils;
+using SerapisPatient.Models.Patient.Supabase;
+using SerapisPatient.PopUpMessages;
+using Rg.Plugins.Popup.Extensions;
+using SerapisPatient.Enum;
 
 namespace SerapisPatient.ViewModels
 {
@@ -31,45 +32,46 @@ namespace SerapisPatient.ViewModels
 
         #region Properties
 
+        private string cellphoneNumberForm;
+        public string CellphoneNumberForm
+        {
+            get { return cellphoneNumberForm; }
+            set
+            {
+                cellphoneNumberForm = value;
+                OnPropertyChanged("CellphoneNumberForm");
+            }
+        }
+
+        private string pinForm;
+        public string PinForm
+        {
+            get { return pinForm; }
+            set
+            {
+                pinForm = value;
+                OnPropertyChanged("PinForm");
+            }
+        }
         public string Token { get; set; }
         public bool IsLoggedIn { get; set; }
 
+        public ValidatableObject<string> CellNumber { get; set; }
+        public ValidatableObject<string> Password { get; set; }
 
-        private string _email;
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
-        private string _password;
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
+        public ICommand ValidateCommand { get; set; }
 
-        //GOOGLE
-        public ICommand LoginCommand { get; set; }
-        public ICommand LogoutCommand { get; set; }
-        private readonly IGoogleClientManager _googleClientManager;
-
-        public ICommand RegisterOnClick { get; set; }
         public ICommand LoginOnClick { get; set; }
         public ICommand RestThePassword { get; set; }
+        public ICommand NavigateToRegisterViewCommand { get; set; }
 
-        //FACEBOOK AUTH
-        string[] permisions = new string[] { "email", "public_profile", "user_posts" };
-        
+    
         public bool IsNotBusy { get { return !IsBusy; } }
         public FacebookProfile Profile { get; set; }
         public Patient _patient { get; set; }
-        GoogleUser googleUser;
 
         public Command OnLoginCommand { get; set; }
-        public Command OnShareDataCommand { get; set; }
-        public Command OnLoadDataCommand { get; set; }
-        public Command OnLogoutCommand { get; set; }
-        public AuthenticationService authenticationService = new AuthenticationService();
+     
         #endregion
         public LoginViewModel()
         {
@@ -80,36 +82,37 @@ namespace SerapisPatient.ViewModels
 
         public void LoginViewModelInit()
         {
-            //Facebook Login
-            Profile = new FacebookProfile();
+            OnLoginCommand = new Command( () => GoogleLogin());
+            ValidateCommand = new Command<string>(ValidateCommandHandler);
 
-            //_realm.Write(() =>
-            //{
-                // Remove the instance from the realm.
-                //_realm.RemoveAll();
-                // Discard the reference.
-            //});
-            OnLoginCommand = new Command( () =>  me());
-            OnLoadDataCommand = new Command(async () => await FacebookLoadData());
-            OnLogoutCommand = new Command(() =>
-            {
 
-                // Add logout method
-
-            });
-
-            //GOOGLE
-            LoginCommand = new Command(LoginAsync);
-            
             //Custom Login
-            LoginOnClick = new Command(LocalAuth);
-
-            //RestThePassword = new Command(RestPassword);
-            RegisterOnClick = new Command(RegisterUser);
-
+            LoginOnClick = new Command(LocalAuthAsync);
+            NavigateToRegisterViewCommand = new Command(NavigateRegister);
+            //LoginOnClick = new Command(() => Task.Run(HandleAuth));
+            AddValidations();
             IsLoggedIn = false;
         }
+
+        private async void NavigateRegister()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new RegisterView());
+        }
+
+        private async void LocalAuthAsync(object obj)
+        {
+            await HandleAuth();
+        }
         #region Methods
+
+        private void ValidateCommandHandler(string field)
+        {
+            switch (field)
+            {
+                case "name": CellNumber.Validate(); break;
+                case "password": Password.Validate(); break;
+            }
+        }
         public void Logout()
         {
             _realm.Write(() =>
@@ -120,213 +123,74 @@ namespace SerapisPatient.ViewModels
             });
         }
 
-        /// <summary>
-        /// <c a="RegisterUser"/>
-        /// Custom Registration
-        /// </summary>
-        private void RegisterUser()
-        {
-            //App.Current.MainPage.Navigation.PushAsync(new RegisterView());
-            var dbuser = _realm.All<Patient>().FirstOrDefault();
-            Debug.WriteLine("DB USER =>" + dbuser.ToJson());
-
-        }
-
-
-        public void me()
+        public void GoogleLogin()
         {
             
             googleAuthentication.OnLoginClicked();
         }
-        
-        [Obsolete]
-        public async Task FacebookLoginAsync()
-        {
-            FacebookResponse<bool> response = await CrossFacebookClient.Current.LoginAsync(permisions);
-            switch (response.Status)
-            {
-                case FacebookActionStatus.Completed:
-                    IsLoggedIn = true;
-                    OnLoadDataCommand.Execute(null);
-                    break;
-                case FacebookActionStatus.Canceled:
 
-                    break;
-                case FacebookActionStatus.Unauthorized:
-                    await App.Current.MainPage.DisplayAlert("Unauthorized", response.Message, "Ok");
-                    break;
-                case FacebookActionStatus.Error:
-                    await App.Current.MainPage.DisplayAlert("Error", response.Message, "Ok");
-                    break;
-            }
-
-        }
-
-
-        public async Task FacebookLoadData()
-        {
-
-            var jsonData = await CrossFacebookClient.Current.RequestUserDataAsync
-            (
-                  new string[] { "id", "name", "email", "picture", "cover", "friends" }, new string[] { }
-            );
-
-            var data = JObject.Parse(jsonData.Data);
-            Profile = new FacebookProfile()
-            {
-                ID = data["id"].ToString(),
-                FullName = data["name"].ToString(),
-                Picture = new UriImageSource { Uri = new Uri($"{data["picture"]["data"]["url"]}") },
-                Email = data["email"].ToString()
-            };
-
-            //login || Register the user
-            //var model = await authenticationService.FacebookLogin(Profile);
-            //await HandleAuth();
-
-        }
-            
-
-        // GOOGLE
-        public async void LoginAsync()
-        {
-            _googleClientManager.OnLogin += OnLoginCompleted;
-            try
-            {
-                await _googleClientManager.LoginAsync();
-            }
-            catch (GoogleClientSignInNetworkErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInCanceledErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInInvalidAccountErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientSignInInternalErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientNotInitializedErrorException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-            catch (GoogleClientBaseException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-            }
-
-        }
-
-        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
-        {
-            
-            if (loginEventArgs.Data != null)
-            {
-                googleUser = loginEventArgs.Data;
-                var _ = CrossGoogleClient.Current.ActiveToken;
-                string token = "";
-
-                // Log the current User email
-                Debug.WriteLine("GOOGLE USER=> "+googleUser.ToJson());
-                IsLoggedIn = true;
-
-                Token = token;
-            }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
-            }
-
-            //var patientuser = authenticationService.GoogleLogin(googleUser, token);
-            _googleClientManager.OnLogin -= OnLoginCompleted;
-            HandleAuth(googleUser);
-        }
-        private void DoDBTransaction(Patient _patient)
-        {
-            _realm.Write(() =>
-            {
-                    _realm.Add<Patient>(_patient);
-            });
-        }
-        private void DoGoogleDBTransaction(GoogleUser _patient)
-        {
-            _realm.Write(() =>
-            {
-                _realm.Add(new Patient
-                {
-                    PatientFirstName = _patient.Name,
-                    PatientLastName = _patient.FamilyName,
-                    PatientProfilePicture = _patient.Picture.ToString(),
-                    IsGoogle = true
-                });
-            });
-        }
 
         /// <summary>
         /// <c a="HandleAuth"/>
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
         /// 
         /// </summary>
-        private async Task HandleAuth(GoogleUser googleUser)
+        private async Task HandleAuth()
         {
-            IsBusy = true;
+            var popUp = new DefaultLoadingView()
+            {
+                IsLightDismissEnabled = false,
+            };
             try
             {
-                    _patient = await authenticationService.GoogleLogin(googleUser, "TOKEN");
-                    _patient.SocialID = googleUser.Id;
-                    _patient.PatientProfilePicture = googleUser.Picture.ToString();
+                App.Current.MainPage.Navigation.ShowPopup(popUp);
+                var internationalNumber = NumberUtil.ReplaceFirst(CellphoneNumberForm, "0", "27");
+                var user = new SupabaseAuth
+                {
+                    phone = internationalNumber,
+                    password = StringUtil.PrefixPadding(PinForm, 5)
+                };
 
-                //DoGoogleDBTransaction(googleUser);
-                DoDBTransaction(_patient);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                IsBusy = false;
-                //MessagingCenter.Send(this, "", _patient.id);
-                App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First() );
-                await App.Current.MainPage.Navigation.PopAsync();
-            }
-        }
+                var response = await AuthenticationService.LoginUserViaSupabaseAsync(user);
 
-        public async void LocalAuth()
-        {
+                Debug.WriteLine(response?.status);
+                Debug.WriteLine(response?.message);
+                if (!response.status)
+                {
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
+                    return;
 
-            try
-            {
-                
-                //object user = await authenticationService.LoginAsync(Email, Password);
-
-                   
+                }
+                bool otpEnabled = true;
+                if (!otpEnabled)
+                {
                     App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
                     await App.Current.MainPage.Navigation.PopAsync();
-
+                }
+                App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                App.SessionCache.CacheData.Add(CacheKeys.Otp.ToString(), response.data.Otp);
+                await App.Current.MainPage.Navigation.PushAsync(new OtpView());
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
-                IsBusy = false;
+                popUp.Dismiss(null);
             }
-            
         }
 
-        /// <summary>
-        ///  <c a="LoginAsync"/>
-        /// Below is the Authentication Code using Plugin.google
-        /// </summary>
-        
+        private void AddValidations()
+        {
+            CellNumber = new ValidatableObject<string>();
+            Password = new ValidatableObject<string>();
+
+      
+            CellNumber.Validations.Add(new IsCellNumberRule<string> { ValidationMessage = "Cell Number format is not correct" });
+            Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
+        }
+
         #endregion
     }
 }

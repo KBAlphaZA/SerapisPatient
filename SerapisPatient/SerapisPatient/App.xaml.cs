@@ -23,6 +23,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using SerapisPatient.Services.Data;
 using System.Collections.Generic;
+using SerapisPatient.TemplateViews;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -35,8 +36,6 @@ namespace SerapisPatient
         public Realm _realm;
         public static string User = "Ceba";  //<-EXAMPLE
         #region Login services
-
-        AuthenticationService mockdata = new AuthenticationService();
         public static SessionContext SessionCache = new SessionContext();
         #endregion
 
@@ -45,7 +44,6 @@ namespace SerapisPatient
             SessionCache.CacheData = new Dictionary<string, object>();
 			InitializeComponent();
             _realm = Realm.GetInstance();
-            //MainPage = new NavigationPage(new CheckIn());
             Init();
 
         }
@@ -62,14 +60,14 @@ namespace SerapisPatient
             dbuser =null;
             try
             {
-                //Checks if there is logged in user, if true then take them straight to the main page
 
                 //Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
 
                 //if (!CheckLogin == true)
                 if (dbuser == null)
                 {
-                        MainPage = new NavigationPage(new LoginView());
+                        MainPage = new NavigationPage(new LoginViewV2());
+                        //MainPage = new NavigationPage(new OtpView());
 
                 }
 

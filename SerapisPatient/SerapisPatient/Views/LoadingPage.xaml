@@ -15,7 +15,6 @@
 	            x:Name="animationView" 
 	            Grid.Row="1"
 	            Animation="hospital_bed.json" 
-	            Loop="True" 
 	            AutoPlay="True"
 	            VerticalOptions="FillAndExpand" 
 	            HorizontalOptions="FillAndExpand" />
