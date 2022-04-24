@@ -24,6 +24,8 @@ using Microsoft.AppCenter.Crashes;
 using SerapisPatient.Services.Data;
 using System.Collections.Generic;
 using SerapisPatient.TemplateViews;
+using SerapisPatient.Models.Entities;
+using SerapisPatient.Services.DB;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -33,7 +35,6 @@ namespace SerapisPatient
 
         public bool MockData = false;
         public static bool CheckLogin { get; set; }
-        public Realm _realm;
         public static string User = "Ceba";  //<-EXAMPLE
         #region Login services
         public static SessionContext SessionCache = new SessionContext();
@@ -43,7 +44,6 @@ namespace SerapisPatient
 		{
             SessionCache.CacheData = new Dictionary<string, object>();
 			InitializeComponent();
-            _realm = Realm.GetInstance();
             Init();
 
         }
@@ -52,45 +52,26 @@ namespace SerapisPatient
 
         private void Init()
         {
-            //check if the user still has a token for login
 
-            Patient dbuser;
-            //dbuser = MockData ? mockdata.DummyPatient() :
-            //dbuser = _realm.All<Patient>().FirstOrDefault();
-            dbuser =null;
+            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
             try
             {
-
+                var dbuser = userDb.RetrieveDocument();
                 //Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
 
-                //if (!CheckLogin == true)
-                if (dbuser == null)
+                if (dbuser == null || !dbuser.IsAuthenticated)
                 {
                         MainPage = new NavigationPage(new LoginViewV2());
-                        //MainPage = new NavigationPage(new OtpView());
-
-                }
-
-                else if (MockData)
-                {
-                        _realm.Write(() =>
-                        {
-                            _realm.Add<Patient>(dbuser);
-                        });
-
-                    MainPage = new NavigationPage(new MasterView());
                 }
                 else
                 {
-
                     MainPage = new NavigationPage(new MasterView());
-
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("ERROR: " + ex);
-                throw ex;
+                MainPage = new NavigationPage(new LoginViewV2());
             }
         }
 
@@ -115,7 +96,21 @@ namespace SerapisPatient
 
 		protected override void OnResume ()
 		{
-			// Handle when your app resumes
+            // Handle when your app resumes
+            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            try
+            {
+                // We probably wanna store some cache somewhere to indicate where was the last page user was on and any data that was pulled
+                var dbuser = userDb.RetrieveDocument();
+                if (!dbuser.IsAuthenticated)
+                {
+                    MainPage = new NavigationPage(new LoginViewV2());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
 		}
 	}
 }

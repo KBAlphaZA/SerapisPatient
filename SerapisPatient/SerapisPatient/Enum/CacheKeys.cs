@@ -7,6 +7,7 @@
         /// </summary>
         SelectedSymptomsData,
         Otp,
-        SessionUser
+        SessionUser,
+        PatientUser
     }
 }

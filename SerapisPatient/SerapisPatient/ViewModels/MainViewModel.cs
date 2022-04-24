@@ -79,8 +79,8 @@ namespace SerapisPatient.ViewModels
 
         public MainViewModel()
         {
-            var user = getLocalUser();
-            FirstName = "Hi "+user.PatientFirstName;
+            var task  = getLocalUserAsync();
+            FirstName = "Hi "+task.Result.PatientFirstName;
             //ProfilePicture = new Uri("user1");
             OptionsLoader.LoadOptions();
             Notifications = OptionsLoader.Notifications;
@@ -91,9 +91,6 @@ namespace SerapisPatient.ViewModels
             NavigateToCheckInPageCommand = new Command(CheckIn);
             OpenNotificationCard = new Command(MockMethod);
             Title = _title;
-            
-            
-
         }
 
         private async void MockMethod()

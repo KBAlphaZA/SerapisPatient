@@ -1,6 +1,8 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using SerapisPatient.Enum;
 using SerapisPatient.Helpers;
+using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
@@ -265,11 +267,11 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
         private void Init()
         {
 
-            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            var dbuser = (PatientDao)App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
             //FullName = dbuser.PatientFirstName;
             FirstName = dbuser.PatientFirstName;
             Surname = dbuser.PatientLastName;
-            EmailPlaceholder = dbuser.PatientContactDetails.Email;
+            EmailPlaceholder = "";//dbuser.PatientContactDetails.Email;
             GenderPlaceholder = dbuser.Gender.ToString();
 
 

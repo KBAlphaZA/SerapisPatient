@@ -1,7 +1,9 @@
 ﻿using MongoDB.Bson;
 using Realms;
+using SerapisPatient.Enum;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.Models.Patient.Supabase;
 using SerapisPatient.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -41,10 +43,11 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
         }
         public void ProfilePageViewModelInit()
         {
-            var dbuser = _realm.All<Patient>().FirstOrDefault();
+            var dbuser =(PatientAuthResponse) App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
             Debug.WriteLine("DB USER =>" + dbuser.ToJson());
-            FirstName = dbuser.PatientFirstName;
-            MyAge = dbuser.PatientAge;
+            FirstName = dbuser.PatientData.PatientFirstName;
+            MyAge = (dbuser.PatientData.PatientAge);
+            //MyAge = dbuser.PatientBloodType;
             GenerateList();
         }
 

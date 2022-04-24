@@ -19,6 +19,8 @@ using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using System.Linq;
 using System.Diagnostics;
+using SerapisPatient.Models.Entities;
+using SerapisPatient.Enum;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
@@ -124,7 +126,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             IsBusy = true;
             try
             {
-                var dbuser = _realm.All<Patient>().FirstOrDefault();
+
+                var dbuser = (PatientDao) App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     var isSuccess = await services.CreateAppointment(dbuser.id,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);

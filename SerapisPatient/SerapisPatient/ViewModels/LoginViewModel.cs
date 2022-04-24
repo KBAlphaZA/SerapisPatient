@@ -22,6 +22,8 @@ using SerapisPatient.Models.Patient.Supabase;
 using SerapisPatient.PopUpMessages;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
+using SerapisPatient.Services.DB;
+using SerapisPatient.Models.Entities;
 
 namespace SerapisPatient.ViewModels
 {
@@ -67,7 +69,6 @@ namespace SerapisPatient.ViewModels
 
     
         public bool IsNotBusy { get { return !IsBusy; } }
-        public FacebookProfile Profile { get; set; }
         public Patient _patient { get; set; }
 
         public Command OnLoginCommand { get; set; }
@@ -115,12 +116,9 @@ namespace SerapisPatient.ViewModels
         }
         public void Logout()
         {
-            _realm.Write(() =>
-            {
-                // Remove the instance from the realm.
-                _realm.RemoveAll();
-                // Discard the reference.
-            });
+            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            userDb.ClearDatabase();
+            userDb.Dispose();
         }
 
         public void GoogleLogin()
@@ -167,6 +165,28 @@ namespace SerapisPatient.ViewModels
                     App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
+                
+                RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+                using (userDb)
+                {
+                    await userDb.SaveDocumentAsync(new PatientDao
+                    {
+                        id = response.data.PatientData.id,
+                        AuthId = response.data.PatientData.SocialID,
+                        PatientFirstName = response.data.PatientData.PatientFirstName,
+                        PatientLastName = response.data.PatientData.PatientLastName,
+                        MedicalAidPatient = response.data.PatientData.MedicalAidPatient,
+                        PatientBloodType = response.data.PatientData.PatientBloodType,
+                        PatientAge = response.data.PatientData.PatientAge,
+                        PatientProfilePicture = response.data.PatientData.PatientProfilePicture,
+                        BirthDate = response.data.PatientData.BirthDate,
+                        IsAuthenticated = true,
+                        AuthenticationExpiresIn = response.data.SupabaseData.ExpiresAt().ToString(),
+                        RefreshToken = response.data.SupabaseData.RefreshToken,
+
+                    });
+                }
+                
                 App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
                 App.SessionCache.CacheData.Add(CacheKeys.Otp.ToString(), response.data.Otp);
                 await App.Current.MainPage.Navigation.PushAsync(new OtpView());

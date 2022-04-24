@@ -94,7 +94,6 @@
     <Compile Include="Renderers\ChatEntryRenderer.cs" />
     <Compile Include="Renderers\CustomEditorRenderer.cs" />
     <Compile Include="Renderers\ExtendedListViewRenderer.cs" />
-    <Compile Include="Renderers\LodingPageServiceiOS.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
