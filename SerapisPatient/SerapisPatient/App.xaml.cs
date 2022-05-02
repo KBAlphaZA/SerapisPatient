@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using SerapisPatient.TemplateViews;
 using SerapisPatient.Models.Entities;
 using SerapisPatient.Services.DB;
+using SerapisPatient.Enum;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -38,6 +39,8 @@ namespace SerapisPatient
         public static string User = "Ceba";  //<-EXAMPLE
         #region Login services
         public static SessionContext SessionCache = new SessionContext();
+        public RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+        BaseResponse<Patient> response = new BaseResponse<Patient> ();
         #endregion
 
         public App ()
@@ -52,8 +55,6 @@ namespace SerapisPatient
 
         private void Init()
         {
-
-            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
             try
             {
                 var dbuser = userDb.RetrieveDocument();
@@ -77,8 +78,33 @@ namespace SerapisPatient
 
        
 
-		protected override void OnStart ()
+		protected override async void OnStart ()
 		{
+            
+            //Set Session user incase
+           /* try
+            {
+              *//*  var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
+                if (!sessionDataExist)
+                {
+                    RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+                    var patient = await userDb.RetrieveDocumentAsync();
+
+                    //var response = await AuthenticationService.LoginUserViaSupabaseAsync(new Models.Patient.Supabase.SupabaseAuth { phone = "27817004798", password = "032401" });
+                    response = await CustomerAccountService.RetrieveUserInformationAsync(patient.id);*//*
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+               *//*App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);*//*
+            }*/
+
+
             //TODO:  retreive yor gpslocation
 
             /*AppCenter.Start("android=b70fd8b0-fec0-484f-bc58-266a1f1bcc3a;" +
@@ -92,6 +118,7 @@ namespace SerapisPatient
 		protected override void OnSleep ()
 		{
             // Handle when your app sleeps
+
         }
 
 		protected override void OnResume ()

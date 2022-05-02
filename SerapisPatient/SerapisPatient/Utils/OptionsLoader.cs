@@ -13,7 +13,6 @@ namespace SerapisPatient.Utils
 
         public static void LoadOptions()
         {
-
             GenerateNotificationList();
         }
         private static void GenerateNotificationList()

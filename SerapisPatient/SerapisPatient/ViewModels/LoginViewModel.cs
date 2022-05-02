@@ -1,40 +1,37 @@
-﻿using SerapisPatient.Models;
+﻿using Rg.Plugins.Popup.Extensions;
+using SerapisPatient.Enum;
+using SerapisPatient.Helpers.Validations;
+using SerapisPatient.Helpers.Validations.Rules;
+using SerapisPatient.Models.Entities;
+using SerapisPatient.Models.Patient;
+using SerapisPatient.Models.Patient.Supabase;
+using SerapisPatient.PopUpMessages;
+using SerapisPatient.Services.Authentication;
+using SerapisPatient.Services.Data;
+using SerapisPatient.Services.DB;
+using SerapisPatient.TemplateViews;
+using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.MainViews;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
-using SerapisPatient.Models.Patient;
-using Realms;
-using MongoDB.Bson;
-using SerapisPatient.Services.Authentication;
-using SerapisPatient.Helpers.Validations;
-using SerapisPatient.Helpers.Validations.Rules;
-using SerapisPatient.TemplateViews;
 using Xamarin.CommunityToolkit.Extensions;
-using SerapisPatient.Services.Data;
-using SerapisPatient.Utils;
-using SerapisPatient.Models.Patient.Supabase;
-using SerapisPatient.PopUpMessages;
-using Rg.Plugins.Popup.Extensions;
-using SerapisPatient.Enum;
-using SerapisPatient.Services.DB;
-using SerapisPatient.Models.Entities;
+using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
         private readonly IAuthenticate _authenticate;
-        GoogleAuthentication googleAuthentication = new GoogleAuthentication();
+        private GoogleAuthentication googleAuthentication = new GoogleAuthentication();
 
         #region Properties
 
         private string cellphoneNumberForm;
+
         public string CellphoneNumberForm
         {
             get { return cellphoneNumberForm; }
@@ -46,6 +43,7 @@ namespace SerapisPatient.ViewModels
         }
 
         private string pinForm;
+
         public string PinForm
         {
             get { return pinForm; }
@@ -55,6 +53,7 @@ namespace SerapisPatient.ViewModels
                 OnPropertyChanged("PinForm");
             }
         }
+
         public string Token { get; set; }
         public bool IsLoggedIn { get; set; }
 
@@ -67,25 +66,23 @@ namespace SerapisPatient.ViewModels
         public ICommand RestThePassword { get; set; }
         public ICommand NavigateToRegisterViewCommand { get; set; }
 
-    
-        public bool IsNotBusy { get { return !IsBusy; } }
+        public bool IsNotBusy
+        { get { return !IsBusy; } }
         public Patient _patient { get; set; }
 
         public Command OnLoginCommand { get; set; }
-     
-        #endregion
+
+        #endregion Properties
+
         public LoginViewModel()
         {
             LoginViewModelInit();
-
-
         }
 
         public void LoginViewModelInit()
         {
-            OnLoginCommand = new Command( () => GoogleLogin());
+            OnLoginCommand = new Command(() => GoogleLogin());
             ValidateCommand = new Command<string>(ValidateCommandHandler);
-
 
             //Custom Login
             LoginOnClick = new Command(LocalAuthAsync);
@@ -104,6 +101,7 @@ namespace SerapisPatient.ViewModels
         {
             await HandleAuth();
         }
+
         #region Methods
 
         private void ValidateCommandHandler(string field)
@@ -114,6 +112,7 @@ namespace SerapisPatient.ViewModels
                 case "password": Password.Validate(); break;
             }
         }
+
         public void Logout()
         {
             RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
@@ -123,25 +122,28 @@ namespace SerapisPatient.ViewModels
 
         public void GoogleLogin()
         {
-            
             googleAuthentication.OnLoginClicked();
         }
-
 
         /// <summary>
         /// <c a="HandleAuth"/>
         /// This handles the Navigation process, Removing the LoginView from thr stack and replacing it with the homepage/MasterView
-        /// 
+        ///
         /// </summary>
         private async Task HandleAuth()
         {
-            var popUp = new DefaultLoadingView()
+            DefaultLoadingView popUp = new DefaultLoadingView();
+
+            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
             {
-                IsLightDismissEnabled = false,
-            };
+                popUp.IsLightDismissEnabled = false;
+            }
+            
+
             try
             {
-                App.Current.MainPage.Navigation.ShowPopup(popUp);
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    App.Current.MainPage.Navigation.ShowPopup(popUp);
                 var internationalNumber = NumberUtil.ReplaceFirst(CellphoneNumberForm, "0", "27");
                 var user = new SupabaseAuth
                 {
@@ -155,9 +157,8 @@ namespace SerapisPatient.ViewModels
                 Debug.WriteLine(response?.message);
                 if (!response.status)
                 {
-                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Couldn'y Login you in.. Please try again "));
                     return;
-
                 }
                 bool otpEnabled = true;
                 if (!otpEnabled)
@@ -165,7 +166,7 @@ namespace SerapisPatient.ViewModels
                     App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
-                
+
                 RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
                 using (userDb)
                 {
@@ -183,21 +184,21 @@ namespace SerapisPatient.ViewModels
                         IsAuthenticated = true,
                         AuthenticationExpiresIn = response.data.SupabaseData.ExpiresAt().ToString(),
                         RefreshToken = response.data.SupabaseData.RefreshToken,
-
                     });
                 }
-                
-                App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+
+                App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(),response.data.PatientData);
                 App.SessionCache.CacheData.Add(CacheKeys.Otp.ToString(), response.data.Otp);
                 await App.Current.MainPage.Navigation.PushAsync(new OtpView());
             }
             catch (Exception ex)
             {
-                throw ex;
+                Debug.WriteLine(ex);
             }
             finally
             {
-                popUp.Dismiss(null);
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    popUp.Dismiss(null);
             }
         }
 
@@ -206,11 +207,10 @@ namespace SerapisPatient.ViewModels
             CellNumber = new ValidatableObject<string>();
             Password = new ValidatableObject<string>();
 
-      
             CellNumber.Validations.Add(new IsCellNumberRule<string> { ValidationMessage = "Cell Number format is not correct" });
             Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
         }
 
-        #endregion
+        #endregion Methods
     }
 }

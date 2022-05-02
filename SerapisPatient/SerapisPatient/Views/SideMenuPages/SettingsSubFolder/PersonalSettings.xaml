@@ -19,7 +19,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding SaveUserDetailsCommand }"/>
+        <ToolbarItem Text="Save" Command="{Binding SaveButton}"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -162,7 +162,8 @@
                                  />
 
                             <Picker Grid.Row="1"
-                                        Title="{Binding GenderPlaceholder}" 
+                                        Title="{Binding GenderPlaceholder}"
+                                        SelectedItem="{Binding MonthsSelectedIndex}"
                                         TextColor="Black" 
                                         HorizontalOptions="FillAndExpand" 
                                         Style="{DynamicResource SettingEntry}"
@@ -191,7 +192,8 @@
                              />
 
                             <Entry Grid.Row="1"  
-                                   Keyboard="Telephone" 
+                                   Keyboard="Telephone"
+                                   IsReadOnly="True"
                                    Placeholder="{Binding CellphonePlaceholder}" 
                                    Text="{Binding CellphoneNumberInput}"
                                    Style="{DynamicResource SettingEntry}"

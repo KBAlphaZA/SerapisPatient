@@ -73,7 +73,7 @@ namespace SerapisPatient.Services.Data
                     HttpContent content = new StringContent(json);
 
                     content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
+                _httpClient.Timeout = TimeSpan.FromSeconds(6);
                     var response = await _httpClient
                         .PostAsync(endpoint, content);
 
@@ -95,7 +95,7 @@ namespace SerapisPatient.Services.Data
                 HttpContent content = new StringContent(json);
 
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
+                _httpClient.Timeout = TimeSpan.FromSeconds(6);
                 var response = await _httpClient
                     .PostAsync(endpoint, content);
 

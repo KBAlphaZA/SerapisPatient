@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using MongoDB.Bson;
 using SerapisPatient.Enum;
 using SerapisPatient.Models.SymptomsChecker;
@@ -11,7 +12,7 @@ namespace SerapisPatient.Utils
     public static class ViewModelHelper
     {
         
-        public static SymptomsListData GroupSymptoms(List<Symptoms> unGroupedList)
+        public async static Task<SymptomsListData> GroupSymptoms(List<Symptoms> unGroupedList)
         {
 
             // Want to group Symptoms by 5 and make it its own list

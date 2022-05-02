@@ -1,32 +1,23 @@
-﻿using SerapisPatient.Utils;
+﻿using Plugin.Connectivity;
+using Rg.Plugins.Popup.Extensions;
+using SerapisPatient.Enum;
+using SerapisPatient.Models.Doctor;
+using SerapisPatient.Models.Entities;
+using SerapisPatient.Models.Practices;
+using SerapisPatient.PopUpMessages;
+using SerapisPatient.Services;
 using SerapisPatient.ViewModels.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms.BehaviorsPack;
-using Rg.Plugins.Popup.Extensions;
-using SerapisPatient.PopUpMessages;
-using Xamarin.Forms;
-using SerapisPatient.ViewModels.AppointmentViewModels.Booking;
-using SerapisPatient.Models.Doctor;
-using SerapisPatient.Models;
-using SerapisPatient.Models.Appointments;
-using Plugin.Connectivity;
-using SerapisPatient.Services;
-using SerapisPatient.Models.Patient;
-using SerapisPatient.Models.Practices;
-using System.Linq;
 using System.Diagnostics;
-using SerapisPatient.Models.Entities;
-using SerapisPatient.Enum;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
 {
     public class ConfirmBookingViewModel : BaseViewModel
     {
         #region Global Declarations
+
         public Command NavigateToHomePageCommand { get; set; }
         public Doctor SelectedDoctor { get; set; }
         public PracticeDto SelectedMedicalBuilding { get; set; }
@@ -34,9 +25,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         public bool BookingSuccess = false;
         public string DateSelected = " ";
-        APIServices services = new APIServices();
+        private APIServices services = new APIServices();
 
         private string doctorLastName;
+
         public string LastName
         {
             get
@@ -49,8 +41,8 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
                 RaisePropertyChanged(nameof(LastName));
             }
-
         }
+
         private string practiceName;
         private string SelectedMonth;
 
@@ -66,13 +58,13 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
                 RaisePropertyChanged(nameof(PracticeName));
             }
-
         }
-        #endregion
+
+        #endregion Global Declarations
 
         public ConfirmBookingViewModel(Doctor enquiredDoctor, PracticeDto _medicalBuildingModel, string _FullDateAndMonth)
         {
-            // 1) Xamlbindings. 
+            // 1) Xamlbindings.
             // 2) One method to handle all bindings & keep things neat
             XamlBindings(enquiredDoctor, _medicalBuildingModel, _FullDateAndMonth);
 
@@ -83,15 +75,15 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
         private void XamlBindings(Doctor enquiredDoctor, PracticeDto _medicalBuildingModel, string _FullDateAndMonth)
         {
-
             SelectedDoctor = enquiredDoctor;
             SelectedMedicalBuilding = _medicalBuildingModel;
 
             PracticeName = _medicalBuildingModel.PracticeName;
             LastName = enquiredDoctor.LastName;
-            Debug.WriteLine(" Doctor Recieved => [" + enquiredDoctor.ToString()+ "]"+ "MedicalBuildingModel Recieved" + "[" + _medicalBuildingModel + "]"+ "FullDateAndMonth Recieved" + "[" +_FullDateAndMonth+ "]");
+            Debug.WriteLine(" Doctor Recieved => [" + enquiredDoctor.ToString() + "]" + "MedicalBuildingModel Recieved" + "[" + _medicalBuildingModel + "]" + "FullDateAndMonth Recieved" + "[" + _FullDateAndMonth + "]");
             ConvertTimeDate(_FullDateAndMonth);
         }
+
         private void ConvertTimeDate(string _FullDateAndMonth)
         {
             //converts to DateTime format for Storage purposes
@@ -105,7 +97,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             //if the booking fails dont navigate anywhere just notify the user that there was an error
             if (BookingSuccess != true)
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
-
             else
             {
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully completed your booking"));
@@ -113,11 +104,12 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
                 await Task.Delay(100);
                 await App.Current.MainPage.Navigation.PopToRootAsync();
             }
-
         }
-        #endregion
+
+        #endregion Navigation Tasks
 
         #region CloudCode
+
         private async Task MakeBookingAsync()
         {
             if (IsBusy)
@@ -126,11 +118,10 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             IsBusy = true;
             try
             {
-
-                var dbuser = (PatientDao) App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
+                var dbuser = (PatientDao)App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                    var isSuccess = await services.CreateAppointment(dbuser.id,FullDateAndMonth,SelectedDoctor, SelectedMedicalBuilding);
+                    var isSuccess = await services.CreateAppointment(dbuser.id, FullDateAndMonth, SelectedDoctor, SelectedMedicalBuilding);
                 }
                 else
                 {
@@ -148,6 +139,6 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             }
         }
 
-        #endregion
+        #endregion CloudCode
     }
 }

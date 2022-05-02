@@ -108,6 +108,7 @@ namespace SerapisPatient.ViewModels
         private async void Logout()
         {
             RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            App.SessionCache.CacheData.Clear();
             userDb.ClearDatabase();
             userDb.Dispose();
 

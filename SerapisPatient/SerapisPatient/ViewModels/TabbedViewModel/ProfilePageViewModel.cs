@@ -5,48 +5,48 @@ using SerapisPatient.Models;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Patient.Supabase;
 using SerapisPatient.ViewModels.Base;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.TabbedViewModel
 {
     public class ProfilePageViewModel : BaseViewModel
     {
-        public ObservableCollection<ProfileModel> PatientCondtions{ get; set; }
+        public ObservableCollection<ProfileModel> PatientCondtions { get; set; }
         public Command LoadMoreIcons { get; set; }
         public Realm _realm;
 
         private string firstname;
-        
+
         public string FirstName
         {
             get { return firstname; }
             set { firstname = value; }
         }
+
         private int myage;
+
         public int MyAge
         {
             get { return myage; }
             set { myage = value; }
         }
+
         public ProfilePageViewModel()
         {
             _realm = Realm.GetInstance();
             ProfilePageViewModelInit();
-            
+
             LoadMoreIcons = new Command(LoadMore);
         }
+
         public void ProfilePageViewModelInit()
         {
-            var dbuser =(PatientAuthResponse) App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
+            var dbuser = (Patient)App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
             Debug.WriteLine("DB USER =>" + dbuser.ToJson());
-            FirstName = dbuser.PatientData.PatientFirstName;
-            MyAge = (dbuser.PatientData.PatientAge);
+            FirstName = dbuser.PatientFirstName;
+            MyAge = (dbuser.PatientAge);
             //MyAge = dbuser.PatientBloodType;
             GenerateList();
         }
@@ -66,10 +66,9 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
         {
             ProfileModel allergies = new ProfileModel()
             {
-                Icon="MyAllergies.png", Title="Allergies"
+                Icon = "MyAllergies.png",
+                Title = "Allergies"
             };
-
         }
-
     }
 }

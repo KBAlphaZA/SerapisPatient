@@ -61,14 +61,27 @@ namespace SerapisPatient.Services.DB
            
         }
 
-        public bool UpdateDocument(T doc)
+        public async Task<bool> UpdateDocumentAsync(T doc)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                RealmInstance.Write(() =>
+                {
 
+                    RealmInstance.Add(doc, update: true);
+                });
+                return await Task.FromResult(true);
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex);
+                return false;
+            }
+        }
         public bool DeleteDocument(T doc)
         {
-            throw new NotImplementedException();
+            return false;    
         }
 
         public void ClearDatabase()

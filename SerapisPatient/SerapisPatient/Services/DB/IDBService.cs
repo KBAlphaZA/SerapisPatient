@@ -11,7 +11,7 @@ namespace SerapisPatient.Services.DB
         Task<T> RetrieveDocumentAsync();
         Task<bool> SaveDocumentAsync(T doc);
         bool DeleteDocument(T doc);
-        bool UpdateDocument(T doc);
+        Task<bool> UpdateDocumentAsync(T doc);
 
         void ClearDatabase();
     }

@@ -37,10 +37,11 @@ namespace SerapisPatient.ViewModels.TemplateViewModel
         }
         private async void ValidateOTP()
         {
-            var popUp = new DefaultLoadingView()
+            var popUp = new DefaultLoadingView();
+            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
             {
-                IsLightDismissEnabled = false,
-            };
+                popUp.IsLightDismissEnabled = false;
+            }
             RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
             try
             {
@@ -55,7 +56,8 @@ namespace SerapisPatient.ViewModels.TemplateViewModel
                    
                     await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Something went wrong.."));
                     userDb.ClearDatabase();
-                    popUp.Dismiss(null);
+                    if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                        popUp.Dismiss(null);
                     return;
                 }
                 if (string.Equals(cachedOtp, OTP))
@@ -63,7 +65,8 @@ namespace SerapisPatient.ViewModels.TemplateViewModel
                     userDb.RetrieveDocument();
                     App.SessionCache.CacheData.Add(CacheKeys.PatientUser.ToString(), userDb);
                     await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Logged in"));
-                    popUp.Dismiss(null);
+                    if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                        popUp.Dismiss(null);
                     App.Current.MainPage.Navigation.InsertPageBefore(new MasterView(), App.Current.MainPage.Navigation.NavigationStack.First());
                     await App.Current.MainPage.Navigation.PopToRootAsync();
                 }
@@ -77,7 +80,8 @@ namespace SerapisPatient.ViewModels.TemplateViewModel
                 Debug.WriteLine("OTPViewModel: " + ex);
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Something went wrong.."));
                 userDb.ClearDatabase();
-                popUp.Dismiss(null);
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    popUp.Dismiss(null);
                 return;
             }
         }

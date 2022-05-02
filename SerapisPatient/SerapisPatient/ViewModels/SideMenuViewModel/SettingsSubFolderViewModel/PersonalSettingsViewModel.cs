@@ -1,9 +1,14 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
 using SerapisPatient.Helpers;
 using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.Patient;
+using SerapisPatient.PopUpMessages;
+using SerapisPatient.Services.Data;
+using SerapisPatient.Services.DB;
+using SerapisPatient.TemplateViews;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.SideMenuPages.SettingsSubFolder;
@@ -13,6 +18,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
@@ -20,15 +28,16 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
     public class PersonalSettingsViewModel : BaseViewModel
     {
         public ObservableCollection<object> NextOfKins { get; set; }
-
+        public RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+        public PatientDao patient = new PatientDao();
 
         public PersonalSettingsViewModel()
         {
             Init();
             GenerateDummyList();
 
-            AddNextOfKin = new Command(AddToList);
-
+            //AddNextOfKin = new Command(AddToList);
+            //SaveUserDetailsCommand
             SaveButton = new Command(
                 execute: () =>
                 {
@@ -261,22 +270,49 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             }
         }
 
+        private string monthsSelectedIndex;
+        public string MonthsSelectedIndex
+        {
+            get
+            {
+                return monthsSelectedIndex;
+            }
+            set
+            {
+                monthsSelectedIndex = value;
+                RaisePropertyChanged(nameof(MonthsSelectedIndex));
+            }
+        }
+
+        public Patient SessionUser { get; set; }
         #endregion
 
         #region Methods
-        private void Init()
+        private async void Init()
         {
-
-            var dbuser = (PatientDao)App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
+            //RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            var dbuser = await userDb.RetrieveDocumentAsync();
+            var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
+            if (!sessionDataExist)
+            {
+                patient = await userDb.RetrieveDocumentAsync();
+                var response = await CustomerAccountService.RetrieveUserInformationAsync(patient.id);
+                Debug.WriteLine(response.data.ToJson());
+                App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                SessionUser = response.data;
+                
+            }
+            SessionUser = (Patient) App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
             //FullName = dbuser.PatientFirstName;
             FirstName = dbuser.PatientFirstName;
             Surname = dbuser.PatientLastName;
-            EmailPlaceholder = "";//dbuser.PatientContactDetails.Email;
+            EmailPlaceholder = SessionUser.PatientContactDetails.Email;
             GenderPlaceholder = dbuser.Gender.ToString();
-
+            CellphonePlaceholder = SessionUser.PatientContactDetails.CellphoneNumber;
+            Birthdate = SessionUser.BirthDate.ToString();
 
         }
-            private void GenerateDummyList()
+        private void GenerateDummyList()
         {
             //NextOfKins = new ObservableCollection<object>()
             //{
@@ -294,16 +330,62 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 
         }
 
-        private void AddToList()
+        private async void AddToList()
         {
             //generate the template
 
             //NextOfKins.Add(kinForm);
+
         }
 
-        private void SavePersonalSettings()
+        private async void SavePersonalSettings()
         {
-            //Stick a messaging center here to send all the properties.
+            DefaultLoadingView popUp = new DefaultLoadingView();
+            try
+            {
+                Debug.WriteLine(MonthsSelectedIndex);
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                {
+                    popUp.IsLightDismissEnabled = false;
+                }
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    App.Current.MainPage.Navigation.ShowPopup(popUp);
+
+                SessionUser = (Patient) App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
+                //Build new changes
+                SessionUser.PatientFirstName = FirstName;
+                SessionUser.PatientLastName = Surname;
+                SessionUser.BirthDate = string.IsNullOrEmpty(Birthdate) ? SessionUser.BirthDate : DateTime.Parse(Birthdate);
+                SessionUser.Gender = StringToGender(MonthsSelectedIndex);
+                //CellPhone number should never change, User should request us to change it for them or create a new account
+                SessionUser.PatientContactDetails.Email = EmailText;
+                var response = await CustomerAccountService.UpdateUserInformation(SessionUser);
+                if (!response.status)
+                {
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Couldn't update details.. Please try again"));
+                }
+                Debug.WriteLine(response.message);
+                await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "Your details have been updated."));
+                patient.PatientFirstName = SessionUser.PatientFirstName;
+                patient.PatientLastName = SessionUser.PatientLastName;
+                patient.BirthDate = SessionUser.BirthDate;
+                patient.Gender = SessionUser.Gender.ToString();
+                var updatedDocument = await userDb.UpdateDocumentAsync(patient);
+                Debug.WriteLine(updatedDocument);
+                App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] = SessionUser;
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    popUp.Dismiss(null);
+            }
+           
 
         }
 
@@ -312,6 +394,22 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
             saveButtonVisability = true;
         }
         #endregion
+
+
+        private Genders StringToGender(string gender)
+        {
+            switch(gender)
+            {
+                case "Male":
+                    return Genders.male;
+                case "Female":
+                    return Genders.female;
+                case "Non-Binary":
+                    return Genders.other;
+                default:
+                    return Genders.other;
+            }
+        }
     }
 
     
