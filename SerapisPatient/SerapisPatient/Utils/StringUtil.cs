@@ -57,17 +57,23 @@ namespace SerapisPatient.Utils
         //32401 - > 0032401
         public static string PrefixPadding(string numberToPad,int limit)
         {
+            var paddingNumber = 0;
             if(numberToPad.Length >= 6 )
             {
                 return numberToPad;
             }
             string paddednumber = "";
+            
             int count = numberToPad.Length;
 
-            while (count <= limit )
+            if (numberToPad.Length == 4)
+            {
+                paddednumber += "90";
+            }
+            if (numberToPad.Length == 5)
             {
                 paddednumber += "0";
-                count++;
+                
             }
 
             return (paddednumber+numberToPad).Trim();

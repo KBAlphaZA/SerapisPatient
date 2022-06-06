@@ -18,33 +18,10 @@ namespace SerapisPatient.Services.Data
 {
     public static class  AuthenticationService
     {
-        //private string APIURL = "serapismedicalapi.azurewebsites.net/api/";
+        private static string APIURL = "https://serapismedicalapi.azurewebsites.net/api/";
         //serapismedicalapi.azurewebsites.net
-        private static string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
+        //private static string APIURL = "https://serapismedicalapi.herokuapp.com/api/";
 
-
-        public static async Task<object> LoginAsync(string email, string password)
-        {
-            string appendedURlString = "/patient/{0}/{1}";
-            appendedURlString = string.Format(APIURL, appendedURlString);
-
-            using (HttpClient _httpClient = new HttpClient())
-            {
-
-                var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
-                if (!response.IsSuccessStatusCode)
-                {
-                    //Do map error to UI and return object.
-                    return "no good";
-                }
-
-                Debug.WriteLine(@"\tTodoItem successfully deleted.");
-
-
-                return response;// this should return a bool
-            }
-
-        }
         public static Patient DummyPatient()
         {
             Patient patient = new Patient();
@@ -64,33 +41,11 @@ namespace SerapisPatient.Services.Data
         ///
         public static async Task<BaseResponse<Patient>> RegisterUserViaSupabaseAsync(Patient patient)
         {
-            string endpoint = ConstantValues.SerapisMedical_Heroku_BaseEndpoint+ConstantValues.SerapisMedical_Register_User_Via_Cell_And_Password;
+            string endpoint = ConstantValues.SerapisMedical_Azure_BaseEndpoint+ConstantValues.SerapisMedical_Register_User_Via_Cell_And_Password;
 
-            using (HttpClient _httpClient = new HttpClient())
-            {      
-
-                    var json = JsonConvert.SerializeObject(patient);
-                    HttpContent content = new StringContent(json);
-
-                    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                _httpClient.Timeout = TimeSpan.FromSeconds(6);
-                    var response = await _httpClient
-                        .PostAsync(endpoint, content);
-
-                 var stringResponse = await response.Content.ReadAsStringAsync();
-
-                var baseResponse = JsonConvert.DeserializeObject<BaseResponse<Patient>>(stringResponse);
-                return baseResponse;
-
-            }
-        }
-        public static async Task<BaseResponse<PatientAuthResponse>> LoginUserViaSupabaseAsync(SupabaseAuth patient)
-        {
-            string endpoint = ConstantValues.SerapisMedical_Heroku_BaseEndpoint + ConstantValues.SerapisMedical_Login_User_Via_Cell_And_Password;
-
-            using (HttpClient _httpClient = new HttpClient())
+            try
             {
-
+                using HttpClient _httpClient = new HttpClient();
                 var json = JsonConvert.SerializeObject(patient);
                 HttpContent content = new StringContent(json);
 
@@ -101,11 +56,52 @@ namespace SerapisPatient.Services.Data
 
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                var baseResponse = JsonConvert.DeserializeObject<BaseResponse<PatientAuthResponse>>(stringResponse);
-
+                var baseResponse = JsonConvert.DeserializeObject<BaseResponse<Patient>>(stringResponse);
                 return baseResponse;
-
             }
+            catch (Exception)
+            {
+
+                return new BaseResponse<Patient>() { status = false, StatusCode = StatusCodes.AuthenticonError, message = "Failure", data = new Patient()};
+            }
+        }
+        public static async Task<BaseResponse<PatientAuthResponse>> LoginUserViaSupabaseAsync(SupabaseAuth patient)
+        {
+            string endpoint = ConstantValues.SerapisMedical_Azure_BaseEndpoint + ConstantValues.SerapisMedical_Login_User_Via_Cell_And_Password;
+
+            using HttpClient _httpClient = new HttpClient();
+            var json = JsonConvert.SerializeObject(patient);
+            HttpContent content = new StringContent(json);
+
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            _httpClient.Timeout = TimeSpan.FromSeconds(6);
+                
+            var response = await _httpClient.PostAsync(endpoint, content);
+                
+            if (!response.IsSuccessStatusCode)
+            {
+                if( response.StatusCode.ToString() == "503")
+                {
+                    return new BaseResponse<PatientAuthResponse>()
+                    {
+                        status = false,
+                        message = "Service Unavailable"
+                    };
+                }
+                else
+                {
+                    return new BaseResponse<PatientAuthResponse>()
+                    {
+                        status = false,
+                        message = "Invalid Credentials"
+                    };
+                }
+            }
+            var stringResponse = await response.Content.ReadAsStringAsync();
+
+            var baseResponse = JsonConvert.DeserializeObject<BaseResponse<PatientAuthResponse>>(stringResponse);
+
+            return baseResponse;
         }
     }
 }

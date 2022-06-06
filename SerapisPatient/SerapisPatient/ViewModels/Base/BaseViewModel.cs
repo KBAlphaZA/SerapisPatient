@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.Base
@@ -80,6 +81,7 @@ namespace SerapisPatient.ViewModels.Base
 
 
         #endregion
+
 
         public SessionContext SessionCache
         {

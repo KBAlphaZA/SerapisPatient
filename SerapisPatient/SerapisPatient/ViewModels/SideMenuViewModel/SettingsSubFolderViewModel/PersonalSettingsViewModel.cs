@@ -25,7 +25,7 @@ using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 {
-    public class PersonalSettingsViewModel : BaseViewModel
+    public partial class PersonalSettingsViewModel : BaseViewModel
     {
         public ObservableCollection<object> NextOfKins { get; set; }
         public RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
@@ -155,7 +155,6 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
                     OnPropertyChanged("SaveButtonVisability");
             }
         }
-
         public string FirstName
         {
             get

@@ -16,9 +16,14 @@ using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Rg.Plugins.Popup.Extensions;
+using SerapisPatient.Models.Patient;
+using SerapisPatient.PopUpMessages;
 using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels
@@ -82,31 +87,26 @@ namespace SerapisPatient.ViewModels
 
         public MainViewModel()
         {
+            
+
             InitAsync();
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
 
         }
         private async Task InitAsync()
         {
-            DefaultLoadingView popUp = new DefaultLoadingView();
-
-            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+            /*PatientDao task = new Patient();
+            if (App.CurrentUser is null)
             {
-                popUp.IsLightDismissEnabled = false;
+                task = await getLocalUserAsync();
             }
-            var task = await getLocalUserAsync();
-            /* if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
-                 App.Current.MainPage.Navigation.ShowPopup(popUp);
-
-             var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
-             if (!sessionDataExist)
-             {
-                 var response = await CustomerAccountService.RetrieveUserInformationAsync(task.id);
-                 Debug.WriteLine(response.data.ToJson());
-                 App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
-
-             }*/
-            FirstName = "Hi " + task.PatientFirstName;
+            else
+            {
+                 task = App.CurrentUser;
+            }*/
+           
+            var patient = App.CurrentUser;
+            FirstName = "Hi " + patient.PatientFirstName;
             //ProfilePicture = new Uri("user1");
             OptionsLoader.LoadOptions();
             Notifications = OptionsLoader.Notifications;
@@ -117,8 +117,7 @@ namespace SerapisPatient.ViewModels
             OpenNotificationCard = new Command(MockMethod);
             Title = _title;
 
-            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
-                popUp.Dismiss(null);
+          
 
         }
         private async void MockMethod()
@@ -243,6 +242,63 @@ namespace SerapisPatient.ViewModels
             scanButton.TranslateTo(0, 0, 1400, Easing.SinInOut);
 
             noticeBoardList.TranslateTo(0, 0, (longerAnimationDuration + 300), Easing.SpringOut);
+        }
+
+        internal async Task OnAppearing()
+        {
+            try
+            {
+                var current = Connectivity.NetworkAccess;
+
+                if (current != NetworkAccess.Internet)
+                {
+                    return;
+                }
+
+                var task = await base.getLocalUserAsync();
+
+                DefaultLoadingView popUp = new DefaultLoadingView();
+
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                {
+                    popUp.IsLightDismissEnabled = false;
+                }
+
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    App.Current.MainPage?.Navigation.ShowPopup(popUp);
+
+                var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
+                if (!sessionDataExist)
+                {
+                    var response =  await CustomerAccountService.RetrieveUserInformationAsync(task.id);
+                
+                    Debug.WriteLine("MainViewModel: "+response.data.ToJson());
+
+                    if (response?.data != null)
+                    {
+                        App.CurrentUser = response.data;
+                        App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                    }
+                    else
+                    {
+                        ViewModelHelper.DumpDataAndKickUserOut();
+                    }
+
+
+                }
+
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    popUp.Dismiss(null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                //We failed to get User Information, clear their token and make them login again
+
+                ViewModelHelper.DumpDataAndKickUserOut();
+            }
+
         }
     }
 }

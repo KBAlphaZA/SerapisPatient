@@ -27,6 +27,8 @@ using SerapisPatient.TemplateViews;
 using SerapisPatient.Models.Entities;
 using SerapisPatient.Services.DB;
 using SerapisPatient.Enum;
+using Device = Xamarin.Forms.Device;
+using Xamarin.CommunityToolkit.Extensions;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -39,6 +41,7 @@ namespace SerapisPatient
         public static string User = "Ceba";  //<-EXAMPLE
         #region Login services
         public static SessionContext SessionCache = new SessionContext();
+        public static Patient CurrentUser = new Patient();
         public RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
         BaseResponse<Patient> response = new BaseResponse<Patient> ();
         #endregion
@@ -57,15 +60,19 @@ namespace SerapisPatient
         {
             try
             {
+                DefaultLoadingView popUp = new DefaultLoadingView();
+                
                 var dbuser = userDb.RetrieveDocument();
                 //Debug.WriteLine("Is there a user =>" + dbuser.ToJson());
 
                 if (dbuser == null || !dbuser.IsAuthenticated)
                 {
+                        userDb.ClearDatabase();
                         MainPage = new NavigationPage(new LoginViewV2());
                 }
                 else
                 {
+                    //Set Session user incase
                     MainPage = new NavigationPage(new MasterView());
                 }
             }
@@ -80,30 +87,6 @@ namespace SerapisPatient
 
 		protected override async void OnStart ()
 		{
-            
-            //Set Session user incase
-           /* try
-            {
-              *//*  var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
-                if (!sessionDataExist)
-                {
-                    RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
-                    var patient = await userDb.RetrieveDocumentAsync();
-
-                    //var response = await AuthenticationService.LoginUserViaSupabaseAsync(new Models.Patient.Supabase.SupabaseAuth { phone = "27817004798", password = "032401" });
-                    response = await CustomerAccountService.RetrieveUserInformationAsync(patient.id);*//*
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-               *//*App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);*//*
-            }*/
-
 
             //TODO:  retreive yor gpslocation
 
@@ -124,6 +107,7 @@ namespace SerapisPatient
 		protected override void OnResume ()
 		{
             // Handle when your app resumes
+            //TODO: Fix this
             RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
             try
             {
