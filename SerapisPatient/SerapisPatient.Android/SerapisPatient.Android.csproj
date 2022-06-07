@@ -1182,12 +1182,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\menu.png" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)' != 'GooglePlay' ">
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="3.3.0" />
-</ItemGroup>
-<ItemGroup Condition=" '$(Configuration)' == 'GooglePlay' ">
-    <PackageReference Include="Microsoft.AppCenter.DistributePlay" Version="3.3.0" />
-</ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <AndroidResource Include="Resources\drawable\yes.png" />
