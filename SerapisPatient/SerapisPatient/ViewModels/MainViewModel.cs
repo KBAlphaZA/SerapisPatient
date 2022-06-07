@@ -93,7 +93,7 @@ namespace SerapisPatient.ViewModels
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
 
         }
-        private async Task InitAsync()
+        private void InitAsync()
         {
             /*PatientDao task = new Patient();
             if (App.CurrentUser is null)

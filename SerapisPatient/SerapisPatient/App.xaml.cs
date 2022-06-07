@@ -1,21 +1,10 @@
-using MongoDB.Bson;
-using Realms;
+
 using SerapisPatient.Models;
 using SerapisPatient.Models.Patient;
-using SerapisPatient.Services;
-using SerapisPatient.Services.Authentication;
-
-using SerapisPatient.TabbedPages;
-using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
-using SerapisPatient.Views.AppointmentFolder;
-using SerapisPatient.Views.AppointmentFolder.Booking;
-using SerapisPatient.Views.CustomViews;
 using SerapisPatient.Views.MainViews;
 using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Microsoft.AppCenter;
@@ -26,9 +15,11 @@ using System.Collections.Generic;
 using SerapisPatient.TemplateViews;
 using SerapisPatient.Models.Entities;
 using SerapisPatient.Services.DB;
-using SerapisPatient.Enum;
-using Device = Xamarin.Forms.Device;
-using Xamarin.CommunityToolkit.Extensions;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Distribute;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SerapisPatient
@@ -72,7 +63,7 @@ namespace SerapisPatient
                 }
                 else
                 {
-                    //Set Session user incase
+                    //Set Session user in case
                     MainPage = new NavigationPage(new MasterView());
                 }
             }
@@ -89,13 +80,13 @@ namespace SerapisPatient
 		{
 
             //TODO:  retreive yor gpslocation
+            Microsoft.AppCenter.AppCenter.Start("android=d0703243-75a1-49fb-bd3e-3a9bf9fadd2f;" +
+                            "uwp={Your UWP App secret here};" + 
+                            "ios={Your iOS App secret here}",
+                  typeof(Analytics), typeof(Crashes));
+            Microsoft.AppCenter.AppCenter.Start("ios={Your Xamarin iOS App Secret};android=d0703243-75a1-49fb-bd3e-3a9bf9fadd2f", typeof(Distribute));
 
-            /*AppCenter.Start("android=b70fd8b0-fec0-484f-bc58-266a1f1bcc3a;" +
-                  "uwp={Your UWP App secret here};" +
-                  "ios={Your iOS App secret here}",
-                  typeof(Analytics), typeof(Crashes));  
-
-            base.OnResume();*/
+            base.OnResume();
         }
 
 		protected override void OnSleep ()

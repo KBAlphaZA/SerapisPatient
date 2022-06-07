@@ -10,6 +10,7 @@ using Xamarin.Forms.PancakeView.Droid;
 using Plugin.FacebookClient;
 using Android.Content;
 using CarouselView.FormsPlugin.Droid;
+using Microsoft.AppCenter.Distribute;
 
 namespace SerapisPatient.Droid
 {
@@ -27,11 +28,7 @@ namespace SerapisPatient.Droid
             base.OnCreate(bundle);
             //ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Rg.Plugins.Popup.Popup.Init(this, bundle);
-
-            //Facebook Plugin
-            //FacebookClientManager.Initialize(this);
-
-            //GoogleClientManager.Initialize(this);
+            
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             //global::Xamarin.Forms.FormsMaterial.Init(this,bundle);
@@ -45,7 +42,8 @@ namespace SerapisPatient.Droid
             //Cros.Current.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
 
-            
+            /*Distribute.SetEnabledForDebuggableBuild(true);            
+            Microsoft.AppCenter.AppCenter.Start("d0703243-75a1-49fb-bd3e-3a9bf9fadd2f", typeof(Distribute));*/
 
             // Initialize Xamarin.Auth Presenters
             Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
