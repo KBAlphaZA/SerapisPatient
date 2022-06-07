@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Lottie.Forms.UWP.Renderers;
+using Lottie.Forms;
 
 namespace SerapisPatient.UWP
 {
@@ -23,7 +23,7 @@ namespace SerapisPatient.UWP
             this.InitializeComponent();
 
             ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
-            AnimationViewRenderer.Init();
+            //AnimationViewRenderer.Init();
             LoadApplication(new SerapisPatient.App());
         }
     }

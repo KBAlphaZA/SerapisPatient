@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using MongoDB.Bson;
+using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
+using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.SymptomsChecker;
+using SerapisPatient.PopUpMessages;
+using SerapisPatient.Services.DB;
+using SerapisPatient.Views;
 using Xamarin.Forms;
 
 namespace SerapisPatient.Utils
@@ -11,7 +18,7 @@ namespace SerapisPatient.Utils
     public static class ViewModelHelper
     {
         
-        public static SymptomsListData GroupSymptoms(List<Symptoms> unGroupedList)
+        public async static Task<SymptomsListData> GroupSymptoms(List<Symptoms> unGroupedList)
         {
 
             // Want to group Symptoms by 5 and make it its own list
@@ -85,6 +92,16 @@ namespace SerapisPatient.Utils
             
             CacheData.Add(Cachekey,data);
             return CacheData;
+        }
+
+        public static async void DumpDataAndKickUserOut()
+        {
+            await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Registered"));
+            App.Current.MainPage.Navigation.InsertPageBefore(new LoginViewV2(), App.Current.MainPage.Navigation.NavigationStack.First());
+
+            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            userDb.ClearDatabase();
+            await App.Current.MainPage.Navigation.PopToRootAsync();
         }
         
     }

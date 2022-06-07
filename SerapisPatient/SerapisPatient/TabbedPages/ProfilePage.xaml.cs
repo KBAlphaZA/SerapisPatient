@@ -21,5 +21,15 @@ namespace SerapisPatient.TabbedPages
             viewModel = new ProfilePageViewModel();
             BindingContext = viewModel;
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            await OnLoad();
+        }
+
+        public async Task OnLoad()
+        {
+            await viewModel.OnAppearing();
+        }
+    }
 }

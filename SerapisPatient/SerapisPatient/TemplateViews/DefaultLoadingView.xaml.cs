@@ -12,12 +12,10 @@ namespace SerapisPatient.TemplateViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DefaultLoadingView : Popup
     {
-        public delegate void DismissPopUpDelegate();
-        public DismissPopUpDelegate OnDismissPopup { get; set; }
+
         public DefaultLoadingView()
         {
             InitializeComponent();
-            //Dismissed += DefaultLoadingView_Dismissed;  
         }
 
         public void DefaultLoadingView_Dismissed()

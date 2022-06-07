@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CarouselView.FormsPlugin.iOS;
 using Foundation;
-using Lottie.Forms.iOS.Renderers;
+using Lottie.Forms.Platforms.Ios;
+using Microsoft.AppCenter.Distribute;
 using Plugin.FacebookClient;
 using UIKit;
 using Xamarin.Forms.PancakeView.iOS;
@@ -26,7 +27,7 @@ namespace SerapisPatient.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 
-            AnimationViewRenderer.Init();
+            //AnimationViewRenderer.Init();
 
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
@@ -43,6 +44,8 @@ namespace SerapisPatient.iOS
             FacebookClientManager.OnActivated();
 
 
+            /*Distribute.DontCheckForUpdatesInDebug();
+            Microsoft.AppCenter.AppCenter.Start("{Your Xamarin iOS App Secret}", typeof(Distribute));*/
 
             return base.FinishedLaunching(app, options);
         }

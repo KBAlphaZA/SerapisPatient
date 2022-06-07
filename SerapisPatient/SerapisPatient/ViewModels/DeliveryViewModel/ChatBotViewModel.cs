@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,7 +12,8 @@ namespace SerapisPatient.ViewModels
         public bool ShowScrollTap { get; set; } = false;
         public bool LastMessageVisible { get; set; } = true;
         public int PendingMessageCount { get; set; } = 0;
-        public bool PendingMessageCountVisible { get { return PendingMessageCount > 0; } }
+        public bool PendingMessageCountVisible
+        { get { return PendingMessageCount > 0; } }
 
         public Queue<Message> DelayedMessages { get; set; } = new Queue<Message>();
         public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
@@ -25,7 +25,9 @@ namespace SerapisPatient.ViewModels
         public ChatBotViewModel()
         {
             //DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, ToolbarItems.First(), "2", Color.Red, Color.White);
+
             #region messages
+
             Messages.Insert(0, new Message() { Text = "Hi im Serapis how can i help you?" });
             Messages.Insert(0, new Message() { Text = "i would like to reorder my prescription?", User = App.User });
             Messages.Insert(0, new Message() { Text = "okay i will check for you" });
@@ -35,7 +37,9 @@ namespace SerapisPatient.ViewModels
             Messages.Insert(0, new Message() { Text = "but we see you ordered iburfan last week for your family, Dont you need another packet?" });
             Messages.Insert(0, new Message() { Text = "No.", User = App.User });
             Messages.Insert(0, new Message() { Text = "okay you may check out now, thank you" });
-            #endregion
+
+            #endregion messages
+
             MessageAppearingCommand = new Command<Message>(OnMessageAppearing);
             MessageDisappearingCommand = new Command<Message>(OnMessageDisappearing);
 
@@ -46,7 +50,6 @@ namespace SerapisPatient.ViewModels
                     Messages.Insert(0, new Message() { Text = TextToSend, User = App.User });
                     TextToSend = string.Empty;
                 }
-
             });
 
             //Code to simulate reveing a new message procces
@@ -64,7 +67,8 @@ namespace SerapisPatient.ViewModels
                 return true;
             });
         }
-        void OnMessageAppearing(Message message)
+
+        private void OnMessageAppearing(Message message)
         {
             var idx = Messages.IndexOf(message);
             if (idx <= 6)
@@ -82,7 +86,7 @@ namespace SerapisPatient.ViewModels
             }
         }
 
-        void OnMessageDisappearing(Message message)
+        private void OnMessageDisappearing(Message message)
         {
             var idx = Messages.IndexOf(message);
             if (idx >= 6)
@@ -92,7 +96,6 @@ namespace SerapisPatient.ViewModels
                     ShowScrollTap = true;
                     LastMessageVisible = false;
                 });
-
             }
         }
     }
