@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Popup = Rg.Plugins.Popup.Popup;
 
 namespace SerapisPatient.UWP
 {
@@ -58,7 +59,8 @@ namespace SerapisPatient.UWP
                 List<Assembly> assembliesToInclude = new List<Assembly>();
                 assembliesToInclude.Add(typeof(CarouselViewRenderer).GetTypeInfo().Assembly);
 
-                Xamarin.Forms.Forms.Init(e);
+                Popup.Init();
+                Xamarin.Forms.Forms.Init(e, Popup.GetExtraAssemblies());
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

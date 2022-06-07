@@ -3,8 +3,10 @@ using MongoDB.Bson;
 using Realms;
 using SerapisPatient.Enum;
 using SerapisPatient.Models;
+using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Patient.Supabase;
+using SerapisPatient.Services.DB;
 using SerapisPatient.Utils;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.Base
@@ -23,11 +26,9 @@ namespace SerapisPatient.ViewModels.Base
     public class BaseViewModel : INotifyPropertyChanged
     {
 
-        public Realm _realm;
         SessionContext _sessionContext = new SessionContext();
         public BaseViewModel()
         {
-            _realm = Realm.GetInstance();
             _sessionContext.CacheData = new Dictionary<string, object>();
         }
 
@@ -35,10 +36,10 @@ namespace SerapisPatient.ViewModels.Base
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Patient getLocalUser()
+        public async Task<PatientDao> getLocalUserAsync()
         {
-            
-            var LocalUser = _realm.All<Patient>().FirstOrDefault();
+            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            var LocalUser = await userDb.RetrieveDocumentAsync();
             if (LocalUser != null)
             {
                 Debug.WriteLine("DB user =>" + LocalUser.ToJson());
@@ -47,9 +48,10 @@ namespace SerapisPatient.ViewModels.Base
                     //new Uri(LocalUser.PatientProfilePicture ) ?? new Uri("user1");
                 return LocalUser;
             }
+            //TODO: Need to remove this session cache( after Alpha release)
             var sessionUser = App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] as PatientAuthResponse;
             var patient = sessionUser.PatientData;
-            return new Patient() { PatientFirstName = $"Hi {patient.PatientFirstName}" };
+            return new PatientDao() { PatientFirstName = $"Hi {patient.PatientFirstName}" };
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -79,6 +81,7 @@ namespace SerapisPatient.ViewModels.Base
 
 
         #endregion
+
 
         public SessionContext SessionCache
         {

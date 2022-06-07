@@ -11,5 +11,6 @@ namespace SerapisPatient.Helpers
         public readonly static string AuthenticonError = "SM11";
         public readonly static string DatabaseError = "SM12";
         public readonly static string FatalError = "SM13";
+        public readonly static string DownTime = "SM14";
     }
 }

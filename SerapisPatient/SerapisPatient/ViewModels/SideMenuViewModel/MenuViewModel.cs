@@ -1,9 +1,13 @@
 ﻿using SerapisPatient.Models;
+using SerapisPatient.Models.Entities;
+using SerapisPatient.Services.DB;
 using SerapisPatient.ViewModels.Base;
+using SerapisPatient.Views;
 using SerapisPatient.Views.SideMenuPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -103,7 +107,15 @@ namespace SerapisPatient.ViewModels
 
         private async void Logout()
         {
-            await App.Current.MainPage.Navigation.PushAsync(new LoginView());
+            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
+            App.SessionCache.CacheData.Clear();
+            userDb.ClearDatabase();
+            userDb.Dispose();
+
+            App.Current.MainPage.Navigation.InsertPageBefore(new LoginViewV2(), App.Current.MainPage.Navigation.NavigationStack.First());
+
+            // await Task.Delay(600);
+            await App.Current.MainPage.Navigation.PopToRootAsync();
         }
         #endregion
 

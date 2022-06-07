@@ -129,10 +129,15 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
             ListOfSelectedSymptoms = new ObservableCollection<Symptoms>();
             ListOfProposedSymptoms = new ObservableCollection<Issue>();
             MainListOfSymptoms = symptomChecker.GetAllSymptomsMock();
-            GroupedListOfSymptoms = GenerateCarouselViewData(MainListOfSymptoms);
+            Init();
             NavigateToNextPageCommand = new Command(SelectedSymptom);
             SelectSymptomCommand = new Command<object>(ExecuteSelectSymptomCommand);
             Title = "Symptoms";
+        }
+
+        private async Task Init()
+        {
+            GroupedListOfSymptoms = await GenerateCarouselViewData(MainListOfSymptoms);
         }
 
         private async void SelectedSymptom()
@@ -191,9 +196,9 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
                 return tempList;
         }
 
-        private ObservableCollection<ViewSymptoms> GenerateCarouselViewData(List<Symptoms> unGroupedList)
+        private async Task<ObservableCollection<ViewSymptoms>> GenerateCarouselViewData(List<Symptoms> unGroupedList)
         {
-            var groupedSymptomData = ViewModelHelper.GroupSymptoms(unGroupedList);
+            var groupedSymptomData = await ViewModelHelper.GroupSymptoms(unGroupedList);
             var  carouselViewList = new ObservableCollection<ViewSymptoms>();
             carouselViewList.Add(groupedSymptomData.Item1);
             carouselViewList.Add(groupedSymptomData.Item2);

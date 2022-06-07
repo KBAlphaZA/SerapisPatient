@@ -1,6 +1,7 @@
 ﻿using SerapisPatient.ViewModels;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,14 +23,14 @@ namespace SerapisPatient.Views.MainViews
 
         const uint longerAnimationDuration = 2000;
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            
+            await OnLoad();
             //viewModel.OnAppearing(noticeBoardList,userName,message,noticeBoardLabel, appointmentButton,medicationButton, scanButton);
             //base.OnAppearing();
             //CheckUp.OnExpandTapped += ExpandPopup;
 
-            //Origanal positions
+            //Original positions
             noticeBoardList.TranslationX = 2000;
 
             userName.Opacity = 0;
@@ -60,12 +61,18 @@ namespace SerapisPatient.Views.MainViews
 
         }
 
+        public async Task OnLoad()
+        {
+            await viewModel.OnAppearing();
+        }
         //private void ExpandPopup()
         //{
         //    var height = CheckUp.Height;
 
         //    CheckUp.TranslateTo(0, this.Height - height, AnimationSpeed, Easing.SinInOut);
         //}
+
+        
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

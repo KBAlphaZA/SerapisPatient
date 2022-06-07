@@ -101,13 +101,14 @@ namespace SerapisPatient.ViewModels
 
         private async Task RegisterUser()
         {
+            var popUp = new DefaultLoadingView()
+            {
+                IsLightDismissEnabled = false,
+            };            
             try
             {
                 //base.IsBusy = true;
-                var popUp = new DefaultLoadingView()
-                {
-                    IsLightDismissEnabled = false,
-                };
+               
                 App.Current.MainPage.Navigation.ShowPopup(popUp) ;
                 Debug.WriteLine("Password: *************");
                 var internationalNumber = NumberUtil.ReplaceFirst(CellphoneNumberForm, "0", "27");
@@ -129,7 +130,7 @@ namespace SerapisPatient.ViewModels
                 popUp.Dismiss(null);
                 if (!response.status)
                     {
-                        if (response.StatusCode == StatusCodes.AuthenticonError && response.message.Contains("User already registered on supabase"))
+                        if (response.StatusCode == StatusCodes.AuthenticonError && response.message.Contains("already"))
                         {
                             await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
                             return;
@@ -161,6 +162,9 @@ namespace SerapisPatient.ViewModels
                     
             catch (Exception e)
             {
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    popUp.Dismiss(null);
+                
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Something went wrong.."));
                 Debug.WriteLine("Error: "+e);
                 return;

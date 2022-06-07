@@ -5,7 +5,7 @@ First Commit
 
 
 
-
+[![Build status](https://build.appcenter.ms/v0.1/apps/62f7610b-bf2b-4521-b050-252dd945366a/branches/release%2Falpha/badge)](https://appcenter.ms)
 
 
 

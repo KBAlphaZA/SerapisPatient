@@ -17,8 +17,8 @@ namespace SerapisPatient.Services
     {
        
 
-        //private string APIURL = "http://serapismedicalapi.azurewebsites.net/api"; <- AZURE
-        private string APIURL = "https://serapismedicalapi.herokuapp.com/api"; 
+        private string APIURL = "https://serapismedicalapi.azurewebsites.net/api"; //<- AZURE
+        //private string APIURL = "https://serapismedicalapi.herokuapp.com/api"; 
 
         //GET
         public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
@@ -82,7 +82,7 @@ namespace SerapisPatient.Services
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}/doctor";
+                string api = $"{APIURL}/v1/doctor";
                 //Getting JSON data from the WebAPI
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
