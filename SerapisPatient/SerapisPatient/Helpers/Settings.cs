@@ -1,6 +1,5 @@
 ﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
-using SerapisPatient.Services;
 using System.Collections.Generic;
 
 namespace SerapisPatient.Helpers

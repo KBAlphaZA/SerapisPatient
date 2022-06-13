@@ -9,7 +9,7 @@
              Title="Serapis Patient"
              >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="{Binding ProfilePicture}" Command="{Binding NavigateToProfilePageCommand }"/>
+        <ToolbarItem Icon="user1.png" Command="{Binding NavigateToProfilePageCommand }"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -71,7 +71,7 @@
                             </BoxView.Behaviors>
                         </BoxView>
 
-                        <Label Text="Make Appointment(Coming Soon)" 
+                        <Label Text="Make Appointment" 
                                VerticalOptions="Center" 
                                HorizontalOptions="Center" 
                                FontSize="20"

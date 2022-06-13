@@ -1,16 +1,11 @@
 ﻿using SerapisPatient.Models;
 using SerapisPatient.ViewModels.Base;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Linq;
 using SerapisPatient.Services.LocationServices;
 using Newtonsoft.Json;
-using SerapisPatient.Helpers;
 
 namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
 {

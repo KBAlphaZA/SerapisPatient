@@ -6,8 +6,11 @@
         /// Symptom data will be cached using this key
         /// </summary>
         SelectedSymptomsData,
+        CachedSymptomsList,
+        SelectedSymptomsIds,
         Otp,
         SessionUser,
-        PatientUser
+        PatientUser,
+        SelectedPractice
     }
 }

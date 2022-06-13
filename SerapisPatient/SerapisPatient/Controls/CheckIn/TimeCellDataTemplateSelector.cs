@@ -1,8 +1,4 @@
-﻿using SerapisPatient.Models.CheckIn;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 //using TimeInfoType = UnZone.Models.TimeInfo.TimeInfoTypeEnum;
 namespace SerapisPatient.Controls.CheckIn
 {

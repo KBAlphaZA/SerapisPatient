@@ -1,5 +1,4 @@
 ﻿using System;
-using SerapisPatient.behavious;
 using SerapisPatient.Models;
 using SerapisPatient.Models.SymptomsChecker;
 using SerapisPatient.Services.SymptomChecker;
@@ -8,29 +7,188 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using CarouselView.FormsPlugin.Abstractions;
-using MongoDB.Bson;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
-using SerapisPatient.Models.Appointments;
+using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.SymptomsChecker.Diagnosis;
 using SerapisPatient.PopUpMessages;
+using SerapisPatient.TemplateViews;
 using SerapisPatient.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.BehaviorsPack;
 using SerapisPatient.Views.SymptomsChecker;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
 {
     public class SymptomsCheckerViewModel : BaseViewModel
     {
-        #region Properties
+       
+
+        public SymptomsCheckerViewModel()
+        {
+            Init();
+            NavigateToNextPageCommand = new Command(SelectedSymptom);
+            SelectSymptomCommand = new Command<object>(ExecuteSelectSymptomCommand);
+            Title = "Symptoms";
+        }
+
+
+
+
+        
+        private async Task Init()
+        {
+            PatientInfo = App.SessionCache.UserInfo;
+            if (ListOfSelectedSymptoms is null || ListOfProposedSymptoms is null)
+                App.SessionCache.CacheData.Remove(CacheKeys.SelectedSymptomsData.ToString());
+            ShowUI = false;
+            ListOfSelectedSymptoms = new ObservableCollection<Symptoms>();
+            ListOfProposedSymptoms = new ObservableCollection<Issue>();
+
+           
+        }
+
+        private async Task<List<Symptoms>> PopulateSymptoms()
+        {
+           return await symptomChecker.GetAllSymptoms();
+        }
+        
+        
+
+        private async void SelectedSymptom()
+        {
+            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
+            
+            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully completed your booking"));
+
+            //await Task.Delay(100);
+            await App.Current.MainPage.Navigation.PushAsync(new DiagnosisView());
+        }
+
+        private async void ExecuteSelectSymptomCommand( object obj )
+        {
+            
+            var labelObj = (Label) obj;
+            var frameObj = (Frame) labelObj.Parent;
+            var title = labelObj.Text;
+            Debug.WriteLine("Label Element " + title );
+            Debug.WriteLine("List Count:  " + MainListOfSymptoms.Count );
+            try
+            {
+                IsBusy = true;
+                var symptomByName = SearchUtil.FindSymptomByName(MainListOfSymptoms, title);
+                // Call API for proposed Symptoms
+
+                App.SessionCache.CacheData = ViewModelHelper.HandleCachingObject<string>(App.SessionCache.CacheData, CacheKeys.SelectedSymptomsIds.ToString(), symptomByName.ID);
+                var userYear = (PatientInfo.PatientAge == 0 ? 30 : DateTime.Now.Year - App.SessionCache.UserInfo.PatientAge).ToString();
+                var gender = (PatientInfo.Gender.ToString() ?? Genders.male.ToString());
+                var ids = (string)App.SessionCache.CacheData[CacheKeys.SelectedSymptomsIds.ToString()];
+                var diagnosisResponses = await symptomChecker.GetProposedDiagnosisResponse(ids, userYear, gender);
+                //var year = (DateTime.Now.Year - PatientInfo.PatientAge).ToString();
+                //var item = await symptomChecker.GetProposedSymptoms(symptomByName.ID,year,user.Gender.ToString());
+                foreach (var diagnosisResponse in diagnosisResponses)
+                {
+                    ListOfSelectedSymptoms.Add(symptomByName);
+                    ListOfProposedSymptoms.Add(diagnosisResponse.Issue);
+                    ProgressBarValue = NumberUtil.ToSingle(diagnosisResponse.Issue.Accuracy);
+                    ProgressBarColor = ViewModelHelper.DetermineProgressBarColorByValue(diagnosisResponse.Issue.Accuracy);
+                }
+
+                App.SessionCache.CacheData = ViewModelHelper.HandleCachingListObject<DiagnosisResponse>(
+                    App.SessionCache.CacheData, CacheKeys.SelectedSymptomsData.ToString(), diagnosisResponses);
+
+                Debug.WriteLine("progressBarValue: {0} progressBarColor: {1}", progressBarValue, progressBarColor);
+                //await progressBar.ProgressTo(0.75, 500, Easing.Linear);
+                IsBusy = false;
+            }
+            catch (Exception e)
+            {
+                IsBusy = false;
+                Debug.WriteLine("Exception: " + e.Message);
+            }
+            
+        }
+        
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                ShowUI = false;
+                //ListOfSymptoms = SearchUtil.SearchForSymptoms(query,MainListOfSymptoms);
+                ListOfSymptoms = Search(query);
+                MainListOfSymptoms = ListOfSymptoms;
+                ShowUI = true;
+            });
+        });
+        
+        private List<Symptoms> Search(string queryText)
+        {
+
+            ListOfSymptoms = MainListOfSymptoms;
+
+            Debug.WriteLine("Query string: [ " + queryText + " ]");
+
+            var tempList = ListOfSymptoms
+                .Where(x => x.Name.ToLower().Contains(queryText.ToLower()))
+                .ToList();
+
+                return tempList;
+        }
+
+        private async Task<ObservableCollection<ViewSymptoms>> GenerateCarouselViewData(List<Symptoms> unGroupedList)
+        {
+            var groupedSymptomData = await ViewModelHelper.GroupSymptoms(unGroupedList);
+            var  carouselViewList = new ObservableCollection<ViewSymptoms>();
+            carouselViewList.Add(groupedSymptomData.Item1);
+            carouselViewList.Add(groupedSymptomData.Item2);
+            carouselViewList.Add(groupedSymptomData.Item3);
+            carouselViewList.Add(groupedSymptomData.Item4);
+            carouselViewList.Add(groupedSymptomData.Item5);
+            
+            return carouselViewList;
+        }
+
+        public async Task OnAppearing()
+        {
+            try
+            {
+
+                DefaultLoadingView popUp = new DefaultLoadingView();
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                {
+                    popUp.IsLightDismissEnabled = false;
+                }
+                
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    App.Current.MainPage?.Navigation.ShowPopup(popUp);
+                //Task.Delay(4000);
+                if (!App.SessionCache.CacheData.ContainsKey(CacheKeys.CachedSymptomsList.ToString()))
+                {
+                    MainListOfSymptoms = await PopulateSymptoms();
+                    App.SessionCache.CacheData.Add(CacheKeys.CachedSymptomsList.ToString(), MainListOfSymptoms);
+                }
+                MainListOfSymptoms = (List<Symptoms>)App.SessionCache.CacheData[CacheKeys.CachedSymptomsList.ToString()];
+                GroupedListOfSymptoms = await GenerateCarouselViewData(MainListOfSymptoms);
+                ShowUI = true;
+                //= PopulateSymptoms().Result;
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                    popUp.Dismiss(null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+        }
+        
+         #region Properties
 
         public Command NavigateToNextPageCommand { get; }
         private Symptoms Symptom { get; set; }
+        public Patient PatientInfo { get;  set; }
 
         private List<Symptoms> _listOfSymptoms;
         private ObservableCollection<Symptoms> _listOfSelectedSymptoms;
@@ -119,94 +277,6 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
         private SessionContext _context; 
 
         #endregion
-
-        public SymptomsCheckerViewModel()
-        {
-            if (ListOfSelectedSymptoms is null || ListOfProposedSymptoms is null)
-                App.SessionCache.CacheData.Remove(CacheKeys.SelectedSymptomsData.ToString());
-            
-            ShowUI = false;
-            ListOfSelectedSymptoms = new ObservableCollection<Symptoms>();
-            ListOfProposedSymptoms = new ObservableCollection<Issue>();
-            MainListOfSymptoms = symptomChecker.GetAllSymptomsMock();
-            Init();
-            NavigateToNextPageCommand = new Command(SelectedSymptom);
-            SelectSymptomCommand = new Command<object>(ExecuteSelectSymptomCommand);
-            Title = "Symptoms";
-        }
-
-        private async Task Init()
-        {
-            GroupedListOfSymptoms = await GenerateCarouselViewData(MainListOfSymptoms);
-        }
-
-        private async void SelectedSymptom()
-        {
-            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
-            
-            await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully completed your booking"));
-
-            await Task.Delay(100);
-            await App.Current.MainPage.Navigation.PushAsync(new DiagnosisView());
-        }
-
-        private async void ExecuteSelectSymptomCommand( object obj )
-        {
-            var labelObj = (Label) obj;
-            var frameObj = (Frame) labelObj.Parent;
-            var title = labelObj.Text;
-            Debug.WriteLine("Label Element " + title );
-            Debug.WriteLine("List Count:  " + MainListOfSymptoms.Count );
-            
-            var symptomByName = SearchUtil.FindSymptomByName(MainListOfSymptoms,title);
-            // Call API for proposed Symptoms
-            var item = await symptomChecker.GetProposedSymptomsMock(symptomByName.ID);
-            ListOfSelectedSymptoms.Add(symptomByName);
-            ListOfProposedSymptoms.Add(item.Issue);
-            App.SessionCache.CacheData = ViewModelHelper.HandleCachingListObject<DiagnosisResponse>(App.SessionCache.CacheData, CacheKeys.SelectedSymptomsData.ToString(),item);
-            ProgressBarValue = NumberUtil.ToSingle(item.Issue.Accuracy);
-            ProgressBarColor = ViewModelHelper.DetermineProgressBarColorByValue(item.Issue.Accuracy);
-            
-            Debug.WriteLine("progressBarValue: {0} progressBarColor: {1}", progressBarValue, progressBarColor);
-            //await progressBar.ProgressTo(0.75, 500, Easing.Linear);
-        }
         
-        public ICommand PerformSearch => new Command<string>((string query) =>
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                ShowUI = false;
-                //ListOfSymptoms = SearchUtil.SearchForSymptoms(query,MainListOfSymptoms);
-                ListOfSymptoms = Search(query);
-                ShowUI = true;
-            });
-        });
-        
-        private List<Symptoms> Search(string queryText)
-        {
-
-            ListOfSymptoms = MainListOfSymptoms;
-
-            Debug.WriteLine("Query string: [ " + queryText + " ]");
-
-            var tempList = ListOfSymptoms
-                .Where(x => x.Name.ToLower().Contains(queryText.ToLower()))
-                .ToList();
-
-                return tempList;
-        }
-
-        private async Task<ObservableCollection<ViewSymptoms>> GenerateCarouselViewData(List<Symptoms> unGroupedList)
-        {
-            var groupedSymptomData = await ViewModelHelper.GroupSymptoms(unGroupedList);
-            var  carouselViewList = new ObservableCollection<ViewSymptoms>();
-            carouselViewList.Add(groupedSymptomData.Item1);
-            carouselViewList.Add(groupedSymptomData.Item2);
-            carouselViewList.Add(groupedSymptomData.Item3);
-            carouselViewList.Add(groupedSymptomData.Item4);
-            carouselViewList.Add(groupedSymptomData.Item5);
-            
-            return carouselViewList;
-        }
     }
 }

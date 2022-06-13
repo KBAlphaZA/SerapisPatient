@@ -1,25 +1,14 @@
 ﻿
 using MongoDB.Bson;
-using Realms;
-using SerapisPatient.Enum;
 using SerapisPatient.Models;
 using SerapisPatient.Models.Entities;
-using SerapisPatient.Models.Patient;
-using SerapisPatient.Models.Patient.Supabase;
 using SerapisPatient.Services.DB;
-using SerapisPatient.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.CommunityToolkit.ObjectModel;
-using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.Base
 {
@@ -46,12 +35,14 @@ namespace SerapisPatient.ViewModels.Base
                 FirstName = "Hi " + LocalUser.PatientFirstName;
                 //ProfilePicture = (LocalUser.PatientProfilePicture == null) ? new Uri("user1") : new Uri(LocalUser.PatientProfilePicture);
                     //new Uri(LocalUser.PatientProfilePicture ) ?? new Uri("user1");
+                    ProfilePicture ="user1.png";
                 return LocalUser;
             }
             //TODO: Need to remove this session cache( after Alpha release)
-            var sessionUser = App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] as PatientAuthResponse;
+            /*var sessionUser = App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] as PatientAuthResponse;
             var patient = sessionUser.PatientData;
-            return new PatientDao() { PatientFirstName = $"Hi {patient.PatientFirstName}" };
+            return new PatientDao() { PatientFirstName = $"Hi {patient.PatientFirstName}" };*/
+            return new PatientDao(){ PatientFirstName = "Hi User"};
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -89,9 +80,9 @@ namespace SerapisPatient.ViewModels.Base
             set { SetProperty(ref _sessionContext, value); }
         }
 
-        private Uri profilePicture;
+        private string profilePicture;
 
-        public Uri ProfilePicture
+        public string ProfilePicture
         {
             get { return profilePicture; }
             set { profilePicture = value; }

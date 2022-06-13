@@ -1,15 +1,5 @@
-﻿using MongoDB.Driver;
-using SerapisPatient.Helpers;
-using SerapisPatient.Services;
-using SerapisPatient.Utils;
+﻿using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

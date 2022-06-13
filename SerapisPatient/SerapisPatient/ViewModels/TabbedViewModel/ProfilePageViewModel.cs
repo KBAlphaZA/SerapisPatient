@@ -1,21 +1,15 @@
 ﻿using System;
 using MongoDB.Bson;
 using Realms;
-using SerapisPatient.Enum;
 using SerapisPatient.Models;
-using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.Patient;
-using SerapisPatient.Models.Patient.Supabase;
 using SerapisPatient.Services.Data;
-using SerapisPatient.Services.DB;
 using SerapisPatient.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using SerapisPatient.TemplateViews;
-using SerapisPatient.Utils;
 using Xamarin.CommunityToolkit.Extensions;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.TabbedViewModel
@@ -26,7 +20,8 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
         public ProfilePageViewModel()
         {
             _realm = Realm.GetInstance();
-            Profile = App.CurrentUser;
+            Profile = App.SessionCache.UserInfo;
+            //Profile = App.CurrentUser;
             ProfilePageViewModelInit();
             
             LoadMoreIcons = new Command(LoadMore);
@@ -81,15 +76,16 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
                     popUp.IsLightDismissEnabled = false;
                 }
 
-                if (App.CurrentUser != null)
+                if (App.SessionCache.UserInfo != null)
                 {
                     return;
                 }
                 
                 if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
                     App.Current.MainPage?.Navigation.ShowPopup(popUp);
-                var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
-                if (!sessionDataExist)
+                var sessionDataExist = App.SessionCache.UserInfo;
+                //var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
+                if (sessionDataExist is null)
                 {
                     var response = await CustomerAccountService.RetrieveUserInformationAsync(null);
 
@@ -97,7 +93,8 @@ namespace SerapisPatient.ViewModels.TabbedViewModel
 
                     if (response?.data != null)
                     {
-                        App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                        //App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                        App.SessionCache.UserInfo = response.data;
                     }
                     else
                     {

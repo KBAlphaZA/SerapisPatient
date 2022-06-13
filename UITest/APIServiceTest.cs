@@ -11,6 +11,7 @@ using System.Reflection;
 using SerapisPatient.Enum;
 using SerapisPatient.Services.SymptomChecker;
 using SerapisPatient.Models.SymptomsChecker;
+using SerapisPatient.Models.SymptomsChecker.Diagnosis;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.SymptomsCheckerViewModel;
 
@@ -27,9 +28,13 @@ namespace UITest
         {
             SymptomCheckerService symptomChecker = new SymptomCheckerService();
             Dictionary<String, object> CacheData = new Dictionary<string, object>();
-            var item = await symptomChecker.GetProposedSymptomsMock("80");
-            var output = ViewModelHelper.HandleCachingListObject(CacheData,CacheKeys.SelectedSymptomsData.ToString(),item);
-            Debug.WriteLine(output);
+            List<DiagnosisResponse> listOfDiagnosis = new List<DiagnosisResponse>();
+                
+                listOfDiagnosis.AddRange((IEnumerable<DiagnosisResponse>)await symptomChecker.GetProposedSymptomsMock("80"));
+                
+            
+           // var output = ViewModelHelper.HandleCachingListObject(CacheData,CacheKeys.SelectedSymptomsData.ToString(),item);
+            //Debug.WriteLine(output);
         }
         [Test]
         public async Task SymptomsTestAsync()

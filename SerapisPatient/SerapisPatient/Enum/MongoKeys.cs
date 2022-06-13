@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Utils
+﻿namespace SerapisPatient.Utils
 {
     public class MongoKeys
     {

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
-using Plugin.Permissions.Abstractions;
-using SerapisPatient.Models;
 
 namespace SerapisPatient.Services.LocationServices
 {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using MvvmHelpers;
 using SerapisPatient.Models;
 using SerapisPatient.Utils;

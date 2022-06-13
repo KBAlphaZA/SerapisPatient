@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using SerapisPatient.Enum;
 using SerapisPatient.Models.SymptomsChecker.Diagnosis;

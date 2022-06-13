@@ -1,8 +1,4 @@
 ﻿using SerapisPatient.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Lottie.Forms;
 
 namespace SerapisPatient.ViewModels
 {

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using SerapisPatient.Enum;
 using SerapisPatient.Models.MedicalDetails;

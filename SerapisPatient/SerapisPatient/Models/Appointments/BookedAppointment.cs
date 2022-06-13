@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Models.Appointments
+﻿namespace SerapisPatient.Models.Appointments
 {
     public class BookedAppointment
     {

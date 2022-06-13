@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Models.Patient.Supabase
+﻿namespace SerapisPatient.Models.Patient.Supabase
 {
     public class PatientAuthResponse
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Models.SymptomsChecker
+﻿namespace SerapisPatient.Models.SymptomsChecker
 {
     public class SymptomsListData 
     {

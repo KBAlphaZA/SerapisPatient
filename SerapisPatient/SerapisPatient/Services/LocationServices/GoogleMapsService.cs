@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SerapisPatient.Helpers;
+﻿using SerapisPatient.Helpers;
 
 namespace SerapisPatient.Services.LocationServices
 {

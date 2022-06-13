@@ -1,24 +1,17 @@
 
 using SerapisPatient.Models;
-using SerapisPatient.Models.Patient;
 using SerapisPatient.Views;
 using SerapisPatient.Views.MainViews;
 using System;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using SerapisPatient.Services.Data;
 using System.Collections.Generic;
 using SerapisPatient.TemplateViews;
 using SerapisPatient.Models.Entities;
 using SerapisPatient.Services.DB;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter;
 using Microsoft.AppCenter.Distribute;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
@@ -29,16 +22,19 @@ namespace SerapisPatient
 
         public bool MockData = false;
         public static bool CheckLogin { get; set; }
-        public static string User = "Ceba";  //<-EXAMPLE
+        
         #region Login services
+        
         public static SessionContext SessionCache = new SessionContext();
-        public static Patient CurrentUser = new Patient();
+        public static List<string> SessionCache1= new List<string>();
+        public static string User = "Unknown";  //<-EXAMPLE //Not to be used
         public RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
-        BaseResponse<Patient> response = new BaseResponse<Patient> ();
+        public static string APIURL = "https://serapismedicalapi.azurewebsites.net/api"; //<- AZURE
         #endregion
 
         public App ()
-		{
+        {
+            SessionCache1 = new List<string>();
             SessionCache.CacheData = new Dictionary<string, object>();
 			InitializeComponent();
             Init();
@@ -99,20 +95,6 @@ namespace SerapisPatient
 		{
             // Handle when your app resumes
             //TODO: Fix this
-            RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
-            try
-            {
-                // We probably wanna store some cache somewhere to indicate where was the last page user was on and any data that was pulled
-                var dbuser = userDb.RetrieveDocument();
-                if (!dbuser.IsAuthenticated)
-                {
-                    MainPage = new NavigationPage(new LoginViewV2());
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-		}
+        }
 	}
 }

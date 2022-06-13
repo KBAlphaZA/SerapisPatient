@@ -1,11 +1,6 @@
-﻿using SerapisPatient.Models;
-using SerapisPatient.Models.Doctor;
+﻿using SerapisPatient.Models.Doctor;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
-using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Services;
 using SerapisPatient.PopUpMessages;

@@ -1,13 +1,8 @@
-﻿using SerapisPatient.Models.Doctor;
-using SerapisPatient.Models.SymptomsChecker;
+﻿using SerapisPatient.Models.SymptomsChecker;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using Newtonsoft.Json;
@@ -17,22 +12,48 @@ namespace SerapisPatient.Services.SymptomChecker
 {
     public class SymptomCheckerService : ISymptomCheckerService
     {
-        private string APIURL = "https://serapismedicalapi.herokuapp.com/api";
+        //private string APIURL = "https://serapismedicalapi.herokuapp.com/api";
+        //private string APIURL = App.APIURL;
 
-        public List<Symptoms> GetAllSymptoms()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<object> GetProposedSymptoms(string id)
+        public async Task<List<Symptoms>> GetAllSymptoms()
         {
             using (HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}/SymptomChecker/v1/diagnosis-by-symptoms/{id}";
+                string api = $"{App.APIURL}/SymptomChecker/v1/symptoms";
                 //Getting JSON data from the WebAPI
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
-                var result = JsonConvert.DeserializeObject<object>(content);
+                var result = JsonConvert.DeserializeObject<List<Symptoms>>(content);
+                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
+                return result;
+            }
+        }
+
+        public async Task<List<Symptoms>> GetProposedSymptoms(string ids, string year, string gender)
+        {
+            using (HttpClient _httpClient = new HttpClient())
+            {
+                string api = $"{App.APIURL}/SymptomChecker/v1/proposed-symptoms?id={ids}&age={year}&sex={gender}";
+                //tring api = $"{APIURL}/SymptomChecker/v1/diagnosis-by-symptoms/{id}";
+                //Getting JSON data from the WebAPI
+                var content = await _httpClient.GetStringAsync(api);
+                //We deserialize the JSON data from this line
+                var result = JsonConvert.DeserializeObject<List<Symptoms>>(content);
+                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
+                return result;
+            }
+        }
+
+        public async Task<List<DiagnosisResponse>> GetProposedDiagnosisResponse(string ids, string year, string gender)
+        {
+            using (HttpClient _httpClient = new HttpClient())
+            {
+                string api = $"{App.APIURL}/SymptomChecker/v1/proposed-symptoms?id={ids}&age={year}&sex={gender}";
+                //tring api = $"{APIURL}/SymptomChecker/v1/diagnosis-by-symptoms/{id}";
+                //Getting JSON data from the WebAPI
+                var content = await _httpClient.GetStringAsync(api);
+                //We deserialize the JSON data from this line
+                var result = JsonConvert.DeserializeObject<List<DiagnosisResponse>>(content);
                 Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
                 return result;
             }

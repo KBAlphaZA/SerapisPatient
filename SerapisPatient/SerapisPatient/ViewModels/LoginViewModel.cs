@@ -187,8 +187,9 @@ namespace SerapisPatient.ViewModels
                     });
                 }
 
-                App.CurrentUser = response.data.PatientData;
-                App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(),response.data.PatientData);
+                App.SessionCache.UserInfo = response.data.PatientData;
+                //App.CurrentUser = response.data.PatientData;
+                //App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(),response.data.PatientData);
                 App.SessionCache.CacheData.Add(CacheKeys.Otp.ToString(), response.data.Otp);
                 await App.Current.MainPage.Navigation.PushAsync(new OtpView());
             }

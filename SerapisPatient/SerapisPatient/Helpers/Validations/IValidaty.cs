@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Helpers.Validations
+﻿namespace SerapisPatient.Helpers.Validations
 {
     internal interface IValidaty
     {

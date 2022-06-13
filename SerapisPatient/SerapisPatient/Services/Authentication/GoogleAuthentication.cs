@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xamarin.Auth;
 using Xamarin.Forms;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using SerapisPatient.Helpers;
-using SerapisPatient.Services.Authentication;
 
 namespace SerapisPatient.Services.Authentication
 {

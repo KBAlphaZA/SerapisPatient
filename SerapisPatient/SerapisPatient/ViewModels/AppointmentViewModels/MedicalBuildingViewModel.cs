@@ -1,21 +1,13 @@
 ﻿
 using CarouselView.FormsPlugin.Abstractions;
 using MongoDB.Bson;
-
-using SerapisPatient.behavious;
-
-using SerapisPatient.Helpers;
-
 using SerapisPatient.Models;
 using SerapisPatient.Models.Appointments;
-using SerapisPatient.Models.Patient;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.Services;
-using SerapisPatient.Services.LocationServices;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;

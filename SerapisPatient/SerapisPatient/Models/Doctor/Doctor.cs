@@ -3,7 +3,6 @@ using MongoDB.Bson.Serialization.Attributes;
 using SerapisPatient.Enum;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SerapisPatient.Models.Doctor
 {

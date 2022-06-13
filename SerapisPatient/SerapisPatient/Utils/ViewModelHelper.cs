@@ -4,11 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
-using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
 using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.SymptomsChecker;
-using SerapisPatient.PopUpMessages;
 using SerapisPatient.Services.DB;
 using SerapisPatient.Views;
 using Xamarin.Forms;
@@ -61,7 +59,7 @@ namespace SerapisPatient.Utils
             return Color.Green;
         }
 
-        public static Dictionary<String, object> HandleCachingListObject<T>(Dictionary<String, object> CacheData,string Cachekey ,T data)
+        public static Dictionary<String, object> HandleCachingListObject<T>(Dictionary<String, object> CacheData,string Cachekey ,List<T> data)
         {
             List<T> list = new List<T>();
             if (CacheData.ContainsKey(Cachekey))
@@ -69,25 +67,37 @@ namespace SerapisPatient.Utils
                 var listObj = (List<T>) CacheData[Cachekey];
                 Debug.WriteLine("Number Symptoms already selected [" + listObj.Count + "]");
                 Debug.WriteLine("Adding new Symptom[" + data.ToJson() + "]" + " to the cache list");
-                listObj.Add(data);
+                listObj.AddRange(data);
                 CacheData[Cachekey] = listObj;
                 return CacheData;
             }
             
-            list.Add(data);
+            list.AddRange(data);
             CacheData.Add(Cachekey,list);
             return CacheData;
         }
         
-        public static Dictionary<String, object> HandleCachingObject(Dictionary<String, object> CacheData,string Cachekey ,object data)
+        public static Dictionary<String, object> HandleCachingObject<T>(Dictionary<String, object> CacheData,string Cachekey ,T data)
         {
-            object obj = new object();
+            //T obj = new T();
             if (CacheData.ContainsKey(Cachekey))
             {
-                obj = CacheData[Cachekey];
-                Debug.WriteLine("Adding new item [" + data.ToJson() + "]" + " to the cache list");
-                CacheData["selectedSymptoms"] = obj;
-                return CacheData;
+                if (Cachekey == CacheKeys.SelectedSymptomsIds.ToString() )
+                {
+                    //13-21-41   etc.... 
+                    var stringToAppend = (string) CacheData[Cachekey]+ "-"+data;
+                    Debug.WriteLine($"Adding ID: {stringToAppend} to the cache list");
+                    CacheData[Cachekey] = stringToAppend;
+                    return CacheData;
+                }
+                else
+                {
+                    T obj = (T) CacheData[Cachekey];
+                    Debug.WriteLine("Adding new item [" + data.ToJson() + "]" + " to the cache list");
+                    CacheData[Cachekey] = obj;
+                    return CacheData;
+                }
+                
             }
             
             CacheData.Add(Cachekey,data);
@@ -96,7 +106,7 @@ namespace SerapisPatient.Utils
 
         public static async void DumpDataAndKickUserOut()
         {
-            await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Registered"));
+            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully Registered"));
             App.Current.MainPage.Navigation.InsertPageBefore(new LoginViewV2(), App.Current.MainPage.Navigation.NavigationStack.First());
 
             RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();

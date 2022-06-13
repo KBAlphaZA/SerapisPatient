@@ -3,13 +3,8 @@ using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
-using SerapisPatient.Views;
 using SerapisPatient.Views.AppointmentFolder.Booking;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels

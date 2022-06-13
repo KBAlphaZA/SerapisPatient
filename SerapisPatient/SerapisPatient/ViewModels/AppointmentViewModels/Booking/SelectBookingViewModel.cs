@@ -2,7 +2,6 @@
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.behavious;
 using SerapisPatient.Models;
-using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.PopUpMessages;
@@ -14,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -170,7 +168,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels.Booking
             {
                 IsBusy = true;
                 await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("W", "We Are loading Avaliable Doctors "));
-                //2await Task.Delay(1500);
+                Task.Delay(100);
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     //Date Value eg.7th

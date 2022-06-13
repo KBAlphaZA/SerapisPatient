@@ -1,11 +1,4 @@
-﻿using SerapisPatient.Services.DependencyServices;
-using SerapisPatient.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using SerapisPatient.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

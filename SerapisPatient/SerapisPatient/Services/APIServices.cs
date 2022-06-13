@@ -44,25 +44,37 @@ namespace SerapisPatient.Services
         {
             using(HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{APIURL}/Booking?id={medicalBuildingModel.Id}";
+                string api = $"{APIURL}/Booking?";
+                //string api = $"{APIURL}/Booking?id={medicalBuildingModel.Id}";
                 //string api = $"{APIURL}/Booking?id=5bc8e04a1c9d44000088ad93";
-                Appointment appointment = new Appointment();
+                var appointment = new Models.Bookings.Booking();
+                var appointmentSession = new Session()
+                {
+                    Duration = "30"
+                };
+                var session = new BookedAppointment()
+                {
+                    BookedpatientId = currentUser,
+                    AppointmentSession = appointmentSession
+                };
+                appointment.id = ObjectId.GenerateNewId().ToString();
                 appointment.BookingId = ObjectId.GenerateNewId().ToString();
-                appointment.LineNumber = 0;
-                appointment.PatientID = currentUser;
-                appointment.DateAndTimeOfAppointment = DateTime.Now;
+                appointment.PracticeId = medicalBuildingModel.Id;
                 appointment.DoctorsId = enquiredDoctor.Id;
-                appointment.IsSerapisBooking = false;
+                //appointment.AppointmentDateTime = bookedDate; //TODO: Fix this date thing
+                appointment.AppointmentDateTime = DateTime.Parse("07/15/2022 14:30:00");
+                appointment.BookedAppointment = session;
+
+
                 appointment.HasSeenGP = false;
-                appointment.Duration = "30";
-                appointment.HasBeenToThisPractice = false;
-                appointment.PracticeID = medicalBuildingModel.Id.ToString();
+                //appointment = false;
+                
 
                 var json = JsonConvert.SerializeObject(appointment);
 
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                var response = await _httpClient.PutAsync(api, content);
+                var response = await _httpClient.PostAsync(api, content);
                 Debug.WriteLine(" Booking Creation Response =>[" + response + "]");
 
                 Debug.WriteLine("Returned Status Code => "+"[" + response.StatusCode + "]");

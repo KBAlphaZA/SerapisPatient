@@ -1,8 +1,5 @@
-﻿using SerapisPatient;
-using SerapisPatient.Models.Doctor;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
@@ -37,7 +34,7 @@ namespace SerapisPatient.Models.Appointments
         ////public Specilization FieldsSpecilized { get; set; }
         ////public BookedTimes BookedTimes { get; set; }
         ///[BsonElement("Appointments")]
-        public List<Appointments.Appointment> Appointments { get; set; }
+        //public List<Appointments.Appointment> Appointments { get; set; }
     }
     public partial class Location
     {        

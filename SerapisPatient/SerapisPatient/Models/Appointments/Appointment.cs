@@ -1,11 +1,8 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace SerapisPatient.Models.Appointments
 {
-    public class Appointment
+    public class BookingAppointment
     {
         public string BookingId { get; set; }
 

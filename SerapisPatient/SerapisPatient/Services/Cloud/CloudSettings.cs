@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Services.Cloud
+﻿namespace SerapisPatient.Services.Cloud
 {
     public class CloudSettings
     {

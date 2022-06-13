@@ -3,8 +3,6 @@ using SerapisPatient.Models.Appointments;
 using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models.SymptomsChecker;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SerapisPatient.behavious
 {

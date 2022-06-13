@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Services.DependencyServices
+﻿namespace SerapisPatient.Services.DependencyServices
 {
     public interface IMedicationReminder
     {

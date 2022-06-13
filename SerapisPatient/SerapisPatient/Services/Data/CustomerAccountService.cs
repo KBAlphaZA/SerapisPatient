@@ -2,7 +2,6 @@
 using SerapisPatient.Models;
 using SerapisPatient.Models.Patient;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;

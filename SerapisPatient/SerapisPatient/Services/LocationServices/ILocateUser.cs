@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Plugin.Geolocator;
-
-namespace SerapisPatient.Services.LocationServices
+﻿namespace SerapisPatient.Services.LocationServices
 {
     interface ILocateUser
     {

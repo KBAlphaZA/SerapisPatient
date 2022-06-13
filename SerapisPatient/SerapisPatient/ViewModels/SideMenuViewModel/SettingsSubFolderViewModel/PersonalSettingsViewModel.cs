@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Driver;
 using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Enum;
 using SerapisPatient.Helpers;
@@ -13,13 +12,8 @@ using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views.SideMenuPages.SettingsSubFolder;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
@@ -291,17 +285,19 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
         {
             //RealmDBService<PatientDao> userDb = new RealmDBService<PatientDao>();
             var dbuser = await userDb.RetrieveDocumentAsync();
-            var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
-            if (!sessionDataExist)
+            //var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
+            var sessionDataExist = App.SessionCache.UserInfo;
+            if (sessionDataExist is null)
             {
                 patient = await userDb.RetrieveDocumentAsync();
                 var response = await CustomerAccountService.RetrieveUserInformationAsync(patient.id);
                 Debug.WriteLine(response.data.ToJson());
-                App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                App.SessionCache.UserInfo = response.data;
                 SessionUser = response.data;
                 
             }
-            SessionUser = (Patient) App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
+
+            SessionUser = sessionDataExist;
             //FullName = dbuser.PatientFirstName;
             FirstName = dbuser.PatientFirstName;
             Surname = dbuser.PatientLastName;
@@ -350,12 +346,13 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
                 if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
                     App.Current.MainPage.Navigation.ShowPopup(popUp);
 
-                SessionUser = (Patient) App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()];
+                SessionUser = App.SessionCache.UserInfo;
                 //Build new changes
                 SessionUser.PatientFirstName = FirstName;
                 SessionUser.PatientLastName = Surname;
                 SessionUser.BirthDate = string.IsNullOrEmpty(Birthdate) ? SessionUser.BirthDate : DateTime.Parse(Birthdate);
                 SessionUser.Gender = StringToGender(MonthsSelectedIndex);
+                
                 //CellPhone number should never change, User should request us to change it for them or create a new account
                 SessionUser.PatientContactDetails.Email = EmailText;
                 var response = await CustomerAccountService.UpdateUserInformation(SessionUser);
@@ -371,7 +368,8 @@ namespace SerapisPatient.ViewModels.SideMenuViewModel.SettingsSubFolderViewModel
                 patient.Gender = SessionUser.Gender.ToString();
                 var updatedDocument = await userDb.UpdateDocumentAsync(patient);
                 Debug.WriteLine(updatedDocument);
-                App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] = SessionUser;
+                //App.SessionCache.CacheData[CacheKeys.SessionUser.ToString()] = SessionUser;
+                App.SessionCache.UserInfo= SessionUser;
 
 
             }

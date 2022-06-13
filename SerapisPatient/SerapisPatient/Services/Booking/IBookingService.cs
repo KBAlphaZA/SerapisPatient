@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Services.Booking
+﻿namespace SerapisPatient.Services.Booking
 {
     public interface IBookingService
     {

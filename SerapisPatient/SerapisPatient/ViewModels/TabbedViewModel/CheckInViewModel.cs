@@ -1,9 +1,6 @@
-﻿using MvvmHelpers;
-using SerapisPatient.Models.CheckIn;
-using System;
+﻿using SerapisPatient.Models.CheckIn;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace SerapisPatient.ViewModels.TabbedViewModel
 {

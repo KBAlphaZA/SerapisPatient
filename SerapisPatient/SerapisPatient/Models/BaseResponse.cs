@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Models
+﻿namespace SerapisPatient.Models
 {
     public class BaseResponse<TObject> where TObject : class
     {

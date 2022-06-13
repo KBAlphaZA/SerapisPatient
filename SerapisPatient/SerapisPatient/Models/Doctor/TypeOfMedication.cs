@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Models.Doctor
+﻿namespace SerapisPatient.Models.Doctor
 {
     public enum TypeOfMedication
     {

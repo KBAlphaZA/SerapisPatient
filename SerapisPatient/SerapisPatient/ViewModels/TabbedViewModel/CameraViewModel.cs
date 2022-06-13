@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 using Rg.Plugins.Popup.Services;
-using Rg.Plugins.Popup.Extensions;
 
 namespace SerapisPatient.ViewModels
 {

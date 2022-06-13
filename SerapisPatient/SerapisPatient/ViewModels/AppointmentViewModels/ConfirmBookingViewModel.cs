@@ -1,8 +1,6 @@
 ﻿using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
-using SerapisPatient.Enum;
 using SerapisPatient.Models.Doctor;
-using SerapisPatient.Models.Entities;
 using SerapisPatient.Models.Practices;
 using SerapisPatient.PopUpMessages;
 using SerapisPatient.Services;
@@ -10,6 +8,8 @@ using SerapisPatient.ViewModels.Base;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using SerapisPatient.Enum;
+using SerapisPatient.Models.Patient;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.AppointmentViewModels
@@ -66,6 +66,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
         {
             // 1) Xamlbindings.
             // 2) One method to handle all bindings & keep things neat
+            _medicalBuildingModel = (PracticeDto) App.SessionCache.CacheData[CacheKeys.SelectedPractice.ToString()];
             XamlBindings(enquiredDoctor, _medicalBuildingModel, _FullDateAndMonth);
 
             NavigateToHomePageCommand = new Command(ConfirmBooking);
@@ -118,10 +119,20 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             IsBusy = true;
             try
             {
-                var dbuser = (PatientDao)App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
+                //var dbuser = (PatientDao)App.SessionCache.CacheData[CacheKeys.PatientUser.ToString()];
+                var user = SessionCache.UserInfo;
+                if (user is null)
+                {
+                    var result = await base.getLocalUserAsync();
+                    Patient temp = new Patient()
+                    {
+                        id = result.id
+                    };
+                    user = temp;
+                }
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                    var isSuccess = await services.CreateAppointment(dbuser.id, FullDateAndMonth, SelectedDoctor, SelectedMedicalBuilding);
+                    var isSuccess = await services.CreateAppointment(user.id, FullDateAndMonth, SelectedDoctor, SelectedMedicalBuilding);
                 }
                 else
                 {

@@ -1,16 +1,13 @@
 ﻿using Rg.Plugins.Popup.Extensions;
 using SerapisPatient.Helpers;
-using SerapisPatient.Models;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.PopUpMessages;
-using SerapisPatient.Services;
 using SerapisPatient.Services.Data;
 using SerapisPatient.TemplateViews;
 using SerapisPatient.Utils;
 using SerapisPatient.ViewModels.Base;
 using SerapisPatient.Views;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -129,21 +126,21 @@ namespace SerapisPatient.ViewModels
                 Debug.WriteLine(response?.message);
                 popUp.Dismiss(null);
                 if (!response.status)
+                {
+                    if (response.StatusCode == StatusCodes.AuthenticonError && response.message.Contains("already"))
                     {
-                        if (response.StatusCode == StatusCodes.AuthenticonError && response.message.Contains("already"))
-                        {
-                            await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
-                            return;
-                        }
+                        await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
+                        return;
+                    }
 
                     //{ "code":422,"msg":"Signup requires a valid password"}
                     if (response.message.Contains("{ \"code\":422,\"msg\":\"Signup requires a valid password\"}"))
-                         {
-                            await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
-                            return;
-                         }
-                        await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Something went wrong.."));
+                    {
+                        await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "You already registered with Serapis Medical.."));
                         return;
+                    }
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Something went wrong.."));
+                    return;
                 }
 
 

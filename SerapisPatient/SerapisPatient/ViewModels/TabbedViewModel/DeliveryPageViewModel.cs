@@ -1,10 +1,6 @@
 ﻿using Plugin.Connectivity;
 using SerapisPatient.Services;
 using SerapisPatient.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SerapisPatient.ViewModels.TabbedViewModel

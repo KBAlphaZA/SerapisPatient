@@ -1,15 +1,6 @@
-﻿using SerapisPatient.Models;
-using SerapisPatient.Models.Appointments;
-using SerapisPatient.Models.Doctor;
+﻿using SerapisPatient.Models.Doctor;
 using SerapisPatient.Models.Practices;
-using SerapisPatient.ViewModels;
 using SerapisPatient.ViewModels.AppointmentViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

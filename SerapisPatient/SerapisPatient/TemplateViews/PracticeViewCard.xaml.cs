@@ -1,5 +1,4 @@
 ﻿using SerapisPatient.ViewModels.AppointmentViewModels;
-using SerapisPatient.ViewModels.TemplateViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -1,12 +1,8 @@
 ﻿using SerapisPatient.Models.PaymentModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Services;
 using SerapisPatient.PopUpMessages;
-using Rg.Plugins.Popup.Pages;
 
 namespace SerapisPatient.ViewModels.SideMenuViewModel
 {

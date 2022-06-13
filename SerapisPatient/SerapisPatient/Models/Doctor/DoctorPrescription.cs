@@ -1,8 +1,5 @@
 ﻿using MongoDB.Bson;
 using SerapisPatient.Models.Delivery;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SerapisPatient.Models.Doctor
 {

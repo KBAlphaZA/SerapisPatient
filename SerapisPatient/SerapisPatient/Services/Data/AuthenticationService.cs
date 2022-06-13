@@ -1,17 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using SerapisPatient.Models;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using SerapisPatient.Models.Patient;
 using SerapisPatient.Helpers;
-using SerapisPatient.Utils;
-using System.ComponentModel;
 using MongoDB.Bson;
-using SerapisPatient.Enum;
 using SerapisPatient.Models.Patient.Supabase;
 
 namespace SerapisPatient.Services.Data

@@ -8,7 +8,6 @@ using System.Linq;
 using SerapisPatient.Views.AppointmentFolder.Booking;
 using Xamarin.Forms.BehaviorsPack;
 using SerapisPatient.behavious;
-using SerapisPatient.Services.LocationServices;
 
 namespace SerapisPatient.ViewModels
 {

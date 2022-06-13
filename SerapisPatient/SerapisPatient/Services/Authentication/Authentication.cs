@@ -1,17 +1,7 @@
-﻿using MongoDB.Bson;
-using Newtonsoft.Json.Linq;
-using Plugin.FacebookClient;
-using Realms;
-using SerapisPatient.Models;
-using SerapisPatient.Models.Patient;
-using SerapisPatient.Services.Data;
+﻿using Realms;
 using SerapisPatient.Views.MainViews;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 

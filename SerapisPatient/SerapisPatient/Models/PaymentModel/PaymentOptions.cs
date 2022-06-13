@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SerapisPatient.Models.PaymentModel
+﻿namespace SerapisPatient.Models.PaymentModel
 {
     public class PaymentOptions
     {

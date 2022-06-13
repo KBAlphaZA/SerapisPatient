@@ -1,11 +1,8 @@
 ﻿using MongoDB.Bson;
 using Rg.Plugins.Popup.Services;
 using SerapisPatient.Controls;
-using SerapisPatient.Enum;
 using SerapisPatient.Models;
-using SerapisPatient.Models.Entities;
 using SerapisPatient.Services.Data;
-using SerapisPatient.Services.DB;
 using SerapisPatient.Services.LocationServices;
 using SerapisPatient.TabbedPages;
 using SerapisPatient.TemplateViews;
@@ -16,12 +13,9 @@ using SerapisPatient.Views.NotificationViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Rg.Plugins.Popup.Extensions;
-using SerapisPatient.Models.Patient;
-using SerapisPatient.PopUpMessages;
+using SerapisPatient.Enum;
 using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -93,20 +87,18 @@ namespace SerapisPatient.ViewModels
             NavigateToDeliveryPageCommand = new Command(DeliveryPage);
 
         }
-        private void InitAsync()
+        private async void InitAsync()
         {
-            /*PatientDao task = new Patient();
-            if (App.CurrentUser is null)
+            var patient = App.SessionCache.UserInfo;
+            if (patient is null)
             {
-                task = await getLocalUserAsync();
+                var result  = await base.getLocalUserAsync();
+                FirstName = "Hi " + result.PatientFirstName;
             }
             else
             {
-                 task = App.CurrentUser;
-            }*/
-           
-            var patient = App.CurrentUser;
-            FirstName = "Hi " + patient.PatientFirstName;
+                FirstName = "Hi " + patient.PatientFirstName;
+            }
             //ProfilePicture = new Uri("user1");
             OptionsLoader.LoadOptions();
             Notifications = OptionsLoader.Notifications;
@@ -255,7 +247,7 @@ namespace SerapisPatient.ViewModels
                     return;
                 }
 
-                var task = await base.getLocalUserAsync();
+                
 
                 DefaultLoadingView popUp = new DefaultLoadingView();
 
@@ -266,18 +258,24 @@ namespace SerapisPatient.ViewModels
 
                 if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
                     App.Current.MainPage?.Navigation.ShowPopup(popUp);
-
-                var sessionDataExist = App.SessionCache.CacheData.ContainsKey(CacheKeys.SessionUser.ToString());
-                if (!sessionDataExist)
+                if(App.SessionCache.CacheData.ContainsKey(CacheKeys.SelectedSymptomsIds.ToString()))
                 {
+                    App.SessionCache.CacheData.Remove(CacheKeys.SelectedSymptomsIds.ToString());
+                }
+                
+                var sessionDataExist = App.SessionCache.UserInfo;
+                if (sessionDataExist is null)
+                {
+                    var task = await base.getLocalUserAsync();
                     var response =  await CustomerAccountService.RetrieveUserInformationAsync(task.id);
                 
                     Debug.WriteLine("MainViewModel: "+response.data.ToJson());
 
                     if (response?.data != null)
                     {
-                        App.CurrentUser = response.data;
-                        App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
+                        //App.CurrentUser = response.data;
+                        App.SessionCache.UserInfo = response.data;
+                        //App.SessionCache.CacheData.Add(CacheKeys.SessionUser.ToString(), response.data);
                     }
                     else
                     {
