@@ -48,9 +48,7 @@ namespace SerapisPatient.Services.SymptomChecker
         {
             using (HttpClient _httpClient = new HttpClient())
             {
-                string api = $"{App.APIURL}/SymptomChecker/v1/proposed-symptoms?id={ids}&age={year}&sex={gender}";
-                //tring api = $"{APIURL}/SymptomChecker/v1/diagnosis-by-symptoms/{id}";
-                //Getting JSON data from the WebAPI
+                string api = $"{App.APIURL}/SymptomChecker/v1/diagnosis-by-symptoms?id={ids}&age={year}&sex={gender}";
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<List<DiagnosisResponse>>(content);

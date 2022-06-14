@@ -15,5 +15,11 @@ namespace SerapisPatient.Views.SideMenuPages
             viewModel = new AppointmentHistoryViewModel();
             BindingContext = viewModel;
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            //await viewModel.OnAppearing();
+            base.OnAppearing();
+        }
+    }
 }

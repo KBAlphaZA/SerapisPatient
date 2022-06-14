@@ -60,11 +60,7 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
 
         private async void SelectedSymptom()
         {
-            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("E", "Error!, We couldn't complete your booking. Please Try Again"));
-            
-            //await App.Current.MainPage.Navigation.PushPopupAsync(new AlertPopup("S", "You Successfully completed your booking"));
-
-            //await Task.Delay(100);
+           
             await App.Current.MainPage.Navigation.PushAsync(new DiagnosisView());
         }
 
@@ -86,7 +82,7 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
                 var userYear = (PatientInfo.PatientAge == 0 ? 30 : DateTime.Now.Year - App.SessionCache.UserInfo.PatientAge).ToString();
                 var gender = (PatientInfo.Gender.ToString() ?? Genders.male.ToString());
                 var ids = (string)App.SessionCache.CacheData[CacheKeys.SelectedSymptomsIds.ToString()];
-                var diagnosisResponses = await symptomChecker.GetProposedDiagnosisResponse(ids, userYear, gender);
+                var diagnosisResponses = await symptomChecker.GetProposedDiagnosisResponse(ids, "26", gender);
                 //var year = (DateTime.Now.Year - PatientInfo.PatientAge).ToString();
                 //var item = await symptomChecker.GetProposedSymptoms(symptomByName.ID,year,user.Gender.ToString());
                 foreach (var diagnosisResponse in diagnosisResponses)

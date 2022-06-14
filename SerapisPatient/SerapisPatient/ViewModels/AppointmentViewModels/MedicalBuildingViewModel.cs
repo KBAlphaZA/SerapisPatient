@@ -169,7 +169,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
             }
 
             Debug.WriteLine("CACHE => "+cache.ToJson());
-            long totalMemory = GC.GetTotalMemory(false);
+            long totalMemory = GC.GetTotalMemory(false) / 1024;
             Debug.WriteLine("GC MEMORY => " + totalMemory);
 
             App.Current.MainPage.Navigation.PushAsync(new SelectBooking(cache as PracticeDto), true);

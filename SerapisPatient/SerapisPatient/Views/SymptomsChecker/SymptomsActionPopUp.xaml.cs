@@ -30,5 +30,10 @@ namespace SerapisPatient.Views.SymptomsChecker
             OnExpandTapped?.Invoke();
             CloseExpandedView?.Invoke();
         }
+
+        private async void SelectableItemsView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await App.Current.MainPage.Navigation.PopToRootAsync();
+        }
     }
 }

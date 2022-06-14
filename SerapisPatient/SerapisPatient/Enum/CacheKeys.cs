@@ -11,6 +11,7 @@
         Otp,
         SessionUser,
         PatientUser,
-        SelectedPractice
+        SelectedPractice,
+        BookingHistory
     }
 }

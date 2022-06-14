@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SerapisPatient.Services.Data
 {
@@ -54,7 +56,7 @@ namespace SerapisPatient.Services.Data
             appendedURlString = $"{ APIURL}patient";
 
             try
-                {
+            {
                 using (HttpClient _httpClient = new HttpClient())
                 {
                     _httpClient.Timeout = TimeSpan.FromSeconds(6);
@@ -71,6 +73,39 @@ namespace SerapisPatient.Services.Data
             catch (Exception ex)
             {
                 return new BaseResponse<Patient>() { status = false, message = ex.Message };
+            }
+        }
+
+        public static async Task<BaseResponse<ObservableCollection<PatientBookingDto>>> RetrievePatientBookingInformationAsync(string id)
+        {
+            try
+            {
+                string appendedURlString = "";
+                appendedURlString = $"{APIURL}Booking/{id}/patient";
+
+                using (var _httpClient = new HttpClient())
+                {
+                    _httpClient.Timeout = TimeSpan.FromSeconds(6);
+                    var response = await _httpClient.GetAsync(appendedURlString); //add your requesturi as a string
+                    //Do map error to UI and return object.
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+
+                    var baseResponse = JsonConvert.DeserializeObject<BaseResponse<ObservableCollection<PatientBookingDto>>>(stringResponse);
+                    Debug.WriteLine(baseResponse.data.ToJson());
+                    return baseResponse;
+                }
+
+                Debug.WriteLine(@"\tTodoItem successfully deleted.");
+
+
+                //return new BaseResponse<Patient>() { status = false };// this should return a bool
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                Debug.WriteLine(e);
+                throw;
             }
         }
     }

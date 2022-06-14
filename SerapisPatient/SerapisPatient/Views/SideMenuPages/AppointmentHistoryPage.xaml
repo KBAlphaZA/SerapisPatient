@@ -26,6 +26,9 @@
                   HasUnevenRows="True" 
                  SeparatorColor="Black"
                   SeparatorVisibility="Default"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsBusy}"
+                  IsPullToRefreshEnabled="True"
                   >
 
             <ListView.ItemTemplate>
@@ -52,7 +55,7 @@
                                                    />
 
                                     <Label Grid.Row="1"
-                                                   Text="{Binding DoctorBooked.surname, StringFormat='Dr. {0}'}"
+                                                   Text="{Binding DoctorName}"
                                                    Style="{StaticResource Labels}"
                                                    />
 
@@ -72,7 +75,7 @@
                                                    />
 
                                     <Label Grid.Row="1"
-                                                   Text="{Binding DateBDateAndTimeOfAppointmentooked}"
+                                                   Text="{Binding AppointmentDateTime}"
                                                    Style="{StaticResource Labels}"
                                                    />
 
@@ -93,7 +96,7 @@
                                                    />
 
                                     <Label Grid.Row="1"
-                                                   Text="{Binding Venue}"
+                                                   Text="{Binding PracticeName}"
                                                    LineBreakMode="TailTruncation"
                                                    Style="{StaticResource Labels}"
                                                 />

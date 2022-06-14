@@ -8,6 +8,7 @@ using SerapisPatient.ViewModels.Base;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using SerapisPatient.Enum;
 using SerapisPatient.Models.Patient;
 using Xamarin.Forms;
@@ -81,7 +82,7 @@ namespace SerapisPatient.ViewModels.AppointmentViewModels
 
             PracticeName = _medicalBuildingModel.PracticeName;
             LastName = enquiredDoctor.LastName;
-            Debug.WriteLine(" Doctor Recieved => [" + enquiredDoctor.ToString() + "]" + "MedicalBuildingModel Recieved" + "[" + _medicalBuildingModel + "]" + "FullDateAndMonth Recieved" + "[" + _FullDateAndMonth + "]");
+            Debug.WriteLine(" Doctor Recieved => [" + enquiredDoctor.ToJson() + "]" + "MedicalBuildingModel Received" + "[" + _medicalBuildingModel.ToJson() + "]" + "FullDateAndMonth Recieved" + "[" + _FullDateAndMonth + "]");
             ConvertTimeDate(_FullDateAndMonth);
         }
 
