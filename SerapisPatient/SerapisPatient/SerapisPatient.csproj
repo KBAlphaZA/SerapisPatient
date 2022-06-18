@@ -38,6 +38,7 @@
     <PackageReference Include="Refit" Version="4.1.0" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.1.0.60" />
     <PackageReference Include="System.Text.Json" Version="6.0.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
