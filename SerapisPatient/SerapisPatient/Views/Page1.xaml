@@ -85,7 +85,7 @@
                     <Frame HasShadow="False" BorderColor="DimGray" Padding="8" CornerRadius="20">
                         <Grid>
                             <buttons:SfChipGroup 
-				                    ItemsSource="{Binding Employees}" 
+				                    ItemsSource="{Binding .}" 
 				                    ChipPadding="8,8,0,0" 
 				                    DisplayMemberPath="Name">
                                     <buttons:SfChipGroup.ChipLayout>
