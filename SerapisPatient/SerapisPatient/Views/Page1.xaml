@@ -7,7 +7,12 @@
              x:Name="page1"
              Title="{Binding Title}"
              xmlns:viewmodels="clr-namespace:SerapisPatient.ViewModels.SymptomsCheckerViewModel;assembly=SerapisPatient"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:model="clr-namespace:SerapisPatient.Models.SymptomsChecker.Diagnosis">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="dev page" Command="{Binding TestPageNavigation}"/>
+    </ContentPage.ToolbarItems>
     
     <Grid Padding="12">
         <Grid.RowDefinitions>
@@ -78,92 +83,24 @@
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <Frame HasShadow="False" BorderColor="DimGray" Padding="8" CornerRadius="20">
-                        <FlexLayout Grid.Row="2"
-                                    Padding="8" Margin="8" AlignItems="Start"
-                                    Direction="Row" JustifyContent="Start"
-                                    Wrap="Wrap">
-
-                            <Frame Margin="5,4" Padding="0"
-                                   CornerRadius="{OnPlatform Android='10', iOS='10'}"
-                                   HasShadow="False" HorizontalOptions="FillAndExpand"
-                                   IsClippedToBounds="True" Opacity="0.7"
-                                   VerticalOptions="FillAndExpand" Visual="Material"
-                                   x:Name="Frame1">
-                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
-                                       FontSize="Small" VerticalOptions="FillAndExpand"
-                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
-                                       Text="{Binding Item1}" TextColor="White" 
-                                       x:Name="Label1">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectSymptomCommand, Source={x:Reference page1}}" CommandParameter="{ x:Reference Label1}" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Frame>
-                            <Frame Margin="5,4" Padding="0"
-                                   CornerRadius="{OnPlatform Android='10', iOS='10'}"
-                                   HasShadow="False" HorizontalOptions="FillAndExpand"
-                                   IsClippedToBounds="True" Opacity="0.7"
-                                   VerticalOptions="FillAndExpand" Visual="Material"
-                                   x:Name="Frame2">
-                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
-                                       FontSize="Small" VerticalOptions="FillAndExpand"
-                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
-                                       Text="{Binding Item2}" TextColor="White"
-                                       x:Name="Label2">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectSymptomCommand, Source={x:Reference page1}}" CommandParameter="{ x:Reference Label2}" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Frame>
-                            <Frame Margin="5,4" Padding="0"
-                                   CornerRadius="{OnPlatform Android='10', iOS='10'}"
-                                   HasShadow="False" HorizontalOptions="FillAndExpand"
-                                   IsClippedToBounds="True" Opacity="0.7"
-                                   VerticalOptions="FillAndExpand" Visual="Material"
-                                   x:Name="Frame3">
-                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
-                                       FontSize="Small" VerticalOptions="FillAndExpand"
-                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
-                                       Text="{Binding Item3}" TextColor="White" 
-                                       x:Name="Label3">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectSymptomCommand, Source={x:Reference page1}}" CommandParameter="{ x:Reference Label3}" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Frame>
-                            <Frame Margin="5,4" Padding="0"
-                                   CornerRadius="{OnPlatform Android='10', iOS='10'}"
-                                   HasShadow="False" HorizontalOptions="FillAndExpand"
-                                   IsClippedToBounds="True" Opacity="0.7"
-                                   VerticalOptions="FillAndExpand" Visual="Material"
-                                   x:Name="Frame4">
-                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
-                                       FontSize="Small" VerticalOptions="FillAndExpand"
-                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
-                                       Text="{Binding Item4}" TextColor="White"
-                                       x:Name="Label4">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectSymptomCommand, Source={x:Reference page1}}" CommandParameter="{ x:Reference Label4}" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Frame>
-                            <Frame Margin="5,4" Padding="0"
-                                   CornerRadius="{OnPlatform Android='10', iOS='10'}"
-                                   HasShadow="False" HorizontalOptions="FillAndExpand"
-                                   IsClippedToBounds="True" Opacity="0.7"
-                                   VerticalOptions="FillAndExpand" Visual="Material"
-                                   x:Name="Frame5">
-                                <Label Padding="20,10" BackgroundColor="{StaticResource SecondaryColour }"
-                                       FontSize="Small" VerticalOptions="FillAndExpand"
-                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
-                                       Text="{Binding Item5}" TextColor="White" 
-                                       x:Name="Label5">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectSymptomCommand, Source={x:Reference page1}}" CommandParameter="{ x:Reference Label5}" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Frame>
-                        </FlexLayout>
+                        <Grid>
+                            <buttons:SfChipGroup 
+				                    ItemsSource="{Binding Employees}" 
+				                    ChipPadding="8,8,0,0" 
+				                    DisplayMemberPath="Name">
+                                    <buttons:SfChipGroup.ChipLayout>
+                                                        <FlexLayout 
+						                                    HorizontalOptions="Start" 
+						                                    VerticalOptions="Center" 
+						                                    Direction="Row" 
+						                                    Wrap="Wrap"
+						                                    JustifyContent="Start"
+						                                    AlignContent="Start" 
+						                                    AlignItems="Start"
+                                                            />
+                                    </buttons:SfChipGroup.ChipLayout>
+                            </buttons:SfChipGroup>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CarouselView.ItemTemplate>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SerapisPatient.Views.DevTestPage"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             Title="Test dev page"
+             >
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2" />
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.6*" />
+                <!-- CourselView-->
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="*" />
+                <!-- ListView of proposed diagnosis-->
+            </Grid.RowDefinitions>
+
+            <!--Top label-->
+            <Label Grid.Row="0" Padding="20,10" BackgroundColor="Blue"
+                                       FontSize="Small" VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" TextColor="White" />
+
+            <!--Search bar-->
+            <Frame Grid.Row="1" BorderColor="Black"
+               BackgroundColor="White"
+               HeightRequest="30"
+               WidthRequest="200"
+               CornerRadius="12"
+               Margin="10,8">
+                <SearchBar Grid.Row="1" x:Name="searchBar" CancelButtonColor="Red"
+                       Placeholder="heartburn, cough, etc.." PlaceholderColor="Gray"
+                       HorizontalTextAlignment="Center"
+                       SearchCommand="{Binding PerformSearch}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                       IsVisible="true" VerticalOptions="EndAndExpand" />
+            </Frame>
+            
+
+            <!--Possible conditions-->
+            <!-- HORIZONTAL LIST VIEW -->
+            <Grid Grid.Row="2">
+                <buttons:SfChipGroup 
+				ItemsSource="{Binding ListOfSelectedSymptoms}" 
+				ChipPadding="8,8,0,0" 
+				DisplayMemberPath="Name">
+                    <buttons:SfChipGroup.ChipLayout>
+                        <FlexLayout 
+						HorizontalOptions="Start" 
+						VerticalOptions="Center" 
+						Direction="Row" 
+						Wrap="Wrap"
+						JustifyContent="Start"
+						AlignContent="Start" 
+						AlignItems="Start"/>
+                    </buttons:SfChipGroup.ChipLayout>
+                </buttons:SfChipGroup>
+            </Grid>
+
+            <!-- PICK A SYMPTOM VIEW -->
+            <CarouselView Grid.Row="3" ItemsSource="{Binding GroupedListOfSymptoms}" IsScrollAnimated="True">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <!--Grouped items-->
+                        <Frame  HasShadow="False" BorderColor="DimGray" Padding="8" CornerRadius="20">
+                            <buttons:SfChipGroup Type="Action">
+                                <buttons:SfChipGroup.Items>
+                                    <buttons:SfChip Text="Extra Small"/>
+                                    <buttons:SfChip Text="Small"/>
+                                    <buttons:SfChip Text="Medium"/>
+                                    <buttons:SfChip Text="Large"/>
+                                    <buttons:SfChip Text="Extra Large"/>
+                                </buttons:SfChipGroup.Items>
+                            </buttons:SfChipGroup>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

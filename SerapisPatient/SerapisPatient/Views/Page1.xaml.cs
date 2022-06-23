@@ -13,8 +13,8 @@ namespace SerapisPatient.Views
         {
             InitializeComponent();
 
-            viewModel = new SymptomsCheckerViewModel();
-            BindingContext = viewModel;
+           viewModel = new SymptomsCheckerViewModel();
+           BindingContext = viewModel;
         }
 
         protected override void OnAppearing()

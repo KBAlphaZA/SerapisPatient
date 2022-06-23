@@ -20,6 +20,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.BehaviorsPack;
 using SerapisPatient.Views.SymptomsChecker;
 using Xamarin.CommunityToolkit.Extensions;
+using SerapisPatient.Views;
 
 namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
 {
@@ -32,6 +33,7 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
             Init();
             NavigateToNextPageCommand = new Command(SelectedSymptom);
             SelectSymptomCommand = new Command<object>(ExecuteSelectSymptomCommand);
+            TestPageNavigation = new Command(async()=>await NavigateToTestPage());
             Title = "Symptoms";
         }
 
@@ -107,7 +109,15 @@ namespace SerapisPatient.ViewModels.SymptomsCheckerViewModel
             }
             
         }
-        
+
+        private async Task NavigateToTestPage()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new DevTestPage());
+        }
+
+        public ICommand TestPageNavigation { get; set; }
+
+
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             Device.BeginInvokeOnMainThread(() =>
