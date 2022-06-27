@@ -85,9 +85,9 @@
                     <Frame HasShadow="False" BorderColor="DimGray" Padding="8" CornerRadius="20">
                         <Grid>
                             <buttons:SfChipGroup 
-				                    ItemsSource="{Binding .}" 
+				                    ItemsSource="{Binding GroupedListOfSymptoms}" 
 				                    ChipPadding="8,8,0,0" 
-				                    DisplayMemberPath="Name">
+				                    DisplayMemberPath="Item1">
                                     <buttons:SfChipGroup.ChipLayout>
                                                         <FlexLayout 
 						                                    HorizontalOptions="Start" 
