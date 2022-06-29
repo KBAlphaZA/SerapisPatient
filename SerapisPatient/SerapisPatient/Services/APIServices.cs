@@ -62,7 +62,7 @@ namespace SerapisPatient.Services
                 appointment.PracticeId = medicalBuildingModel.Id;
                 appointment.DoctorsId = enquiredDoctor.Id;
                 //appointment.AppointmentDateTime = bookedDate; //TODO: Fix this date thing
-                appointment.AppointmentDateTime = DateTime.Parse("07/15/2022 14:30:00");
+                appointment.AppointmentDateTime = DateTime.Parse("06/30/2022 14:30:00");
                 appointment.BookedAppointment = session;
 
 
