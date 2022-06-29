@@ -5,6 +5,7 @@
              x:Class="SerapisPatient.Views.SymptomsChecker.DiagnosisView" Padding="10" 
              xmlns:view="clr-namespace:SerapisPatient.Views.SymptomsChecker;assembly=SerapisPatient"
              x:Name="RootPage"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              >
     <Grid>
         <Grid.RowDefinitions>
