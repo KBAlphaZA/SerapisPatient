@@ -99,7 +99,7 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<List<Doctor>>(content);
-                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
+                Debug.WriteLine(" GetDoctorsAsync Response =>[" + result.ToJson() + "]");
                 return result;
                 
             }
@@ -117,7 +117,7 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
                 //We deserialize the JSON data from this line
                 var result = JsonConvert.DeserializeObject<ObservableCollection<PracticeDto>>(content);
-                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
+                Debug.WriteLine(" GetAllMedicalBuildingsAsync Response =>[" + result.ToJson() + "]");
                 return result;
             }
         }
@@ -132,7 +132,7 @@ namespace SerapisPatient.Services
                 var content = await _httpClient.GetStringAsync(api);
 
                 var result = JsonConvert.DeserializeObject<List<PracticeDto>>(content);
-                Debug.WriteLine(" Booking Creation Response =>[" + result.ToJson() + "]");
+                Debug.WriteLine(" GetAllMedicalBuildingsAsync Response =>[" + result.ToJson() + "]");
                 return result;
             }
         }
